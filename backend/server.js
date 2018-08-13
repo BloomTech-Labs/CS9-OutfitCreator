@@ -6,9 +6,6 @@ const User = require('./models/userModel');
 const Item = require('./models/itemModel');
 const Outfit = require('./models/outfitModel');
 
-const sessionOptions = {
-
-}
 
 // set up server
 const server = express();
