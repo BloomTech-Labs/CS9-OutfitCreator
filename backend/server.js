@@ -17,6 +17,18 @@ server.get('/', (req, res) => {
     res.status(200).json("Server running")
 })
 
+// API WISHLIST
+// POST - Register new User
+// MIDDLEWARE - password hashing with bcrypt
+// POST - Log in as specific User
+// PUT - Change User details
+// GET - specific item of clothing by ID
+// GET - outfit by ID
+// GET - all items with a certain tag
+
+
+
 server.listen(port, () => {
     console.log(`Server running on port ${port}`)
 })
+
