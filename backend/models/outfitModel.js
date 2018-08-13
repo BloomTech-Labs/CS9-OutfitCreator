@@ -11,14 +11,14 @@ const OutfitSchema = new mongoose.Schema({
     worn: [{
         type: Date,
     }],
-    top: {
+    top: [{ // changing this to an array to account for layers
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Item',
-    },
-    bottom: {
+    }],
+    bottom: [{ // changing this to an array to account for layers
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Item',
-    },
+    }],
     shoes: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Item',
