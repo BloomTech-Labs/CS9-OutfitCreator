@@ -3,13 +3,13 @@
   justify-content: space-between;
 }
 
-a {
-  color: black;
-}
-
 .BreadCrumbs {
   position: absolute;
   margin: 18px 20px;
+}
+
+.Home {
+  text-decoration: underline;
 }
 
 .SideNav {
@@ -21,12 +21,16 @@ a {
   width: 150px;
 }
 
+.SideNav a {
+  color: black;
+}
+
 .SignOut {
   align-items: center;
-  border: 1px solid black;
   display: flex;
   height: 30px;
   justify-content: center;
   margin: 20px;
+  text-decoration: underline;
 }
 
