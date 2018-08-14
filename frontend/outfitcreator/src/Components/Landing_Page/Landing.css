@@ -7,8 +7,9 @@
     height: 800px;
 }
 
-.landingPage--Signin {
+.landingPage--modals {
     align-self: flex-end;
+    display: flex;
 }
 
 .landingPage--carousel {

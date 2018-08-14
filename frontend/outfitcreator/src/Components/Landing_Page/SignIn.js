@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'reactstrap';
-import './SignIn.css'
+import './Modal.css'
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class SignIn extends React.Component {
     render() {
         return (
             <div>
-                <Button className='' onClick={this.toggle} >Sign In </Button>
+                <Button className='trigger--modal' onClick={this.toggle} >Sign In </Button>
                 {this.state.modal ?
                     <div className='modal--backdrop' onClick={this.toggle}>
                     </div> : null}
@@ -64,7 +64,7 @@ class SignIn extends React.Component {
                                 </form>
                             </div>
                             <div className='modal--footer'>
-                                <Button color='success' >Submit</Button>
+                                <Button  color='success' >Submit</Button>
                                 <Button color='danger' onClick={this.toggle}>Cancel</Button>
                             </div>
                         </div>

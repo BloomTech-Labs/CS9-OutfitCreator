@@ -2,6 +2,7 @@ import './Landing.css';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SignIn from './SignIn';
+import SignUp from './SignUp';
 import {
     Button,
     Carousel,
@@ -78,7 +79,8 @@ class Landing extends Component {
 
         return (
             <div className='container--landingPage'>
-                <div className='landingPage--Signin'>
+                <div className='landingPage--modals'>
+                    <SignUp />
                     <SignIn />
                 </div>
                 <p>Outfit Maker</p>
