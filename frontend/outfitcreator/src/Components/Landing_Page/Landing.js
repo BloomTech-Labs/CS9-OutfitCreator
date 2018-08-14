@@ -81,8 +81,8 @@ class Landing extends Component {
                 <div className='landingPage--Signin'>
                     <SignIn />
                 </div>
-                Outfit Maker
-                <div className='landingPage==carousel'>
+                <p>Outfit Maker</p>
+                <div className='landingPage--carousel'>
                     <Carousel
                         activeIndex={activeIndex}
                         next={this.next}

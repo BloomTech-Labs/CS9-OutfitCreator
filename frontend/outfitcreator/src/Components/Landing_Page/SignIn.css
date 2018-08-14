@@ -1,12 +1,12 @@
 .modal {
-    border: 1px solid rgb(0, 0, 0, .5);
     display: flex;
+    border-radius: 4%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 550px;
+    width: 25vw;
     margin: 0 auto;
-    height: 150px;
+    height: 45vh;
     z-index: 10040;
     top: -610px;
     left: 32%;
@@ -27,7 +27,6 @@
 }
 
 .modal--test {
-    border: 1px solid black;
     position: absolute;
     top: 200px;
     right: 0;
@@ -40,13 +39,25 @@
 }
 
 .modal--body {
-    width: 500px;
+    margin-bottom: 5%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     text-align: center;
     padding: 15px;    
 }
   
+.modal--input {
+    margin: 5% 0;
+}
+
 .modal--footer {
-    width: 500px;
+    width: 100%;
     display: flex;
     justify-content: center;    
+}
+
+.modal--footer Button {
+    margin: 0 8%;
 }

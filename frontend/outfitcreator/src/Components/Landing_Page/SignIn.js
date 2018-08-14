@@ -17,7 +17,7 @@ class SignIn extends React.Component {
     }
 
     render() {
-        return(
+        return (
             <div>
                 <Button className='' onClick={this.toggle} >Sign In </Button>
                 {this.state.modal ?
@@ -27,11 +27,24 @@ class SignIn extends React.Component {
                     <div className='modal modal--test'>
                         <div className='container'>
                             <div className='modal--body' >
-                                Sign in :)
+                                <p className='modal--welcome'>
+                                    Hello! :)<br />
+                                    Sign in here.
+                                </p>
+                                <div className='modal--input'>
+                                    <label htmlFor='username'>Username</label>
+                                    <br/>
+                                    <input type='text' id='username' />
+                                </div>
+                                <div className='modal--input'>
+                                    <label htmlFor='password'>Password</label>
+                                    <br/>
+                                    <input type='text' id='password' />
+                                </div>
                             </div>
                             <div className='modal--footer'>
-                                <Button>Submit</Button>
-                                <Button onClick={this.toggle}>Cancel</Button>
+                                <Button color='success' >Submit</Button>
+                                <Button color='danger' onClick={this.toggle}>Cancel</Button>
                             </div>
                         </div>
                     </div> : null}
