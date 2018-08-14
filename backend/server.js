@@ -6,11 +6,16 @@ const User = require('./models/userModel');
 const Item = require('./models/itemModel');
 const Outfit = require('./models/outfitModel');
 
+// API WISHLIST
+// HOW WILL THE FOLLOWING WORK WITH OAUTH?
+// POST - Register new User
+// MIDDLEWARE - to protect routes by requiring user login
+// POST - Log in as specific User
+// PUT - Change User details
 
 // set up server
 const server = express();
 server.use(express.json());
-
 
 mongoose.connect('mongodb://user:password123@ds163630.mlab.com:63630/outfit-creator').then(() => {
     console.log('Connected to MongoDB');
@@ -19,13 +24,6 @@ mongoose.connect('mongodb://user:password123@ds163630.mlab.com:63630/outfit-crea
 server.get('/', (req, res) => {
     res.status(200).json("Server running")
 });
-
-// API WISHLIST
-// HOW WILL THE FOLLOWING WORK WITH OAUTH?
-// POST - Register new User
-// MIDDLEWARE - to protect routes by requiring user login
-// POST - Log in as specific User
-// PUT - Change User details
 
 // POST - Add an item to the database
 server.post('/item', (req, res) => {
@@ -39,7 +37,20 @@ server.post('/item', (req, res) => {
         });
 });
 
-// PUT - Change an item in the database?
+// POST - Add specific tag to a specific item
+server.post('/item/:id/tag', (req, res) => {
+    const {tag} = req.body;
+    const id = req.params.id;
+    Item.findById(id)
+        .then(item => {
+            item.tags.push(tag);
+            item.save();
+        })
+        .then(res.status(200).json("success!"))
+        .catch(err => {
+            res.status(500).json({error: err.message});
+        });
+})
 
 // POST - Add an outfit to the database
 server.post('/outfit', (req, res) => {
