@@ -7,7 +7,7 @@ class Navigation extends Component {
     return (
       <div className='Navigation'>
         <div className='BreadCrumbs'>
-          Home > {this.props.location.pathname.slice(1)}
+          <a href='/Landing' className='Home'>Home</a> > {this.props.location.pathname.slice(1)}
         </div>
         <Nav vertical className='SideNav'>
           <NavItem>
