@@ -6,6 +6,9 @@ const User = require('./models/userModel');
 const Item = require('./models/itemModel');
 const Outfit = require('./models/outfitModel');
 
+const authRoutes = require('./routes/auth-routes')
+const passportSetup = require('./config/passport-setup');
+
 const sessionOptions = {
 
 }
@@ -13,6 +16,9 @@ const sessionOptions = {
 // set up server
 const server = express();
 server.use(express.json());
+
+// set up routes
+server.use('/auth', authRoutes);
 
 
 mongoose.connect('mongodb://user:password123@ds163630.mlab.com:63630/outfit-creator').then(() => {
