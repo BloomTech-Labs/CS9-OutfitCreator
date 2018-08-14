@@ -1,0 +1,27 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+
+#keys
+/backend/config/keys.js
+
+# dependencies
+/node_modules
+/backend/node_modules
+/frontend/outfitcreator/node_modules
+
+# testing
+/frontend/outfitcreator//coverage
+
+# production
+/frontend/outfitcreator//build
+
+# misc
+/frontend/outfitcreator/.DS_Store
+/frontend/outfitcreator/.env.local
+/frontend/outfitcreator/.env.development.local
+/frontend/outfitcreator/.env.test.local
+/frontend/outfitcreator/.env.production.local
+
+/frontend/outfitcreator/npm-debug.log*
+/frontend/outfitcreator/yarn-debug.log*
+/frontend/outfitcreator/yarn-error.log*
