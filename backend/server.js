@@ -97,7 +97,21 @@ server.get("/outfit/:id", (req, res) => {
 });
 
 // GET - all items with a certain tag
+server.get("/search/:tag", (req, res) => {
+    const tag = req.params.tag;
+    Item.find({
+        tags: tag
+    })
+    .populate()
+    .then(items => {
+        res.status(200).json(items);
+    })
+    .catch(err => {
+        res.sent({error: err.message});
+    });
+});
 
+// Start the server
 server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
