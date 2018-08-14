@@ -6,7 +6,9 @@ class SignIn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            modal: false
+            modal: false,
+            username: '',
+            password: ''
         };
     }
 
@@ -14,6 +16,10 @@ class SignIn extends React.Component {
         this.setState({
             modal: !this.state.modal
         });
+    }
+
+    handleInputCHange = event => {
+        this.setState({ [event.target.name]: event.target.value })
     }
 
     render() {
@@ -31,16 +37,31 @@ class SignIn extends React.Component {
                                     Hello! :)<br />
                                     Sign in here.
                                 </p>
-                                <div className='modal--input'>
+                                <form className='modal--input'>
                                     <label htmlFor='username'>Username</label>
                                     <br/>
-                                    <input type='text' id='username' />
-                                </div>
-                                <div className='modal--input'>
+                                    <input 
+                                        type='username'
+                                        id='username'
+                                        name='username'
+                                        placeholder='Username'
+                                        className='input--username'
+                                        value={this.state.username}
+                                        onChange={this.handleInputCHange}
+                                     />
+                                    <br/>                                   
                                     <label htmlFor='password'>Password</label>
                                     <br/>
-                                    <input type='text' id='password' />
-                                </div>
+                                    <input 
+                                        type='password'
+                                        id='password'
+                                        name='password'
+                                        placeholder='Password'
+                                        className='input--password'
+                                        value={this.state.password}
+                                        onChange={this.handleInputCHange}
+                                    />
+                                </form>
                             </div>
                             <div className='modal--footer'>
                                 <Button color='success' >Submit</Button>
