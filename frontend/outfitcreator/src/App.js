@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import Landing from './Components/Landing';
+import Landing from './Components/Landing_Page/Landing';
 import Navigation from './Components/Navigation';
 import Create from './Components/Create';
 import Upload from './Components/Upload';
@@ -14,10 +13,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
 
         <Switch>
           <Route exact path='/Landing' component={Landing} />
@@ -28,10 +23,6 @@ class App extends Component {
           <Route path='/Settings' component={Settings} />
           <Route path='/Billing' component={Billings} />
         </Switch>
-
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
       </div>
     );
   }
