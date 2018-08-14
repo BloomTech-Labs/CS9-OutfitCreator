@@ -40,7 +40,12 @@ class App extends Component {
               <Upload />
             </div>
           } />
-          <Route path='/Billing' component={Billings} />
+          <Route path='/Billing'  render={ props =>
+            <div>
+              <Navigation />
+              <Billings />
+            </div>
+          } />
         </Switch>
       </div>
     );
