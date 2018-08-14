@@ -6,11 +6,10 @@ class Navigation extends Component {
   render() {
     return (
       <div className='Navigation'>
-          <div className='BreadCrumbs'>
-            Home > {this.props.location.pathname.slice(1)}
-          </div>
+        <div className='BreadCrumbs'>
+          Home > {this.props.location.pathname.slice(1)}
+        </div>
         <Nav vertical className='SideNav'>
-          
           <NavItem>
             <NavLink href='/Create' className='Create'>Create</NavLink>
           </NavItem>
