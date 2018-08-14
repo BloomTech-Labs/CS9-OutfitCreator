@@ -1,10 +1,10 @@
-const express = require('express');
-const mongoose = require('mongoose');
+const express = require("express");
+const mongoose = require("mongoose");
 
 const port = process.env.PORT || 5000;
-const User = require('./models/userModel');
-const Item = require('./models/itemModel');
-const Outfit = require('./models/outfitModel');
+const User = require("./models/userModel");
+const Item = require("./models/itemModel");
+const Outfit = require("./models/outfitModel");
 
 // API WISHLIST
 // HOW WILL THE FOLLOWING WORK WITH OAUTH?
@@ -17,84 +17,87 @@ const Outfit = require('./models/outfitModel');
 const server = express();
 server.use(express.json());
 
-mongoose.connect('mongodb://user:password123@ds163630.mlab.com:63630/outfit-creator').then(() => {
-    console.log('Connected to MongoDB');
+mongoose
+  .connect("mongodb://user:password123@ds163630.mlab.com:63630/outfit-creator")
+  .then(() => {
+    console.log("Connected to MongoDB");
+  });
+
+server.get("/", (req, res) => {
+  res.status(200).json("Server running");
 });
 
-server.get('/', (req, res) => {
-    res.status(200).json("Server running")
+// Add a new item to the database
+server.post("/item", (req, res) => {
+  const { name, image, type, tags } = req.body;
+  Item.create({ name, image, type, tags })
+    .then(item => {
+      res.status(201).json(item);
+    })
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
 });
 
-// POST - Add an item to the database
-server.post('/item', (req, res) => {
-    const {name, image, type, tags} = req.body;
-    Item.create({name, image, type, tags})
-        .then(item => {
-            res.status(201).json(item);
-        })
-        .catch(err => {
-            res.status(500).json({error: err.message});
-        });
+// Add a new outfit to the database
+server.post("/outfit", (req, res) => {
+  const { name, tags, worn, top, bottom, shoes } = req.body;
+  Outfit.create({ name, tags, worn, top, bottom, shoes })
+    .then(outfit => {
+      res.status(201).json(outfit);
+    })
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
 });
 
-// POST - Add specific tag to a specific item
-server.post('/item/:id/tags', (req, res) => {
-    const {tags} = req.body;
-    const id = req.params.id;
-    Item.findById(id)
-        .then(item => {
-            item.tags = item.tags.concat(tags);
-            item.save();
-        })
-        .then(res.status(200).json("success!"))
-        .catch(err => {
-            res.status(500).json({error: err.message});
-        });
-})
-
-// POST - Add an outfit to the database
-server.post('/outfit', (req, res) => {
-    const {name, tags, worn, top, bottom, shoes} = req.body;
-    Outfit.create({name, tags, worn, top, bottom, shoes})
-        .then(outfit => {
-            res.status(201).json(outfit);
-        })
-        .catch(err => {
-            res.status(500).json({error: err.message});
-        });
+// Add an array of tags to a specific item
+server.post("/item/:id/tags", (req, res) => {
+  const { tags } = req.body;
+  const id = req.params.id;
+  Item.findById(id)
+    .then(item => {
+      item.tags = item.tags.concat(tags);
+      item.save();
+    })
+    .then(res.status(200).json("success!"))
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
 });
 
 // PUT - Change an outfit in the database?
 
-// GET - specific item of clothing by ID
-server.get('/item/:id', (req, res) => {
-    const id = req.params.id;
-    Item.findById(id)
-        .then(item => {
-            res.status(200).json(item)
-        })
-        .catch(err => {
-            res.send({error: err.message})
-        });
+// Get all items of clothing for a specific user
+
+// Get all outfits for a specific user
+
+// Get a specific item of clothing by ID
+server.get("/item/:id", (req, res) => {
+  const id = req.params.id;
+  Item.findById(id)
+    .then(item => {
+      res.status(200).json(item);
+    })
+    .catch(err => {
+      res.send({ error: err.message });
+    });
 });
 
-// GET - outfit by ID
-server.get('/outfit/:id', (req, res) => {
-    const id = req.params.id;
-    Outfit.findById(id)
-        .then(outfit => {
-            res.status(200).json(outfit)
-        })
-        .catch(err => {
-            res.send({error: err.message})
-        });
+// Get a specific outfit by ID
+server.get("/outfit/:id", (req, res) => {
+  const id = req.params.id;
+  Outfit.findById(id)
+    .then(outfit => {
+      res.status(200).json(outfit);
+    })
+    .catch(err => {
+      res.send({ error: err.message });
+    });
 });
 
 // GET - all items with a certain tag
 
-
-
 server.listen(port, () => {
-    console.log(`Server running on port ${port}`)
-})
-
+  console.log(`Server running on port ${port}`);
+});
