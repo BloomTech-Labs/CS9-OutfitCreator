@@ -29,8 +29,8 @@ server.get("/", (req, res) => {
 
 // Add a new item to the database
 server.post("/item", (req, res) => {
-  const { name, image, type, tags } = req.body;
-  Item.create({ name, image, type, tags })
+  const { user, name, image, type, tags } = req.body;
+  Item.create({ user, name, image, type, tags })
     .then(item => {
       res.status(201).json(item);
     })
@@ -41,8 +41,8 @@ server.post("/item", (req, res) => {
 
 // Add a new outfit to the database
 server.post("/outfit", (req, res) => {
-  const { name, tags, worn, top, bottom, shoes } = req.body;
-  Outfit.create({ name, tags, worn, top, bottom, shoes })
+  const { user, name, tags, worn, top, bottom, shoes } = req.body;
+  Outfit.create({ user, name, tags, worn, top, bottom, shoes })
     .then(outfit => {
       res.status(201).json(outfit);
     })

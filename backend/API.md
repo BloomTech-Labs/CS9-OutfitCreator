@@ -2,7 +2,8 @@
 This request should have the following format:
 ```
 {
-	"name": "black flats",
+	"user": "5b71ec57a606882af8753934",
+    "name": "black flats",
 	"image": "www.thisisarealurl.com/shoes",
 	"type": "shoes",
 	"tags": ["black", "formal"]
@@ -21,7 +22,8 @@ Add an array of one or more tags to a specific item by ID. This request should h
 This request should have the following format:
 ```
 {
-	"name": "christmas party outfit",
+	"user": "5b71ec57a606882af8753934",
+    "name": "christmas party outfit",
 	"tags": ["formal", "work"],
 	"worn": [],
 	"top": ["5b71ec57a606882af8789934", "5b71ec57a606882af8789937"],
@@ -34,6 +36,7 @@ This request should have the following format:
 A GET request for a specific item by ID. Returns an object like this:
 ```
 {
+    "user": "5b71ec57a606882af8753934",
     "tags": [
         "red",
         "christmas"
@@ -50,6 +53,7 @@ A GET request for a specific item by ID. Returns an object like this:
 A GET request for a specific outfit by ID. Returns an object like this:
 ```
 {
+    "user": "5b71ec57a606882af8753934",
     "tags": [
         "formal",
         "work"
