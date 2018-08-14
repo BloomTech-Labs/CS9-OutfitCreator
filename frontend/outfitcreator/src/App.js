@@ -21,12 +21,36 @@ class App extends Component {
 
         <Switch>
           <Route exact path='/Landing' component={Landing} />
-          <Route path='/' component={Navigation} />
-          <Route path='/Create' component={Create} />
-          <Route path='/Upload' component={Upload} />
-          <Route path='/Archive' component={Archive} />
-          <Route path='/Settings' component={Settings} />
-          <Route path='/Billing' component={Billings} />
+          <Route path='/Create' render={props => 
+            <div>
+              <Navigation {...props}/>
+              <Create />
+            </div>
+          } />
+          <Route path='/Archive' render={props => 
+            <div>
+              <Navigation {...props}/>
+              <Archive />
+            </div>
+          } />
+          <Route path='/Upload' render={props => 
+            <div>
+              <Navigation {...props}/>
+              <Upload />
+            </div>
+          } />
+          <Route path='/Settings' render={props => 
+            <div>
+              <Navigation {...props}/>
+              <Settings />
+            </div>
+          } />
+          <Route path='/Billing' render={props => 
+            <div>
+              <Navigation {...props}/>
+              <Billings />
+            </div>
+          } />
         </Switch>
 
         <p className="App-intro">
