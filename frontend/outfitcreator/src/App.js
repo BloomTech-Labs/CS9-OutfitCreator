@@ -16,11 +16,30 @@ class App extends Component {
 
         <Switch>
           <Route exact path='/Landing' component={Landing} />
-          <Route path='/' component={Navigation} />
-          <Route path='/Create' component={Create} />
-          <Route path='/Upload' component={Upload} />
-          <Route path='/Archive' component={Archive} />
-          <Route path='/Settings' component={Settings} />
+          <Route path='/Create'  render={ props =>
+            <div className='App--create'>
+              <Navigation />
+              <Create />
+            </div>
+          } />
+          <Route path='/Archive'  render={ props =>
+            <div>
+              <Navigation />
+              <Archive />
+            </div>
+          } />
+          <Route path='/Settings'  render={ props =>
+            <div>
+              <Navigation />
+              <Settings />
+            </div>
+          } />
+          <Route path='/Upload'  render={ props =>
+            <div>
+              <Navigation />
+              <Upload />
+            </div>
+          } />
           <Route path='/Billing' component={Billings} />
         </Switch>
       </div>
