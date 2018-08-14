@@ -8,6 +8,7 @@ const UserSchema = new Schema({
     required: true
   },
   googleId: String,
+  thumbnail: String,
   // password: {
   //   type: String,
   //   required: true
