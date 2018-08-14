@@ -1,0 +1,43 @@
+.container--landingPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 1200px;
+    height: 800px;
+}
+
+.landingPage--Signin {
+    align-self: flex-end;
+}
+
+.landingPage--description {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    height: 18.75%;
+    margin: 20px 0 20px 0;
+}
+
+.description--opening {
+    align-self: flex-start;
+    margin-left: 15px;
+}
+
+.description--list {
+    align-self: center;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.list--item {
+    align-self: center;
+}
+
+li {
+    margin-right: auto;
+}
