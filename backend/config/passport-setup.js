@@ -1,14 +1,14 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const keys = require("./keys");
-const User = require("../models/userModel");
+const Guser = require("../models/guserModel");
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id).then(user => {
+  Guser.findById(id).then(user => {
     done(null, user);
   });
 });
@@ -25,12 +25,12 @@ passport.use(
       // passport callback function
       // console.log('Callback firing');
       // console.log(profile);
-      User.findOne({ googleId: profile.id }).then(currentUser => {
+      Guser.findOne({ googleId: profile.id }).then(currentUser => {
         if (currentUser) {
           //console.log("user is: ", currentUser);
           done(null, currentUser);
         } else {
-          new User({
+          new Guser({
             googleId: profile.id,
             username: profile.displayName,
             thumbnail: profile._json.image.url

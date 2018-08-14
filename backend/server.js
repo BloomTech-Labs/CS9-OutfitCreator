@@ -36,11 +36,9 @@ server.use(passport.session());
 server.use("/auth", authRoutes);
 server.use("/profile", profileRoutes);
 
-mongoose
-  .connect("mongodb://user:password123@ds163630.mlab.com:63630/outfit-creator")
-  .then(() => {
-    console.log("Connected to MongoDB");
-  });
+mongoose.connect(keys.mongoDb.dbURI).then(() => {
+  console.log("Connected to MongoDB");
+});
 
 server.get("/", (req, res) => {
   res.status(200).json("Server running");

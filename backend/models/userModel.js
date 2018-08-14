@@ -7,20 +7,10 @@ const UserSchema = new Schema({
     unique: true,
     required: true
   },
-  googleId: String,
-  thumbnail: String
-  // password: {
-  //   type: String,
-  //   required: true
-  // }
+  password: {
+    type: String,
+    required: true
+  }
 });
-
-// const GuserSchema = new Schema ({
-//   username: String,
-//   googleId: String
-// });
-
-// const Guser = mongoose.model('guser', GuserSchema);
-// module.exports = Guser;
 
 module.exports = mongoose.model("User", UserSchema);
