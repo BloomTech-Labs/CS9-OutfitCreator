@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Nav, NavItem, NavLink } from 'reactstrap';
+import { withRouter } from 'react-router';
 import './Navigation.css';
 
 class Navigation extends Component {
@@ -7,7 +8,7 @@ class Navigation extends Component {
     return (
       <div className='Navigation'>
         <div className='BreadCrumbs'>
-          {/* <a href='/Landing' className='Home'>Home</a> > {this.props.location.pathname.slice(1)} */}
+          <a href='/Landing' className='Home'>Home</a> > {this.props.location.pathname.slice(1)}
         </div>
         <Nav vertical className='SideNav'>
           <NavItem>
@@ -32,4 +33,5 @@ class Navigation extends Component {
   }
 }
 
-export default Navigation;
+
+export default withRouter(Navigation);
