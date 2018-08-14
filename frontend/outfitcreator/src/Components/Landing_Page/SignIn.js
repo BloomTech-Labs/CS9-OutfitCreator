@@ -20,9 +20,11 @@ class SignIn extends React.Component {
         return(
             <div>
                 <Button className='' onClick={this.toggle} >Sign In </Button>
+                // This one has no content, is just the dark background for the modal
                 {this.state.modal ?
                     <div className='modal--backdrop' onClick={this.toggle}>
                     </div> : null}
+                // Content of the modal goes in here
                 {this.state.modal ?
                     <div className='modal modal--test'>
                         <div className='container'>
