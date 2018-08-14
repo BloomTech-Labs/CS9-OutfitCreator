@@ -7,12 +7,18 @@ a {
   color: black;
 }
 
+.BreadCrumbs {
+  position: absolute;
+  margin: 18px 20px;
+}
+
 .SideNav {
   border: 1px solid black;
-  height: 700px;
-  margin: 10px;
+  height: 50vh;
+  margin: 20px;
+  margin-top: 60px;
   text-align: left;
-  width: 25%;
+  width: 150px;
 }
 
 .SignOut {
@@ -21,6 +27,6 @@ a {
   display: flex;
   height: 30px;
   justify-content: center;
-  margin: 10px;
+  margin: 20px;
 }
 
