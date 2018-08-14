@@ -1,0 +1,26 @@
+.Navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
+a {
+  color: black;
+}
+
+.SideNav {
+  border: 1px solid black;
+  height: 700px;
+  margin: 10px;
+  text-align: left;
+  width: 25%;
+}
+
+.SignOut {
+  align-items: center;
+  border: 1px solid black;
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  margin: 10px;
+}
+
