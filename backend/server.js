@@ -38,12 +38,12 @@ server.post('/item', (req, res) => {
 });
 
 // POST - Add specific tag to a specific item
-server.post('/item/:id/tag', (req, res) => {
-    const {tag} = req.body;
+server.post('/item/:id/tags', (req, res) => {
+    const {tags} = req.body;
     const id = req.params.id;
     Item.findById(id)
         .then(item => {
-            item.tags.push(tag);
+            item.tags = item.tags.concat(tags);
             item.save();
         })
         .then(res.status(200).json("success!"))

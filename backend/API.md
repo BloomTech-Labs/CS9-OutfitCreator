@@ -9,6 +9,14 @@ This request should have the following format:
 }
 ```
 
+## POST to /item/:id/tags
+Add an array of one or more tags to a specific item by ID. This request should have the following format:
+```
+{
+	"tags": ["red", "business-casual"]
+}
+```
+
 ## POST to /outfit
 This request should have the following format:
 ```
