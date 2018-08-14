@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const port = process.env.PORT || 5000;
-const User = require("./models/userModel");
+const Profile = require("./models/profileModel");
 const Item = require("./models/itemModel");
 const Outfit = require("./models/outfitModel");
 
@@ -29,8 +29,8 @@ server.get("/", (req, res) => {
 
 // Add a new item to the database
 server.post("/item", (req, res) => {
-  const { user, name, image, type, tags } = req.body;
-  Item.create({ user, name, image, type, tags })
+  const { profile, name, image, type, tags } = req.body;
+  Item.create({ profile, name, image, type, tags })
     .then(item => {
       res.status(201).json(item);
     })
@@ -41,8 +41,8 @@ server.post("/item", (req, res) => {
 
 // Add a new outfit to the database
 server.post("/outfit", (req, res) => {
-  const { user, name, tags, worn, top, bottom, shoes } = req.body;
-  Outfit.create({ user, name, tags, worn, top, bottom, shoes })
+  const { profile, name, tags, worn, top, bottom, shoes } = req.body;
+  Outfit.create({ profile, name, tags, worn, top, bottom, shoes })
     .then(outfit => {
       res.status(201).json(outfit);
     })
