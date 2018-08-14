@@ -7,11 +7,18 @@ const Item = require("./models/itemModel");
 const Outfit = require("./models/outfitModel");
 
 // API WISHLIST
-// HOW WILL THE FOLLOWING WORK WITH OAUTH?
-// POST - Register new User
-// MIDDLEWARE - to protect routes by requiring user login
-// POST - Log in as specific User
-// PUT - Change User details
+// ---------------
+// Middleware to protect most routes
+// Edit an item's properties
+// Edit an outfit's properties
+// Delete a specific item
+// Delete a specific outfit
+// Get all items for a user
+// Get all outfits for a user
+// Create a new user profile
+// Edit a user profile
+
+
 
 // set up server
 const server = express();
@@ -66,12 +73,6 @@ server.post("/item/:id/tags", (req, res) => {
     });
 });
 
-// PUT - Change an outfit in the database?
-
-// Get all items of clothing for a specific user
-
-// Get all outfits for a specific user
-
 // Get a specific item of clothing by ID
 server.get("/item/:id", (req, res) => {
   const id = req.params.id;
@@ -96,11 +97,13 @@ server.get("/outfit/:id", (req, res) => {
     });
 });
 
-// GET - all items with a certain tag
+// Get all items with a certain tag
 server.get("/search/:tag", (req, res) => {
     const tag = req.params.tag;
+    const { id } = req.body;
     Item.find({
-        tags: tag
+        tags: tag,
+        profile: id
     })
     .populate()
     .then(items => {
