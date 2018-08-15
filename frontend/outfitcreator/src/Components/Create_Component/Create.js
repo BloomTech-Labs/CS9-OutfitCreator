@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardText, CardImg, CardImgOverlay, CardDeck, Button, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
 
 import './Create.css';
 
@@ -22,7 +23,7 @@ class Create extends Component {
     };
 
     handleCreateOutfit = e => {
-        e.preventDefault();
+        const outfit = {};
         axios.post('http://localhost:5000/outfit', outfit)
         .then(savedOutfit => {
             console.log(savedOutfit);
