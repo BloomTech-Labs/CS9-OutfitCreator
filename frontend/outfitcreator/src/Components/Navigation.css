@@ -1,0 +1,36 @@
+.Navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
+.BreadCrumbs {
+  position: absolute;
+  margin: 18px 20px;
+}
+
+.Home {
+  text-decoration: underline;
+}
+
+.SideNav {
+  border: 1px solid black;
+  height: 50vh;
+  margin: 20px;
+  margin-top: 60px;
+  text-align: left;
+  width: 150px;
+}
+
+.SideNav a {
+  color: black;
+}
+
+.SignOut {
+  align-items: center;
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  margin: 20px;
+  text-decoration: underline;
+}
+
