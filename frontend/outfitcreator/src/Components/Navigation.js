@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Nav, NavItem, NavLink } from 'reactstrap';
+import { withRouter } from 'react-router';
 import './Navigation.css';
 
 class Navigation extends Component {
@@ -32,4 +33,5 @@ class Navigation extends Component {
   }
 }
 
-export default Navigation;
+
+export default withRouter(Navigation);
