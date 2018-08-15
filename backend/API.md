@@ -24,7 +24,7 @@ This request should have the following format:
 
 ## POST to /item/:id/tags
 Add an array of one or more tags to a specific item.
-`:id` refers to the mongoDB _id of the item.
+`:id` refers to the mongoDB id of the item.
 This request should have the following format:
 ```
 {
@@ -34,7 +34,7 @@ This request should have the following format:
 
 ## DELETE to /item/:id
 Delete an Item from the database.
-`:id` refers to the mongoDB _id of the item to delete.
+`:id` refers to the mongoDB id of the item to delete.
 
 ## POST to /outfit
 Add an outfit to the database.
@@ -53,15 +53,15 @@ This request should have the following format:
 
 ## DELETE to /outfit/:id
 Delete an Outfit from the database.
-`:id` refers to the mongoDB _id of the outfit to delete.
+`:id` refers to the mongoDB id of the outfit to delete.
 
 ## GET to /:user/items
 Get all Items for a User. Returns an array of Item objects.
-`:user` refers to the mongoDB _id of the user.
+`:user` refers to the mongoDB id of the user.
 
 ## GET to /:user/outfits
 Get all Outfits for a User. Returns an array of Outfit objects.
-`:user` refers to the mongoDB _id of the user.
+`:user` refers to the mongoDB id of the user.
 
 ## GET to /item/:id
 A GET request for a specific item by ID. Returns an object like this:
