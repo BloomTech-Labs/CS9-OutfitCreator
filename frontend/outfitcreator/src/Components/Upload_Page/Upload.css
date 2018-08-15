@@ -1,0 +1,53 @@
+.UploadPage {
+  border: 1px dashed green;
+  position: absolute;
+  left: 200px;
+}
+
+.UploadColumns {
+  border: 1px dashed blue;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 12vh;
+  width: 70vw;
+}
+
+.UploadLeft {
+  align-items: center;
+  border: 1px dashed red;
+  display: flex;
+  flex-flow: column;
+  
+}
+
+.UploadRight {
+  border: 1px dashed red;
+  
+}
+
+.UploadImage {
+  border: 1px solid black;
+  height: 20vh;
+  width: 20vw;
+}
+
+.UploadButton, .SaveButton {
+  background: white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 0 0 black;
+  color: black;
+  font-size: 10px;
+  margin: 10px 0 30px;
+}
+
+#ClothingName {
+  border-radius: 0;
+  font-size: 12px;
+  height: 30px;
+}
+
+#SelectType {
+  font-size: 12px;
+  height: 25px;
+  width: 20vw;
+}
