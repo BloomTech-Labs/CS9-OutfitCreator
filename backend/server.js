@@ -5,7 +5,7 @@ const port = process.env.PORT || 5000;
 const User = require("./models/userModel");
 const Item = require("./models/itemModel");
 const Outfit = require("./models/outfitModel");
-const Profile = require("./models/profileModel");
+// const Profile = require("./models/profileModel");
 
 
 const keys = require("./config/keys");
@@ -182,6 +182,21 @@ server.get("/:user/outfits", (req, res) => {
     .catch(err => {
       res.send({ error: err.message });
     });
+});
+
+// Get items by type
+server.get("/items/:type", (req, res) => {
+  const { type } = req.params;
+  Item.find({
+    type
+  })
+  .populate()
+  .then(items => {
+    res.status(200).json(items);
+  })
+  .catch(err => {
+    res.status(500).json({ message: 'Items could not be retreived at this time.'})
+  });
 });
 
 // Start the server
