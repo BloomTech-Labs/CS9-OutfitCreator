@@ -16,20 +16,6 @@ const authRoutes = require("./routes/auth-routes");
 const profileRoutes = require("./routes/profile-routes");
 const passportSetup = require("./config/passport-setup");
 
-const sessionOptions = {};
-
-// API WISHLIST
-// ---------------
-// Middleware to protect most routes
-// Edit an item's properties
-// Edit an outfit's properties
-// Delete a specific item
-// Delete a specific outfit
-// Get all items for a user
-// Get all outfits for a user
-// Create a new user profile
-// Edit a user profile
-
 // set up server
 const server = express();
 server.use(express.json());
@@ -58,39 +44,63 @@ server.get("/", (req, res) => {
   res.status(200).json("Server running");
 });
 
-// API WISHLIST
-// HOW WILL THE FOLLOWING WORK WITH OAUTH?
-// POST - Register new User
-// MIDDLEWARE - to protect routes by requiring user login
-// POST - Log in as specific User
-// PUT - Change User details
+
+// Add a new user to the database
+server.post("/signup", (req, res) => {
+  const { username, password, email } = req.body;
+  User.create({ username, password, email })
+    .then(user => {
+      res.status(201).json(user);
+    })
+    .catch(err => {
+      res.send(500).json({ error: err.message });
+    });
+});
 
 // Add a new item to the database
 server.post("/item", (req, res) => {
-  const { profile, name, image, type, tags } = req.body;
-  Item.create({ profile, name, image, type, tags })
+  const { user, name, image, type, tags } = req.body;
+  Item.create({ user, name, image, type, tags })
     .then(item => {
       res.status(201).json(item);
     })
     .catch(err => {
-      res.status(500).json({ error: err.message });
+      res.send(500).json({ error: err.message });
+    });
+});
+
+// Delete a specific item
+server.delete("/item/:id", (req, res) => {
+  Item.findByIdAndRemove(req.params.id)
+    .then(res.status(200).json(`successfully deleted item ${req.params.id}`))
+    .catch(err => {
+      res.send(500).json({ error: err.message });
     });
 });
 
 // Add a new outfit to the database
 server.post("/outfit", (req, res) => {
-  const { profile, name, tags, worn, top, bottom, shoes } = req.body;
-  Outfit.create({ profile, name, tags, worn, top, bottom, shoes })
+  const { user, name, tags, worn, top, bottom, shoes } = req.body;
+  Outfit.create({ user, name, tags, worn, top, bottom, shoes })
     .then(outfit => {
       res.status(201).json(outfit);
     })
     .catch(err => {
-      res.status(500).json({ error: err.message });
+      res.send(500).json({ error: err.message });
+    });
+});
+
+// Delete a specific outfit
+server.delete("/outfit/:id", (req, res) => {
+  Outfit.findByIdAndRemove(req.params.id)
+    .then(res.status(200).json(`successfully deleted outfit ${req.params.id}`))
+    .catch(err => {
+      res.send(500).json({ error: err.message });
     });
 });
 
 // Add an array of tags to a specific item
-server.post("/item/:id/tags", (req, res) => {
+server.post("/item/tags/:id", (req, res) => {
   const { tags } = req.body;
   const id = req.params.id;
   Item.findById(id)
@@ -100,7 +110,7 @@ server.post("/item/:id/tags", (req, res) => {
     })
     .then(res.status(200).json("success!"))
     .catch(err => {
-      res.status(500).json({ error: err.message });
+      res.send(500).json({ error: err.message });
     });
 });
 
@@ -128,20 +138,49 @@ server.get("/outfit/:id", (req, res) => {
     });
 });
 
-// Get all items with a certain tag
-server.get("/search/:tag", (req, res) => {
-    const tag = req.params.tag;
-    const { id } = req.body;
-    Item.find({
-        tags: tag,
-        profile: id
-    })
+// Get all of a user's items with a certain tag
+server.get("/search/:user/:tag", (req, res) => {
+  const { tag, user } = req.params;
+  Item.find({
+    tags: tag,
+    user: user
+  })
     .populate()
     .then(items => {
-        res.status(200).json(items);
+      res.status(200).json(items);
     })
     .catch(err => {
-        res.sent({error: err.message});
+      res.send({ error: err.message });
+    });
+});
+
+// Get all items for a user
+server.get("/:user/items", (req, res) => {
+  const user = req.params.user;
+  Item.find({
+    user
+  })
+    .populate()
+    .then(items => {
+      res.status(200).json(items);
+    })
+    .catch(err => {
+      res.send({ error: err.message });
+    });
+});
+
+// Get all outfits for a user
+server.get("/:user/outfits", (req, res) => {
+  const user = req.params.user;
+  Outfit.find({
+    user
+  })
+    .populate()
+    .then(outfits => {
+      res.status(200).json(outfits);
+    })
+    .catch(err => {
+      res.send({ error: err.message });
     });
 });
 
