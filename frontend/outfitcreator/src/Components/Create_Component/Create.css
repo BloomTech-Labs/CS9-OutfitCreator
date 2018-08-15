@@ -38,3 +38,7 @@
     width: 25%;
     margin-bottom: 1em;
 }
+
+.close-icon {
+    cursor: pointer;
+}
