@@ -34,17 +34,18 @@
   border-radius: 5px;
   box-shadow: 2px 2px 0 0 black;
   color: black;
-  font-size: 10px;
+  font-size: 12px;
   margin: 10px 0 30px;
 }
 
 #ClothingName {
-  border-radius: 0;
+  border: 1px solid grey;
   font-size: 12px;
   height: 30px;
 }
 
 #SelectType {
+  border: 1px solid grey;
   font-size: 12px;
   height: 25px;
   width: 20vw;
