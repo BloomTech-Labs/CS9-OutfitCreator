@@ -7,10 +7,26 @@ import './Create.css';
 class Create extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            profile: "5b71ec57a606882af8753934",
+            name: '',
+            worn: [],
+            top: ["5b71ec57a606882af8789934", "5b71ec57a606882af8789937"],
+            bottom: ["5b71ec8ba606882af8789935"],
+            shoes: "5b71ecafa606882af8789936"
+        }
     }
 
     handleButtonClick = e => {
         console.log('button clicked!')
+    };
+
+    handleCreateOutfit = e => {
+        e.preventDefault();
+        axios.post('http://localhost:5000/outfit', outfit)
+        .then(savedOutfit => {
+            console.log(savedOutfit);
+        })
     };
 
     render() {
@@ -24,7 +40,7 @@ class Create extends Component {
                             alt="Card image cap"
                         />
                         <CardImgOverlay>
-                            <span aria-hidden="true" className="pull-right clickable close-icon" date-effect="fadeOut" onClick={ this.handleButtonClick}>&times;</span>
+                            <span aria-hidden="true" className="pull-right clickable close-icon" data-effect="fadeOut" onClick={this.handleButtonClick}>&times;</span>
                             <CardText className="cardText">
                                 Top
                             </CardText>
@@ -52,7 +68,7 @@ class Create extends Component {
                             alt="Card image cap"
                         />
                         <CardImgOverlay>
-                            <Button className="close" aria-label="Close">
+                            <Button className="close" aria-label="Close" onClick={this.handleButtonClick}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
                             <CardText className="cardText">
@@ -64,7 +80,7 @@ class Create extends Component {
                 <div className="outfitPickerContainer">
                     <Input type="text" name="outfitNickname" placeholder="Outfit Nickname" className="outfitInput" />
                     <div className="outfitPickerDecision">
-                        <Button onClick={this.handleButtonClick}>Yes!</Button>
+                        <Button onClick={this.handleCreateOutfit}>Yes!</Button>
                         <Button onClick={this.handleButtonClick}>Randomize</Button>
                         <FontAwesomeIcon icon="share-alt" size="4x" onClick={this.handleButtonClick}/>
                     </div>

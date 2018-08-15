@@ -39,6 +39,6 @@
     margin-bottom: 1em;
 }
 
-.close-icon {
+.close-icon, .close {
     cursor: pointer;
 }
