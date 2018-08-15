@@ -25,6 +25,7 @@
 
 .UploadImage {
   height: 200px;
+  min-width: 300px;
   width: 30vw;
 }
 
