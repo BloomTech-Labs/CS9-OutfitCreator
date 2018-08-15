@@ -1,4 +1,13 @@
 .container--archive {
     border: 1px solid blue;
-    margin-right: 40vw;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    top: 10vh;
+    left: 200px;
+    height: 60vh;
+    width: 70vw;
+    min-width: 750px;
+    z-index: 1;
 }

@@ -15,7 +15,11 @@ class Archive extends React.Component {
 
     filter = () => {
         const { search, outfits } = this.state;
-        const filteredOutfits = outfits.filter( (outfit) => outfit.nickname.toLowerCase().includes(search.toLowerCase()))
+        // Filters based name or tag
+        const filteredOutfits = outfits.filter((outfit) => (
+            outfit.name.toLowerCase().includes(search.toLowerCase()) ||
+            outfit.tags.some((tag) => tag.toLowerCase.includes(search.toLowerCase()))
+        ))
         this.setState({ searchedOutfits: filteredOutfits })
     }
 
