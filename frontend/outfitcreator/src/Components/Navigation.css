@@ -1,6 +1,7 @@
 .Navigation {
   display: flex;
   justify-content: space-between;
+  left: 0;
   position: absolute;
   width: 100vw;
   z-index: 100;
