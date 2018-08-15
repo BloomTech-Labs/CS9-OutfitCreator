@@ -8,7 +8,7 @@ import Landing from './Components/Landing_Page/Landing';
 import Navigation from './Components/Navigation';
 import Create from './Components/Create_Component/Create';
 import Upload from './Components/Upload';
-import Archive from './Components/Archive';
+import Archive from './Components/Archive_Page/Archive';
 import Settings from './Components/Settings';
 import Billings from './Components/Billings';
 import './App.css';
