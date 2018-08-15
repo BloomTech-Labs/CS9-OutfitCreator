@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faShareAlt } from '@fortawesome/free-solid-svg-icons';
+
+
 import Landing from './Components/Landing_Page/Landing';
 import Navigation from './Components/Navigation';
-import Create from './Components/Create';
+import Create from './Components/Create_Component/Create';
 import Upload from './Components/Upload';
 import Archive from './Components/Archive_Page/Archive';
 import Settings from './Components/Settings';
 import Billings from './Components/Billings';
 import './App.css';
-import { Switch, Route } from 'react-router-dom';
+
+library.add(faShareAlt);
 
 class App extends Component {
   render() {
