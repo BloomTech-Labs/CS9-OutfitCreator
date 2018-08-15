@@ -32,3 +32,8 @@
 ul {
   list-style: none;
 }
+
+.App--create {
+  border: 1xp solid blue;
+  display: flex;
+}

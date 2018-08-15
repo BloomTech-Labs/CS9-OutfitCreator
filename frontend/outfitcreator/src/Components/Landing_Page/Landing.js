@@ -2,6 +2,7 @@ import './Landing.css';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SignIn from './SignIn';
+import SignUp from './SignUp';
 import {
     Button,
     Carousel,
@@ -81,11 +82,12 @@ class Landing extends Component {
 
         return (
             <div className='container--landingPage'>
-                <div className='landingPage--Signin'>
+                <div className='landingPage--modals'>
+                    <SignUp />
                     <SignIn />
                 </div>
-                Outfit Maker
-                <div className='landingPage==carousel'>
+                <p>Outfit Maker</p>
+                <div className='landingPage--carousel'>
                     <Carousel
                         activeIndex={activeIndex}
                         next={this.next}
@@ -113,7 +115,7 @@ class Landing extends Component {
                     <div className='description--closing'>AND we can even randomize your options to try and come up with new combinations!</div>
                 </div>
                 <div className='landingPage--button'>
-                    <Link to='/SignUp'>
+                    <Link to='/Create'>
                         <Button color='success'>Check it out </Button>
                     </Link>
                 </div>

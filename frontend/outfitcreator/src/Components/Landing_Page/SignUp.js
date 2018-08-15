@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import './Modal.css'
 
-class SignIn extends React.Component {
+class SignUp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,18 +25,17 @@ class SignIn extends React.Component {
     render() {
         return (
             <div>
-                <Button className='trigger--modal' onClick={this.toggle} >Sign In </Button>
+                <Button className='trigger--modal' onClick={this.toggle} >Sign Up </Button>
                 {this.state.modal ?
                     <div className='modal--backdrop' onClick={this.toggle}>
                     </div> : null}
-                {/* Content of the modal goes in here */}
                 {this.state.modal ?
                     <div className='modal modal--test'>
                         <div className='container'>
                             <div className='modal--body' >
                                 <p className='modal--welcome'>
-                                    Hello! :)<br />
-                                    Sign in here.
+                                    Welcome! :)<br />
+                                    Sign up here.
                                 </p>
                                 <form className='modal--input'>
                                     <label htmlFor='username'>Username</label>
@@ -65,7 +64,7 @@ class SignIn extends React.Component {
                                 </form>
                             </div>
                             <div className='modal--footer'>
-                                <Button  color='success' >Submit</Button>
+                                <Button color='success' >Sign Up</Button>
                                 <Button color='danger' onClick={this.toggle}>Cancel</Button>
                             </div>
                         </div>
@@ -75,4 +74,4 @@ class SignIn extends React.Component {
     }
 }
 
-export default SignIn;
+export default SignUp;
