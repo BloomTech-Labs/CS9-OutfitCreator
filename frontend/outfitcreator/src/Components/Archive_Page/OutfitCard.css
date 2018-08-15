@@ -1,5 +1,5 @@
 .container--card {
-    border: 1px solid purple;
+    border: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -19,5 +19,17 @@
 .header--edit{
     border: 0;
     background: transparent;
-    background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACvSURBVDhP1dI7CsJQEIXhuwFxA27Dwvcr6B4EQezcna7FykpLH03UQjv9Z8wYRPBOGsEDH+QEJplLEv4qVaywRl1uFIkMnHDPbOBOAzucYQ/YwpUmZHiYXV9wxQDRyMAeibZ8k5G2SFqQYXuTDEt3DbdxQF/b+zGiseGutnwTO8bXyKc6oqPtc5Nolpg+L1/DPW2OlCE/SgUzyCZ2DFcmuCHFAjUUyhxjlLT9LiE8AMEBJiZWyGVOAAAAAElFTkSuQmCC') no-repeat center;
+}
+
+.edit--button {
+    border: none;
+    height: 25px;
+    width: 25px;
+    background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACkSURBVEhL7ZDNCQIxEEbTwipsMV60CgXtRBC3CMVutAr7cO+CvlkzEEIWIZnc8uCRn8P3JeManiO+cDedjDnjx/tG85IBtUBLtljM2q9CXCLjKkLHIqsSlpzkIpdw5qkSMZs4PFWSzVy4usFs/oVXGYvawpMWhQtLvGGVcKVH8/ADrn7biQ71JyYvv+CIYckCzcbyQHltXGLGE+94xb1cNCrj3Bd0W2O4MZVXCgAAAABJRU5ErkJggg==');
+}
+
+
+
+.card--footer{
+    align-self: flex-start;
 }

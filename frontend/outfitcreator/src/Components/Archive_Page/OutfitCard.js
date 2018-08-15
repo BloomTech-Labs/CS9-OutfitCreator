@@ -13,7 +13,7 @@ const OutfitCard = props => {
                     {props.name}
                 </div>
                 <div className='header--edit'>
-                    <button />
+                    <button className='edit--button' />
                 </div>
             </div>
             <div className='card--image'>

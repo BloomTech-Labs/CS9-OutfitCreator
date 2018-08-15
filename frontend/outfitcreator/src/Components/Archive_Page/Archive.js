@@ -11,7 +11,7 @@ class Archive extends React.Component {
             outfits: [{
                 id: 0,
                 name: 'Evening Gown',
-                tags: ['Hot', 'expensive', 'red', 'silk', 'night', 'cloth'],
+                tags: ['Hot', 'expensive', 'red', 'silk', 'night wear', 'cloth'],
                 img: 'blank for now sorry',
                 date: '08/15/2018'
             },
@@ -39,7 +39,7 @@ class Archive extends React.Component {
             {
                 id: 4,
                 name: 'Evening Gown',
-                tags: ['Hot', 'expensive', 'red', 'silk', 'night', 'cloth'],
+                tags: ['Hot', 'expensive', 'red', 'silk', 'night wear', 'cloth'],
                 img: 'blank for now sorry',
                 date: '08/15/2018'
             },
@@ -67,7 +67,7 @@ class Archive extends React.Component {
             {
                 id: 8,
                 name: 'Evening Gown',
-                tags: ['Hot', 'expensive', 'red', 'silk', 'night', 'cloth'],
+                tags: ['Hot', 'expensive', 'red', 'silk', 'night wear', 'cloth'],
                 img: 'blank for now sorry',
                 date: '08/15/2018'
             },
@@ -95,7 +95,7 @@ class Archive extends React.Component {
             {
                 id: 12,
                 name: 'Evening Gown',
-                tags: ['Hot', 'expensive', 'red', 'silk', 'night', 'cloth'],
+                tags: ['Hot', 'expensive', 'red', 'silk', 'night wear', 'cloth'],
                 img: 'blank for now sorry',
                 date: '08/15/2018'
             },
