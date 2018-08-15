@@ -1,14 +1,13 @@
 import React from 'react';
+import './OutfitCard.css';
 import { withRouter } from 'react-router';
 
 // Will display a card with any information relevent to an outfit such as name, image, etc. To Be Implemented
 
 const OutfitCard = props => {
-
-    console.log(this.props.location)
+    // console.log(props.location)
     return (
-        <div className='container--card'>
-        {console.log(props)}
+        <div className='container--card' key={props.key}>
             <div className='card--header'>
                 <div className='header--title'>
                     {props.name}
