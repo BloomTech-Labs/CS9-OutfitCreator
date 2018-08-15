@@ -5,6 +5,8 @@ const port = process.env.PORT || 5000;
 const User = require("./models/userModel");
 const Item = require("./models/itemModel");
 const Outfit = require("./models/outfitModel");
+const Profile = require("./models/profileModel");
+
 
 const keys = require("./config/keys");
 
@@ -15,6 +17,18 @@ const profileRoutes = require("./routes/profile-routes");
 const passportSetup = require("./config/passport-setup");
 
 const sessionOptions = {};
+
+// API WISHLIST
+// ---------------
+// Middleware to protect most routes
+// Edit an item's properties
+// Edit an outfit's properties
+// Delete a specific item
+// Delete a specific outfit
+// Get all items for a user
+// Get all outfits for a user
+// Create a new user profile
+// Edit a user profile
 
 // set up server
 const server = express();
@@ -51,10 +65,10 @@ server.get("/", (req, res) => {
 // POST - Log in as specific User
 // PUT - Change User details
 
-// POST - Add an item to the database
+// Add a new item to the database
 server.post("/item", (req, res) => {
-  const { name, image, type, tags } = req.body;
-  Item.create({ name, image, type, tags })
+  const { profile, name, image, type, tags } = req.body;
+  Item.create({ profile, name, image, type, tags })
     .then(item => {
       res.status(201).json(item);
     })
@@ -63,12 +77,10 @@ server.post("/item", (req, res) => {
     });
 });
 
-// PUT - Change an item in the database?
-
-// POST - Add an outfit to the database
+// Add a new outfit to the database
 server.post("/outfit", (req, res) => {
-  const { name, tags, worn, top, bottom, shoes } = req.body;
-  Outfit.create({ name, tags, worn, top, bottom, shoes })
+  const { profile, name, tags, worn, top, bottom, shoes } = req.body;
+  Outfit.create({ profile, name, tags, worn, top, bottom, shoes })
     .then(outfit => {
       res.status(201).json(outfit);
     })
@@ -77,9 +89,22 @@ server.post("/outfit", (req, res) => {
     });
 });
 
-// PUT - Change an outfit in the database?
+// Add an array of tags to a specific item
+server.post("/item/:id/tags", (req, res) => {
+  const { tags } = req.body;
+  const id = req.params.id;
+  Item.findById(id)
+    .then(item => {
+      item.tags = item.tags.concat(tags);
+      item.save();
+    })
+    .then(res.status(200).json("success!"))
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+});
 
-// GET - specific item of clothing by ID
+// Get a specific item of clothing by ID
 server.get("/item/:id", (req, res) => {
   const id = req.params.id;
   Item.findById(id)
@@ -91,7 +116,7 @@ server.get("/item/:id", (req, res) => {
     });
 });
 
-// GET - outfit by ID
+// Get a specific outfit by ID
 server.get("/outfit/:id", (req, res) => {
   const id = req.params.id;
   Outfit.findById(id)
@@ -103,8 +128,24 @@ server.get("/outfit/:id", (req, res) => {
     });
 });
 
-// GET - all items with a certain tag
+// Get all items with a certain tag
+server.get("/search/:tag", (req, res) => {
+    const tag = req.params.tag;
+    const { id } = req.body;
+    Item.find({
+        tags: tag,
+        profile: id
+    })
+    .populate()
+    .then(items => {
+        res.status(200).json(items);
+    })
+    .catch(err => {
+        res.sent({error: err.message});
+    });
+});
 
+// Start the server
 server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
