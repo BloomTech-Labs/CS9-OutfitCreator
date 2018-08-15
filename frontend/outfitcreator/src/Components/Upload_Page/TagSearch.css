@@ -1,0 +1,38 @@
+.TagSearch {
+  width: 30vw;
+}
+
+.SearchIcon {
+  align-items: center;
+  border: 1px solid grey;
+  border-radius: 20px 0 0 20px;
+  border-right: none;
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  padding-left: 10px;
+  width: 35px;
+}
+
+.SearchIcon img {
+  height: 18px;
+  width: 18px;
+}
+
+.Search {
+  border: 1px solid grey;
+  border-radius: 20px;
+  border-left: none;
+  height: 30px;
+}
+
+.Search:focus {
+  border: 1px solid grey;
+  border-left: none;
+  box-shadow:none;
+  outline: none;
+}
+
+.TagView {
+  border: 1px dashed purple;
+}
