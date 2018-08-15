@@ -2,9 +2,21 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const port = process.env.PORT || 5000;
-const Profile = require("./models/profileModel");
+const User = require("./models/userModel");
 const Item = require("./models/itemModel");
 const Outfit = require("./models/outfitModel");
+const Profile = require("./models/profileModel");
+
+
+const keys = require("./config/keys");
+
+const cookieSession = require("cookie-session");
+const passport = require("passport");
+const authRoutes = require("./routes/auth-routes");
+const profileRoutes = require("./routes/profile-routes");
+const passportSetup = require("./config/passport-setup");
+
+const sessionOptions = {};
 
 // API WISHLIST
 // ---------------
@@ -18,21 +30,40 @@ const Outfit = require("./models/outfitModel");
 // Create a new user profile
 // Edit a user profile
 
-
-
 // set up server
 const server = express();
 server.use(express.json());
 
-mongoose
-  .connect("mongodb://user:password123@ds163630.mlab.com:63630/outfit-creator")
-  .then(() => {
-    console.log("Connected to MongoDB");
-  });
+//set up cookie-session
+server.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [keys.session.cookieKey]
+  })
+);
+
+// set up passport. Initialize
+server.use(passport.initialize());
+server.use(passport.session());
+
+// set up routes
+server.use("/auth", authRoutes);
+server.use("/profile", profileRoutes);
+
+mongoose.connect(keys.mongoDb.dbURI).then(() => {
+  console.log("Connected to MongoDB");
+});
 
 server.get("/", (req, res) => {
   res.status(200).json("Server running");
 });
+
+// API WISHLIST
+// HOW WILL THE FOLLOWING WORK WITH OAUTH?
+// POST - Register new User
+// MIDDLEWARE - to protect routes by requiring user login
+// POST - Log in as specific User
+// PUT - Change User details
 
 // Add a new item to the database
 server.post("/item", (req, res) => {
