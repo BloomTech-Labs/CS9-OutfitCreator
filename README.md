@@ -8,12 +8,20 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+For OAuth with MongoDB you will need knowledge on Node.js and Express with routing, as well as a mlab account with database and the Google+ API at Google's developers console set up. 
 
+Additionally you will need to download Passport with the desired strategy (we will use Google in this example)
 ```
-Give examples
+yarn add passport passport-google-oauth20
 ```
-
+You will also need to install mongoose
+```
+yarn add mongoose
+```
+Install cookie-session
+```
+yarn add cookie-session
+```
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running
