@@ -10,7 +10,7 @@ class PaymentForm extends Component {
 
     async submit() {
         let {token} = await this.props.stripe.createToken({name: "Name"});
-        let response = await fetch("localhost:5000/charge/", {
+        let response = await fetch("localhost:5000/pay/", {
             method: "POST",
             headers: {"Content-Type": "text/plain"},
             body: token.id
