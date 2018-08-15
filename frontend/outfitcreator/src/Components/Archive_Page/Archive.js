@@ -15,10 +15,18 @@ class Archive extends React.Component {
 
     filter = () => {
         const { search, outfits } = this.state;
-        // Filters based name or tag
+        const searchWords = search.split(' ');
+        // Filters from the outfit list based on context in search bar, by name and tag
+        // i.e. if the name of outfit A was used as a tag in outfit B, both will show
         const filteredOutfits = outfits.filter((outfit) => (
             outfit.name.toLowerCase().includes(search.toLowerCase()) ||
-            outfit.tags.some((tag) => tag.toLowerCase.includes(search.toLowerCase()))
+            outfit.tags.some((tag) => (
+                tag.toLowerCase().includes(search.toLowerCase()) ||
+                searchWords.some((word) => (
+                    tag.toLowerCase().includes(word.toLowerCase()) ||
+                    outfit.name.toLowerCase().includes(word.toLowerCase())
+                ))
+            ))
         ))
         this.setState({ searchedOutfits: filteredOutfits })
     }
@@ -48,12 +56,20 @@ class Archive extends React.Component {
                 {this.state.searching ?
                     <div className='archive--collection'>
                         {this.state.searchedOutfits.map((outfit) => (
-                            <OutfitCard />
+                            <OutfitCard
+                                name={outfit.name}
+                                src={outfit.img}
+                                lastWorn={outfit.date}
+                            />
                         ))}
                     </div> :
                     <div className='archive--collection'>
                         {this.state.outfits.map((outfit) => (
-                            <OutfitCard />
+                            <OutfitCard
+                                name={outfit.name}
+                                src={outfit.img}
+                                lastWorn={outfit.date}
+                            />
                         ))}
                     </div>
                 }

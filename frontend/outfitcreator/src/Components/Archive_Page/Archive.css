@@ -9,5 +9,17 @@
     height: 60vh;
     width: 70vw;
     min-width: 750px;
+    min-height: 500px;
     z-index: 1;
+}
+
+.search--input {
+    border-radius: 50px;
+    background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAChSURBVDhPxZFLDgFREABniTgOtlZcyJ5wFUfgCNiz9LuAA4gVVemxmnlPSGQqqfRn0nmdnuLfdHCOF3zguazb+BGHd7jGPnbLaL1Fv2dZ4CrSCvZnkaa5Yi/SCm5yijTNHV27DvveJMsBfakO+8dI00wwd4NppGnG+ESvPkDXNlpvMPsrh3jDEbrJHr2Jh/P6LUzyHjZ+TXPDssSfh5uiKF6jryBed3R9/QAAAABJRU5ErkJggg==') no-repeat left center;
+    padding-left: 20px;
+}
+
+.archive--collection {
+    min-width: 500px;
+    min-height: 500px;
 }
