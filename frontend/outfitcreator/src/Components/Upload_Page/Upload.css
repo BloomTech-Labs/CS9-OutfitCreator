@@ -1,37 +1,34 @@
 .UploadPage {
-  border: 1px dashed green;
-  position: absolute;
   left: 200px;
+  position: absolute;
+  top: 75px;
 }
 
 .UploadColumns {
-  border: 1px dashed blue;
+  align-items: center;
   display: flex;
+  flex-flow: wrap;
   justify-content: space-around;
-  margin-top: 12vh;
   width: 70vw;
+}
+
+.UploadLeft, .UploadRight {
+  min-width: 300px;
+  margin-top: 25px;
 }
 
 .UploadLeft {
   align-items: center;
-  border: 1px dashed red;
   display: flex;
   flex-flow: column;
-  
-}
-
-.UploadRight {
-  border: 1px dashed red;
-  
 }
 
 .UploadImage {
-  border: 1px solid black;
-  height: 20vh;
-  width: 20vw;
+  height: 200px;
+  width: 30vw;
 }
 
-.UploadButton, .SaveButton {
+.UploadButton, .UploadButton:focus {
   background: white;
   border-radius: 5px;
   box-shadow: 2px 2px 0 0 black;
@@ -50,4 +47,14 @@
   font-size: 12px;
   height: 25px;
   width: 20vw;
+}
+
+.SaveButton, .SaveButton:focus {
+  background: white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 0 0 black;
+  color: black;
+  margin: 30px 50px 30px 0;
+  font-size: 15px;
+  width: 100px;
 }
