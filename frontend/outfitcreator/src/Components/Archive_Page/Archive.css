@@ -6,10 +6,11 @@
     align-items: flex-start;
     top: 10vh;
     left: 200px;
-    height: 60vh;
+    height: 80vh;
     width: 70vw;
     min-width: 750px;
     min-height: 500px;
+    overflow-y: auto;
     z-index: 1;
 }
 
@@ -20,6 +21,8 @@
 }
 
 .archive--collection {
+    display: flex;
+    flex-wrap: wrap;
     min-width: 500px;
     min-height: 500px;
 }
