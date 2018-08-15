@@ -67,7 +67,7 @@ Get all Outfits for a User. Returns an array of Outfit objects.
 A GET request for a specific item by ID. Returns an object like this:
 ```
 {
-    "profile": "5b71ec57a606882af8753934",
+    "user": "5b71ec57a606882af8753934",
     "tags": [
         "red",
         "christmas"
@@ -84,7 +84,7 @@ A GET request for a specific item by ID. Returns an object like this:
 A GET request for a specific outfit by ID. Returns an object like this:
 ```
 {
-    "profile": "5b71ec57a606882af8753934",
+    "user": "5b71ec57a606882af8753934",
     "tags": [
         "formal",
         "work"
