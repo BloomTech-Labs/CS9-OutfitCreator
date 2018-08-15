@@ -1,0 +1,23 @@
+.container--card {
+    border: 1px solid purple;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 600px;
+    max-height: 250px;
+    min-width: 400px;
+    min-height: 300px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.card--header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header--edit{
+    border: 0;
+    background: transparent;
+    background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACvSURBVDhP1dI7CsJQEIXhuwFxA27Dwvcr6B4EQezcna7FykpLH03UQjv9Z8wYRPBOGsEDH+QEJplLEv4qVaywRl1uFIkMnHDPbOBOAzucYQ/YwpUmZHiYXV9wxQDRyMAeibZ8k5G2SFqQYXuTDEt3DbdxQF/b+zGiseGutnwTO8bXyKc6oqPtc5Nolpg+L1/DPW2OlCE/SgUzyCZ2DFcmuCHFAjUUyhxjlLT9LiE8AMEBJiZWyGVOAAAAAElFTkSuQmCC') no-repeat center;
+}
