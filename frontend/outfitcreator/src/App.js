@@ -8,7 +8,7 @@ import Landing from './Components/Landing_Page/Landing';
 import Navigation from './Components/Navigation';
 import Create from './Components/Create_Component/Create';
 import Upload from './Components/Upload';
-import Archive from './Components/Archive';
+import Archive from './Components/Archive_Page/Archive';
 import Settings from './Components/Settings';
 import Billings from './Components/Billings';
 import './App.css';
@@ -24,32 +24,32 @@ class App extends Component {
           <Route exact path='/Landing' component={Landing} />
           <Route path='/Create'  render={ props =>
             <div className='App--create'>
-              <Navigation />
               <Create />
+              <Navigation />
             </div>
           } />
           <Route path='/Archive'  render={ props =>
             <div>
-              <Navigation />
               <Archive />
+              <Navigation />
             </div>
           } />
           <Route path='/Settings'  render={ props =>
             <div>
-              <Navigation />
               <Settings />
+              <Navigation />
             </div>
           } />
           <Route path='/Upload'  render={ props =>
             <div>
-              <Navigation />
               <Upload />
+              <Navigation />
             </div>
           } />
           <Route path='/Billing'  render={ props =>
             <div>
-              <Navigation />
               <Billings />
+              <Navigation />
             </div>
           } />
         </Switch>
