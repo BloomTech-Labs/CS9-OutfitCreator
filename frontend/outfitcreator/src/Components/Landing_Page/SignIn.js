@@ -29,7 +29,7 @@ class SignIn extends React.Component {
                 {this.state.modal ?
                     <div className='modal--backdrop' onClick={this.toggle}>
                     </div> : null}
-                // Content of the modal goes in here
+                {/* // Content of the modal goes in here */}
                 {this.state.modal ?
                     <div className='modal modal--test'>
                         <div className='container'>
