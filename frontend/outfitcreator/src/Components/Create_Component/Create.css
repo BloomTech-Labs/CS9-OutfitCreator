@@ -41,3 +41,7 @@
     width: 25%;
     margin-bottom: 1em;
 }
+
+.close-icon, .close {
+    cursor: pointer;
+}

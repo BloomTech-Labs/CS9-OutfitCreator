@@ -10,7 +10,7 @@ import Create from './Components/Create_Component/Create';
 import Upload from './Components/Upload_Page/Upload';
 import Archive from './Components/Archive_Page/Archive';
 import Settings from './Components/Settings';
-import Billings from './Components/Billing_Page/Billings';
+import Billing from './Components/Billing_Page/Billing';
 import './App.css';
 
 library.add(faShareAlt);
@@ -48,7 +48,7 @@ class App extends Component {
           } />
           <Route path='/Billing'  render={ props =>
             <div>
-              <Billings />
+              <Billing />
               <Navigation />
             </div>
           } />

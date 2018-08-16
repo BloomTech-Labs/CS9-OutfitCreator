@@ -108,3 +108,32 @@ A GET request for a specific outfit by ID. Returns an object like this:
 A GET request for items with a specific tag. Returns an array of populated Item objects.
 `:user` refers to the mongodb ID for that user profile.
 `:tag` is a string to search for in item tags.
+
+## GET to /items/:type
+A GET request for all items by type. Returns an object like this:
+```
+[
+    {
+        tags: [
+            "black",
+            "formal"
+        ],
+        _id: "5b71ec8ba606882af8789935",
+        name: "black skirt",
+        image: "www.thisisarealurl.com/skirt",
+        type: "bottom",
+        __v: 0
+    },
+    {
+        tags: [
+            "black",
+            "formal"
+        ],
+        _id: "5b730e67353aa20014aac57f",
+        name: "black skirt",
+        image: "www.thisisarealurl.com/skirt",
+        type: "bottom",
+        __v: 0
+    }
+]
+```

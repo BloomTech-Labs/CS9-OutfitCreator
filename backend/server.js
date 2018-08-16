@@ -1,4 +1,6 @@
 const express = require("express");
+const helmet = require("helmet");
+const cors = require("cors");
 const mongoose = require("mongoose");
 
 const port = process.env.PORT || 5000;
@@ -12,10 +14,19 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const authRoutes = require("./routes/auth-routes");
 const profileRoutes = require("./routes/profile-routes");
+const stripeRoutes = require("./routes/stripe-routes");
 const passportSetup = require("./config/passport-setup");
 
 // set up server
 const server = express();
+const corsOptions = {
+  origin: "*",
+  credentials: true
+}
+
+// set up middlewares
+server.use(cors(corsOptions));
+server.use(helmet());
 server.use(express.json());
 
 //set up cookie-session
@@ -33,6 +44,7 @@ server.use(passport.session());
 // set up routes
 server.use("/auth", authRoutes);
 server.use("/profile", profileRoutes);
+server.use("/pay", stripeRoutes);
 
 mongoose.connect(keys.mongoDb.dbURI).then(() => {
   console.log("Connected to MongoDB");
@@ -180,6 +192,21 @@ server.get("/:user/outfits", (req, res) => {
     .catch(err => {
       res.send({ error: err.message });
     });
+});
+
+// Get items by type
+server.get("/items/:type", (req, res) => {
+  const { type } = req.params;
+  Item.find({
+    type
+  })
+  .populate()
+  .then(items => {
+    res.status(200).json(items);
+  })
+  .catch(err => {
+    res.status(500).json({ message: 'Items could not be retreived at this time.'})
+  });
 });
 
 // Start the server
