@@ -52,22 +52,22 @@ class TagSearch extends Component {
         </div>
 
         <Label>Pair With:</Label>
-        <Form className="PairWith">
+        <Form className='PairWith'>
           <FormGroup check>
             <Label check>
-              <Input type="checkbox" />
-              Bottoms
-            </Label>
-          </FormGroup>
-          <FormGroup check>
-            <Label check>
-              <Input type="checkbox" />
+              <Input type='checkbox' id='TopsCheckbox'/>
               Tops
             </Label>
           </FormGroup>
           <FormGroup check>
             <Label check>
-              <Input type="checkbox" />
+              <Input type='checkbox' id='BottomsCheckbox' />
+              Bottoms
+            </Label>
+          </FormGroup>
+          <FormGroup check>
+            <Label check>
+              <Input type='checkbox' id='ShoesCheckbox' />
               Shoes
             </Label>
           </FormGroup>
