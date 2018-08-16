@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faShareAlt } from '@fortawesome/free-solid-svg-icons';
-import { Elements } from 'react-stripe-elements';
 
 
 import Landing from './Components/Landing_Page/Landing';
@@ -11,7 +10,7 @@ import Create from './Components/Create_Component/Create';
 import Upload from './Components/Upload_Page/Upload';
 import Archive from './Components/Archive_Page/Archive';
 import Settings from './Components/Settings';
-import Billings from './Components/Billing_Page/Billings';
+import Billing from './Components/Billing_Page/Billing';
 import './App.css';
 
 library.add(faShareAlt);
@@ -49,9 +48,7 @@ class App extends Component {
           } />
           <Route path='/Billing' render={props =>
             <div>
-              <Elements>
-                <Billings />
-              </Elements>
+              <Billing />
               <Navigation />
             </div>
           } />
