@@ -11,7 +11,6 @@ const ItemSchema = new mongoose.Schema({
   },
   image: {
     // storing images as URLs for now
-    data: Buffer,
     type: String,
     required: true
   },
