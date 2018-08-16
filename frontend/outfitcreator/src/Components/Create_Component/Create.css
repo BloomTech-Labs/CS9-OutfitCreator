@@ -1,4 +1,7 @@
 .createContainer {
+    position: absolute;
+    left: 100px;
+    max-width: 70vw;
     margin-top: 4.5em;
     width: 80%;
     margin-left: 10em;
