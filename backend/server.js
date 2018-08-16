@@ -15,6 +15,7 @@ const authRoutes = require("./routes/auth-routes");
 const profileRoutes = require("./routes/profile-routes");
 const stripeRoutes = require("./routes/stripe-routes");
 const passportSetup = require("./config/passport-setup");
+const cors = require('cors');
 
 // set up server
 const server = express();
@@ -27,6 +28,11 @@ server.use(
     keys: [keys.session.cookieKey]
   })
 );
+
+// set up cors options
+const corsOptions = {
+  origin: 'localhost:3000'
+}
 
 // set up passport. Initialize
 server.use(passport.initialize());
