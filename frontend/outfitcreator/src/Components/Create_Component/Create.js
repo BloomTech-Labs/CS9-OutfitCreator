@@ -9,20 +9,35 @@ class Create extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            profile: "5b71ec57a606882af8753934",
+            user: '',
             name: '',
             worn: [],
-            top: ["5b71ec57a606882af8789934", "5b71ec57a606882af8789937"],
-            bottom: ["5b71ec8ba606882af8789935"],
-            shoes: "5b71ecafa606882af8789936"
+            top: [],
+            bottom: [],
+            shoes: []
         }
     }
 
-    handleButtonClick = e => {
+    componentDidMount() {
+        axios.all([ 
+            axios.get(`http://localhost:5000/items/top`),
+            axios.get(`http://localhost:5000/items/bottom`),
+            axios.get(`http://localhost:5000/items/shoes`),
+        ])
+        .then(res => {
+            this.setState({ top: res[0].data, bottom: res[1].data, shoes: res[2].data })
+        })
+    }
+
+    handleButtonClick = () => {
         console.log('button clicked!')
     };
 
-    handleCreateOutfit = e => {
+    handleInputChange = e => {
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
+    handleCreateOutfit = () => {
         const outfit = {};
         axios.post('http://localhost:5000/outfit', outfit)
         .then(savedOutfit => {
@@ -41,7 +56,9 @@ class Create extends Component {
                             alt="Card image cap"
                         />
                         <CardImgOverlay>
-                            <span aria-hidden="true" className="pull-right clickable close-icon" data-effect="fadeOut" onClick={this.handleButtonClick}>&times;</span>
+                            <Button className="close" aria-label="Close" onClick={this.handleButtonClick}>
+                                <span aria-hidden="true">&times;</span>
+                            </Button>
                             <CardText className="cardText">
                                 Top
                             </CardText>
@@ -54,7 +71,7 @@ class Create extends Component {
                             alt="Card image cap"
                         />
                         <CardImgOverlay>
-                            <Button className="close" aria-label="Close">
+                            <Button className="close" aria-label="Close" onClick={this.handleButtonClick}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
                             <CardText className="cardText">
@@ -79,7 +96,7 @@ class Create extends Component {
                     </Card>
                 </CardDeck>
                 <div className="outfitPickerContainer">
-                    <Input type="text" name="outfitNickname" placeholder="Outfit Nickname" className="outfitInput" />
+                    <Input type="text" name="name" placeholder="Outfit Nickname" onChange={this.handleInputChange} value={this.state.name} className="outfitInput" />
                     <div className="outfitPickerDecision">
                         <Button onClick={this.handleCreateOutfit}>Yes!</Button>
                         <Button onClick={this.handleButtonClick}>Randomize</Button>
