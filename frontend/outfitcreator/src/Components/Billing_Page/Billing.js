@@ -1,16 +1,11 @@
 import './billing.css';
 import React from 'react';
-import {Elements, StripeProvider} from 'react-stripe-elements';
-import PaymentForm from './PaymentForm';
+import Checkout from './Checkout';
 
 const Billing = (props) => {
     return (
         <div>
-            <StripeProvider apiKey="pk_test_LwL4RUtinpP3PXzYirX2jNfR">
-                <Elements>
-                    <PaymentForm/>
-                </Elements>
-            </StripeProvider>
+            <Checkout/>
         </div>
     );
 };

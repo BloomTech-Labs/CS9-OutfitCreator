@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {CardElement, injectStripe} from 'react-stripe-elements';
 
+const server = "localhost:5000";
+
 class PaymentForm extends Component {
     constructor(props){
         super(props);
@@ -9,6 +11,9 @@ class PaymentForm extends Component {
     }
 
     async submit() {
+        // axios.post(`${server}/pay/`, {
+            
+        // })
         let {token} = await this.props.stripe.createToken({name: "Name"});
         let response = await fetch("localhost:5000/pay/", {
             method: "POST",
@@ -25,7 +30,7 @@ class PaymentForm extends Component {
             <div className="checkout">
                 <p>Would you like to subscribe?</p>
                 <CardElement/>
-                <button onClick={this.submit}>Send</button>
+                <button className="button" onClick={this.submit}>Send</button>
             </div>
         )
     }

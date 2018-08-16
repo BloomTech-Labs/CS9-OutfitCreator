@@ -1,5 +1,5 @@
 const router = require("express")();
-const stripe = require("stripe")("sk_test_TwTTlid3GeOG6YPydOjARw4I");
+const stripe = require("stripe")("sk_test_xj8MsjaHp54vM8zhfcWAZtDH");
 
 router.use(require("body-parser").text());
 
