@@ -20,9 +20,9 @@ class Create extends Component {
 
     componentDidMount() {
         axios.all([ 
-            axios.get(`http://localhost:5000/items/top`),
-            axios.get(`http://localhost:5000/items/bottom`),
-            axios.get(`http://localhost:5000/items/shoes`),
+            axios.get(`https://lambda-outfit-creator-api.herokuapp.com/items/top`),
+            axios.get(`https://lambda-outfit-creator-api.herokuapp.com/items/bottom`),
+            axios.get(`https://lambda-outfit-creator-api.herokuapp.com/items/shoes`),
         ])
         .then(res => {
             this.setState({ top: res[0].data, bottom: res[1].data, shoes: res[2].data })
