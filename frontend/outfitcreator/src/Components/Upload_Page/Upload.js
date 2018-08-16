@@ -8,7 +8,10 @@ class Upload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: ''
+      image: '',
+      query: '',
+      results: [],
+      tags: ['some', 'cool', 'tags', 'go', 'here', 'testing', 'wrap']
     }
   }
 
@@ -31,12 +34,12 @@ class Upload extends Component {
       image: this.state.image,
       type: 'top',
     })
-    .then( response => {
-      console.log(response);
-    })
-    .catch( err => {
-      console.log(err);
-    });
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   fileChanged = event => {
@@ -44,9 +47,14 @@ class Upload extends Component {
     // this.setState({ image: event.target.files[0] });
     this.setState({ image: URL.createObjectURL(event.target.files[0]) });
   }
+
+  updateState = (state) => {
+    this.setState(state);
+  }
+
   render() {
     return (
-      <div className="UploadPage">
+      <div className='UploadPage'>
         <div className='UploadColumns'>
           <div className="UploadLeft">
             {this.state.image ?
@@ -60,10 +68,10 @@ class Upload extends Component {
             <FormGroup>
               <Input type='file' name='clothing' id='image--upload' onChange={this.fileChanged} />
               <br />
-              <Input type="text" name="name" id="ClothingName" placeholder="Clothing Name" />
+              <Input type="text" name="name" id="ClothingName" placeholder="Clothing Name" autoComplete='off' />
             </FormGroup>
             <FormGroup>
-              <Input type="select" name="select" id="SelectType">
+              <Input id='SelectType' type='select' name='select'>
                 <option>Top</option>
                 <option>Bottom</option>
                 <option>Shoes</option>
@@ -72,13 +80,14 @@ class Upload extends Component {
           </div>
 
           <div className="UploadRight">
-            <TagSearch />
+            <TagSearch state={this.state} updateState={this.updateState} />
 
           </div>
         </div>
 
         <Button className="SaveButton" onClick={this.handleSubmit}>Save</Button>
-      </div >
+
+      </div>
     );
   }
 }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {CardElement, injectStripe} from 'react-stripe-elements';
+const keys = require("./config/keys");
 
 class PaymentForm extends Component {
     constructor(props){
@@ -8,9 +9,13 @@ class PaymentForm extends Component {
         this.submit = this.submit.bind(this);
     }
 
-    async submit() {
+    async submit(e) {
+        //TODO: Refactor using Axios
+        // axios.post(`${server}/pay/`, {
+        // })
+        console.log("submitting payment");
         let {token} = await this.props.stripe.createToken({name: "Name"});
-        let response = await fetch("localhost:5000/charge/", {
+        let response = await fetch(`${keys.server}/pay/charge`, {
             method: "POST",
             headers: {"Content-Type": "text/plain"},
             body: token.id
@@ -25,7 +30,7 @@ class PaymentForm extends Component {
             <div className="checkout">
                 <p>Would you like to subscribe?</p>
                 <CardElement/>
-                <button onClick={this.submit}>Send</button>
+                <button className="button" onClick={this.submit}>Send</button>
             </div>
         )
     }

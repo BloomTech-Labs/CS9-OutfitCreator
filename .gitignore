@@ -3,6 +3,7 @@
 
 #keys
 /backend/config/keys.js
+/frontend/outfitcreator/src/Components/Billing_Page/config/keys.js
 
 # dependencies
 /node_modules
