@@ -4,7 +4,15 @@ import TagSearch from './TagSearch';
 import './Upload.css';
 
 class Upload extends Component {
+  state = {
+    query: '',
+    results: [],
+    tags: ['some', 'cool', 'tags', 'go', 'here', 'testing', 'wrap']
+  }
 
+  updateState = (state) => {
+    this.setState(state);
+  }
 
   render () {
     return (
@@ -28,7 +36,7 @@ class Upload extends Component {
           </div>
 
           <div className='UploadRight'>
-            <TagSearch />
+            <TagSearch state={this.state} updateState={this.updateState} />
             
           </div>
         </div>
