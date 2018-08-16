@@ -1,4 +1,6 @@
 const express = require("express");
+const helmet = require("helmet");
+const cors = require("cors");
 const mongoose = require("mongoose");
 
 const port = process.env.PORT || 5000;
@@ -16,6 +18,14 @@ const passportSetup = require("./config/passport-setup");
 
 // set up server
 const server = express();
+const corsOptions = {
+  origin: "*",
+  credentials: true
+}
+
+// set up middlewares
+server.use(cors(corsOptions));
+server.use(helmet());
 server.use(express.json());
 
 //set up cookie-session
