@@ -10,11 +10,16 @@ class TagSearch extends Component {
     tags: ['some', 'cool', 'tags', 'go', 'here', 'testing', 'wrap']
   }
 
-  addTag = () => {
-    
+  addTag = (e) => {
+    const { query, results, tags } = this.state;
+    if(e.key === 'Enter' && !tags.includes(query)){
+      tags.push(query);
+
+      this.setState({ query: '', results: results, tags: tags });
+    }
   }
 
-  removeTag = () => {
+  removeTag = (e) => {
 
   }
 
@@ -31,14 +36,14 @@ class TagSearch extends Component {
       <div>
         <InputGroup className='TagSearch'>
           <InputGroupAddon className='SearchIcon' addonType='prepend'><img src={SearchIcon} alt='Magnifying Glass' /></InputGroupAddon>
-          <Input className='Search' placeholder='Search' value={this.state.query} onChange={(e) => this.handleInputChange(e)} />
+          <Input className='Search' placeholder='Search' value={this.state.query} onChange={this.handleInputChange} onKeyPress={this.addTag} />
         </InputGroup>
 
         {/* Display tag text for each tag in state */}
         <div className='TagView'>
           {this.state.tags.map(tag => (
             <div className={'Tag ' + tag} key={this.state.tags.indexOf(tag)}>
-              <span className='DeleteTag'>x</span>{tag}
+              <span className='DeleteTag' onClick={this.removeTag}>x</span>{tag}
             </div>
           ))}
         </div>
