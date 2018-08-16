@@ -11,11 +11,10 @@ class TagSearch extends Component {
   }
 
   addTag = (e) => {
-    const { query, results, tags } = this.state;
-    if(e.key === 'Enter' && !tags.includes(query)){
-      tags.push(query);
-
-      this.setState({ query: '', results: results, tags: tags });
+    const newState = { ...this.state };
+    if(e.key === 'Enter' && !newState.tags.includes(newState.query)){
+      newState.tags.push(newState.query);
+      this.setState({ ...newState });
     }
   }
 
