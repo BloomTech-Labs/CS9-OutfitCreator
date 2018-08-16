@@ -47,7 +47,7 @@ server.use("/auth", authRoutes);
 server.use("/profile", profileRoutes);
 server.use("/pay", stripeRoutes);
 
-mongoose.connect(keys.mongoDb.dbURI).then(() => {
+mongoose.connect(keys.mongoDb.dbURImul).then(() => {
   console.log("Connected to MongoDB");
 });
 

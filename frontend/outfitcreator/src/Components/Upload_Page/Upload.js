@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { CardImg, Button, FormGroup, Input } from 'reactstrap';
 import TagSearch from './TagSearch';
 import './Upload.css';
@@ -12,18 +13,30 @@ class Upload extends Component {
   }
 
   handleSubmit = event => {
+    event.preventDefault();
     console.log(this.state.image);
     // this.setState({ image: URL.createObjectURL(event.target.files[0])});
-    const formData = new FormData({
-      name: 'myImage',
+    // const formData = new FormData({
+    //   name: 'myImage',
+    //   image: this.state.image,
+    //   imageName: 'image name here'
+    // });
+    // formData.name = 'myImage';
+    // formData.image = this.state.image;
+    // formData.imageName = 'image name';
+    // console.log(formData);
+    axios.post('http://localhost:5000/item', {
+      // user: 'jekm321',
+      name: 'jekms\'s test',
       image: this.state.image,
-      imageName: 'image name here'
+      type: 'top',
+    })
+    .then( response => {
+      console.log(response);
+    })
+    .catch( err => {
+      console.log(err);
     });
-    formData.name = 'myImage';
-    formData.image = this.state.image;
-    formData.imageName = 'image name';
-    console.log(formData);
-    event.preventDefault();
   }
 
   fileChanged = event => {
@@ -45,7 +58,7 @@ class Upload extends Component {
                 alt="Upload Image Thumbnail" />}
             <Button className="UploadButton">Upload</Button>
             <FormGroup>
-              <Input type='file' name='clothing' onChange={this.fileChanged} />
+              <Input type='file' name='clothing' id='image--upload' onChange={this.fileChanged} />
               <br />
               <Input type="text" name="name" id="ClothingName" placeholder="Clothing Name" />
             </FormGroup>
@@ -64,7 +77,7 @@ class Upload extends Component {
           </div>
         </div>
 
-        <Button className="SaveButton">Save</Button>
+        <Button className="SaveButton" onClick={this.handleSubmit}>Save</Button>
       </div >
     );
   }
