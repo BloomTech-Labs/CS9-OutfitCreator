@@ -21,7 +21,7 @@ class App extends Component {
       <div className="App">
 
         <Switch>
-          <Route exact path='/Landing' component={Landing} />
+          <Route exact path='/' component={Landing} />
           <Route path='/Create' render={props =>
             <div className='App--create'>
               <Create />
