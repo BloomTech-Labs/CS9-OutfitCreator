@@ -1,12 +1,73 @@
+button {
+    border: none;
+    background-color: green;
+    align-self: flex-start;
+    margin: 20px 0 0 30px;
+    height: 50px;
+    width: 150px;
+    box-shadow: 3px 3px;
+}
+
+.Checkout {
+    margin: 0 auto;
+    max-width: 800px;
+    box-sizing: border-box;
+    padding: 0 5px;
+}
+
+button {
+    white-space: nowrap;
+    border: 0;
+    outline: 0;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 14px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+    color: #fff;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    background-color: #6772e5;
+    text-decoration: none;
+    -webkit-transition: all 150ms ease;
+    transition: all 150ms ease;
+    margin-top: 10px;
+}
+
+input,
+.StripeElement {
+    margin: 10px 0 20px 0;
+    max-width: 500px;
+    padding: 10px 14px;
+    font-size: 1em;
+    font-family: 'Source Code Pro', monospace;
+    box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
+    border: 0;
+    outline: 0;
+    border-radius: 4px;
+    background: white;
+}
+
+.ccn--element {
+    width: 200px;
+}
+
+.cvc--element {
+    width: 100px;
+    text-align: center;
+}
+
 .container--billing {
-    border: 1px solid blue;
     position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    top: 8vh;
+    top: 7vh;
     left: 200px;
-    height: 50vh;
+    height: 70vh;
     width: 60vw;
     min-width: 300px;
     min-height: 500px;
@@ -15,12 +76,15 @@
 
 .billing--header {
     align-self: flex-start;
+    margin-bottom: 10px;
 }
 
-h5 {
+.billing--info {
+    margin-left: 50px;
 }
 
 .billing--form {
+    margin-left: 30px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -30,8 +94,9 @@ h5 {
 }
 
 .billing--input {
-    width: 80%;
+    width: 200px;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .billing--consent {
@@ -43,14 +108,4 @@ h5 {
 
 .billing--consent input {
     margin-right: 15px;
-}
-
-button {
-    border: none;
-    background-color: green;
-    align-self: flex-start;
-    margin: 20px 0 0 30px;
-    height: 50px;
-    width: 150px;
-    box-shadow: 3px 3px;
 }

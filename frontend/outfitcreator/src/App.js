@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faShareAlt } from '@fortawesome/free-solid-svg-icons';
+import { Elements } from 'react-stripe-elements';
 
 
 import Landing from './Components/Landing_Page/Landing';
@@ -22,33 +23,35 @@ class App extends Component {
 
         <Switch>
           <Route exact path='/Landing' component={Landing} />
-          <Route path='/Create'  render={ props =>
+          <Route path='/Create' render={props =>
             <div className='App--create'>
               <Create />
               <Navigation />
             </div>
           } />
-          <Route path='/Archive'  render={ props =>
+          <Route path='/Archive' render={props =>
             <div>
               <Archive />
               <Navigation />
             </div>
           } />
-          <Route path='/Settings'  render={ props =>
+          <Route path='/Settings' render={props =>
             <div>
               <Settings />
               <Navigation />
             </div>
           } />
-          <Route path='/Upload'  render={ props =>
+          <Route path='/Upload' render={props =>
             <div>
               <Upload />
               <Navigation />
             </div>
           } />
-          <Route path='/Billing'  render={ props =>
+          <Route path='/Billing' render={props =>
             <div>
-              <Billings />
+              <Elements>
+                <Billings />
+              </Elements>
               <Navigation />
             </div>
           } />
