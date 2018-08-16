@@ -14,10 +14,10 @@ class Upload extends Component {
               alt="Upload Image Thumbnail" />
             <Button className="UploadButton">Upload</Button>
             <FormGroup>
-              <Input type="text" name="name" id="ClothingName" placeholder="Clothing Name" />
+              <Input id="ClothingName" type="text" name="name" placeholder="Clothing Name" />
             </FormGroup>
             <FormGroup>
-              <Input type="select" name="select" id="SelectType">
+              <Input id="SelectType" type="select" name="select">
                 <option>Top</option>
                 <option>Bottom</option>
                 <option>Shoes</option>
