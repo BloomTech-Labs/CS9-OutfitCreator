@@ -18,46 +18,53 @@ class Billings extends React.Component {
     render() {
         return (
             <div className='container--billing'>
+                <div className='billing--header'>
+                    <h1>Billing </h1>
+                    <h5>Payment Info </h5>
+                </div>
                 <form className='billing--form'>
-                    <label htmlFor='ccn' >Card Number</label>
-                    <br />
                     <input
                         type='text'
                         id='ccn'
                         name='ccn'
-                        required placeholder='Card Number'
-                        className='billing--number'
-                        autoComplete='cc-number'
+                        placeholder='Card Number'
+                        className='billing--input billing--number'
+                        required autocomplete="cc-number"
                         value={this.state.ccn}
                         onChange={this.state.handleInputChange}
                     />
-                    <br />
-                    <label htmlFor='exp' >Expiration Date</label>
-                    <br />
                     <input
                         type='date'
                         id='exp'
                         name='exp'
-                        required placeholder='Expiration Date'
-                        className='billing--exp'
+                        placeholder="MM-YYYY"
+                        className='billing--input billing--exp'
                         autoComplete='cc-exp'
                         value={this.state.exp}
                         onChange={this.state.handleInputChange}
                     />
-                    <br />
-                    <label htmlFor='cvv' >CVV</label>
-                    <br />
                     <input
                         type='password'
                         id='cvv'
                         name='cvv'
                         required placeholder='CVV'
-                        className='billing--cvv'
-                        autoComplete='cc-csc'
+                        className='billing--input billing--cvv'
+                        autocomplete="cc-csc"
                         value={this.state.cvv}
                         onChange={this.state.handleInputChange}
                     />
                 </form>
+                <div className='billing--consent'>
+                    <label>
+                        <input
+                            type='checkbox'
+                            name='consent'
+                            value={this.state.accept}
+                        />
+                        I understand that this is a monthly subscription of $20
+                </label>
+                </div>
+                <button >Buy Now</button>
             </div>
         );
     }
