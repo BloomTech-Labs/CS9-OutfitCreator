@@ -4,24 +4,22 @@ import './TagSearch.css';
 import SearchIcon from '../../search.png';
 
 class TagSearch extends Component {
-  state = {
-    query: '',
-    results: [],
-    tags: ['some', 'cool', 'tags', 'go', 'here', 'testing', 'wrap']
+  constructor(props) {
+    super();
   }
 
   addTag = (e) => {
-    const newState = { ...this.state };
+    const newState = { ...this.props.state };
     if(e.key === 'Enter' && !newState.tags.includes(newState.query)){
       newState.tags.push(newState.query);
-      this.setState({ ...newState });
+      this.props.updateState(newState);
     }
   }
 
   removeTag = (e) => {
-    const newState = { ...this.state };
+    const newState = { ...this.props.state };
     newState.tags = newState.tags.filter(tag => tag !== e.target.nextElementSibling.innerHTML);
-    this.setState({ ...newState });
+    this.props.updateState(newState);
   }
 
   getTags = () => {
@@ -29,7 +27,9 @@ class TagSearch extends Component {
   }
 
   handleInputChange = (e) => {
-    this.setState({ query: e.target.value });
+    const newState = { ...this.props.state };
+    newState.query = e.target.value;
+    this.props.updateState(newState);
   }
 
   render () {
@@ -37,13 +37,13 @@ class TagSearch extends Component {
       <div>
         <InputGroup className='TagSearch'>
           <InputGroupAddon className='SearchIcon' addonType='prepend'><img src={SearchIcon} alt='Magnifying Glass' /></InputGroupAddon>
-          <Input className='Search' placeholder='Search' value={this.state.query} onChange={this.handleInputChange} onKeyPress={this.addTag} />
+          <Input className='Search' type='text' placeholder='Search' value={this.props.state.query} onChange={this.handleInputChange} onKeyPress={this.addTag} />
         </InputGroup>
 
         {/* Display tag text for each tag in state */}
         <div className='TagView'>
-          {this.state.tags.map(tag => (
-            <div className={'Tag ' + tag} key={this.state.tags.indexOf(tag)}>
+          {this.props.state.tags.map(tag => (
+            <div className={'Tag ' + tag} key={this.props.state.tags.indexOf(tag)}>
               <span className='DeleteTag' onClick={this.removeTag}>x</span>
               <span>{tag}</span>
             </div>
