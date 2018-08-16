@@ -8,7 +8,7 @@ router.use(require("body-parser").text());
 
 // set up cors options
 const corsOptions = {
-    origin: 'http://localhost:3000'
+    origin: '*'
   };
   
 router.post("/charge", cors(corsOptions), async (req, res) => {

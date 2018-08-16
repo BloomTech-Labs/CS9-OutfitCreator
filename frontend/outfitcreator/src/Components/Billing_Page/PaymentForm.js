@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {CardElement, injectStripe} from 'react-stripe-elements';
+const keys = require("./config/keys");
 
 class PaymentForm extends Component {
     constructor(props){
@@ -14,7 +15,7 @@ class PaymentForm extends Component {
         // })
         console.log("submitting payment");
         let {token} = await this.props.stripe.createToken({name: "Name"});
-        let response = await fetch("http://localhost:5000/pay/charge", {
+        let response = await fetch(`${keys.server}/pay/charge`, {
             method: "POST",
             headers: {"Content-Type": "text/plain"},
             body: token.id
