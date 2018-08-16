@@ -7,7 +7,7 @@ import { faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import Landing from './Components/Landing_Page/Landing';
 import Navigation from './Components/Navigation';
 import Create from './Components/Create_Component/Create';
-import Upload from './Components/Upload';
+import Upload from './Components/Upload_Page/Upload';
 import Archive from './Components/Archive_Page/Archive';
 import Settings from './Components/Settings';
 import Billing from './Components/Billing_Page/Billing';
