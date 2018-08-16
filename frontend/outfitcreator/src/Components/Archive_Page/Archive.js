@@ -1,6 +1,9 @@
 import React from 'react';
+import axios from 'axios';
 import OutfitCard from './OutfitCard';
 import './Archive.css';
+
+const testUser= 'jekm321';
 
 class Archive extends React.Component {
     constructor(props) {
@@ -122,6 +125,21 @@ class Archive extends React.Component {
             }],
             searchedOutfits: []
         };
+    }
+
+    componentDidMount() {
+        this.getOutfits();
+    }
+
+    getOutfits = () => {
+        axios.get(`http://localhost:5000/${testUser}/items`)
+            .then(response => {
+                this.setState({ myOutfits: response.data })
+            })
+            .catch(err => {
+                console.log(err);
+            });
+            console.log(this.state)
     }
 
     filter = () => {
