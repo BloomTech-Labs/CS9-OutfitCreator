@@ -12,6 +12,7 @@ class TagSearch extends Component {
     const newState = { ...this.props.state };
     if(e.key === 'Enter' && !newState.tags.includes(newState.query)){
       newState.tags.push(newState.query);
+      newState.query = '';
       this.props.updateState(newState);
     }
   }
