@@ -10,7 +10,7 @@ import Create from './Components/Create_Component/Create';
 import Upload from './Components/Upload_Page/Upload';
 import Archive from './Components/Archive_Page/Archive';
 import Settings from './Components/Settings';
-import Billings from './Components/Billings';
+import Billings from './Components/Billing_Page/Billings';
 import './App.css';
 
 library.add(faShareAlt);
