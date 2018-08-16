@@ -20,7 +20,9 @@ class TagSearch extends Component {
   }
 
   removeTag = (e) => {
-
+    const newState = { ...this.state };
+    newState.tags = newState.tags.filter(tag => tag !== e.target.nextElementSibling.innerHTML);
+    this.setState({ ...newState });
   }
 
   getTags = () => {
@@ -43,7 +45,8 @@ class TagSearch extends Component {
         <div className='TagView'>
           {this.state.tags.map(tag => (
             <div className={'Tag ' + tag} key={this.state.tags.indexOf(tag)}>
-              <span className='DeleteTag' onClick={this.removeTag}>x</span>{tag}
+              <span className='DeleteTag' onClick={this.removeTag}>x</span>
+              <span>{tag}</span>
             </div>
           ))}
         </div>
