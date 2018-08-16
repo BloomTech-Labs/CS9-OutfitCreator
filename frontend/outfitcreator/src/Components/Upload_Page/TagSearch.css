@@ -1,0 +1,66 @@
+.TagSearch {
+  min-width: 300px;
+  width: 30vw;
+}
+
+.SearchIcon {
+  align-items: center;
+  border: 1px solid grey;
+  border-radius: 20px 0 0 20px;
+  border-right: none;
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  padding-left: 10px;
+  width: 35px;
+}
+
+.SearchIcon img {
+  height: 18px;
+  width: 18px;
+}
+
+.Search {
+  border: 1px solid grey;
+  border-radius: 20px;
+  border-left: none;
+  height: 30px;
+}
+
+.Search:focus {
+  border: 1px solid grey;
+  border-left: none;
+  box-shadow:none;
+  outline: none;
+}
+
+.TagView {
+  display: flex;
+  flex-flow: wrap;
+  min-width: 300px;
+  width: 30vw;
+  margin-bottom: 50px;
+}
+
+.DeleteTag {
+  padding: 0 8px;
+}
+
+.Tag {
+  border: 1px solid black;
+  box-shadow: 2px 2px 0 0 black;
+  display: flex;
+  margin: 5px;
+  padding: 3px 10px 3px 5px;
+}
+
+.PairWith {
+  text-align: left;
+  margin: 0 auto;
+  width: 50%;
+}
+
+input[type=checkbox] {
+  transform: scale(1.5);
+  padding: 10px;
+}

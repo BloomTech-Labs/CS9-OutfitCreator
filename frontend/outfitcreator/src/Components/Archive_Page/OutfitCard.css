@@ -1,0 +1,35 @@
+.container--card {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 600px;
+    max-height: 250px;
+    min-width: 400px;
+    min-height: 300px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.card--header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header--edit{
+    border: 0;
+    background: transparent;
+}
+
+.edit--button {
+    border: none;
+    height: 25px;
+    width: 25px;
+    background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACkSURBVEhL7ZDNCQIxEEbTwipsMV60CgXtRBC3CMVutAr7cO+CvlkzEEIWIZnc8uCRn8P3JeManiO+cDedjDnjx/tG85IBtUBLtljM2q9CXCLjKkLHIqsSlpzkIpdw5qkSMZs4PFWSzVy4usFs/oVXGYvawpMWhQtLvGGVcKVH8/ADrn7biQ71JyYvv+CIYckCzcbyQHltXGLGE+94xb1cNCrj3Bd0W2O4MZVXCgAAAABJRU5ErkJggg==');
+}
+
+
+
+.card--footer{
+    align-self: flex-start;
+}
