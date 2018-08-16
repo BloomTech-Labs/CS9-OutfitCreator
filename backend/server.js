@@ -14,6 +14,7 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const authRoutes = require("./routes/auth-routes");
 const profileRoutes = require("./routes/profile-routes");
+const stripeRoutes = require("./routes/stripe-routes");
 const passportSetup = require("./config/passport-setup");
 
 // set up server
@@ -43,6 +44,7 @@ server.use(passport.session());
 // set up routes
 server.use("/auth", authRoutes);
 server.use("/profile", profileRoutes);
+server.use("/pay", stripeRoutes);
 
 mongoose.connect(keys.mongoDb.dbURI).then(() => {
   console.log("Connected to MongoDB");
