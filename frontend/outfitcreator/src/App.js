@@ -10,7 +10,7 @@ import Create from './Components/Create_Component/Create';
 import Upload from './Components/Upload_Page/Upload';
 import Archive from './Components/Archive_Page/Archive';
 import Settings from './Components/Settings';
-import Billings from './Components/Billings';
+import Billing from './Components/Billing_Page/Billing';
 import './App.css';
 
 library.add(faShareAlt);
@@ -22,33 +22,33 @@ class App extends Component {
 
         <Switch>
           <Route exact path='/Landing' component={Landing} />
-          <Route path='/Create'  render={ props =>
+          <Route path='/Create' render={props =>
             <div className='App--create'>
               <Create />
               <Navigation />
             </div>
           } />
-          <Route path='/Archive'  render={ props =>
+          <Route path='/Archive' render={props =>
             <div>
               <Archive />
               <Navigation />
             </div>
           } />
-          <Route path='/Settings'  render={ props =>
+          <Route path='/Settings' render={props =>
             <div>
               <Settings />
               <Navigation />
             </div>
           } />
-          <Route path='/Upload'  render={ props =>
+          <Route path='/Upload' render={props =>
             <div>
               <Upload />
               <Navigation />
             </div>
           } />
-          <Route path='/Billing'  render={ props =>
+          <Route path='/Billing' render={props =>
             <div>
-              <Billings />
+              <Billing />
               <Navigation />
             </div>
           } />

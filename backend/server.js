@@ -1,7 +1,8 @@
 const express = require("express");
 const helmet = require("helmet");
-const cors = require("cors");
 const mongoose = require("mongoose");
+const multer = require('multer');
+const cors = require('cors');
 
 const port = process.env.PORT || 5000;
 const User = require("./models/userModel");
@@ -14,6 +15,7 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const authRoutes = require("./routes/auth-routes");
 const profileRoutes = require("./routes/profile-routes");
+const stripeRoutes = require("./routes/stripe-routes");
 const passportSetup = require("./config/passport-setup");
 
 // set up server
@@ -27,6 +29,7 @@ const corsOptions = {
 server.use(cors(corsOptions));
 server.use(helmet());
 server.use(express.json());
+server.use(cors());
 
 //set up cookie-session
 server.use(
@@ -36,6 +39,13 @@ server.use(
   })
 );
 
+const upload = multer({
+  dest: './uploads/',
+  rename: (fieldname, filename) => {
+    return filename;
+  },
+});
+
 // set up passport. Initialize
 server.use(passport.initialize());
 server.use(passport.session());
@@ -43,8 +53,9 @@ server.use(passport.session());
 // set up routes
 server.use("/auth", authRoutes);
 server.use("/profile", profileRoutes);
+server.use("/pay", stripeRoutes);
 
-mongoose.connect(keys.mongoDb.dbURI).then(() => {
+mongoose.connect(keys.mongoDb.dbURImul).then(() => {
   console.log("Connected to MongoDB");
 });
 
@@ -66,8 +77,13 @@ server.post("/signup", (req, res) => {
 });
 
 // Add a new item to the database
-server.post("/item", (req, res) => {
+server.post("/item", upload.single('clothing'), (req, res) => {
+  // console.log('req.body: ' + req.body);
   const { user, name, image, type, tags } = req.body;
+  // image.data = fs.readFileSync(req.files.userPhoto.path);
+  // console.log('image data: ' + image.data);
+  console.log('image: ' + image);
+  // image.type = 'image/png';
   Item.create({ user, name, image, type, tags })
     .then(item => {
       res.status(201).json(item);
