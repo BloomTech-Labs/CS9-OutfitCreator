@@ -10,13 +10,17 @@ const port = process.env.PORT || 5000;
 const User = require("./models/userModel");
 const Item = require("./models/itemModel");
 const Outfit = require("./models/outfitModel");
+const Profile = require("./models/profileModel");
 
 const keys = require("./config/keys");
+require('dotenv').config();
 cloudinary.config({
   cloud_name: 'cloudtesting',
   api_key: '465735684648442',
   api_secret: 'HVxIWBW7bQaBHJygz_qiprAfwok',
 });
+
+
 
 const cookieSession = require("cookie-session");
 const passport = require("passport");
@@ -44,7 +48,7 @@ server.use(cors());
 server.use(
   cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
-    keys: [keys.session.cookieKey]
+    keys: process.env.COOKIE_KEY
   })
 );
 
@@ -74,7 +78,8 @@ server.use("/profile", profileRoutes);
 server.use("/pay", stripeRoutes);
 server.use("/user", userRoutes)
 
-mongoose.connect(keys.mongoDb.dbURImul).then(() => {
+mongoose.connect(process.env.DB_URI, {useNewUrlParser:true}).then(() => {
+
   console.log("Connected to MongoDB");
 });
 
