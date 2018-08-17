@@ -15,6 +15,7 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const passportSetup = require("./config/passport-setup");
 
+const localAuthRoutes = require("./routes/local-auth-routes");
 const authRoutes = require("./routes/auth-routes");
 const profileRoutes = require("./routes/profile-routes");
 const stripeRoutes = require("./routes/stripe-routes");
@@ -53,6 +54,7 @@ server.use(passport.initialize());
 server.use(passport.session());
 
 // set up routes
+server.use("/local-auth", localAuthRoutes);
 server.use("/auth", authRoutes);
 server.use("/profile", profileRoutes);
 server.use("/pay", stripeRoutes);
