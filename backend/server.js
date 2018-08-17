@@ -104,15 +104,21 @@ server.post("/item", jekmsUpload.single('image'), (req, res) => {
   const { originalname } = req.file;
   // console.log(req.file);
   cloudinary.uploader.upload(`./uploads/${originalname}`, (result) => {
-    fs.unlink(`./uploads/${originalname}`, (err) => {if(err) throw err});
-    console.log(result);
-    const image = result.url;
+    fs.unlinkSync(`./uploads/${originalname}`);
+    const {width, height, url} = result;
+    let cropWidth = width, cropHeight = height;
+    while(cropWidth >= 300 || cropHeight >= 200) {
+      cropWidth *= .9, cropHeight *= .9;
+    }
+    const crop = `/upload/w_${cropWidth.toFixed(0)},h_${cropHeight.toFixed(0)}/`;
+    const [partOne, partTwo] = url.split('/upload/');
+    const image = partOne + crop + partTwo;
     Item.create({ user, name, image, type, tags })
       .then(item => {
         res.status(201).json(item);
       })
       .catch(err => {
-        res.send(500).json({ error: err.message });
+        res.send(500).json(err);
       });
   });
 });
