@@ -14,13 +14,14 @@ import './Upload.css';
 class Upload extends Component {
       constructor(props) {
         super(props);
-        this.state = { // image, name, type, search, tags, pairWith
+        this.state = {
             image: '',
+            // pairWith currently not used
             pairWith: [],
             name: '',
             search: '',
             tags: ['some', 'cool', 'tags', 'go', 'here', 'testing', 'wrap'],
-            type: ''
+            type: 'top'
         }
     }
 
@@ -57,9 +58,14 @@ class Upload extends Component {
         this.setState({ image: URL.createObjectURL(event.target.files[0]) });
     }
 
+    testInput = e => {
+        console.log(e.target.name, e.target.type, e.target.value);
+    }
 
-    handleInputChange = event => {
-        this.setState({ [event.target.name]: event.target.value });
+    handleInputChange = e => {
+      e.target.type === 'select-one' ? 
+          this.setState({ [e.target.name]: e.target.value.toLowerCase() }) :
+          this.setState({ [e.target.name]: e.target.value });
     }
 
     updateState = state => {
@@ -97,18 +103,22 @@ class Upload extends Component {
                             name="name" 
                             className="upload--name" 
                             placeholder="Clothing Name" 
-                            autoComplete='off' 
+                            autoComplete='off'
+                            onChange={this.handleInputChange} 
                         />
                     </FormGroup>
                     <FormGroup>
-                        <Input className='upload--select' type='select' name='select'>
+                        <Input 
+                            className='upload--select'
+                            type='select' 
+                            name='type'
+                            onChange={this.handleInputChange}>
                             <option>Top</option>
                             <option>Bottom</option>
                             <option>Shoes</option>
                         </Input>
                     </FormGroup>
                 </div>
-
                 <div className="column--right">
                     <TagSearch 
                         state={this.state} 
@@ -121,6 +131,8 @@ class Upload extends Component {
                               <Input 
                                   type='checkbox' 
                                   id='upload--topsCheckbox'
+                                  name='tops'
+                                  onChange={this.testInput}
                               />
                               Tops
                             </Label>
@@ -129,7 +141,9 @@ class Upload extends Component {
                             <Label check>
                                 <Input 
                                     type='checkbox' 
-                                    id='upload--bottomsCheckbox' 
+                                    id='upload--bottomsCheckbox'
+                                    name='bottom'
+                                    onChange={this.testInput}
                                 />
                                 Bottoms
                             </Label>
@@ -138,7 +152,9 @@ class Upload extends Component {
                             <Label check>
                                 <Input 
                                     type='checkbox' 
-                                    id='upload--shoesCheckbox' 
+                                    id='upload--shoesCheckbox'
+                                    name='shoes'
+                                    onChange={this.testInput} 
                                 />
                                 Shoes
                             </Label>
@@ -146,7 +162,6 @@ class Upload extends Component {
                     </Form>
                 </div>
             </div>
-
             <Button className="upload--save" onClick={this.handleSubmit}>Save</Button>
         </div>
       );
