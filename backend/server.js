@@ -7,7 +7,7 @@ const Item = require("./models/itemModel");
 const Outfit = require("./models/outfitModel");
 const Profile = require("./models/profileModel");
 
-const keys = require("./config/keys");
+require('dotenv').config();
 
 const cookieSession = require("cookie-session");
 const passport = require("passport");
