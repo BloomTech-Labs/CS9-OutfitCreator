@@ -3,7 +3,7 @@ import axios from 'axios';
 import OutfitCard from './OutfitCard';
 import './Archive.css';
 
-const testUser= '5b75d6c63c59f410844d880b';
+const testUser= '5b772cde26426245c86f0eea';
 
 class Archive extends React.Component {
     constructor(props) {
@@ -15,112 +15,112 @@ class Archive extends React.Component {
                 id: 0,
                 name: 'Evening Gown',
                 tags: ['Hot', 'expensive', 'red', 'silk', 'night wear', 'cloth'],
-                img: 'blank for now sorry',
+                image: 'blank for now sorry',
                 date: '08/15/2018'
             },
             {
                 id: 1,
                 name: 'day suit',
                 tags: ['Hot', 'blue', 'cheap', 'cloth'],
-                img: 'blank for now sorry',
+                image: 'blank for now sorry',
                 date: '08/15/2018'
             },
             {
                 id: 2,
                 name: 'night Gown',
                 tags: ['expensive', 'purple', 'silk'],
-                img: 'blank for now sorry',
+                image: 'blank for now sorry',
                 date: '08/15/2018'
             },
             {
                 id: 3,
                 name: 'ski gear',
                 tags: ['sexy', 'red', 'polyester'],
-                img: 'blank for now sorry',
+                image: 'blank for now sorry',
                 date: '08/15/2018'
             },
             {
                 id: 4,
                 name: 'Evening Gown',
                 tags: ['Hot', 'expensive', 'red', 'silk', 'night wear', 'cloth'],
-                img: 'blank for now sorry',
+                image: 'blank for now sorry',
                 date: '08/15/2018'
             },
             {
                 id: 5,
                 name: 'day suit',
                 tags: ['Hot', 'blue', 'cheap', 'cloth'],
-                img: 'blank for now sorry',
+                image: 'blank for now sorry',
                 date: '08/15/2018'
             },
             {
                 id: 6,
                 name: 'night Gown',
                 tags: ['expensive', 'purple', 'silk'],
-                img: 'blank for now sorry',
+                image: 'blank for now sorry',
                 date: '08/15/2018'
             },
             {
                 id: 7,
                 name: 'ski gear',
                 tags: ['sexy', 'red', 'polyester'],
-                img: 'blank for now sorry',
+                image: 'blank for now sorry',
                 date: '08/15/2018'
             },
             {
                 id: 8,
                 name: 'Evening Gown',
                 tags: ['Hot', 'expensive', 'red', 'silk', 'night wear', 'cloth'],
-                img: 'blank for now sorry',
+                image: 'blank for now sorry',
                 date: '08/15/2018'
             },
             {
                 id: 9,
                 name: 'day suit',
                 tags: ['Hot', 'blue', 'cheap', 'cloth'],
-                img: 'blank for now sorry',
+                image: 'blank for now sorry',
                 date: '08/15/2018'
             },
             {
                 id: 10,
                 name: 'night Gown',
                 tags: ['expensive', 'purple', 'silk'],
-                img: 'blank for now sorry',
+                image: 'blank for now sorry',
                 date: '08/15/2018'
             },
             {
                 id: 11,
                 name: 'ski gear',
                 tags: ['sexy', 'red', 'polyester'],
-                img: 'blank for now sorry',
+                image: 'blank for now sorry',
                 date: '08/15/2018'
             },
             {
                 id: 12,
                 name: 'Evening Gown',
                 tags: ['Hot', 'expensive', 'red', 'silk', 'night wear', 'cloth'],
-                img: 'blank for now sorry',
+                image: 'blank for now sorry',
                 date: '08/15/2018'
             },
             {
                 id: 13,
                 name: 'day suit',
                 tags: ['Hot', 'blue', 'cheap', 'cloth'],
-                img: 'blank for now sorry',
+                image: 'blank for now sorry',
                 date: '08/15/2018'
             },
             {
                 id: 14,
                 name: 'night Gown',
                 tags: ['expensive', 'purple', 'silk'],
-                img: 'blank for now sorry',
+                image: 'blank for now sorry',
                 date: '08/15/2018'
             },
             {
                 id: 15,
                 name: 'ski gear',
                 tags: ['sexy', 'red', 'polyester'],
-                img: 'blank for now sorry',
+                image: 'blank for now sorry',
                 date: '08/15/2018'
             }],
             searchedOutfits: [],
@@ -190,7 +190,7 @@ class Archive extends React.Component {
                             <OutfitCard
                                 key={outfit._id}
                                 name={outfit.name}
-                                src={outfit.img}
+                                src={outfit.image}
                                 lastWorn={outfit.date}
                             />
                         ))}
@@ -200,7 +200,7 @@ class Archive extends React.Component {
                             <OutfitCard
                                 key={outfit.id}
                                 name={outfit.name}
-                                src={outfit.img}
+                                src={outfit.image}
                                 lastWorn={outfit.date}
                             />
                         ))}
