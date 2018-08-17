@@ -1,37 +1,38 @@
 const express = require("express");
+const helmet = require("helmet");
 const mongoose = require("mongoose");
+const multer = require('multer');
+const cors = require('cors');
 
 const port = process.env.PORT || 5000;
 const User = require("./models/userModel");
 const Item = require("./models/itemModel");
 const Outfit = require("./models/outfitModel");
-const Profile = require("./models/profileModel");
 
+const Profile = require("./models/profileModel");
 require('dotenv').config();
 
 const cookieSession = require("cookie-session");
 const passport = require("passport");
-const authRoutes = require("./routes/auth-routes");
-const profileRoutes = require("./routes/profile-routes");
 const passportSetup = require("./config/passport-setup");
 
-const sessionOptions = {};
-
-// API WISHLIST
-// ---------------
-// Middleware to protect most routes
-// Edit an item's properties
-// Edit an outfit's properties
-// Delete a specific item
-// Delete a specific outfit
-// Get all items for a user
-// Get all outfits for a user
-// Create a new user profile
-// Edit a user profile
+const authRoutes = require("./routes/auth-routes");
+const profileRoutes = require("./routes/profile-routes");
+const stripeRoutes = require("./routes/stripe-routes");
+const userRoutes = require("./routes/user-routes");
 
 // set up server
 const server = express();
+const corsOptions = {
+  origin: "*",
+  credentials: true
+}
+
+// set up middlewares
+server.use(cors(corsOptions));
+server.use(helmet());
 server.use(express.json());
+server.use(cors());
 
 //set up cookie-session
 server.use(
@@ -41,6 +42,13 @@ server.use(
   })
 );
 
+const upload = multer({
+  dest: './uploads/',
+  rename: (fieldname, filename) => {
+    return filename;
+  },
+});
+
 // set up passport. Initialize
 server.use(passport.initialize());
 server.use(passport.session());
@@ -48,8 +56,11 @@ server.use(passport.session());
 // set up routes
 server.use("/auth", authRoutes);
 server.use("/profile", profileRoutes);
+server.use("/pay", stripeRoutes);
+server.use("/user", userRoutes)
 
 mongoose.connect(process.env.DB_URI, {useNewUrlParser:true}).then(() => {
+
   console.log("Connected to MongoDB");
 });
 
@@ -57,39 +68,68 @@ server.get("/", (req, res) => {
   res.status(200).json("Server running");
 });
 
-// API WISHLIST
-// HOW WILL THE FOLLOWING WORK WITH OAUTH?
-// POST - Register new User
-// MIDDLEWARE - to protect routes by requiring user login
-// POST - Log in as specific User
-// PUT - Change User details
+
+// Add a new user to the database
+server.post("/signup", (req, res) => {
+  const { username, password, email } = req.body;
+  User.create({ username, password, email })
+    .then(user => {
+      res.status(201).json(user);
+    })
+    .catch(err => {
+      res.send(500).json({ error: err.message });
+    });
+});
 
 // Add a new item to the database
-server.post("/item", (req, res) => {
-  const { profile, name, image, type, tags } = req.body;
-  Item.create({ profile, name, image, type, tags })
+server.post("/item", upload.single('clothing'), (req, res) => {
+  // console.log('req.body: ' + req.body);
+  const { user, name, image, type, tags } = req.body;
+  // image.data = fs.readFileSync(req.files.userPhoto.path);
+  // console.log('image data: ' + image.data);
+  console.log('image: ' + image);
+  // image.type = 'image/png';
+  Item.create({ user, name, image, type, tags })
     .then(item => {
       res.status(201).json(item);
     })
     .catch(err => {
-      res.status(500).json({ error: err.message });
+      res.send(500).json({ error: err.message });
+    });
+});
+
+// Delete a specific item
+server.delete("/item/:id", (req, res) => {
+  Item.findByIdAndRemove(req.params.id)
+    .then(res.status(200).json(`successfully deleted item ${req.params.id}`))
+    .catch(err => {
+      res.send(500).json({ error: err.message });
     });
 });
 
 // Add a new outfit to the database
 server.post("/outfit", (req, res) => {
-  const { profile, name, tags, worn, top, bottom, shoes } = req.body;
-  Outfit.create({ profile, name, tags, worn, top, bottom, shoes })
+  const { user, name, tags, worn, top, bottom, shoes } = req.body;
+  Outfit.create({ user, name, tags, worn, top, bottom, shoes })
     .then(outfit => {
       res.status(201).json(outfit);
     })
     .catch(err => {
-      res.status(500).json({ error: err.message });
+      res.send(500).json({ error: err.message });
+    });
+});
+
+// Delete a specific outfit
+server.delete("/outfit/:id", (req, res) => {
+  Outfit.findByIdAndRemove(req.params.id)
+    .then(res.status(200).json(`successfully deleted outfit ${req.params.id}`))
+    .catch(err => {
+      res.send(500).json({ error: err.message });
     });
 });
 
 // Add an array of tags to a specific item
-server.post("/item/:id/tags", (req, res) => {
+server.post("/item/tags/:id", (req, res) => {
   const { tags } = req.body;
   const id = req.params.id;
   Item.findById(id)
@@ -99,7 +139,7 @@ server.post("/item/:id/tags", (req, res) => {
     })
     .then(res.status(200).json("success!"))
     .catch(err => {
-      res.status(500).json({ error: err.message });
+      res.send(500).json({ error: err.message });
     });
 });
 
@@ -127,21 +167,65 @@ server.get("/outfit/:id", (req, res) => {
     });
 });
 
-// Get all items with a certain tag
-server.get("/search/:tag", (req, res) => {
-    const tag = req.params.tag;
-    const { id } = req.body;
-    Item.find({
-        tags: tag,
-        profile: id
-    })
+// Get all of a user's items with a certain tag
+server.get("/search/:user/:tag", (req, res) => {
+  const { tag, user } = req.params;
+  Item.find({
+    tags: tag,
+    user: user
+  })
     .populate()
     .then(items => {
-        res.status(200).json(items);
+      res.status(200).json(items);
     })
     .catch(err => {
-        res.sent({error: err.message});
+      res.send({ error: err.message });
     });
+});
+
+// Get all items for a user
+server.get("/:user/items", (req, res) => {
+  const user = req.params.user;
+  Item.find({
+    user
+  })
+    .populate()
+    .then(items => {
+      res.status(200).json(items);
+    })
+    .catch(err => {
+      res.send({ error: err.message });
+    });
+});
+
+// Get all outfits for a user
+server.get("/:user/outfits", (req, res) => {
+  const user = req.params.user;
+  Outfit.find({
+    user
+  })
+    .populate()
+    .then(outfits => {
+      res.status(200).json(outfits);
+    })
+    .catch(err => {
+      res.send({ error: err.message });
+    });
+});
+
+// Get items by type
+server.get("/items/:type", (req, res) => {
+  const { type } = req.params;
+  Item.find({
+    type
+  })
+  .populate()
+  .then(items => {
+    res.status(200).json(items);
+  })
+  .catch(err => {
+    res.status(500).json({ message: 'Items could not be retreived at this time.'})
+  });
 });
 
 // Start the server

@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faShareAlt } from '@fortawesome/free-solid-svg-icons';
+
+
 import Landing from './Components/Landing_Page/Landing';
 import Navigation from './Components/Navigation';
-import Create from './Components/Create';
-import Upload from './Components/Upload';
-import Archive from './Components/Archive';
+import Create from './Components/Create_Component/Create';
+import Upload from './Components/Upload_Page/Upload';
+import Archive from './Components/Archive_Page/Archive';
 import Settings from './Components/Settings';
-import Billings from './Components/Billings';
+import Billing from './Components/Billing_Page/Billing';
 import './App.css';
-import { Switch, Route } from 'react-router-dom';
+
+library.add(faShareAlt);
 
 class App extends Component {
   render() {
@@ -15,35 +21,35 @@ class App extends Component {
       <div className="App">
 
         <Switch>
-          <Route exact path='/Landing' component={Landing} />
-          <Route path='/Create'  render={ props =>
+          <Route exact path='/' component={Landing} />
+          <Route path='/Create' render={props =>
             <div className='App--create'>
-              <Navigation />
               <Create />
+              <Navigation />
             </div>
           } />
-          <Route path='/Archive'  render={ props =>
+          <Route path='/Archive' render={props =>
             <div>
-              <Navigation />
               <Archive />
+              <Navigation />
             </div>
           } />
-          <Route path='/Settings'  render={ props =>
+          <Route path='/Settings' render={props =>
             <div>
-              <Navigation />
               <Settings />
+              <Navigation />
             </div>
           } />
-          <Route path='/Upload'  render={ props =>
+          <Route path='/Upload' render={props =>
             <div>
-              <Navigation />
               <Upload />
+              <Navigation />
             </div>
           } />
-          <Route path='/Billing'  render={ props =>
+          <Route path='/Billing' render={props =>
             <div>
+              <Billing />
               <Navigation />
-              <Billings />
             </div>
           } />
         </Switch>

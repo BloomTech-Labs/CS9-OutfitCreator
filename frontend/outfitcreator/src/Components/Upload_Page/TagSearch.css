@@ -1,0 +1,55 @@
+.container--tagSearch {
+    min-width: 300px;
+    width: 30vw;
+}
+
+.tagSearch--icon {
+    align-items: center;
+    border: 1px solid grey;
+    border-radius: 20px 0 0 20px;
+    border-right: none;
+    display: flex;
+    height: 30px;
+    justify-content: center;
+    padding-left: 10px;
+    width: 35px;
+}
+
+.tagSearch--icon img {
+    height: 18px;
+    width: 18px;
+}
+
+.tagSearch--input {
+    border: 1px solid grey;
+    border-radius: 20px;
+    border-left: none;
+    height: 30px;
+}
+
+.tagSearch--input:focus {
+    border: 1px solid grey;
+    border-left: none;
+    box-shadow:none;
+    outline: none;
+}
+
+.tagSearch--view {
+    display: flex;
+    flex-flow: wrap;
+    min-width: 300px;
+    width: 30vw;
+    margin-bottom: 50px;
+}
+
+.tagSearch--delete {
+    padding: 0 8px;
+}
+
+.tagSearch--tag {
+    border: 1px solid black;
+    box-shadow: 2px 2px 0 0 black;
+    display: flex;
+    margin: 5px;
+    padding: 3px 10px 3px 5px;
+}

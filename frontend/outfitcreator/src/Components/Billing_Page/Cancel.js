@@ -1,11 +1,11 @@
+import './billing.css';
 import React from 'react';
 
-const Create = (props) => {
+const Cancel = (props) => {
     return (
         <div>
-            Testing Create
         </div>
     );
 };
 
-export default Create;
+export default Cancel;
