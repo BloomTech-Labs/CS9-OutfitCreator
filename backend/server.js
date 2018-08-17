@@ -55,7 +55,7 @@ server.use("/auth", authRoutes);
 server.use("/profile", profileRoutes);
 server.use("/pay", stripeRoutes);
 
-mongoose.connect(keys.mongoDb.dbURImul).then(() => {
+mongoose.connect(keys.mongoDb.dbURI).then(() => {
   console.log("Connected to MongoDB");
 });
 
@@ -72,7 +72,7 @@ server.post("/signup", (req, res) => {
       res.status(201).json(user);
     })
     .catch(err => {
-      res.send(500).json({ error: err.message });
+      res.status(500).json({ error: err.message });
     });
 });
 
@@ -213,6 +213,22 @@ server.get("/items/:type", (req, res) => {
   const { type } = req.params;
   Item.find({
     type
+  })
+  .populate()
+  .then(items => {
+    res.status(200).json(items);
+  })
+  .catch(err => {
+    res.status(500).json({ message: 'Items could not be retreived at this time.'})
+  });
+});
+
+// Get items by type for a user
+server.get("/:user/items/:type", (req, res) => {
+  const { user, type } = req.params;
+  Item.find({
+    type,
+    user
   })
   .populate()
   .then(items => {
