@@ -4,23 +4,15 @@ import { CardImg, Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import TagSearch from './TagSearch';
 import './Upload.css';
 
-
-// TO DO
-// Refactor so that every input has its respective name
-// Create universal event listener for all fields that set state
-// Make axios calls with state
-
-
 class Upload extends Component {
       constructor(props) {
         super(props);
         this.state = {
             image: '',
-            // pairWith currently not used
-            pairWith: [],
+            // pairWith: [], // currently not used
             name: '',
             search: '',
-            tags: ['some', 'cool', 'tags', 'go', 'here', 'testing', 'wrap'],
+            tags: [],
             type: 'top'
         }
     }
@@ -58,8 +50,21 @@ class Upload extends Component {
         this.setState({ image: URL.createObjectURL(event.target.files[0]) });
     }
 
-    testInput = e => {
-        console.log(e.target.name, e.target.type, e.target.value);
+    saveItem = e => {
+        e.preventDefault();
+        const { name, image, tags, type } = this.state;
+
+        axios.post('https://lambda-outfit-creator-api.herokuapp.com/item', {
+            name, image, tags, type
+        })
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+        
+        this.setState({ image: '', name: '', tags: [], type: 'top' });
     }
 
     handleInputChange = e => {
@@ -68,7 +73,7 @@ class Upload extends Component {
           this.setState({ [e.target.name]: e.target.value });
     }
 
-    updateState = state => {
+    passState = state => {
         this.setState(state);
     }
 
@@ -122,7 +127,7 @@ class Upload extends Component {
                 <div className="column--right">
                     <TagSearch 
                         state={this.state} 
-                        updateState={this.updateState} 
+                        passState={this.passState} 
                     />
                     <Label>Pair With:</Label>
                     <Form className='upload--pairWith'>
@@ -162,7 +167,7 @@ class Upload extends Component {
                     </Form>
                 </div>
             </div>
-            <Button className="upload--save" onClick={this.handleSubmit}>Save</Button>
+            <Button className="upload--save" onClick={this.saveItem}>Save</Button>
         </div>
       );
     }

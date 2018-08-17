@@ -9,8 +9,8 @@ class TagSearch extends Component {
     }
 
     addTag = (e) => {
-        if(e.key === 'Enter' && !this.props.state.tags.includes(this.props.state.search)){
-            this.props.updateState({ 
+        if(e.key === 'Enter' && !this.props.state.tags.includes(this.props.state.search)) {
+            this.props.passState({ 
                 tags: [...this.props.state.tags, this.props.state.search],
                 search: ''
             });
@@ -18,17 +18,17 @@ class TagSearch extends Component {
     }
 
     removeTag = (e) => {
-        this.props.updateState({ 
+        this.props.passState({ 
             tags: this.props.state.tags.filter(tag => tag !== e.target.nextElementSibling.innerHTML) 
         });
     }
 
     getTags = () => {
-      // Axios call
+      // Axios call?
     }
 
     handleInputChange = (e) => {
-        this.props.updateState({ search: e.target.value });
+        this.props.passState({ search: e.target.value });
     }
 
     render () {
