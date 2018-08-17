@@ -3,7 +3,7 @@ import axios from 'axios';
 import OutfitCard from './OutfitCard';
 import './Archive.css';
 
-const testUser= '5b772cde26426245c86f0eea';
+const testUser = '5b772cde26426245c86f0eea';
 
 class Archive extends React.Component {
     constructor(props) {
@@ -140,15 +140,15 @@ class Archive extends React.Component {
             .catch(err => {
                 console.log(err);
             });
-            console.log(this.state)
+        console.log(this.state)
     }
 
     filter = () => {
-        const { search, outfits } = this.state;
+        const { search, myOutfits } = this.state;
         const searchWords = search.trim().split(' ');
         // Filters from the outfit list based on context in search bar, by name and tag
         // i.e. if the name of outfit A was used as a tag in outfit B, both will show
-        const filteredOutfits = outfits.filter((outfit) => (
+        const filteredOutfits = myOutfits.filter((outfit) => (
             outfit.name.toLowerCase().includes(search.toLowerCase()) ||
             outfit.tags.some((tag) => (
                 tag.toLowerCase().includes(search.toLowerCase()) ||
@@ -165,8 +165,8 @@ class Archive extends React.Component {
         this.setState({ [event.target.name]: event.target.value });
         if (this.state.search.length === 0) this.setState({ searching: false });
         else {
-            this.setState({ searching: true });
             this.filter();
+            this.setState({ searching: true });
         }
     }
 
@@ -185,16 +185,30 @@ class Archive extends React.Component {
                     />
                 </div>
                 {this.state.myOutfits ?
-                    <div className='archive--collection'>
-                        {this.state.myOutfits.map((outfit) => (
-                            <OutfitCard
-                                key={outfit._id}
-                                name={outfit.name}
-                                src={outfit.image}
-                                lastWorn={outfit.date}
-                            />
-                        ))}
-                    </div> :
+                    this.state.searching ? (
+                        < div className='archive--collection'>
+                            {this.state.searchedOutfits.map((outfit) => (
+                                <OutfitCard
+                                    key={outfit._id}
+                                    name={outfit.name}
+                                    src={outfit.image}
+                                    lastWorn={outfit.date}
+                                />
+                            ))}
+                        </div>
+                    ) : (
+                            < div className='archive--collection'>
+                                {this.state.myOutfits.map((outfit) => (
+                                    <OutfitCard
+                                        key={outfit._id}
+                                        name={outfit.name}
+                                        src={outfit.image}
+                                        lastWorn={outfit.date}
+                                    />
+                                ))}
+                            </div>
+                        )
+                    :
                     <div className='archive--collection'>
                         {this.state.outfits.map((outfit) => (
                             <OutfitCard
