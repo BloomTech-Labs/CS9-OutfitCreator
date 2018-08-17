@@ -1,68 +1,80 @@
-.UploadPage {
-  left: 200px;
-  position: absolute;
-  top: 75px;
+.container--upload {
+    left: 200px;
+    position: absolute;
+    top: 75px;
 }
 
-.UploadColumns {
-  align-items: center;
-  display: flex;
-  flex-flow: wrap;
-  justify-content: space-around;
-  width: 70vw;
+.upload--columns {
+    align-items: center;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-around;
+    width: 70vw;
 }
 
-.UploadLeft, .UploadRight {
-  min-width: 300px;
-  margin-top: 25px;
+.column--left, .column--right {
+    min-width: 300px;
+    margin-top: 25px;
 }
 
-.UploadLeft {
-  align-items: center;
-  display: flex;
-  flex-flow: column;
+.column--left {
+    align-items: center;
+    display: flex;
+    flex-flow: column;
 }
 
-.UploadImage {
-  height: 200px;
-  min-width: 300px;
-  width: 30vw;
+.upload--image {
+    height: 200px;
+    min-width: 300px;
+    width: 30vw;
 }
 
-.UploadButton, .UploadButton:focus {
-  background: white;
-  border-radius: 5px;
-  box-shadow: 2px 2px 0 0 black;
-  color: black;
-  font-size: 12px;
-  margin: 10px 0 30px;
+.upload--button, .upload--button:focus {
+    background: white;
+    border-radius: 5px;
+    box-shadow: 2px 2px 0 0 black;
+    color: black;
+    font-size: 12px;
+    margin: 10px 0 30px;
 }
 
-#ClothingName {
-  border: 1px solid grey;
-  font-size: 12px;
-  height: 30px;
+.upload--name {
+    border: 1px solid grey;
+    font-size: 12px;
+    height: 30px;
 }
 
-#ClothingName:focus {
-  border: 1px solid grey;
-  box-shadow:none;
-  outline: none;
+.upload--name:focus {
+    border: 1px solid grey;
+    box-shadow:none;
+    outline: none;
 }
 
-#SelectType {
-  border: 1px solid grey;
-  font-size: 12px;
-  height: 25px;
-  width: 20vw;
+.upload--select {
+    border: 1px solid grey;
+    font-size: 12px;
+    height: 25px;
+    width: 20vw;
 }
 
-.SaveButton, .SaveButton:focus {
-  background: white;
-  border-radius: 5px;
-  box-shadow: 2px 2px 0 0 black;
-  color: black;
-  margin: 30px 50px 30px 0;
-  font-size: 15px;
-  width: 100px;
+.upload--save, .upload--save:focus {
+    background: white;
+    border-radius: 5px;
+    box-shadow: 2px 2px 0 0 black;
+    color: black;
+    margin: 30px 50px 30px 0;
+    font-size: 15px;
+    width: 100px;
+}
+
+.upload--pairWith {
+    line-height: 23px;
+    text-align: left;
+    margin: 0 auto;
+    width: 50%;
+}
+
+input[type=checkbox] {
+    padding: 10px;
+    transform: scale(1.3);
 }
