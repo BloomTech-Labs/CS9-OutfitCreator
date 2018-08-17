@@ -38,7 +38,7 @@ server.use(express.json());
 server.use(
   cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
-    keys: [keys.session.cookieKey]
+    keys: process.env.COOKIE_KEY
   })
 );
 
@@ -50,7 +50,7 @@ server.use(passport.session());
 server.use("/auth", authRoutes);
 server.use("/profile", profileRoutes);
 
-mongoose.connect(keys.mongoDb.dbURI).then(() => {
+mongoose.connect(process.env.DB_URI, {useNewUrlParser:true}).then(() => {
   console.log("Connected to MongoDB");
 });
 

@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const keys = require("./keys");
@@ -18,8 +20,8 @@ passport.use(
     {
       // options for google strategy
       callbackURL: "/auth/google/redirect",
-      clientID: keys.google.clientID,
-      clientSecret: keys.google.clientSecret
+      clientID: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET
     },
     (accessToken, refreshToken, profile, done) => {
       // passport callback function
