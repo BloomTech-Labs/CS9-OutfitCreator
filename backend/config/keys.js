@@ -8,7 +8,8 @@ module.exports = {
       cookieKey: "topsecretrandomcookiephrase"
     },
     mongoDb: {
-      dbURI: "mongodb://user:password123@ds163630.mlab.com:63630/outfit-creator"
+      dbURI: "mongodb://user:password123@ds163630.mlab.com:63630/outfit-creator",
+      dbURImul: "mongodb://user:password123@ds163630.mlab.com:63630/outfit-creator"
     },
     stripe: {
       secretkey: "sk_test_xj8MsjaHp54vM8zhfcWAZtDH"

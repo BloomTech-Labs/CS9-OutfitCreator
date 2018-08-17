@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {CardElement, injectStripe} from 'react-stripe-elements';
-const keys = require("./config/keys");
+const keys = require("./config/keys.js");
+const axios = require("axios");
 
 class PaymentForm extends Component {
     constructor(props){
@@ -21,16 +22,24 @@ class PaymentForm extends Component {
             body: token.id
         });
 
-        if (response.ok) this.setState({complete: true});
+        if (response.ok) {
+            this.setState({complete: true});
+            // POST request to new endpoint to update subscription info
+            // requires the user's mongoDB ID to be passed in
+            
+            //axios.post(`${server}/user/subscribe/${userID}`)
+                //.then(res => {
+                    // does anything need to be updated on the client side?
+                //}).catch(err => console.log(err));
+        }
     }
 
     render() {
         if (this.state.complete) return (<h1>Payment Complete!</h1>)
         return (
             <div className="checkout">
-                <p>Would you like to subscribe?</p>
                 <CardElement/>
-                <button className="button" onClick={this.submit}>Send</button>
+                <button className="button" onClick={this.submit}>Subscribe!</button>
             </div>
         )
     }

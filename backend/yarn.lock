@@ -459,14 +459,13 @@ detect-libc@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
 
-<<<<<<< HEAD
 dicer@0.2.5:
   version "0.2.5"
   resolved "https://registry.yarnpkg.com/dicer/-/dicer-0.2.5.tgz#5996c086bb33218c812c090bddc09cd12facb70f"
   dependencies:
     readable-stream "1.1.x"
     streamsearch "0.1.2"
-=======
+
 dns-prefetch-control@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/dns-prefetch-control/-/dns-prefetch-control-0.1.0.tgz#60ddb457774e178f1f9415f0cabb0e85b0b300b2"
@@ -474,7 +473,6 @@ dns-prefetch-control@0.1.0:
 dont-sniff-mimetype@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/dont-sniff-mimetype/-/dont-sniff-mimetype-1.0.0.tgz#5932890dc9f4e2f19e5eb02a20026e5e5efc8f58"
->>>>>>> fcdde03fa021631a54e0041112bdc4bb9f28319a
 
 dot-prop@^4.1.0:
   version "4.2.0"
@@ -610,19 +608,6 @@ extglob@^2.0.4:
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
-
-file-match@^1.0.1:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/file-match/-/file-match-1.0.2.tgz#c9cad265d2c8adf3a81475b0df475859069faef7"
-  dependencies:
-    utils-extend "^1.0.6"
-
-file-system@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/file-system/-/file-system-2.2.2.tgz#7d65833e3a2347dcd956a813c677153ed3edd987"
-  dependencies:
-    file-match "^1.0.1"
-    utils-extend "^1.0.4"
 
 fill-range@^4.0.0:
   version "4.0.0"
@@ -1414,13 +1399,10 @@ oauth@0.9.x:
   version "0.9.15"
   resolved "https://registry.yarnpkg.com/oauth/-/oauth-0.9.15.tgz#bd1fefaf686c96b75475aed5196412ff60cfb9c1"
 
-<<<<<<< HEAD
 object-assign@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-3.0.0.tgz#9bedd5ca0897949bca47e7ff408062d549f587f2"
 
-=======
->>>>>>> fcdde03fa021631a54e0041112bdc4bb9f28319a
 object-assign@^4, object-assign@^4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
@@ -2127,10 +2109,6 @@ use@^3.1.0:
 util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
-
-utils-extend@^1.0.4, utils-extend@^1.0.6:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/utils-extend/-/utils-extend-1.0.8.tgz#ccfd7b64540f8e90ee21eec57769d0651cab8a5f"
 
 utils-merge@1.0.1, utils-merge@1.x.x:
   version "1.0.1"
