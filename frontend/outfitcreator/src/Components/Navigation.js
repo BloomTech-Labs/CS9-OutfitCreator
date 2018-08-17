@@ -4,11 +4,13 @@ import { withRouter } from 'react-router';
 import './Navigation.css';
 
 class Navigation extends Component {
+
+  
   render() {
     return (
       <div className='Navigation'>
         <div className='BreadCrumbs'>
-          <a href='/Landing' className='Home'>Home</a> > {this.props.location.pathname.slice(1)}
+          <a href='/' className='Home'>Home</a> > {this.props.location.pathname.slice(1)}
         </div>
         <Nav vertical className='SideNav'>
           <NavItem>
@@ -27,7 +29,7 @@ class Navigation extends Component {
             <NavLink href='/Billing' className='Billing'>Billing</NavLink>
           </NavItem>
         </Nav>
-        <NavLink href='/Landing' className='SignOut'>Sign Out</NavLink>
+        <NavLink href='/' className='SignOut'>Sign Out</NavLink>
       </div>
     );
   }
