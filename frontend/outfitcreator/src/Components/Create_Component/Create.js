@@ -5,6 +5,8 @@ import axios from 'axios';
 
 import './Create.css';
 
+const testUserId = '5b761531cdcd6d00043d420e';
+
 class Create extends Component {
     constructor(props) {
         super(props);
@@ -12,20 +14,29 @@ class Create extends Component {
             user: '',
             name: '',
             worn: [],
+            tags: [],
             top: [],
             bottom: [],
-            shoes: []
+            shoes: ''
         }
     }
 
     componentDidMount() {
         axios.all([ 
-            axios.get(`https://lambda-outfit-creator-api.herokuapp.com/items/top`),
-            axios.get(`https://lambda-outfit-creator-api.herokuapp.com/items/bottom`),
-            axios.get(`https://lambda-outfit-creator-api.herokuapp.com/items/shoes`),
+            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/items/top`),
+            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/items/bottom`),
+            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/items/shoes`),
+            axios.get(`http://localhost:5000/${testUserId}/items/top`),
+            axios.get(`http://localhost:5000/${testUserId}/items/bottom`),
+            axios.get(`http://localhost:5000/${testUserId}/items/shoes`),
         ])
         .then(res => {
-            this.setState({ top: res[0].data, bottom: res[1].data, shoes: res[2].data })
+            const topTags = res[0].data[0].tags;
+            const bottomTags = res[1].data[0].tags;
+            const shoesTags = res[2].data[0].tags;
+            const combinedTags = [...topTags, ...bottomTags, ...shoesTags];
+            const tags = [...new Set(combinedTags)];
+            this.setState({ top: [res[0].data[0]._id], bottom: [res[1].data[0]._id], shoes:res[2].data[0]._id, user: testUserId, tags: tags })
         })
     }
 
@@ -38,10 +49,15 @@ class Create extends Component {
     }
 
     handleCreateOutfit = () => {
-        const outfit = {};
-        axios.post('http://localhost:5000/outfit', outfit)
+        const { user, name, worn, tags, top, bottom, shoes } = this.state;
+        const outfit = { user, name, worn, tags, top, bottom, shoes};
+        axios.post(`http://localhost:5000/outfit`, outfit)
         .then(savedOutfit => {
             console.log(savedOutfit);
+            this.props.history.push("/Archive");
+        })
+        .catch(err => {
+            console.log(err);
         })
     };
 
