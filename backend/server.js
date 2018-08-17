@@ -85,8 +85,9 @@ server.post("/item", upload.single('clothing'), (req, res) => {
   const { user, name, image, type, tags } = req.body;
   // image.data = fs.readFileSync(req.files.userPhoto.path);
   // console.log('image data: ' + image.data);
-  console.log('image: ' + image);
+  // console.log('image: ' + image);
   // image.type = 'image/png';
+  // console.log(user, name, image, type, tags);
   Item.create({ user, name, image, type, tags })
     .then(item => {
       res.status(201).json(item);

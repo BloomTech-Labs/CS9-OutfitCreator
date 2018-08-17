@@ -3,7 +3,7 @@ import axios from 'axios';
 import OutfitCard from './OutfitCard';
 import './Archive.css';
 
-const testUser= 'jekm321';
+const testUser= '5b75d6c63c59f410844d880b';
 
 class Archive extends React.Component {
     constructor(props) {
@@ -123,7 +123,8 @@ class Archive extends React.Component {
                 img: 'blank for now sorry',
                 date: '08/15/2018'
             }],
-            searchedOutfits: []
+            searchedOutfits: [],
+            myOutfits: []
         };
     }
 
@@ -183,11 +184,11 @@ class Archive extends React.Component {
                         onKeyUp={this.filter}
                     />
                 </div>
-                {this.state.searching ?
+                {this.state.myOutfits ?
                     <div className='archive--collection'>
-                        {this.state.searchedOutfits.map((outfit) => (
+                        {this.state.myOutfits.map((outfit) => (
                             <OutfitCard
-                                key={outfit.id}
+                                key={outfit._id}
                                 name={outfit.name}
                                 src={outfit.img}
                                 lastWorn={outfit.date}

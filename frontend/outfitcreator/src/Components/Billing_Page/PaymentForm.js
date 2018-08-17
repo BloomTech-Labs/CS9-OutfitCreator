@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {CardElement, injectStripe} from 'react-stripe-elements';
-const keys = require("./config/keys.js");
+const keys = require("./config/keys");
 const axios = require("axios");
 
 class PaymentForm extends Component {
