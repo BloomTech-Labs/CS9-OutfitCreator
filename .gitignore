@@ -1,9 +1,14 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
+
+#env
 .env
+/backend/.env
+/frontend/.env
 
 #keys
 /backend/config/keys.js
+/frontend/outfitcreator/src/Components/Billing_Page/config/keys.js
 
 # dependencies
 /node_modules
