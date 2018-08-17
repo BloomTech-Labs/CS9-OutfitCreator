@@ -3,6 +3,7 @@ const helmet = require("helmet");
 const mongoose = require("mongoose");
 const multer = require('multer');
 const cors = require('cors');
+const cloudinary = require('cloudinary');
 
 const port = process.env.PORT || 5000;
 const User = require("./models/userModel");
