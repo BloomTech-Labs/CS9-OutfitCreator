@@ -40,6 +40,34 @@ class Create extends Component {
         })
     }
 
+    // method to retrieve random items of all types
+    randomize = () => {
+        const { allTops, allBottoms, allShoes } = this.state;
+        const selectedTop = allTops[Math.floor(Math.random() * allTops.length)];
+        const selectedBottom = allBottoms[Math.floor(Math.random() * allBottoms.length)];
+        const selectedShoe = allShoes[Math.floor(Math.random() * allShoes.length)];
+        const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
+        this.setState({ selectedTop, selectedBottom, selectedShoe, tags });
+    }
+
+    // method to retrieve a single random item
+    randomizeSingle = (event) => {
+        const { allTops, allBottoms, allShoes, selectedTop, selectedBottom, selectedShoe } = this.state;
+        
+        if(event.target.parentNode.classList.contains('top')) {
+            const selectedTop = allTops[Math.floor(Math.random() * allTops.length)];
+            const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
+            this.setState({ selectedTop, tags })
+        } else if(event.target.parentNode.classList.contains('bottom')) {
+            const selectedBottom = allBottoms[Math.floor(Math.random() * allBottoms.length)];
+            const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
+            this.setState({ selectedBottom, tags })
+        } else if(event.target.parentNode.classList.contains('shoe')) {
+            const selectedShoe = allShoes[Math.floor(Math.random() * allShoes.length)];
+            const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
+            this.setState({ selectedShoe, tags })
+        }
+    }
     handleButtonClick = () => {
         console.log('button clicked!')
     };
