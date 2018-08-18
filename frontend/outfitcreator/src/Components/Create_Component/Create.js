@@ -15,28 +15,30 @@ class Create extends Component {
             name: '',
             worn: [],
             tags: [],
-            top: [],
-            bottom: [],
-            shoes: ''
+            allTops: [],
+            allBottoms: [],
+            allShoes: [],
+            selectedTop: [],
+            selectedBottom: [],
+            selectedShoe: []
         }
     }
 
     componentDidMount() {
         axios.all([ 
-            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/items/top`),
-            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/items/bottom`),
-            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/items/shoes`),
+            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/top`),
+            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/bottom`),
+            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/shoes`),
             axios.get(`http://localhost:5000/${testUserId}/items/top`),
             axios.get(`http://localhost:5000/${testUserId}/items/bottom`),
             axios.get(`http://localhost:5000/${testUserId}/items/shoes`),
         ])
         .then(res => {
-            const topTags = res[0].data[0].tags;
-            const bottomTags = res[1].data[0].tags;
-            const shoesTags = res[2].data[0].tags;
-            const combinedTags = [...topTags, ...bottomTags, ...shoesTags];
-            const tags = [...new Set(combinedTags)];
-            this.setState({ top: [res[0].data[0]._id], bottom: [res[1].data[0]._id], shoes:res[2].data[0]._id, user: testUserId, tags: tags })
+            this.setState({ allTops: res[0].data, allBottoms: res[1].data, allShoes: res[2].data, user: testUserId });
+            this.randomize();
+        })
+        .catch(err => {
+            console.log(err);
         })
     }
 
@@ -68,6 +70,7 @@ class Create extends Component {
             this.setState({ selectedShoe, tags })
         }
     }
+
     handleButtonClick = () => {
         console.log('button clicked!')
     };
@@ -76,31 +79,37 @@ class Create extends Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
+    // method handle creating an outfit
     handleCreateOutfit = () => {
-        const { user, name, worn, tags, top, bottom, shoes } = this.state;
+        const { user, name, worn, tags, selectedTop, selectedBottom, selectedShoe } = this.state;
+        const top = [selectedTop._id];
+        const bottom = [selectedBottom._id];
+        const shoes = selectedShoe._id;
         const outfit = { user, name, worn, tags, top, bottom, shoes};
-        axios.post(`http://localhost:5000/outfit`, outfit)
-        .then(savedOutfit => {
-            console.log(savedOutfit);
-            this.props.history.push("/Archive");
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        axios
+            .post(`http://localhost:5000/outfit`, outfit)
+            .then(savedOutfit => {
+                console.log(savedOutfit);
+                this.props.history.push('/Archive');
+            })
+            .catch(err => {
+                console.log(err);
+            });
     };
 
     render() {
+        const { selectedTop, selectedBottom, selectedShoe } = this.state;
         return (
             <div className="createContainer">
                 <CardDeck>
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97270&w=318&h=270&bg=333333&txtclr=666666"
+                            src={selectedTop.image}
                             alt="Card image cap"
                         />
                         <CardImgOverlay>
-                            <Button className="close" aria-label="Close" onClick={this.handleButtonClick}>
+                            <Button className="close top" aria-label="Close" onClick={this.randomizeSingle}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
                             <CardText className="cardText">
@@ -111,11 +120,11 @@ class Create extends Component {
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97270&w=318&h=270&bg=333333&txtclr=666666"
+                            src={selectedBottom.image}
                             alt="Card image cap"
                         />
                         <CardImgOverlay>
-                            <Button className="close" aria-label="Close" onClick={this.handleButtonClick}>
+                            <Button className="close bottom" aria-label="Close" onClick={this.randomizeSingle}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
                             <CardText className="cardText">
@@ -126,11 +135,11 @@ class Create extends Component {
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97270&w=318&h=270&bg=333333&txtclr=666666"
+                            src={selectedShoe.image}
                             alt="Card image cap"
                         />
                         <CardImgOverlay>
-                            <Button className="close" aria-label="Close" onClick={this.handleButtonClick}>
+                            <Button className="close shoe" aria-label="Close" onClick={this.randomizeSingle}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
                             <CardText className="cardText">
@@ -143,7 +152,7 @@ class Create extends Component {
                     <Input type="text" name="name" placeholder="Outfit Nickname" onChange={this.handleInputChange} value={this.state.name} className="outfitInput" />
                     <div className="outfitPickerDecision">
                         <Button onClick={this.handleCreateOutfit}>Yes!</Button>
-                        <Button onClick={this.handleButtonClick}>Randomize</Button>
+                        <Button onClick={this.randomize}>Randomize</Button>
                         <FontAwesomeIcon icon="share-alt" size="4x" onClick={this.handleButtonClick}/>
                     </div>
                 </div>
