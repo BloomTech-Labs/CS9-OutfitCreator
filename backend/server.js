@@ -9,7 +9,7 @@ const User = require("./models/userModel");
 const Item = require("./models/itemModel");
 const Outfit = require("./models/outfitModel");
 
-const Profile = require("./models/profileModel");
+// const Profile = require("./models/profileModel");
 require('dotenv').config();
 
 const cookieSession = require("cookie-session");
