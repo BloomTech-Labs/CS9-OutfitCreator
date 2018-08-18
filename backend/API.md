@@ -137,3 +137,15 @@ A GET request for all items by type. Returns an object like this:
     }
 ]
 ```
+
+## POST to /user/subscribe/:user
+Change the user's subscription status to "true"
+`:user` refers to the User's mongodb ID.
+
+## POST to /user/unsubscribe/:user
+Change the user's subscription status to "false"
+`:user` refers to the User's mongodb ID.
+
+## GET to /user/info/:user
+Get a specific User profile.
+`:user` is the User's mongodb ID.

@@ -1,7 +1,6 @@
 const router = require("express")();
 const keys = require("../config/keys");
 const cors = require('cors');
-
 const stripe = require("stripe")(keys.stripe.secretkey);
 
 router.use(require("body-parser").text());

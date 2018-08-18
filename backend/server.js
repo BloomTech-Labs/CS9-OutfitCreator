@@ -9,14 +9,17 @@ const User = require("./models/userModel");
 const Item = require("./models/itemModel");
 const Outfit = require("./models/outfitModel");
 
-const keys = require("./config/keys");
+const Profile = require("./models/profileModel");
+require('dotenv').config();
 
 const cookieSession = require("cookie-session");
 const passport = require("passport");
+const passportSetup = require("./config/passport-setup");
+
 const authRoutes = require("./routes/auth-routes");
 const profileRoutes = require("./routes/profile-routes");
 const stripeRoutes = require("./routes/stripe-routes");
-const passportSetup = require("./config/passport-setup");
+const userRoutes = require("./routes/user-routes");
 
 // set up server
 const server = express();
@@ -35,7 +38,7 @@ server.use(cors());
 server.use(
   cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
-    keys: [keys.session.cookieKey]
+    keys: process.env.COOKIE_KEY
   })
 );
 
@@ -54,8 +57,10 @@ server.use(passport.session());
 server.use("/auth", authRoutes);
 server.use("/profile", profileRoutes);
 server.use("/pay", stripeRoutes);
+server.use("/user", userRoutes)
 
-mongoose.connect(keys.mongoDb.dbURI).then(() => {
+mongoose.connect(process.env.DB_URI, {useNewUrlParser:true}).then(() => {
+
   console.log("Connected to MongoDB");
 });
 
