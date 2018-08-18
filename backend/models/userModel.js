@@ -21,19 +21,16 @@ const UserSchema = new mongoose.Schema({
     }
 });
 
-// UserSchema.pre('create', function(next) {
-//     bcrypt.hash(this.password, 11, (err, hash) => {
-//         if (err) return next(err);
-//         this.password = hash;
-//         next();
-//     });
-// })
+UserSchema.pre('save', function(next) {
+    bcrypt.hash(this.password, 11, (err, hash) => {
+        if (err) return next(err);
+        this.password = hash;
+        next();
+    });
+})
 
-// UserSchema.methods.checkPassword(plainTextPW, this.password, (err, isMatch) => {
-//     bcrypt.compare(passwordGuess, this.password, (err, isMatch) => {
-//         if (err) return cb(err);
-//         cb(null, isMatch);
-//     });
-// })
+UserSchema.methods.validPassword = async function(passwordGuess) {
+  return await bcrypt.compare(passwordGuess, this.password);
+};
 
 module.exports = mongoose.model("User", UserSchema);
