@@ -5,6 +5,8 @@ import axios from 'axios';
 
 import './Create.css';
 
+const testUserId = '5b761531cdcd6d00043d420e';
+
 class Create extends Component {
     constructor(props) {
         super(props);
@@ -12,21 +14,61 @@ class Create extends Component {
             user: '',
             name: '',
             worn: [],
-            top: [],
-            bottom: [],
-            shoes: []
+            tags: [],
+            allTops: [],
+            allBottoms: [],
+            allShoes: [],
+            selectedTop: [],
+            selectedBottom: [],
+            selectedShoe: []
         }
     }
 
     componentDidMount() {
         axios.all([ 
-            axios.get(`http://localhost:5000/items/top`),
-            axios.get(`http://localhost:5000/items/bottom`),
-            axios.get(`http://localhost:5000/items/shoes`),
+            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/top`),
+            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/bottom`),
+            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/shoes`),
+            axios.get(`http://localhost:5000/${testUserId}/items/top`),
+            axios.get(`http://localhost:5000/${testUserId}/items/bottom`),
+            axios.get(`http://localhost:5000/${testUserId}/items/shoes`),
         ])
         .then(res => {
-            this.setState({ top: res[0].data, bottom: res[1].data, shoes: res[2].data })
+            this.setState({ allTops: res[0].data, allBottoms: res[1].data, allShoes: res[2].data, user: testUserId });
+            this.randomize();
         })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+
+    // method to retrieve random items of all types
+    randomize = () => {
+        const { allTops, allBottoms, allShoes } = this.state;
+        const selectedTop = allTops[Math.floor(Math.random() * allTops.length)];
+        const selectedBottom = allBottoms[Math.floor(Math.random() * allBottoms.length)];
+        const selectedShoe = allShoes[Math.floor(Math.random() * allShoes.length)];
+        const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
+        this.setState({ selectedTop, selectedBottom, selectedShoe, tags });
+    }
+
+    // method to retrieve a single random item
+    randomizeSingle = (event) => {
+        const { allTops, allBottoms, allShoes, selectedTop, selectedBottom, selectedShoe } = this.state;
+        
+        if(event.target.parentNode.classList.contains('top')) {
+            const selectedTop = allTops[Math.floor(Math.random() * allTops.length)];
+            const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
+            this.setState({ selectedTop, tags })
+        } else if(event.target.parentNode.classList.contains('bottom')) {
+            const selectedBottom = allBottoms[Math.floor(Math.random() * allBottoms.length)];
+            const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
+            this.setState({ selectedBottom, tags })
+        } else if(event.target.parentNode.classList.contains('shoe')) {
+            const selectedShoe = allShoes[Math.floor(Math.random() * allShoes.length)];
+            const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
+            this.setState({ selectedShoe, tags })
+        }
     }
 
     handleButtonClick = () => {
@@ -37,26 +79,37 @@ class Create extends Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
+    // method handle creating an outfit
     handleCreateOutfit = () => {
-        const outfit = {};
-        axios.post('http://localhost:5000/outfit', outfit)
-        .then(savedOutfit => {
-            console.log(savedOutfit);
-        })
+        const { user, name, worn, tags, selectedTop, selectedBottom, selectedShoe } = this.state;
+        const top = [selectedTop._id];
+        const bottom = [selectedBottom._id];
+        const shoes = selectedShoe._id;
+        const outfit = { user, name, worn, tags, top, bottom, shoes};
+        axios
+            .post(`http://localhost:5000/outfit`, outfit)
+            .then(savedOutfit => {
+                console.log(savedOutfit);
+                this.props.history.push('/Archive');
+            })
+            .catch(err => {
+                console.log(err);
+            });
     };
 
     render() {
+        const { selectedTop, selectedBottom, selectedShoe } = this.state;
         return (
             <div className="createContainer">
                 <CardDeck>
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97270&w=318&h=270&bg=333333&txtclr=666666"
+                            src={selectedTop.image}
                             alt="Card image cap"
                         />
                         <CardImgOverlay>
-                            <Button className="close" aria-label="Close" onClick={this.handleButtonClick}>
+                            <Button className="close top" aria-label="Close" onClick={this.randomizeSingle}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
                             <CardText className="cardText">
@@ -67,11 +120,11 @@ class Create extends Component {
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97270&w=318&h=270&bg=333333&txtclr=666666"
+                            src={selectedBottom.image}
                             alt="Card image cap"
                         />
                         <CardImgOverlay>
-                            <Button className="close" aria-label="Close" onClick={this.handleButtonClick}>
+                            <Button className="close bottom" aria-label="Close" onClick={this.randomizeSingle}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
                             <CardText className="cardText">
@@ -82,11 +135,11 @@ class Create extends Component {
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97270&w=318&h=270&bg=333333&txtclr=666666"
+                            src={selectedShoe.image}
                             alt="Card image cap"
                         />
                         <CardImgOverlay>
-                            <Button className="close" aria-label="Close" onClick={this.handleButtonClick}>
+                            <Button className="close shoe" aria-label="Close" onClick={this.randomizeSingle}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
                             <CardText className="cardText">
@@ -99,7 +152,7 @@ class Create extends Component {
                     <Input type="text" name="name" placeholder="Outfit Nickname" onChange={this.handleInputChange} value={this.state.name} className="outfitInput" />
                     <div className="outfitPickerDecision">
                         <Button onClick={this.handleCreateOutfit}>Yes!</Button>
-                        <Button onClick={this.handleButtonClick}>Randomize</Button>
+                        <Button onClick={this.randomize}>Randomize</Button>
                         <FontAwesomeIcon icon="share-alt" size="4x" onClick={this.handleButtonClick}/>
                     </div>
                 </div>
