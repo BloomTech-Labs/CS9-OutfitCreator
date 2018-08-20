@@ -14,17 +14,17 @@ class SignIn extends React.Component {
     }
 
     signIn = () => {
-      const { username, password } = this.state;
-
-      axios.post('http://localhost:5000/local-auth/login', { username, password })
-          .then(res => {
-            // Redirect to create page once logged in
-            window.location = 'http://localhost:3000/Create';
-          })
-          .catch(err => {
-            // Alert for incorrect credentials
-            alert('Invalid credentials. Please try again.');
-          });
+        const { username, password } = this.state;
+        
+        axios.post('http://localhost:5000/local-auth/login', { username, password })
+            .then(res => {
+              // Redirect to create page once logged in
+              window.location = 'http://localhost:3000/Create';
+            })
+            .catch(err => {
+              // Alert for invalid credentials
+              alert('Invalid credentials. Please try again.');
+            });
     }
 
     toggle = () => {

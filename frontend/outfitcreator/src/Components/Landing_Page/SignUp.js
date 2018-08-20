@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Button } from 'reactstrap';
 import './Modal.css'
 
@@ -10,6 +11,20 @@ class SignUp extends React.Component {
             username: '',
             password: ''
         };
+    }
+
+    signUp = () => {
+        const { username, password } = this.state;
+          
+        axios.post('http://localhost:5000/signup', { username, password })
+            .then(res => {
+              // Redirect to create page once logged in
+              window.location = 'http://localhost:3000/Create';
+            })
+            .catch(err => {
+              // Alert message for failed user creation
+              alert('Failed to sign up. Username taken.')
+            });
     }
 
     toggle = () => {
@@ -64,7 +79,7 @@ class SignUp extends React.Component {
                                 </form>
                             </div>
                             <div className='modal--footer'>
-                                <Button color='success' >Sign Up</Button>
+                                <Button color='success' onClick={this.signUp}>Sign Up</Button>
                                 <Button color='danger' onClick={this.toggle}>Cancel</Button>
                             </div>
                         </div>
