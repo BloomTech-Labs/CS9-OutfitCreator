@@ -21,24 +21,9 @@ passport.use(new LocalStrategy(
   }
 ));
 
-
-// Allow passport to utilize sessions
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
-});
-
 // Routes for local login and log out
 router.post("/login", 
-  passport.authenticate("local", {
-    successRedirect: '/',
-    failureRedirect: '/login'
-  })
+  passport.authenticate("local", { successRedirect: '/' })
 );
 
 router.get("/logout", req => {
