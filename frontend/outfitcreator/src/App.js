@@ -9,7 +9,7 @@ import Navigation from './Components/Navigation';
 import Create from './Components/Create_Component/Create';
 import Upload from './Components/Upload_Page/Upload';
 import Archive from './Components/Archive_Page/Archive';
-import Settings from './Components/Settings';
+import Settings from './Components/Settings_Page/Settings';
 import Billing from './Components/Billing_Page/Billing';
 import './App.css';
 
