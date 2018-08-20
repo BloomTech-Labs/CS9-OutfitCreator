@@ -9,7 +9,24 @@ router.use(require("body-parser").text());
 const corsOptions = {
     origin: '*'
   };
-  
+
+const customer = stripe.customers.create({
+    email: ,
+    source: ,
+})
+
+const subscription = stripe.plans.create({
+    product: {
+        name: 'Outfit Creator',
+        type: 'service',
+    },
+    nickname: 'outfit creator',
+    currency: 'usd',
+    interval: 'month',
+    amount: 1000,
+})
+
+
 router.post("/charge", cors(corsOptions), async (req, res) => {
     try {
         let {status} = await stripe.charges.create({
