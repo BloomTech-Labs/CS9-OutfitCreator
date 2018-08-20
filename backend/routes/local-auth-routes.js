@@ -3,14 +3,17 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require("../models/userModel");
 
+// LocalStrategy acts as middleware to check username and password 
+// inputs against users in the database.
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
+    // Use async function for awaiting promise in user.validPassword
+    User.findOne({ username: username }, async function(err, user) {
       if (err) return done(err);
       if (!user) {
         return done(null, false);
       }
-      if (!user.validPassword(password)) {
+      if (!(await user.validPassword(password))) {
         return done(null, false);
       }
       return done(null, user);
@@ -18,6 +21,8 @@ passport.use(new LocalStrategy(
   }
 ));
 
+
+// Allow passport to utilize sessions
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -28,7 +33,7 @@ passport.deserializeUser((id, done) => {
   });
 });
 
-// Routes
+// Routes for local login and log out
 router.post("/login", 
   passport.authenticate("local", {
     successRedirect: '/',

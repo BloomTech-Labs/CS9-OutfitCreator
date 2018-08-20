@@ -21,22 +21,19 @@ const UserSchema = new mongoose.Schema({
     }
 });
 
-// UserSchema.pre('create', function(next) {
-//     bcrypt.hash(this.password, 11, (err, hash) => {
-//         if (err) return next(err);
-//         this.password = hash;
-//         next();
-//     });
-// })
+// Hash passwords when user is created
+UserSchema.pre('save', function(next) {
+    bcrypt.hash(this.password, 11, (err, hash) => {
+        if (err) return next(err);
+        this.password = hash;
+        next();
+    });
+})
 
-// UserSchema.methods.validPassword = async function(passwordGuess, cb) {
-//   const match = await bcrypt.compare(passwordGuess, this.password);
-//   return match;
-// };
-
+// Hash password guess and check against user password
 UserSchema.methods.validPassword = function(passwordGuess) {
-  return this.password === passwordGuess;
-}
+  return bcrypt.compare(passwordGuess, this.password);
+};
   
 
 module.exports = mongoose.model("User", UserSchema);
