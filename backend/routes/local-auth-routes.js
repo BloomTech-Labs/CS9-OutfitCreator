@@ -32,12 +32,8 @@ passport.deserializeUser((id, done) => {
 router.post("/login", 
   passport.authenticate("local", { 
     successRedirect: "/Create",
-    failureRedirect: "/",
-    failureFlash: true 
+    failureRedirect: "/"
   })
-  , (req, res) => {
-    res.json('Signed in as user ' + req.body.username + '?');
-  }
 );
 
 router.get("/logout", (req, res) => {
