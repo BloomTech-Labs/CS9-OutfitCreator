@@ -3,14 +3,25 @@ const helmet = require("helmet");
 const mongoose = require("mongoose");
 const multer = require('multer');
 const cors = require('cors');
+const cloudinary = require('cloudinary');
+const fs = require('fs');
 
 const port = process.env.PORT || 5000;
 const User = require("./models/userModel");
 const Item = require("./models/itemModel");
 const Outfit = require("./models/outfitModel");
+const Profile = require("./models/profileModel");
 
-// const Profile = require("./models/profileModel");
+const keys = require("./config/keys");
+
 require('dotenv').config();
+cloudinary.config({
+  cloud_name: 'cloudtesting',
+  api_key: '465735684648442',
+  api_secret: 'HVxIWBW7bQaBHJygz_qiprAfwok',
+});
+
+
 
 const cookieSession = require("cookie-session");
 const passport = require("passport");
@@ -42,12 +53,21 @@ server.use(
   })
 );
 
-const upload = multer({
-  dest: './uploads/',
-  rename: (fieldname, filename) => {
-    return filename;
+// const upload = multer({
+//   dest: './uploads/',
+//   rename: (fieldname, filename) => {
+//     return (filename + '.png');
+//   },
+// });
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './uploads/');
   },
-});
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  }
+})
 
 // set up passport. Initialize
 server.use(passport.initialize());
@@ -81,21 +101,32 @@ server.post("/signup", (req, res) => {
     });
 });
 
+const jekmsUpload = multer({ storage: storage });
+// const upload = multer({ dest: './uploads' });
 // Add a new item to the database
-server.post("/item", upload.single('clothing'), (req, res) => {
+server.post("/item", jekmsUpload.single('image'), (req, res) => {
   // console.log('req.body: ' + req.body);
-  const { user, name, image, type, tags } = req.body;
-  // image.data = fs.readFileSync(req.files.userPhoto.path);
-  // console.log('image data: ' + image.data);
-  console.log('image: ' + image);
-  // image.type = 'image/png';
-  Item.create({ user, name, image, type, tags })
-    .then(item => {
-      res.status(201).json(item);
-    })
-    .catch(err => {
-      res.send(500).json({ error: err.message });
-    });
+  const { user, name, type, tags } = req.body;
+  const { originalname } = req.file;
+  // console.log(req.file);
+  cloudinary.uploader.upload(`./uploads/${originalname}`, (result) => {
+    fs.unlinkSync(`./uploads/${originalname}`);
+    const {width, height, url} = result;
+    let cropWidth = width, cropHeight = height;
+    while(cropWidth >= 300 || cropHeight >= 200) {
+      cropWidth *= .9, cropHeight *= .9;
+    }
+    const crop = `/upload/w_${cropWidth.toFixed(0)},h_${cropHeight.toFixed(0)}/`;
+    const [partOne, partTwo] = url.split('/upload/');
+    const image = partOne + crop + partTwo;
+    Item.create({ user, name, image, type, tags })
+      .then(item => {
+        res.status(201).json(item);
+      })
+      .catch(err => {
+        res.send(500).json(err);
+      });
+  });
 });
 
 // Delete a specific item
@@ -219,13 +250,13 @@ server.get("/items/:type", (req, res) => {
   Item.find({
     type
   })
-  .populate()
-  .then(items => {
-    res.status(200).json(items);
-  })
-  .catch(err => {
-    res.status(500).json({ message: 'Items could not be retreived at this time.'})
-  });
+    .populate()
+    .then(items => {
+      res.status(200).json(items);
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Items could not be retreived at this time.' })
+    });
 });
 
 // Get items by type for a user
