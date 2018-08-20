@@ -6,12 +6,12 @@ const User = require("../models/userModel");
 passport.use(new LocalStrategy(
   function(username, password, done) {
     User.findOne({ username: username }, function(err, user) {
-      if (err) return done(err); 
+      if (err) return done(err);
       if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
+        return done(null, false);
       }
       if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
+        return done(null, false);
       }
       return done(null, user);
     });
@@ -30,16 +30,14 @@ passport.deserializeUser((id, done) => {
 
 // Routes
 router.post("/login", 
-  passport.authenticate("local", { 
-    successRedirect: "/Create",
-    failureRedirect: "/"
+  passport.authenticate("local", {
+    successRedirect: '/',
+    failureRedirect: '/login'
   })
 );
 
-router.get("/logout", (req, res) => {
-  console.log('testing');
+router.get("/logout", req => {
   req.logout();
-  res.redirect("/");
 });
 
 module.exports = router;
