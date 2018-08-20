@@ -1,6 +1,7 @@
 import './billing.css';
 import React from 'react';
 import Checkout from './Checkout';
+import Cancel from './Cancel';
 
 class Billing extends React.Component {
     constructor() {
@@ -18,19 +19,15 @@ class Billing extends React.Component {
     }
     
     render() {
-        if (this.state.stripe == null){
-            return (
-                <div>
-                    <h1>Having trouble loading Stripe...</h1>
-                </div>
-            )} else {
+            //TODO: change subscription prop for Cancel button to a user profile reference.
+            //TODO: conditional rendering -- show Cancel if already subscribed, otherwise Checkout
             return (
                 <div>
                     <h2>Subscribe to the Outfit Creator!</h2>
                     <Checkout stripe={this.state.stripe}/>
+                    <Cancel stripe = {this.state.stripe} subscription='sub_DSE0Hm8zCEYQNK'/>
                 </div>
-            )}
-    };
+            )};
 };
 
 export default Billing;

@@ -11,7 +11,6 @@ const corsOptions = {
   };
 
 router.post("/charge", cors(corsOptions), async (req, res) => {
-    console.log(req);
     stripe.customers.create({
         //this will return a new Customer object.
         //Store customer.id in database with user profile info
@@ -42,6 +41,11 @@ router.post("/charge", cors(corsOptions), async (req, res) => {
         .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
+})
+
+router.post("/cancel", cors(corsOptions), async (req, res) => {
+    stripe.subscriptions.del('sub_DSDzTOUVFD0gsk'), {at_period_end: true});
+
 })
 
 module.exports = router;
