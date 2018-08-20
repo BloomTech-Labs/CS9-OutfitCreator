@@ -31,9 +31,7 @@ const UserSchema = new mongoose.Schema({
 
 // UserSchema.methods.validPassword = async function(passwordGuess, cb) {
 //   const match = await bcrypt.compare(passwordGuess, this.password);
-//   const result = match;
-//   console.log('Internal: ' + match, result);
-//   return result;
+//   return match;
 // };
 
 UserSchema.methods.validPassword = function(passwordGuess) {
