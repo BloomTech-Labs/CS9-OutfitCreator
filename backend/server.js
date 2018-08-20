@@ -14,6 +14,8 @@ const Outfit = require("./models/outfitModel");
 const keys = require("./config/keys");
 
 require('dotenv').config();
+// to be changed later when cloud is changed to a clean non testing one
+// key and secret will be stored in the .env
 cloudinary.config({
   cloud_name: 'cloudtesting',
   api_key: '465735684648442',
