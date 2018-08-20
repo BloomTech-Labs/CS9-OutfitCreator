@@ -94,14 +94,15 @@ class Upload extends Component {
                             alt="Upload Image Thumbnail" 
                         />
                     }
-                    <Button className="upload--button">Upload</Button>
                     <FormGroup>
                         <Input 
                             type='file' 
                             name='clothing' 
                             id='image--upload' 
-                            onChange={this.fileChanged} 
+                            onChange={this.fileChanged}
+                            className='inputfile'
                         />
+                        <Label htmlFor='image--upload'>Upload</Label>
                         <br />
                         <Input 
                             type="text" 
