@@ -11,11 +11,16 @@ const corsOptions = {
   };
 
 const customer = stripe.customers.create({
-    email: ,
-    source: ,
+    //this will return a new Customer object.
+    //Store customer.id in database with user profile info
+    //and be ready to submit that info  when creating the subscription
+    email: 'ellen.nitchals@gmail.com', // should be passed along from the user-routes
+    source: req.body, // this may need to be sent to the server separately, with the server response submitted here
 })
 
-const subscription = stripe.plans.create({
+const plan = stripe.plans.create({
+    //this will return a new Plan object.
+    //keep the plan.id handy for creating the subscription
     product: {
         name: 'Outfit Creator',
         type: 'service',
@@ -26,6 +31,10 @@ const subscription = stripe.plans.create({
     amount: 1000,
 })
 
+const subscription = stripe.subscriptions.create({
+    customer: '',
+    items: [{plan: ''}]
+})
 
 router.post("/charge", cors(corsOptions), async (req, res) => {
     try {
