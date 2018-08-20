@@ -145,29 +145,30 @@ class Archive extends React.Component {
 
     filter = () => {
         const { search, myOutfits } = this.state;
-        const searchWords = search.trim().split(' ');
+
+        const searchWords = search.trim().toLowerCase().split(' ');
         // Filters from the outfit list based on context in search bar, by name and tag
         // i.e. if the name of outfit A was used as a tag in outfit B, both will show
-        const filteredOutfits = myOutfits.filter((outfit) => (
-            outfit.name.toLowerCase().includes(search.toLowerCase()) ||
-            outfit.tags.some((tag) => (
-                tag.toLowerCase().includes(search.toLowerCase()) ||
-                searchWords.some((word) => (
-                    tag.toLowerCase().includes(word.toLowerCase()) ||
-                    outfit.name.toLowerCase().includes(word.toLowerCase())
-                ))
-            ))
-        ))
-        this.setState({ searchedOutfits: filteredOutfits })
+        const filteredOutfits = myOutfits.filter(outfit => {
+            let count = 0;
+            while (count < searchWords.length) {
+                if (outfit.name.toLowerCase().includes(searchWords[count]) ||
+                    outfit.tags.some((tag) => (
+                        tag.toLowerCase().includes(searchWords[count])
+                    ))) {
+                    count++;
+                }
+                else break;
+            }
+            if (count === searchWords.length) return true;
+            else false;
+        });
+        if (search.length === 0) this.setState({ searching: false, searchedOutfits: filteredOutfits });
+        else this.setState({ searching: true, searchedOutfits: filteredOutfits });
     }
 
     handleInputChange = event => {
         this.setState({ [event.target.name]: event.target.value });
-        if (this.state.search.length === 0) this.setState({ searching: false });
-        else {
-            this.filter();
-            this.setState({ searching: true });
-        }
     }
 
     render() {
