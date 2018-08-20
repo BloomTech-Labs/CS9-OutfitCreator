@@ -10,11 +10,13 @@ const port = process.env.PORT || 5000;
 const User = require("./models/userModel");
 const Item = require("./models/itemModel");
 const Outfit = require("./models/outfitModel");
-const Profile = require("./models/profileModel");
+// const Profile = require("./models/profileModel");
 
 const keys = require("./config/keys");
 
 require('dotenv').config();
+// to be changed later when cloud is changed to a clean non testing one
+// key and secret will be stored in the .env
 cloudinary.config({
   cloud_name: 'cloudtesting',
   api_key: '465735684648442',
