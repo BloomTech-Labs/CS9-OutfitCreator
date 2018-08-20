@@ -13,6 +13,7 @@ const Outfit = require("./models/outfitModel");
 const Profile = require("./models/profileModel");
 
 const keys = require("./config/keys");
+
 require('dotenv').config();
 cloudinary.config({
   cloud_name: 'cloudtesting',
@@ -96,7 +97,7 @@ server.post("/signup", (req, res) => {
       res.status(201).json(user);
     })
     .catch(err => {
-      res.send(500).json({ error: err.message });
+      res.status(500).json({ error: err.message });
     });
 });
 
@@ -256,6 +257,22 @@ server.get("/items/:type", (req, res) => {
     .catch(err => {
       res.status(500).json({ message: 'Items could not be retreived at this time.' })
     });
+});
+
+// Get items by type for a user
+server.get("/:user/items/:type", (req, res) => {
+  const { user, type } = req.params;
+  Item.find({
+    type,
+    user
+  })
+  .populate()
+  .then(items => {
+    res.status(200).json(items);
+  })
+  .catch(err => {
+    res.status(500).json({ message: 'Items could not be retreived at this time.'})
+  });
 });
 
 // Start the server
