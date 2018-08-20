@@ -10,7 +10,6 @@ const port = process.env.PORT || 5000;
 const User = require("./models/userModel");
 const Item = require("./models/itemModel");
 const Outfit = require("./models/outfitModel");
-const Profile = require("./models/profileModel");
 
 const keys = require("./config/keys");
 
