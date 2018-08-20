@@ -10,7 +10,6 @@ const port = process.env.PORT || 5000;
 const User = require("./models/userModel");
 const Item = require("./models/itemModel");
 const Outfit = require("./models/outfitModel");
-const Profile = require("./models/profileModel");
 
 const keys = require("./config/keys");
 
@@ -25,7 +24,7 @@ cloudinary.config({
 
 const cookieSession = require("cookie-session");
 const passport = require("passport");
-const passportSetup = require("./config/passport-setup");
+//const passportSetup = require("./config/passport-setup");
 
 const authRoutes = require("./routes/auth-routes");
 const profileRoutes = require("./routes/profile-routes");

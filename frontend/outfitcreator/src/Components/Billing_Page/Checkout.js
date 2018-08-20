@@ -19,6 +19,7 @@ class Checkout extends React.Component {
   //}
 
   render() {
+    //TODO: add a user email
     return (
       <div className="Checkout">
         <StripeProvider stripe={this.props.stripe}>
