@@ -73,7 +73,7 @@ server.use("/user", userRoutes)
 server.use("/items", itemRoutes);
 server.use("/outfits", outfitRoutes);
 
-mongoose.connect(process.env.DB_URI, {useNewUrlParser:true}).then(() => {
+mongoose.connect(process.env.DB_URI, { useNewUrlParser: true }).then(() => {
 
   console.log("Connected to MongoDB");
 });
@@ -94,6 +94,8 @@ server.post("/signup", (req, res) => {
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
+    })
+});
 
 // Start the server
 server.listen(port, () => {
