@@ -22,7 +22,7 @@ class Billing extends React.Component {
             //TODO: change subscription prop for Cancel button to a user profile reference.
             //TODO: conditional rendering -- show Cancel if already subscribed, otherwise Checkout
             return (
-                <div>
+                <div className='container--billing'>
                     <h2>Subscribe to the Outfit Creator!</h2>
                     <Checkout stripe={this.state.stripe}/>
                     <Cancel stripe = {this.state.stripe} subscription='sub_DSE0Hm8zCEYQNK'/>

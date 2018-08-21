@@ -17,7 +17,12 @@ const OutfitCard = props => {
                 </div>
             </div>
             <div className='card--image'>
-                <img src={props.src} alt={props.name} />
+                {props.src.map((item) => {
+                    if (item) {
+                        return <img src={item.src} alt={item.name} />
+                    } else return null;
+                })}
+                {/* <img src={props.src} alt={props.name} /> */}
             </div>
             <div className='card--footer'>
                 Worn on: {props.lastWorn}
