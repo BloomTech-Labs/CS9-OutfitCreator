@@ -11,6 +11,7 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 //const passportSetup = require("./config/passport-setup");
 
+const localAuthRoutes = require("./routes/local-auth-routes");
 const authRoutes = require("./routes/auth-routes");
 const profileRoutes = require("./routes/profile-routes");
 const stripeRoutes = require("./routes/stripe-routes");
@@ -51,7 +52,19 @@ server.use(
 server.use(passport.initialize());
 server.use(passport.session());
 
+// Allow passport to utilize sessions
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    done(err, user);
+  });
+});
+
 // set up routes
+server.use("/local-auth", localAuthRoutes);
 server.use("/auth", authRoutes);
 server.use("/profile", profileRoutes);
 server.use("/pay", stripeRoutes);
@@ -59,7 +72,7 @@ server.use("/user", userRoutes)
 server.use("/items", itemRoutes);
 server.use("/outfits", outfitRoutes);
 
-mongoose.connect(process.env.DB_URI, {useNewUrlParser:true}).then(() => {
+mongoose.connect(process.env.DB_URI, { useNewUrlParser: true }).then(() => {
 
   console.log("Connected to MongoDB");
 });
