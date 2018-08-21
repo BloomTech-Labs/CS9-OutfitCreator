@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { withRouter } from 'react-router';
+import axios from 'axios';
 import './Navigation.css';
 
 class Navigation extends Component {
-
+  signOut = () => {
+    axios.get('http://localhost:5000/local-auth/logout')
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
   
   render() {
     return (
@@ -29,7 +38,7 @@ class Navigation extends Component {
             <NavLink href='/Billing' className='Billing'>Billing</NavLink>
           </NavItem>
         </Nav>
-        <NavLink href='/' className='SignOut'>Sign Out</NavLink>
+        <NavLink href='/' className='SignOut' onClick={this.signOut}>Sign Out</NavLink>
       </div>
     );
   }
