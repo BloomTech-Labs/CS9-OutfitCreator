@@ -31,10 +31,12 @@ router.get("/:user", (req, res) => {
 });
 
 // Get a specific outfit by ID
-router.get("/:id", (req, res) => {
+router.get("/:user/:id", (req, res) => {
   const id = req.params.id;
   Outfit.findById(id)
+    .populate()
     .then(outfit => {
+      console.log(outfit);
       res.status(200).json(outfit);
     })
     .catch(err => {
