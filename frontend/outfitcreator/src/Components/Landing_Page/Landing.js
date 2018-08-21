@@ -99,6 +99,23 @@ class Landing extends Component {
                         <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
                     </Carousel>
                 </div>
+                {/* <div className='landingPage--animations'>
+                    <div className='animation--top'>
+                    <img src='https://res.cloudinary.com/cloudtesting/image/upload/w_300,h_400/v1534808124/icons8-t-shirt-480.png' alt='top' className='animation--top' />
+                    </div>
+                    <div className='animation--pants'>
+                    <img src='https://res.cloudinary.com/cloudtesting/image/upload/w_200,h_300/v1534808124/icons8-shorts-480.png' alt='pants' />
+                    </div>
+                    <div className='animation--shoes--first'>
+                    <img src='https://res.cloudinary.com/cloudtesting/image/upload/w_200,h_200/v1534808126/icons8-work-boot-500.png' alt='shoes' />
+                    </div>
+                    <div className='animation--shoes--second'>
+                    <img src='' alt='shoes' />
+                    </div>
+                    <div className='animation--shoes'>
+                    <img src='' alt='shoes' />
+                    </div>
+                </div> */}
                 <div className='landingPage--description'>
                     <div className='description--opening'>The easy way to:</div>
                     <ul className='description--list'>

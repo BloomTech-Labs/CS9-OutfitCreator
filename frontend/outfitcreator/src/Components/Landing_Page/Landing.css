@@ -47,3 +47,72 @@
 li {
     margin-right: auto;
 }
+
+.landingPage--animations {
+    border: 1px solid blue;
+    height: 1500px;
+    width: 1200px;
+}
+
+@keyframes leftSlide {
+    from {
+        opacity: 0;
+        transform: translate(1500px, 0px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0px, 0px);
+    }
+}
+
+@keyframes rightSlide {
+    from {
+        opacity: 0;
+        transform: translate(1500px, 0px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0px, 0px);
+    }
+}
+
+@keyframes jumpIn {
+    from {
+        opacity: 0;
+        transform: translate(0px, 1500px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0px, 0px);
+    }
+}
+
+.animation--top {
+    transition: .3s;
+    /* animation: leftSlide 3s ease-in once; */
+}
+
+.animation--top:hover {
+    transform: translate(200px, 150px) rotate(20deg);
+}
+
+.animation--pants {
+    transition: .3s;
+    /* animation: rightSlide 3s ease-in once; */
+}
+
+.animation--pants:hover {
+    transform: translate(-250px, 150px) rotate(-20deg);
+}
+
+.animation--shoes--first {
+    transition: .3s;
+    /* animation: jumpIn 3s ease-in once; */
+}
+
+.animation--shoes--first:hover {
+    transform: translate(200px, 150px) rotate(20deg);
+}
