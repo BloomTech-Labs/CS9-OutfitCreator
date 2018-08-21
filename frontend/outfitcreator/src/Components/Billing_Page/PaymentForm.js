@@ -5,7 +5,7 @@ require('dotenv').config();
 
 
 class PaymentForm extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = { complete: false };
         this.submit = this.submit.bind(this);
@@ -33,9 +33,9 @@ class PaymentForm extends Component {
             
             // TODO: Make a post to update user profile subscription status
             //axios.post(`${server}/user/subscribe/${userID}`)
-                //.then(res => {
-                    // does anything need to be updated on the client side?
-                //}).catch(err => console.log(err));
+            //.then(res => {
+            // does anything need to be updated on the client side?
+            //}).catch(err => console.log(err));
         }
     }
 
@@ -43,7 +43,7 @@ class PaymentForm extends Component {
         if (this.state.complete) return (<h1>Payment Complete!</h1>)
         return (
             <div className="checkout">
-                <CardElement/>
+                <CardElement />
                 <button className="button" onClick={this.submit}>Subscribe!</button>
             </div>
         )

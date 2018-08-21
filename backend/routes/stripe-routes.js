@@ -45,7 +45,7 @@ router.post("/charge", cors(corsOptions), async (req, res) => {
 
 router.post("/cancel", cors(corsOptions), async (req, res) => {
     //TODOL update this to use a value passed through in request
-    stripe.subscriptions.del('sub_DSDzTOUVFD0gsk'), {at_period_end: true});
+    stripe.subscriptions.del('sub_DSDzTOUVFD0gsk', {at_period_end: true});
 })
 
 module.exports = router;

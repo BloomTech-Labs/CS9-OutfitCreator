@@ -1,7 +1,9 @@
-const Outfit = require("./models/outfitModel");
+const Outfit = require("../models/outfitModel");
+
+const router = require("express").Router();
 
 // Add a new outfit to the database
-server.post("/", (req, res) => {
+router.post("/", (req, res) => {
     const { user, name, tags, worn, top, bottom, shoes } = req.body;
     Outfit.create({ user, name, tags, worn, top, bottom, shoes })
       .then(outfit => {
@@ -13,7 +15,7 @@ server.post("/", (req, res) => {
   });
 
 // Get all outfits for a user
-server.get("/:user", (req, res) => {
+router.get("/:user", (req, res) => {
     const user = req.params.user;
     Outfit.find({
       user
@@ -28,7 +30,7 @@ server.get("/:user", (req, res) => {
   });
   
   // Get a specific outfit by ID
-server.get("/:id", (req, res) => {
+router.get("/:id", (req, res) => {
     const id = req.params.id;
     Outfit.findById(id)
       .then(outfit => {
@@ -40,10 +42,12 @@ server.get("/:id", (req, res) => {
   });
 
   // Delete a specific outfit
-  server.delete("/:id", (req, res) => {
+  router.delete("/:id", (req, res) => {
     Outfit.findByIdAndRemove(req.params.id)
       .then(res.status(200).json(`successfully deleted outfit ${req.params.id}`))
       .catch(err => {
         res.send(500).json({ error: err.message });
       });
   });
+
+  module.exports = router;

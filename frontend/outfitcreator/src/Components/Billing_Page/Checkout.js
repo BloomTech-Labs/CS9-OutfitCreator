@@ -8,15 +8,6 @@ class Checkout extends React.Component {
     super();
     this.state = { stripe: null };
   }
-  // componentDidMount() {
-  //     if (window.Stripe) {
-  //         this.setState({stripe: window.Stripe("pk_test_vRQk70zZL34BhEqLJJtqp29z")})
-  //     } else {
-  //         document.querySelector('#stripe-js').addEventListener('load', () => {
-  //             this.setState({stripe: window.Stripe("pk_test_vRQk70zZL34BhEqLJJtqp29z")});
-  //         });
-  //     }
-  //}
 
   render() {
     //TODO: add a user email

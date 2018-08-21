@@ -2,7 +2,10 @@ const multer = require('multer');
 const fs = require('fs');
 const cloudinary = require('cloudinary');
 
-const Item = require("./models/itemModel");
+const Item = require("../models/itemModel");
+
+const router = require("express").Router();
+
 
 require('dotenv').config();
 cloudinary.config({
@@ -23,7 +26,7 @@ const storage = multer.diskStorage({
 const jekmsUpload = multer({ storage: storage });
 // const upload = multer({ dest: './uploads' });
 // Add a new item to the database
-server.post("/", jekmsUpload.single('image'), (req, res) => {
+router.post("/", jekmsUpload.single('image'), (req, res) => {
   // console.log('req.body: ' + req.body);
   const { user, name, type, tags } = req.body;
   const { originalname } = req.file;
@@ -49,7 +52,7 @@ server.post("/", jekmsUpload.single('image'), (req, res) => {
 });
 
 // Get all items for a user
-server.get("/:user", (req, res) => {
+router.get("/:user", (req, res) => {
   const user = req.params.user;
   Item.find({
     user
@@ -64,7 +67,7 @@ server.get("/:user", (req, res) => {
 });
 
 // Get a specific item of clothing by ID
-server.get("/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   const id = req.params.id;
   Item.findById(id)
     .then(item => {
@@ -76,7 +79,7 @@ server.get("/:id", (req, res) => {
 });
 
 // Delete a specific item
-server.delete("/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
   Item.findByIdAndRemove(req.params.id)
     .then(res.status(200).json(`successfully deleted item ${req.params.id}`))
     .catch(err => {
@@ -85,7 +88,7 @@ server.delete("/:id", (req, res) => {
 });
 
 // Add an array of tags to a specific item
-server.post("/tags/:id", (req, res) => {
+router.post("/tags/:id", (req, res) => {
   const { tags } = req.body;
   const id = req.params.id;
   Item.findById(id)
@@ -100,7 +103,7 @@ server.post("/tags/:id", (req, res) => {
 });
 
 // Get items by type for a user
-server.get("/:user/:type", (req, res) => {
+router.get("/:user/:type", (req, res) => {
     const { user, type } = req.params;
     Item.find({
       type,
@@ -118,7 +121,7 @@ server.get("/:user/:type", (req, res) => {
   });
 
   // Get all of a user's items with a certain tag
-server.get("/search/:user/:tag", (req, res) => {
+router.get("/search/:user/:tag", (req, res) => {
     const { tag, user } = req.params;
     Item.find({
       tags: tag,
@@ -132,11 +135,13 @@ server.get("/search/:user/:tag", (req, res) => {
         res.send({ error: err.message });
       });
   });
-  
+
+  module.exports = router;
+
 
 // Get items by type
 // Should probably be deprecated, keeping the code just in case
-// server.get("/items/:type", (req, res) => {
+// router.get("/items/:type", (req, res) => {
 //     const { type } = req.params;
 //     Item.find({
 //       type
