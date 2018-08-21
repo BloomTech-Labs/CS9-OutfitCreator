@@ -14,6 +14,8 @@ POST - Start a user subscription in Stripe.
 POST - End a user subscription in Stripe.
 
 # /User
+## /User/Signup
+POST - Create a new user account
 ## /User/Info/:ID
 GET - Get user information by ID
 ## /User/Info/Subscribe/:ID
