@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { CardElement, injectStripe } from 'react-stripe-elements';
-const keys = require("./config/keys");
-// eslint-disable-next-line
+import React, {Component} from 'react';
+import {CardElement, injectStripe} from 'react-stripe-elements';
 const axios = require("axios");
+require('dotenv').config();
+
 
 class PaymentForm extends Component {
     constructor(props) {
@@ -16,18 +16,22 @@ class PaymentForm extends Component {
         // axios.post(`${server}/pay/`, {
         // })
         console.log("submitting payment");
-        let { token } = await this.props.stripe.createToken({ name: "Name" });
-        let response = await fetch(`${keys.server}/pay/charge`, {
+        let {token} = await this.props.stripe.createToken({name: "Token"});
+        let response = await fetch(`http://localhost:5000/pay/charge`, {//TODO: change to config var
             method: "POST",
-            headers: { "Content-Type": "text/plain" },
-            body: token.id
+            headers: {"Content-Type": "text/plain"},
+            body: token.id,
+            email: 'test@testemail.com' //TODO: change to customer email
         });
 
         if (response.ok) {
-            this.setState({ complete: true });
-            // POST request to new endpoint to update subscription info
-            // requires the user's mongoDB ID to be passed in
-
+            console.log(response.body);
+            this.setState({complete: true});
+            // Data from response.body that needs to be stored with user profile data:
+            // Customer.id
+            // Subscription.id (for cancellation)
+            
+            // TODO: Make a post to update user profile subscription status
             //axios.post(`${server}/user/subscribe/${userID}`)
             //.then(res => {
             // does anything need to be updated on the client side?
