@@ -48,7 +48,7 @@ router.post("/", jekmsUpload.single("image"), (req, res) => {
         res.status(201).json(item);
       })
       .catch(err => {
-        res.json(err);
+      res.status(500).json({ error: err.message });
       });
   });
 });
@@ -64,7 +64,7 @@ router.get("/:user", (req, res) => {
       res.status(200).json(items);
     })
     .catch(err => {
-      res.json({ error: err.message });
+      res.status(500).json({ error: err.message });
     });
 });
 
@@ -76,7 +76,7 @@ router.get("/:id", (req, res) => {
       res.status(200).json(item);
     })
     .catch(err => {
-      res.json({ error: err.message });
+      res.status(500).json({ error: err.message });
     });
 });
 
@@ -85,7 +85,7 @@ router.delete("/:id", (req, res) => {
   Item.findByIdAndRemove(req.params.id)
     .then(res.status(200).json(`successfully deleted item ${req.params.id}`))
     .catch(err => {
-      res.json({ error: err.message });
+      res.status(500).json({ error: err.message });
     });
 });
 
@@ -100,7 +100,7 @@ router.post("/tags/:id", (req, res) => {
     })
     .then(res.status(200).json("success!"))
     .catch(err => {
-      res.json({ error: err.message });
+      res.status(500).json({ error: err.message });
     });
 });
 
@@ -134,7 +134,7 @@ router.get("/search/:user/:tag", (req, res) => {
       res.status(200).json(items);
     })
     .catch(err => {
-      res.send({ error: err.message });
+      res.status(500).json({ error: err.message });
     });
 });
 
