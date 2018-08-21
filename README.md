@@ -24,18 +24,50 @@ yarn add cookie-session
 ```
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
+After implementing a server with Express, the routes used by OAuth need to be created. For this 'routes' and the file 'auth.routes.js' are made.
+Inside 'auth-routes.js' Express and Passport are needed:
 
 ```
-until finished
+const router = require("express").Router();
+const passport = require("passport");
+```
+
+With the auth login route ready to implement in front end
+
+```
+router.get("/login", (req, res) => {
+  res.send("Please login");
+});
+```
+With the auth login route ready to implement in front end,
+
+```
+router.get("/login", (req, res) => {
+  res.send("Please login");
+});
+```
+The logout route,
+
+```
+router.get("/logout", (req, res) => {
+  // handle with passport
+  req.logout();
+  res.redirect("/");
+});
+```
+the authentication with Google+
+
+```
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: ["profile"]
+  })
+);
+```
+and the callback route for Google to redirect to
+
+```
 ```
 
 End with an example of getting some data out of the system or using it for a little demo

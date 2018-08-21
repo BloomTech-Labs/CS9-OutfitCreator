@@ -1,4 +1,5 @@
 ## POST to /signup
+**NOTE: May be deprecated -- unsure if this is necessary with existing authentication.**
 Create a new User account in the database.
 This request should have the following format:
 ```
