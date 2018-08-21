@@ -12,18 +12,18 @@ router.get("/info/:id", (req, res) => {
         });
 });
 
-router.post("/subscribe/:user", (req, res) => {
-    const user = req.params.user;
-    User.findByIdAndUpdate(user, {paid: true})
+router.post("/subscribe/:id", (req, res) => {
+    const id = req.params.id;
+    User.findByIdAndUpdate(id, {paid: true})
         .then(res.status(201).json("Subscribed!"))
         .catch(err => {
             res.send(500).json({ error: err.message });
         });
 });
 
-router.post("/unsubscribe/:user", (req, res) => {
-    const user = req.params.user;
-    User.findByIdAndUpdate(user, {paid: false})
+router.post("/unsubscribe/:id", (req, res) => {
+    const id = req.params.id;
+    User.findByIdAndUpdate(id, {paid: false})
         .then(res.status(201).json("Unsubscribed!"))
         .catch(err => {
             res.send(500).json({error: err.message});
