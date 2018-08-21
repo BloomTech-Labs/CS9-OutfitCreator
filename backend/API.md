@@ -1,6 +1,21 @@
-## POST to /signup
-**NOTE: May be deprecated -- unsure if this is necessary with existing authentication.**
-Create a new User account in the database.
+# /Auth
+## /Auth/Login
+## /Auth/Logout
+## /Auth/Google
+## /Auth/Google/Redirect
+
+# /Profile
+## /Profile/
+
+# /Pay
+## /Pay/Charge
+POST - Start a user subscription in Stripe.
+## /Pay/Cancel
+POST - End a user subscription in Stripe.
+
+# /User
+## /User/Signup
+POST - Create a new user account
 This request should have the following format:
 ```
 {
@@ -9,9 +24,16 @@ This request should have the following format:
     "email": "ellen@email.com"
 }
 ```
+## /User/Info/:ID
+GET - Get user information by ID. Returns the User object.
+## /User/Info/Subscribe/:ID
+POST - Mark a user as subscribed: true.
+## /User/Info/Unsubscribe/:ID
+POST - Mark a user as subscribed: false.
 
-## POST to /item
-Create a new Item in the database.
+# /Items
+## /Items/
+POST - Create a new Item.
 This request should have the following format:
 ```
 {
@@ -22,50 +44,10 @@ This request should have the following format:
 	"tags": ["black", "formal"]
 }
 ```
-
-## POST to /item/:id/tags
-Add an array of one or more tags to a specific item.
-`:id` refers to the mongoDB id of the item.
-This request should have the following format:
-```
-{
-	"tags": ["red", "business-casual"]
-}
-```
-
-## DELETE to /item/:id
-Delete an Item from the database.
-`:id` refers to the mongoDB id of the item to delete.
-
-## POST to /outfit
-Add an outfit to the database.
-This request should have the following format:
-```
-{
-	"user": "5b71ec57a606882af8753934",
-    "name": "christmas party outfit",
-	"tags": ["formal", "work"],
-	"worn": [],
-	"top": ["5b71ec57a606882af8789934", "5b71ec57a606882af8789937"],
-	"bottom": ["5b71ec8ba606882af8789935"],
-	"shoes": "5b71ecafa606882af8789936"
-}
-```
-
-## DELETE to /outfit/:id
-Delete an Outfit from the database.
-`:id` refers to the mongoDB id of the outfit to delete.
-
-## GET to /:user/items
-Get all Items for a User. Returns an array of Item objects.
-`:user` refers to the mongoDB id of the user.
-
-## GET to /:user/outfits
-Get all Outfits for a User. Returns an array of Outfit objects.
-`:user` refers to the mongoDB id of the user.
-
-## GET to /item/:id
-A GET request for a specific item by ID. Returns an object like this:
+## /Items/:User
+GET - Get items for a user by ID. Returns an array of Item objects.
+## /Items/:ID
+GET - Get a specific item by ID. Returns a single Item object:
 ```
 {
     "user": "5b71ec57a606882af8753934",
@@ -80,9 +62,39 @@ A GET request for a specific item by ID. Returns an object like this:
     "__v": 0
 }
 ```
+DELETE - Delete a specific item by ID.
+## /Items/Tags/:ID
+POST - Add an array of tags to a specific item by ID.
+This request should have the following format:
+```
+{
+	"tags": ["red", "business-casual"]
+}
+```
+## /Items/:User/:Type
+GET - Get items by Type for a specific User. Returns an array of Item objects.
+## /Items/Search/:User/:Tag
+GET - Get items by Tag for a specific User. Returns an array of Item objects.
 
-## GET to /outfit/:id
-A GET request for a specific outfit by ID. Returns an object like this:
+# /Outfits
+## /Outfits/
+POST - Create a new Outfit.
+This request should have the following format:
+```
+{
+	"user": "5b71ec57a606882af8753934",
+    "name": "christmas party outfit",
+	"tags": ["formal", "work"],
+	"worn": [],
+	"top": ["5b71ec57a606882af8789934", "5b71ec57a606882af8789937"],
+	"bottom": ["5b71ec8ba606882af8789935"],
+	"shoes": "5b71ecafa606882af8789936"
+}
+```
+## /Outfits/:User
+GET - Get all outfits for a user by ID. Returns an array of Outfit objects.
+## /Outfits/:ID
+GET - Get a specific outfit by ID. Returns a single Outfit object:
 ```
 {
     "user": "5b71ec57a606882af8753934",
@@ -104,49 +116,4 @@ A GET request for a specific outfit by ID. Returns an object like this:
     "__v": 0
 }
 ```
-
-## GET to /search/:user/:tag
-A GET request for items with a specific tag. Returns an array of populated Item objects.
-`:user` refers to the mongodb ID for that user profile.
-`:tag` is a string to search for in item tags.
-
-## GET to /items/:type
-A GET request for all items by type. Returns an object like this:
-```
-[
-    {
-        tags: [
-            "black",
-            "formal"
-        ],
-        _id: "5b71ec8ba606882af8789935",
-        name: "black skirt",
-        image: "www.thisisarealurl.com/skirt",
-        type: "bottom",
-        __v: 0
-    },
-    {
-        tags: [
-            "black",
-            "formal"
-        ],
-        _id: "5b730e67353aa20014aac57f",
-        name: "black skirt",
-        image: "www.thisisarealurl.com/skirt",
-        type: "bottom",
-        __v: 0
-    }
-]
-```
-
-## POST to /user/subscribe/:user
-Change the user's subscription status to "true"
-`:user` refers to the User's mongodb ID.
-
-## POST to /user/unsubscribe/:user
-Change the user's subscription status to "false"
-`:user` refers to the User's mongodb ID.
-
-## GET to /user/info/:user
-Get a specific User profile.
-`:user` is the User's mongodb ID.
+DELETE - Delete a specific outfit by ID.

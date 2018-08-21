@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const cors = require('cors');
 
 const port = process.env.PORT || 5000;
-const User = require("./models/userModel");
 
 require('dotenv').config();
 
@@ -68,11 +67,6 @@ mongoose.connect(process.env.DB_URI, {useNewUrlParser:true}).then(() => {
 server.get("/", (req, res) => {
   res.status(200).json("Server running");
 });
-
-
-
-
-
 
 // Start the server
 server.listen(port, () => {
