@@ -20,18 +20,13 @@ passport.deserializeUser((id, done) => {
 passport.use(
   new GoogleStrategy(
     {
-      // options for google strategy
       callbackURL: "/auth/google/redirect",
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET
     },
     (accessToken, refreshToken, profile, done) => {
-      // passport callback function
-      // console.log('Callback firing');
-      // console.log(profile);
       Guser.findOne({ "google.googleId": profile.id }).then(currentUser => {
         if (currentUser) {
-          //console.log("user is: ", currentUser);
           done(null, currentUser);
         } else {
           new Guser({
@@ -53,19 +48,14 @@ passport.use(
 passport.use(
   new FacebookStrategy(
     {
-      // options for google strategy
       callbackURL: "https://localhost:5000/auth/facebook/callback",
       clientID: process.env.FB_CLIENT_ID,
       clientSecret: process.env.FB_CLIENT_SECRET,
       profileFields: ["id", "displayName", "name", "gender", "photos", "email"]
     },
     (accessToken, refreshToken, profile, done) => {
-      // passport callback function
-      // console.log("Callback firing");
-      // console.log(profile._json, profile);
       Guser.findOne({ "facebook.facebookId": profile.id }).then(currentUser => {
         if (currentUser) {
-          //console.log("user is: ", currentUser);
           done(null, currentUser);
         } else {
           new Guser({
@@ -88,19 +78,14 @@ passport.use(
 passport.use(
   new GitHubStrategy(
     {
-      // options for google strategy
       callbackURL: "/auth/github/callback",
       clientID: process.env.GH_CLIENT_ID,
       clientSecret: process.env.GH_CLIENT_SECRET,
       scope: "user"
     },
     (accessToken, refreshToken, profile, done) => {
-      // passport callback function
-      // console.log('Callback firing');
-      // console.log(profile);
       Guser.findOne({ "github.githubId": profile.id }).then(currentUser => {
         if (currentUser) {
-          //console.log("user is: ", currentUser);
           done(null, currentUser);
         } else {
           new Guser({

@@ -23,7 +23,6 @@ router.get(
 
 // callback route for google to redirect to
 router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
-  //res.send(req.user);
   res.redirect("/profile");
 });
 
@@ -43,10 +42,6 @@ router.get(
     failureRedirect: "/login"
   })
 );
-//(req, res) => {
-//res.send(req.user);
-//res.redirect("/profile");
-//});
 
 // auth with github
 router.get(
@@ -56,11 +51,10 @@ router.get(
   })
 );
 
-// callback route for google to redirect to
+// callback route for github to redirect to
 router.get("/github/callback", passport.authenticate("github"), (req, res) => {
-  //res.send(req.user);
   res.redirect("/profile");
 });
 
-// Google/Facebook buttons to be implemented in React page
+// Google/Facebook/Github buttons to be implemented in React page
 module.exports = router;
