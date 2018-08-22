@@ -1,16 +1,16 @@
 const express = require("express");
 const helmet = require("helmet");
 const mongoose = require("mongoose");
-const multer = require('multer');
-const cors = require('cors');
+const multer = require("multer");
+const cors = require("cors");
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001; // HTTPS: changed port to use https on 5000
 const User = require("./models/userModel");
 const Item = require("./models/itemModel");
 const Outfit = require("./models/outfitModel");
 
-const Profile = require("./models/profileModel");
-require('dotenv').config();
+//const Profile = require("./models/profileModel");
+require("dotenv").config();
 
 const cookieSession = require("cookie-session");
 const passport = require("passport");
@@ -21,12 +21,22 @@ const profileRoutes = require("./routes/profile-routes");
 const stripeRoutes = require("./routes/stripe-routes");
 const userRoutes = require("./routes/user-routes");
 
+// HTTPS: set up
+const path = require("path");
+const fs = require("fs");
+const https = require("https");
+// HTTPS: certifications
+const certification = {
+  key: fs.readFileSync(path.resolve("./ssl/server.key")),
+  cert: fs.readFileSync(path.resolve("./ssl/server.crt"))
+};
+
 // set up server
 const server = express();
 const corsOptions = {
   origin: "*",
   credentials: true
-}
+};
 
 // set up middlewares
 server.use(cors(corsOptions));
@@ -38,15 +48,15 @@ server.use(cors());
 server.use(
   cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
-    keys: process.env.COOKIE_KEY
+    keys: [process.env.COOKIE_KEY]
   })
 );
 
 const upload = multer({
-  dest: './uploads/',
+  dest: "./uploads/",
   rename: (fieldname, filename) => {
     return filename;
-  },
+  }
 });
 
 // set up passport. Initialize
@@ -57,17 +67,20 @@ server.use(passport.session());
 server.use("/auth", authRoutes);
 server.use("/profile", profileRoutes);
 server.use("/pay", stripeRoutes);
-server.use("/user", userRoutes)
+server.use("/user", userRoutes);
 
-mongoose.connect(process.env.DB_URI, {useNewUrlParser:true}).then(() => {
-
-  console.log("Connected to MongoDB");
-});
+mongoose
+  .connect(
+    process.env.DB_URI,
+    { useNewUrlParser: true }
+  )
+  .then(() => {
+    console.log("Connected to MongoDB");
+  });
 
 server.get("/", (req, res) => {
   res.status(200).json("Server running");
 });
-
 
 // Add a new user to the database
 server.post("/signup", (req, res) => {
@@ -82,12 +95,12 @@ server.post("/signup", (req, res) => {
 });
 
 // Add a new item to the database
-server.post("/item", upload.single('clothing'), (req, res) => {
+server.post("/item", upload.single("clothing"), (req, res) => {
   // console.log('req.body: ' + req.body);
   const { user, name, image, type, tags } = req.body;
   // image.data = fs.readFileSync(req.files.userPhoto.path);
   // console.log('image data: ' + image.data);
-  console.log('image: ' + image);
+  console.log("image: " + image);
   // image.type = 'image/png';
   Item.create({ user, name, image, type, tags })
     .then(item => {
@@ -219,14 +232,19 @@ server.get("/items/:type", (req, res) => {
   Item.find({
     type
   })
-  .populate()
-  .then(items => {
-    res.status(200).json(items);
-  })
-  .catch(err => {
-    res.status(500).json({ message: 'Items could not be retreived at this time.'})
-  });
+    .populate()
+    .then(items => {
+      res.status(200).json(items);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ message: "Items could not be retreived at this time." });
+    });
 });
+
+//HTTPS: server start
+https.createServer(certification, server).listen(5000);
 
 // Start the server
 server.listen(port, () => {
