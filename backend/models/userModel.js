@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -19,5 +20,20 @@ const UserSchema = new mongoose.Schema({
         default: false,
     }
 });
+
+// Hash passwords when user is created
+UserSchema.pre('save', function(next) {
+    bcrypt.hash(this.password, 11, (err, hash) => {
+        if (err) return next(err);
+        this.password = hash;
+        next();
+    });
+})
+
+// Hash password guess and check against user password
+UserSchema.methods.validPassword = function(passwordGuess) {
+  return bcrypt.compare(passwordGuess, this.password);
+};
+  
 
 module.exports = mongoose.model("User", UserSchema);

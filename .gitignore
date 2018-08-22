@@ -33,3 +33,5 @@
 /frontend/outfitcreator/npm-debug.log*
 /frontend/outfitcreator/yarn-debug.log*
 /frontend/outfitcreator/yarn-error.log*
+
+/backend/yarn-error.log*

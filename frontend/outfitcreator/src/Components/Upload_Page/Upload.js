@@ -30,7 +30,7 @@ class Upload extends Component {
         // formData.image = this.state.image;
         // formData.imageName = 'image name';
         // console.log(formData);
-        axios.post('http://localhost:5000/item', {
+        axios.post('http://localhost:5000/items', {
             // user: 'jekm321',
             name: 'jekms\'s test',
             image: this.state.image,
@@ -54,7 +54,7 @@ class Upload extends Component {
         e.preventDefault();
         const { name, image, tags, type } = this.state;
 
-        axios.post('https://lambda-outfit-creator-api.herokuapp.com/item', {
+        axios.post('https://lambda-outfit-creator-api.herokuapp.com/items', {
             name, image, tags, type
         })
         .then(response => {
@@ -94,14 +94,15 @@ class Upload extends Component {
                             alt="Upload Image Thumbnail" 
                         />
                     }
-                    <Button className="upload--button">Upload</Button>
                     <FormGroup>
                         <Input 
                             type='file' 
                             name='clothing' 
                             id='image--upload' 
-                            onChange={this.fileChanged} 
+                            onChange={this.fileChanged}
+                            className='inputfile'
                         />
+                        <Label htmlFor='image--upload'>Upload</Label>
                         <br />
                         <Input 
                             type="text" 

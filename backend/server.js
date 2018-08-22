@@ -1,25 +1,24 @@
 const express = require("express");
 const helmet = require("helmet");
 const mongoose = require("mongoose");
-const multer = require("multer");
 const cors = require("cors");
 
 const port = process.env.PORT || 5001; // HTTPS: changed port to use https on 5000
 const User = require("./models/userModel");
-const Item = require("./models/itemModel");
-const Outfit = require("./models/outfitModel");
 
-//const Profile = require("./models/profileModel");
 require("dotenv").config();
 
 const cookieSession = require("cookie-session");
 const passport = require("passport");
-const passportSetup = require("./config/passport-setup");
+//const passportSetup = require("./config/passport-setup");
 
+const localAuthRoutes = require("./routes/local-auth-routes");
 const authRoutes = require("./routes/auth-routes");
 const profileRoutes = require("./routes/profile-routes");
 const stripeRoutes = require("./routes/stripe-routes");
 const userRoutes = require("./routes/user-routes");
+const outfitRoutes = require("./routes/outfit-routes");
+const itemRoutes = require("./routes/item-routes");
 
 // HTTPS: set up
 const path = require("path");
@@ -52,22 +51,36 @@ server.use(
   })
 );
 
-const upload = multer({
-  dest: "./uploads/",
-  rename: (fieldname, filename) => {
-    return filename;
-  }
-});
+// const upload = multer({
+//   dest: './uploads/',
+//   rename: (fieldname, filename) => {
+//     return (filename + '.png');
+//   },
+// });
 
 // set up passport. Initialize
 server.use(passport.initialize());
 server.use(passport.session());
 
+// Allow passport to utilize sessions
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    done(err, user);
+  });
+});
+
 // set up routes
+server.use("/local-auth", localAuthRoutes);
 server.use("/auth", authRoutes);
 server.use("/profile", profileRoutes);
 server.use("/pay", stripeRoutes);
 server.use("/user", userRoutes);
+server.use("/items", itemRoutes);
+server.use("/outfits", outfitRoutes);
 
 mongoose
   .connect(
@@ -83,164 +96,17 @@ server.get("/", (req, res) => {
 });
 
 // Add a new user to the database
+// QUESTION: Is this being used anywhere??
 server.post("/signup", (req, res) => {
   const { username, password, email } = req.body;
   User.create({ username, password, email })
     .then(user => {
+      passport.authenticate('local', { successRedirect: '/' });
       res.status(201).json(user);
     })
     .catch(err => {
-      res.send(500).json({ error: err.message });
-    });
-});
-
-// Add a new item to the database
-server.post("/item", upload.single("clothing"), (req, res) => {
-  // console.log('req.body: ' + req.body);
-  const { user, name, image, type, tags } = req.body;
-  // image.data = fs.readFileSync(req.files.userPhoto.path);
-  // console.log('image data: ' + image.data);
-  console.log("image: " + image);
-  // image.type = 'image/png';
-  Item.create({ user, name, image, type, tags })
-    .then(item => {
-      res.status(201).json(item);
+      res.status(500).json({ error: err.message });
     })
-    .catch(err => {
-      res.send(500).json({ error: err.message });
-    });
-});
-
-// Delete a specific item
-server.delete("/item/:id", (req, res) => {
-  Item.findByIdAndRemove(req.params.id)
-    .then(res.status(200).json(`successfully deleted item ${req.params.id}`))
-    .catch(err => {
-      res.send(500).json({ error: err.message });
-    });
-});
-
-// Add a new outfit to the database
-server.post("/outfit", (req, res) => {
-  const { user, name, tags, worn, top, bottom, shoes } = req.body;
-  Outfit.create({ user, name, tags, worn, top, bottom, shoes })
-    .then(outfit => {
-      res.status(201).json(outfit);
-    })
-    .catch(err => {
-      res.send(500).json({ error: err.message });
-    });
-});
-
-// Delete a specific outfit
-server.delete("/outfit/:id", (req, res) => {
-  Outfit.findByIdAndRemove(req.params.id)
-    .then(res.status(200).json(`successfully deleted outfit ${req.params.id}`))
-    .catch(err => {
-      res.send(500).json({ error: err.message });
-    });
-});
-
-// Add an array of tags to a specific item
-server.post("/item/tags/:id", (req, res) => {
-  const { tags } = req.body;
-  const id = req.params.id;
-  Item.findById(id)
-    .then(item => {
-      item.tags = item.tags.concat(tags);
-      item.save();
-    })
-    .then(res.status(200).json("success!"))
-    .catch(err => {
-      res.send(500).json({ error: err.message });
-    });
-});
-
-// Get a specific item of clothing by ID
-server.get("/item/:id", (req, res) => {
-  const id = req.params.id;
-  Item.findById(id)
-    .then(item => {
-      res.status(200).json(item);
-    })
-    .catch(err => {
-      res.send({ error: err.message });
-    });
-});
-
-// Get a specific outfit by ID
-server.get("/outfit/:id", (req, res) => {
-  const id = req.params.id;
-  Outfit.findById(id)
-    .then(outfit => {
-      res.status(200).json(outfit);
-    })
-    .catch(err => {
-      res.send({ error: err.message });
-    });
-});
-
-// Get all of a user's items with a certain tag
-server.get("/search/:user/:tag", (req, res) => {
-  const { tag, user } = req.params;
-  Item.find({
-    tags: tag,
-    user: user
-  })
-    .populate()
-    .then(items => {
-      res.status(200).json(items);
-    })
-    .catch(err => {
-      res.send({ error: err.message });
-    });
-});
-
-// Get all items for a user
-server.get("/:user/items", (req, res) => {
-  const user = req.params.user;
-  Item.find({
-    user
-  })
-    .populate()
-    .then(items => {
-      res.status(200).json(items);
-    })
-    .catch(err => {
-      res.send({ error: err.message });
-    });
-});
-
-// Get all outfits for a user
-server.get("/:user/outfits", (req, res) => {
-  const user = req.params.user;
-  Outfit.find({
-    user
-  })
-    .populate()
-    .then(outfits => {
-      res.status(200).json(outfits);
-    })
-    .catch(err => {
-      res.send({ error: err.message });
-    });
-});
-
-// Get items by type
-server.get("/items/:type", (req, res) => {
-  const { type } = req.params;
-  Item.find({
-    type
-  })
-    .populate()
-    .then(items => {
-      res.status(200).json(items);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ message: "Items could not be retreived at this time." });
-    });
 });
 
 //HTTPS: server start
