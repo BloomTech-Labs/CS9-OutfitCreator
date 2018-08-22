@@ -25,10 +25,10 @@ const path = require("path");
 const fs = require("fs");
 const https = require("https");
 // HTTPS: certifications
-const certification = {
-  key: fs.readFileSync(path.resolve("./ssl/server.key")),
-  cert: fs.readFileSync(path.resolve("./ssl/server.crt"))
-};
+// const certification = {
+//   key: fs.readFileSync(path.resolve("./ssl/server.key")),
+//   cert: fs.readFileSync(path.resolve("./ssl/server.crt"))
+// };
 
 // set up server
 const server = express();
@@ -40,6 +40,7 @@ const corsOptions = {
 // set up middlewares
 server.use(cors(corsOptions));
 server.use(helmet());
+server.use(express.urlencoded());
 server.use(express.json());
 server.use(cors());
 
@@ -73,15 +74,6 @@ passport.deserializeUser((id, done) => {
   });
 });
 
-// set up routes
-server.use("/local-auth", localAuthRoutes);
-server.use("/auth", authRoutes);
-server.use("/profile", profileRoutes);
-server.use("/pay", stripeRoutes);
-server.use("/user", userRoutes);
-server.use("/items", itemRoutes);
-server.use("/outfits", outfitRoutes);
-
 mongoose
   .connect(
     process.env.DB_URI,
@@ -94,6 +86,17 @@ mongoose
 server.get("/", (req, res) => {
   res.status(200).json("Server running");
 });
+
+
+
+// set up routes
+server.use("/local-auth", localAuthRoutes);
+server.use("/auth", authRoutes);
+server.use("/profile", profileRoutes);
+server.use("/pay", stripeRoutes);
+server.use("/user", userRoutes);
+server.use("/items", itemRoutes);
+server.use("/outfits", outfitRoutes);
 
 // Add a new user to the database
 // QUESTION: Is this being used anywhere??
@@ -110,7 +113,7 @@ server.post("/signup", (req, res) => {
 });
 
 //HTTPS: server start
-https.createServer(certification, server).listen(5000);
+// https.createServer(certification, server).listen(5000);
 
 // Start the server
 server.listen(port, () => {
