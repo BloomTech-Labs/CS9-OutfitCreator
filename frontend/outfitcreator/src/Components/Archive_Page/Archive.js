@@ -133,7 +133,7 @@ class Archive extends React.Component {
     }
 
     getOutfits = () => {
-        axios.get(`http://localhost:5000/items/${testUser}`)
+        axios.get(`http://localhost:5000/outfits/${testUser}`)
             .then(response => {
                 this.setState({ myOutfits: response.data })
             })
