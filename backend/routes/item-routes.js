@@ -69,10 +69,11 @@ router.get("/:user", (req, res) => {
 });
 
 // Get a specific item of clothing by ID
-router.get("/:id", (req, res) => {
+router.get("/:user/:id", (req, res) => {
   const id = req.params.id;
   Item.findById(id)
     .then(item => {
+      console.log(item);
       res.status(200).json(item);
     })
     .catch(err => {

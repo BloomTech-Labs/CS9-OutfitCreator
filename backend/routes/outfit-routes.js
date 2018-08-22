@@ -10,7 +10,7 @@ router.post("/", (req, res) => {
       res.status(201).json(outfit);
     })
     .catch(err => {
-      res.send(500).json({ error: err.message });
+      res.status(500).json({ error: err.message });
     });
 });
 
@@ -30,9 +30,10 @@ router.get("/:user", (req, res) => {
 });
 
 // Get a specific outfit by ID
-router.get("/:id", (req, res) => {
+router.get("/:user/:id", (req, res) => {
   const id = req.params.id;
   Outfit.findById(id)
+    .populate()
     .then(outfit => {
       res.status(200).json(outfit);
     })
@@ -46,7 +47,7 @@ router.delete("/:id", (req, res) => {
   Outfit.findByIdAndRemove(req.params.id)
     .then(res.status(200).json(`successfully deleted outfit ${req.params.id}`))
     .catch(err => {
-      res.send(500).json({ error: err.message });
+      res.status(500).json({ error: err.message });
     });
 });
 
