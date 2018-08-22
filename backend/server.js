@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const cors = require('cors');
 
 const port = process.env.PORT || 5000;
-const User = require("./models/userModel");
 
 require('dotenv').config();
 
@@ -80,21 +79,6 @@ mongoose.connect(process.env.DB_URI, { useNewUrlParser: true }).then(() => {
 
 server.get("/", (req, res) => {
   res.status(200).json("Server running");
-});
-
-
-// Add a new user to the database
-// QUESTION: Is this being used anywhere??
-server.post("/signup", (req, res) => {
-  const { username, password, email } = req.body;
-  User.create({ username, password, email })
-    .then(user => {
-      passport.authenticate('local', { successRedirect: '/' });
-      res.status(201).json(user);
-    })
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    })
 });
 
 // Start the server
