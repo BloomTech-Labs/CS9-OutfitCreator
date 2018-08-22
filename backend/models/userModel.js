@@ -18,6 +18,12 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: false,
+    },
+    stripe_cust: {
+        type: String,
+    },
+    stripe_sub: {
+        type: String,
     }
 });
 

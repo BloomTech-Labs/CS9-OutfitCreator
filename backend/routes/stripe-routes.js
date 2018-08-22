@@ -15,7 +15,7 @@ router.post("/charge", cors(corsOptions), async (req, res) => {
         //this will return a new Customer object.
         //Store customer.id in database with user profile info
         email: 'test@example.com', //TODO: how to extract this data from the request?
-        source: req.body
+        source: req.body.token
     })
     .then(customer => {
         stripe.plans.create({
@@ -34,7 +34,9 @@ router.post("/charge", cors(corsOptions), async (req, res) => {
                 items: [{plan: plan.id}]
             })
             .then(subscription => {
-                res.status(200).send({customer, subscription})
+                const data = {stripe_cust: customer.id, stripe_sub: subscription.id};
+                console.log(data);
+                res.status(200).json(data)
             })
             .catch(err => console.log(err));
         })
