@@ -3,7 +3,7 @@ import axios from 'axios';
 import OutfitCard from './OutfitCard';
 import './Archive.css';
 
-const testUser = '5b772cde26426245c86f0eea';
+const testUser = '5b745597a48cb52b0c1baedf';
 
 class Archive extends React.Component {
     constructor(props) {

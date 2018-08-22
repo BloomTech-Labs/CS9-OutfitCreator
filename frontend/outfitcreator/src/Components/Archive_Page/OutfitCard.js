@@ -18,7 +18,7 @@ const OutfitCard = props => {
                     <button className='edit--button' />
                 </div>
             </div>
-            <div className='card--image'>
+            <div className='card--images'>
                 {props.src.map((item) => {
                     if (item) {
                         return <Imaging key={item} urlSrc={item} />
