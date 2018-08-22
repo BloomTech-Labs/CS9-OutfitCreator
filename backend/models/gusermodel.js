@@ -2,9 +2,25 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const GuserSchema = new Schema({
-  username: String,
-  googleId: String,
-  thumbnail: String
+  google: {
+    username: String,
+    googleId: String,
+    thumbnail: String,
+    email: String
+  },
+  facebook: {
+    username: String,
+    facebookId: String,
+    email: String,
+    picture: String,
+    token: String
+  },
+  github: {
+    username: String,
+    githubId: String,
+    thumbnail: String,
+    email: String
+  }
 });
 
 const Guser = mongoose.model("guser", GuserSchema);
