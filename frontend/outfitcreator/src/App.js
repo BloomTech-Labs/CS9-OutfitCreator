@@ -16,39 +16,54 @@ import './App.css';
 library.add(faShareAlt);
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      userID: null,
+    }
+  }
+
+  updateUserID = (ID) => {
+    this.setState({userID: ID});
+  }
+
   render() {
     return (
       <div className="App">
 
         <Switch>
-          <Route exact path='/' component={Landing} />
+          <Route exact path='/' render={props =>
+            <div>
+              <Landing {...props} userID={this.userID} login={this.updateUserID}/>
+            </div>
+          } />
           <Route path='/Create' render={props =>
             <div className='App--create'>
-              <Create {...props} />
+              <Create {...props} userID={this.userID}/>
               <Navigation />
             </div>
           } />
           <Route path='/Archive' render={props =>
             <div>
-              <Archive />
+              <Archive {...props} userID={this.userID}/>
               <Navigation />
             </div>
           } />
           <Route path='/Settings' render={props =>
             <div>
-              <Settings />
+              <Settings {...props} userID={this.userID}/>
               <Navigation />
             </div>
           } />
           <Route path='/Upload' render={props =>
             <div>
-              <Upload />
+              <Upload {...props} userID={this.userID}/>
               <Navigation />
             </div>
           } />
           <Route path='/Billing' render={props =>
             <div>
-              <Billing />
+              <Billing {...props} userID={this.userID}/>
               <Navigation />
             </div>
           } />
