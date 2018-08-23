@@ -18,12 +18,13 @@ class SignIn extends React.Component {
         
         axios.post('http://localhost:5000/local-auth/login', { username, password })
             .then(res => {
-              // Redirect to create page once logged in
-              window.location = 'http://localhost:3000/Create';
+                this.props.onSignin(res.data);
+                // Redirect to create page once logged in
+                window.location = 'http://localhost:3000/Create';
             })
             .catch(err => {
-              // Alert for invalid credentials
-              alert('Invalid credentials. Please try again.');
+                // Alert for invalid credentials
+                localStorage.removeItem('token');
             });
     }
 
