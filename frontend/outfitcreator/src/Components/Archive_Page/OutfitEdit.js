@@ -51,12 +51,11 @@ class OutfitEdit extends React.Component {
                     <div className='container--edit' key={outfit.key}>
                         <div className='edit--header'>
                             <div className='header--title'>
-                                <input
+                                Name: <input
                                     name='name'
                                     value={this.state.name}
                                     onChange={this.handleInput}
                                 />
-                                {outfit.name}
                             </div>
                         </div>
                         <div className='edit--images'>
@@ -67,12 +66,11 @@ class OutfitEdit extends React.Component {
                             })}
                         </div>
                         <div className='edit--footer'>
-                            <input
+                            Worn on: <input
                                 name='lastWorn'
                                 value={this.state.lastWorn}
                                 onChange={this.handleInput}
                             />
-                            Worn on: {outfit.lastWorn}
                         </div>
                     </div>
                     <button className='edit--return'>Return</button>
