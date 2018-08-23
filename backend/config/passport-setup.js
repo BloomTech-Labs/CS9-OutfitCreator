@@ -23,6 +23,19 @@ passport.deserializeUser((id, done) => {
   });
 });
 
+const localStrategy = new LocalStrategy(function(username, password, done) {
+  // Use async function for awaiting promise in user.validPassword
+  User.findOne({ username }, async function(err, user) {
+    if (err) return done(err);
+    if (!user) {
+      return done(null, false);
+    }
+    if (!(await user.validPassword(password))) {
+      return done(null, false);
+    }
+    return done(null, user);
+  });
+});
 passport.use(
   new GoogleStrategy(
     {
