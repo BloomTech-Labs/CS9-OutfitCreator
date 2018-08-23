@@ -65,6 +65,22 @@ router.get("/:user", (req, res) => {
     });
 });
 
+// Get all items for a user filtered by a type
+router.get("/type/:user/:type", (req, res) => {
+  const { user, type } = req.params;
+  Item.find({
+    user
+  })
+    .populate()
+    .then(items => {
+      const filteredItems = items.filter( (item) => (item.type === type))
+      res.status(200).json(filteredItems);
+    })
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 // Get a specific item of clothing by ID
 router.get("/:user/:id", (req, res) => {
   const id = req.params.id;
@@ -102,22 +118,22 @@ router.post("/tags/:id", (req, res) => {
 });
 
 // Get items by type for a user
-router.get("/:user/:type", (req, res) => {
-  const { user, type } = req.params;
-  Item.find({
-    type,
-    user
-  })
-    .populate()
-    .then(items => {
-      res.status(200).json(items);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ message: "Items could not be retreived at this time." });
-    });
-});
+// router.get("/:user/:type", (req, res) => {
+//   const { user, type } = req.params;
+//   Item.find({
+//     type,
+//     user
+//   })
+//     .populate()
+//     .then(items => {
+//       res.status(200).json(items);
+//     })
+//     .catch(err => {
+//       res
+//         .status(500)
+//         .json({ message: "Items could not be retreived at this time." });
+//     });
+// });
 
 // Get all of a user's items with a certain tag
 router.get("/search/:user/:tag", (req, res) => {
