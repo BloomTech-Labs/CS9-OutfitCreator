@@ -16,40 +16,56 @@ import './App.css';
 library.add(faShareAlt);
 
 class App extends Component {
+  state = {
+    user: null,
+    token: null
+  }
+
+  signInSuccess = (data) => {
+    this.setState({ user: data.user});
+    localStorage.setItem('authToken', `Bearer ${data.token}`);
+    this.updateToken();
+  }
+
+  updateToken = () => {
+    const token = localStorage.getItem('authToken');
+    this.setState({ token })
+  }
+
   render() {
     return (
       <div className="App">
 
         <Switch>
-          <Route exact path='/' component={Landing} />
+          <Route exact path='/' render={props => <Landing {...props} onSignin={this.signInSuccess} />} />
           <Route path='/Create' render={props =>
             <div className='App--create'>
               <Create {...props} />
-              <Navigation />
+              <Navigation token={this.state.token} user={this.state.user} />
             </div>
           } />
           <Route path='/Archive' render={props =>
             <div>
               <Archive />
-              <Navigation />
+              <Navigation token={this.state.token} user={this.state.user} />
             </div>
           } />
           <Route path='/Settings' render={props =>
             <div>
               <Settings />
-              <Navigation />
+              <Navigation token={this.state.token} user={this.state.user} />
             </div>
           } />
           <Route path='/Upload' render={props =>
             <div>
               <Upload />
-              <Navigation />
+              <Navigation token={this.state.token} user={this.state.user} />
             </div>
           } />
           <Route path='/Billing' render={props =>
             <div>
               <Billing />
-              <Navigation />
+              <Navigation token={this.state.token} user={this.state.user} />
             </div>
           } />
         </Switch>
