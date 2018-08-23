@@ -142,3 +142,13 @@ This request should have the following format:
 }
 ```
 DELETE - Delete a specific outfit by ID.
+## /Outfits/Tags/:ID
+POST - Add an array of tags to a specific item by ID.
+This request should have the following format:
+```
+{
+	"tags": ["red", "business-casual"]
+}
+```
+## /Outfits/Search/:User/:Tag
+GET - Get outfits by Tag for a specific User. Returns an array of Item objects.

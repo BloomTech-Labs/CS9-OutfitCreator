@@ -61,4 +61,35 @@ router.put("/:id", (req, res) => {
     });
 });
 
+// Add an array of tags to a specific outfit
+router.post("/tags/:id", (req, res) => {
+  const { tags } = req.body;
+  const id = req.params.id;
+  Outfit.findById(id)
+    .then(outfit => {
+      outfit.tags = outfit.tags.concat(tags);
+      outfit.save();
+    })
+    .then(res.status(200).json("success!"))
+    .catch(err => {
+      res.send(500).json({ error: err.message });
+    });
+});
+
+// Get all of a user's outfits with a certain tag
+router.get("/search/:user/:tag", (req, res) => {
+  const { tag, user } = req.params;
+  Outfit.find({
+    tags: tag,
+    user: user
+  })
+    .populate()
+    .then(outfits => {
+      res.status(200).json(outfits);
+    })
+    .catch(err => {
+      res.send({ error: err.message });
+    });
+});
+
 module.exports = router;
