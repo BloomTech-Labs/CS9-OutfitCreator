@@ -105,7 +105,7 @@ router.post("/tags/:id", (req, res) => {
 });
 
 // Get items by type for a user
-router.get("/:user/:type", (req, res) => {
+router.get("/type/:user/:type", (req, res) => {
   const { user, type } = req.params;
   Item.find({
     type,

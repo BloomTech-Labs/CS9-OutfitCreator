@@ -30,9 +30,9 @@ class Create extends Component {
             // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/top`),
             // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/bottom`),
             // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/shoes`),
-            axios.get(`${ROOT_URL.API}/items/${testUserId}/top`),
-            axios.get(`${ROOT_URL.API}/items/${testUserId}/bottom`),
-            axios.get(`${ROOT_URL.API}/items/${testUserId}/shoes`),
+            axios.get(`${ROOT_URL.API}/items/type/${testUserId}/top`),
+            axios.get(`${ROOT_URL.API}/items/type/${testUserId}/bottom`),
+            axios.get(`${ROOT_URL.API}/items/type/${testUserId}/shoes`),
         ])
         .then(res => {
             this.setState({ allTops: res[0].data, allBottoms: res[1].data, allShoes: res[2].data, user: testUserId });
