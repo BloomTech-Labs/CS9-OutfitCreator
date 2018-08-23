@@ -22,10 +22,10 @@ const storage = multer.diskStorage({
   }
 });
 
-const jekmsUpload = multer({ storage: storage });
+const upload = multer({ storage: storage });
 // const upload = multer({ dest: './uploads' });
 // Add a new item to the database
-router.post("/", jekmsUpload.single("image"), (req, res) => {
+router.post("/", upload.single("image"), (req, res) => {
   // console.log('req.body: ' + req.body);
   const { user, name, type, tags } = req.body;
   const { originalname } = req.file;
