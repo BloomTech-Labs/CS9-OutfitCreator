@@ -22,6 +22,7 @@ class Archive extends React.Component {
     }
 
     getOutfits = () => {
+
         axios.get(`${ROOT_URL}/outfits/${testUser}/`)
             .then(response => { 
                 this.setState({ myOutfits: response.data })

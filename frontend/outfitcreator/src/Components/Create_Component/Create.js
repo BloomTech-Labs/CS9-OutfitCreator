@@ -29,9 +29,9 @@ class Create extends Component {
             // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/top`),
             // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/bottom`),
             // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/shoes`),
-            axios.get(`http://localhost:5000/items/${testUserId}/top`),
-            axios.get(`http://localhost:5000/items/${testUserId}/bottom`),
-            axios.get(`http://localhost:5000/items/${testUserId}/shoes`),
+            axios.get(`${process.env.SERVER || 'http://localhost:5000'}/items/${testUserId}/top`),
+            axios.get(`${process.env.SERVER || 'http://localhost:5000'}/items/${testUserId}/bottom`),
+            axios.get(`${process.env.SERVER || 'http://localhost:5000'}/items/${testUserId}/shoes`),
         ])
         .then(res => {
             this.setState({ allTops: res[0].data, allBottoms: res[1].data, allShoes: res[2].data, user: testUserId });
@@ -87,7 +87,7 @@ class Create extends Component {
         const shoes = selectedShoe._id;
         const outfit = { user, name, worn, tags, top, bottom, shoes};
         axios
-            .post(`http://localhost:5000/outfits`, outfit)
+            .post(`${process.env.SERVER || 'http://localhost:5000'}/outfits`, outfit)
             .then(savedOutfit => {
                 console.log(savedOutfit);
                 this.props.history.push('/Archive');

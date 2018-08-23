@@ -12,7 +12,7 @@ class PaymentForm extends Component {
 
     async submit(e) {
         let {token} = await this.props.stripe.createToken({name: "Token"});
-        axios.post(`http://localhost:5000/pay/charge`, {
+        axios.post(`${process.env.SERVER || 'http://localhost:5000'}/pay/charge`, {
             token: token.id,
             email: 'test@testemail.com'
         })

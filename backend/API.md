@@ -62,6 +62,15 @@ GET - Get a specific item by ID. Returns a single Item object:
     "__v": 0
 }
 ```
+PUT - Edit an item's name, type, and tags.
+This request should have the following format:
+```
+{
+    "name": "new item name",
+    "type": "shoes",
+    "tags": ["new tags", "in an array"]
+}
+```
 DELETE - Delete a specific item by ID.
 ## /Items/Tags/:ID
 POST - Add an array of tags to a specific item by ID.
@@ -116,4 +125,30 @@ GET - Get a specific outfit by ID. Returns a single Outfit object:
     "__v": 0
 }
 ```
+PUT - Edit an outfit's name, tags, top(s), bottom(s), and shoes.
+This request should have the following format:
+```
+{
+    "name": "new outfit name",
+    "tags": ["new tags", "in an array"],
+    "top": [
+        "5b730e92353aa20014aac580",
+        "5b730ebe353aa20014aac581"
+    ],
+    "bottom": [
+        "5b730e67353aa20014aac57f"
+    ],
+    "shoes": "5b730e26353aa20014aac57e"
+}
+```
 DELETE - Delete a specific outfit by ID.
+## /Outfits/Tags/:ID
+POST - Add an array of tags to a specific item by ID.
+This request should have the following format:
+```
+{
+	"tags": ["red", "business-casual"]
+}
+```
+## /Outfits/Search/:User/:Tag
+GET - Get outfits by Tag for a specific User. Returns an array of Item objects.

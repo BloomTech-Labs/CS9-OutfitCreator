@@ -89,6 +89,17 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+// Edit a specific item
+router.put("/:id", (req, res) => {
+  const {id} = req.params;
+  const {name, type, tags} = req.body;
+  Item.findByIdAndUpdate(id, {name, type, tags})
+    .then(res.status(200).json(`successfully updated item`))
+    .catch(err => {
+      res.send(500).json({error: err.message});
+    });
+});
+
 // Add an array of tags to a specific item
 router.post("/tags/:id", (req, res) => {
   const { tags } = req.body;

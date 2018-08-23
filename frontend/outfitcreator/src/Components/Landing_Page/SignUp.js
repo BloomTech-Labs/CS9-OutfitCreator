@@ -16,7 +16,6 @@ class SignUp extends React.Component {
 
     signUp = () => {
         const { username, password } = this.state;
-          
         axios.post(`${ROOT_URL.API}/signup`, { username, password })
             .then(res => {
               // Redirect to create page once logged in
