@@ -14,6 +14,9 @@ const UserSchema = new mongoose.Schema({
     email: {
         type: String,
     },
+    phone: {
+        type: String,
+    },
     paid: {
         type: Boolean,
         required: true,
