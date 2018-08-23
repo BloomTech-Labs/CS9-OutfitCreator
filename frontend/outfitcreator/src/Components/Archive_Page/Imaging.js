@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-const TESTUSER = '5b772cde26426245c86f0eea';
+const TESTUSER = '5b745597a48cb52b0c1baedf';
 const ROOT_URL = process.env.NODE_ENV === 'production' ? 'https://lambda-outfit-creator-api.herokuapp.com/' : 'http://localhost:5000';
 
 class Imaging extends React.Component {
@@ -17,6 +17,7 @@ class Imaging extends React.Component {
     }
 
     getImages = () => {
+        console.log(this.props.urlSrc)
         axios.get(`${ROOT_URL}/items/${TESTUSER}/${this.props.urlSrc}`)
             .then(response => {
                 this.setState({ image: response.data });
