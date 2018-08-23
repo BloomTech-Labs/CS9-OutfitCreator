@@ -55,7 +55,7 @@ class Upload extends Component {
         e.preventDefault();
         const { name, image, tags, type } = this.state;
 
-        axios.post(`${ROOT_URL.API}/items`, {
+        axios.post{`${ROOT_URL.API}/items`, {
             name, image, tags, type
         })
         .then(response => {
