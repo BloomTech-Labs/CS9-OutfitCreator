@@ -36,6 +36,26 @@ const localStrategy = new LocalStrategy(function(username, password, done) {
     return done(null, user);
   });
 });
+const jwtOptions = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: secret
+}
+
+// Passport strategy for securing RESTful endpoints using JWT
+const jwtStrategy = new JwtStrategy(jwtOptions, (payload, done) => {
+  User.findById(payload.sub)
+  .select('-password')
+  .then(user => {
+    if(user) {
+      done(null, user);
+    } else {
+      done(null, false);
+    }
+  })
+  .catch(err => {
+    done(err, false);
+  })
+})
 passport.use(
   new GoogleStrategy(
     {
