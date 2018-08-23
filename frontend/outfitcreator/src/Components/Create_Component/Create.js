@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardText, CardImg, CardImgOverlay, CardDeck, Button, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ROOT_URL } from '../../config'; 
 import axios from 'axios';
 
 import './Create.css';
@@ -29,9 +30,9 @@ class Create extends Component {
             // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/top`),
             // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/bottom`),
             // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/shoes`),
-            axios.get(`http://localhost:5000/items/${testUserId}/top`),
-            axios.get(`http://localhost:5000/items/${testUserId}/bottom`),
-            axios.get(`http://localhost:5000/items/${testUserId}/shoes`),
+            axios.get(`${ROOT_URL.API}/items/type/${testUserId}/top`),
+            axios.get(`${ROOT_URL.API}/items/type/${testUserId}/bottom`),
+            axios.get(`${ROOT_URL.API}/items/type/${testUserId}/shoes`),
         ])
         .then(res => {
             this.setState({ allTops: res[0].data, allBottoms: res[1].data, allShoes: res[2].data, user: testUserId });
@@ -87,7 +88,7 @@ class Create extends Component {
         const shoes = selectedShoe._id;
         const outfit = { user, name, worn, tags, top, bottom, shoes};
         axios
-            .post(`http://localhost:5000/outfits`, outfit)
+            .post(`${ROOT_URL.API}/outfits`, outfit)
             .then(savedOutfit => {
                 console.log(savedOutfit);
                 this.props.history.push('/Archive');
