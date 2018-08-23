@@ -3,17 +3,14 @@ import './OutfitCard.css';
 import Imaging from './Imaging';
 import { withRouter } from 'react-router';
 
-// Will display a card with any information relevent to an outfit such as name, image, etc. To Be Implemented
+// Will display a card with any information relevent to an outfit such as name, image, etc.
 
 class OutfitCard extends React.Component {
     renderEdit = () => {
-        console.log(this.props);
-        // console.log(this.props.location.pathname);
         this.props.location.pathname = `/Edit/${this.props.outfitId}`
         window.location = this.props.location.pathname;
     }
-
-    // console.log(props.location)
+    
     render() {
         return (
             <div className='container--card' key={this.props.key}>
