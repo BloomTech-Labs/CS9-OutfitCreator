@@ -17,7 +17,7 @@ class SignUp extends React.Component {
     signUp = () => {
         const { username, password } = this.state;
           
-        axios.post('http://localhost:5000/local-auth/signup', { username, password })
+        axios.post(`${ROOT_URL.API}/local-auth/signup`, { username, password })
             .then(res => {
               // Redirect to create page once logged in
             //   this.props.history.push(`/signin`);
