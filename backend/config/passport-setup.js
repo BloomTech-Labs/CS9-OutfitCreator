@@ -36,6 +36,7 @@ const localStrategy = new LocalStrategy(function(username, password, done) {
     return done(null, user);
   });
 });
+
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: secret
@@ -56,6 +57,7 @@ const jwtStrategy = new JwtStrategy(jwtOptions, (payload, done) => {
     done(err, false);
   })
 })
+
 passport.use(
   new GoogleStrategy(
     {
@@ -142,3 +144,27 @@ passport.use(
     }
   )
 );
+
+// passport global middleware
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+// passport local middleware
+const passportOptions = { session: false };
+const authenticate = passport.authenticate('local', passportOptions);
+const restricted = passport.authenticate('jwt', passportOptions);
+
+function makeToken(user) {
+  const timestamp = new Date().getTime();
+  const payload = {
+    sub: user._id,
+    iat: timestamp,
+    username: user.username
+  };
+  const options = {
+    expiresIn: '24h'
+  };
+  return jwt.sign(payload, secret, options);
+}
+
+module.exports = { authenticate, restricted, makeToken }
