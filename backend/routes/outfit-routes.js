@@ -50,4 +50,15 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+// Edit a specific outfit
+router.put("/:id", (req, res) => {
+  const {id} = req.params;
+  const { name, tags, top, bottom, shoes } = req.body;
+  Outfit.findByIdAndUpdate(id, {name, tags, top, bottom, shoes})
+    .then(res.status(200).json(`successfully updated outfit`))
+    .catch(err => {
+      res.send(500).json({error: err.message});
+    });
+});
+
 module.exports = router;
