@@ -40,7 +40,7 @@ const corsOptions = {
 // set up middlewares
 server.use(cors(corsOptions));
 server.use(helmet());
-server.use(express.urlencoded());
+server.use(express.urlencoded({ extended:false }));
 server.use(express.json());
 server.use(cors());
 
