@@ -4,7 +4,6 @@ import OutfitCard from './OutfitCard';
 import './Archive.css';
 
 const testUser = '5b745597a48cb52b0c1baedf';
-const ROOT_URL = process.env.NODE_ENV === 'production' ? 'https://lambda-outfit-creator-api.herokuapp.com/' : 'http://localhost:5000';
 
 class Archive extends React.Component {
     constructor(props) {
@@ -22,7 +21,7 @@ class Archive extends React.Component {
     }
 
     getOutfits = () => {
-        axios.get(`${ROOT_URL}/outfits/${testUser}/`)
+        axios.get(`${ROOT_URL.API}/outfits/${testUser}/`)
             .then(response => { 
                 this.setState({ myOutfits: response.data })
             })

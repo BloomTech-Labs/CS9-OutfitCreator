@@ -30,7 +30,7 @@ class Upload extends Component {
         // formData.image = this.state.image;
         // formData.imageName = 'image name';
         // console.log(formData);
-        axios.post('http://localhost:5000/items', {
+        axios.post(`${ROOT_URL.API}/items`, {
             // user: 'jekm321',
             name: 'jekms\'s test',
             image: this.state.image,
@@ -54,7 +54,7 @@ class Upload extends Component {
         e.preventDefault();
         const { name, image, tags, type } = this.state;
 
-        axios.post('https://lambda-outfit-creator-api.herokuapp.com/items', {
+        axios.post{`${ROOT_URL.API}/items`, {
             name, image, tags, type
         })
         .then(response => {

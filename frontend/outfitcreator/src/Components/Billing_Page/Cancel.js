@@ -12,7 +12,7 @@ class Cancel extends React.Component {
 
     cancel = () => {
         axios
-            .post(`${process.env.SERVER || 'http://localhost:5000'}/pay/cancel`, this.props.subscription)
+            .post(`${ROOT_URL.API}/pay/cancel`, this.props.subscription)
             .then(this.setState({canceled: true}))
             .catch(err => console.log(err))
     }
