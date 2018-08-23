@@ -7,10 +7,10 @@ router.post("/", (req, res) => {
   const { user, name, tags, worn, top, bottom, shoes } = req.body;
   Outfit.create({ user, name, tags, worn, top, bottom, shoes })
     .then(outfit => {
-      res.status(201).json(outfit);
+      res.sendStatus(201).json(outfit);
     })
     .catch(err => {
-      res.send(500).json({ error: err.message });
+      res.status(500).json({ error: err.message });
     });
 });
 
@@ -25,19 +25,20 @@ router.get("/:user", (req, res) => {
       res.status(200).json(outfits);
     })
     .catch(err => {
-      res.send({ error: err.message });
+      res.status(500).json({ error: err.message });
     });
 });
 
 // Get a specific outfit by ID
-router.get("/:id", (req, res) => {
+router.get("/:user/:id", (req, res) => {
   const id = req.params.id;
   Outfit.findById(id)
+    .populate()
     .then(outfit => {
       res.status(200).json(outfit);
     })
     .catch(err => {
-      res.send({ error: err.message });
+      res.status(500).json({ error: err.message });
     });
 });
 
@@ -46,7 +47,49 @@ router.delete("/:id", (req, res) => {
   Outfit.findByIdAndRemove(req.params.id)
     .then(res.status(200).json(`successfully deleted outfit ${req.params.id}`))
     .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+// Edit a specific outfit
+router.put("/:id", (req, res) => {
+  const {id} = req.params;
+  const { name, tags, top, bottom, shoes } = req.body;
+  Outfit.findByIdAndUpdate(id, {name, tags, top, bottom, shoes})
+    .then(res.status(200).json(`successfully updated outfit`))
+    .catch(err => {
+      res.send(500).json({error: err.message});
+    });
+});
+
+// Add an array of tags to a specific outfit
+router.post("/tags/:id", (req, res) => {
+  const { tags } = req.body;
+  const id = req.params.id;
+  Outfit.findById(id)
+    .then(outfit => {
+      outfit.tags = outfit.tags.concat(tags);
+      outfit.save();
+    })
+    .then(res.status(200).json("success!"))
+    .catch(err => {
       res.send(500).json({ error: err.message });
+    });
+});
+
+// Get all of a user's outfits with a certain tag
+router.get("/search/:user/:tag", (req, res) => {
+  const { tag, user } = req.params;
+  Outfit.find({
+    tags: tag,
+    user: user
+  })
+    .populate()
+    .then(outfits => {
+      res.status(200).json(outfits);
+    })
+    .catch(err => {
+      res.send({ error: err.message });
     });
 });
 

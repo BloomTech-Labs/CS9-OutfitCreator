@@ -16,6 +16,9 @@ const UserSchema = new mongoose.Schema({
         type: String,
         lowercase: true,
     },
+    phone: {
+        type: String,
+    },
     paid: {
         type: Boolean,
         required: true,

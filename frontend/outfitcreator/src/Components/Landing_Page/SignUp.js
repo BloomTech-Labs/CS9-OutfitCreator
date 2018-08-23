@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Button } from 'reactstrap';
+import { ROOT_URL } from '../../config';
 import './Modal.css'
 
 class SignUp extends React.Component {

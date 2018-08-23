@@ -19,7 +19,6 @@ router.get("/info/:id", restricted, (req, res) => {
 // Mark a user as subscribed
 router.post("/subscribe/:id", restricted, (req, res) => {
     const id = req.params.id;
-    console.log("Request body: ", req.body);
     User.findByIdAndUpdate(id, {
         paid: true,
         stripe_sub: req.body.stripe_sub,

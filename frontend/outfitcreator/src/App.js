@@ -11,6 +11,7 @@ import Upload from './Components/Upload_Page/Upload';
 import Archive from './Components/Archive_Page/Archive';
 import Settings from './Components/Settings_Page/Settings';
 import Billing from './Components/Billing_Page/Billing';
+import OutfitEdit from './Components/Archive_Page/OutfitEdit';
 import './App.css';
 
 library.add(faShareAlt);
@@ -66,6 +67,12 @@ class App extends Component {
             <div>
               <Billing />
               <Navigation token={this.state.token} user={this.state.user} />
+            </div>
+          } />
+          <Route path='/Edit' render={props =>
+            <div>
+              <OutfitEdit {...props} userID={this.userID}/>
+              <Navigation />
             </div>
           } />
         </Switch>
