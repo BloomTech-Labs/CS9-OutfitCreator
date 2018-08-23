@@ -73,7 +73,6 @@ router.get("/:user/:id", (req, res) => {
   const id = req.params.id;
   Item.findById(id)
     .then(item => {
-      console.log(item);
       res.status(200).json(item);
     })
     .catch(err => {
