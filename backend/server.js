@@ -10,7 +10,7 @@ require("dotenv").config();
 
 const cookieSession = require("cookie-session");
 const passport = require("passport");
-//const passportSetup = require("./config/passport-setup");
+const passportSetup = require("./config/passport-setup");
 
 const localAuthRoutes = require("./routes/local-auth-routes");
 const authRoutes = require("./routes/auth-routes");
