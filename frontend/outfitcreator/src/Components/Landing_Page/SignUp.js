@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Button } from 'reactstrap';
+import { ROOT_URL } from '../../config';
 import './Modal.css'
 
 class SignUp extends React.Component {
@@ -15,11 +16,10 @@ class SignUp extends React.Component {
 
     signUp = () => {
         const { username, password } = this.state;
-          
-        axios.post(`${process.env.SERVER || 'http://localhost:5000'}/user/signup`, { username, password })
+        axios.post(`${ROOT_URL.API}/signup`, { username, password })
             .then(res => {
               // Redirect to create page once logged in
-              window.location = 'http://localhost:3000/Create';
+              window.location = `${ROOT_URL.WEB}/Create`;
             })
             .catch(err => {
               // Alert message for failed user creation

@@ -3,7 +3,6 @@ import {CardElement, injectStripe} from 'react-stripe-elements';
 const axios = require("axios");
 require('dotenv').config();
 
-
 class PaymentForm extends Component {
     constructor(props) {
         super(props);
@@ -18,10 +17,8 @@ class PaymentForm extends Component {
             email: 'test@testemail.com'
         })
         .then(res => {
-            console.log(res.data);
             this.setState({complete: true});
-            //axios request to set user as subscribed and store customer/subscription IDs.
-            axios.post(`${process.env.SERVER || 'http://localhost:5000'}/user/subscribe/5b745597a48cb52b0c1baedf`, {
+            axios.post(`http://localhost:5000/user/subscribe/5b745597a48cb52b0c1baedf`, {
                 stripe_sub: res.data.stripe_sub,
                 stripe_cust: res.data.stripe_cust
             })
