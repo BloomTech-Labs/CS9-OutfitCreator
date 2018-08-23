@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { withRouter } from 'react-router';
 import axios from 'axios';
+import { ROOT_URL } from '../config';
 import './Navigation.css';
 
 class Navigation extends Component {
   signOut = () => {
-    axios.get('http://localhost:5000/local-auth/logout')
+    axios.get(`${ROOT_URL.API}/local-auth/logout`)
       .then(res => {
         console.log(res);
       })
