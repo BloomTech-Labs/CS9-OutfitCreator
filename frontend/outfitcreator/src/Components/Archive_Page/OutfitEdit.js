@@ -48,8 +48,8 @@ class OutfitEdit extends React.Component {
         return (
             outfit ? (
                 <div className='container--archive'>
-                    <div className='container--card' key={outfit.key}>
-                        <div className='card--header'>
+                    <div className='container--edit' key={outfit.key}>
+                        <div className='edit--header'>
                             <div className='header--title'>
                                 <input
                                     name='name'
@@ -59,14 +59,14 @@ class OutfitEdit extends React.Component {
                                 {outfit.name}
                             </div>
                         </div>
-                        <div className='card--images'>
+                        <div className='edit--images'>
                             {sources.map((item) => {
                                 if (item) {
                                     return <Imaging key={item} urlSrc={item} />
                                 } else return null;
                             })}
                         </div>
-                        <div className='card--footer'>
+                        <div className='edit--footer'>
                             <input
                                 name='lastWorn'
                                 value={this.state.lastWorn}

@@ -1,4 +1,4 @@
-.container--card {
+.container--edit {
     border: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -12,7 +12,7 @@
     padding: 10px;
 }
 
-.card--header {
+.edit--header {
     display: flex;
     justify-content: space-between;
     padding-bottom: 30px;
@@ -32,6 +32,6 @@
 
 
 
-.card--footer{
+.edit--footer{
     align-self: flex-start;
 }
