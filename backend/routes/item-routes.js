@@ -22,10 +22,10 @@ const storage = multer.diskStorage({
   }
 });
 
-const jekmsUpload = multer({ storage: storage });
+const upload = multer({ storage: storage });
 // const upload = multer({ dest: './uploads' });
 // Add a new item to the database
-router.post("/", jekmsUpload.single("image"), (req, res) => {
+router.post("/", upload.single("image"), (req, res) => {
   // console.log('req.body: ' + req.body);
   const { user, name, type, tags } = req.body;
   const { originalname } = req.file;
@@ -33,14 +33,11 @@ router.post("/", jekmsUpload.single("image"), (req, res) => {
   cloudinary.uploader.upload(`./uploads/${originalname}`, result => {
     fs.unlinkSync(`./uploads/${originalname}`);
     const { width, height, url } = result;
-    let cropWidth = width,
-      cropHeight = height;
+    let cropWidth = width, cropHeight = height;
     while (cropWidth >= 300 || cropHeight >= 200) {
       (cropWidth *= 0.9), (cropHeight *= 0.9);
     }
-    const crop = `/upload/w_${cropWidth.toFixed(0)},h_${cropHeight.toFixed(
-      0
-    )}/`;
+    const crop = `/upload/w_${cropWidth.toFixed(0)},h_${cropHeight.toFixed(0)}/`;
     const [partOne, partTwo] = url.split("/upload/");
     const image = partOne + crop + partTwo;
     Item.create({ user, name, image, type, tags })
@@ -48,7 +45,7 @@ router.post("/", jekmsUpload.single("image"), (req, res) => {
         res.status(201).json(item);
       })
       .catch(err => {
-      res.status(500).json({ error: err.message });
+        res.status(500).json({ error: err.message });
       });
   });
 });
@@ -62,6 +59,22 @@ router.get("/:user", (req, res) => {
     .populate()
     .then(items => {
       res.status(200).json(items);
+    })
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+// Get all items for a user filtered by a type
+router.get("/type/:user/:type", (req, res) => {
+  const { user, type } = req.params;
+  Item.find({
+    user
+  })
+    .populate()
+    .then(items => {
+      const filteredItems = items.filter( (item) => (item.type === type))
+      res.status(200).json(filteredItems);
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
@@ -116,22 +129,22 @@ router.post("/tags/:id", (req, res) => {
 });
 
 // Get items by type for a user
-router.get("/type/:user/:type", (req, res) => {
-  const { user, type } = req.params;
-  Item.find({
-    type,
-    user
-  })
-    .populate()
-    .then(items => {
-      res.status(200).json(items);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ message: "Items could not be retreived at this time." });
-    });
-});
+// router.get("/:user/:type", (req, res) => {
+//   const { user, type } = req.params;
+//   Item.find({
+//     type,
+//     user
+//   })
+//     .populate()
+//     .then(items => {
+//       res.status(200).json(items);
+//     })
+//     .catch(err => {
+//       res
+//         .status(500)
+//         .json({ message: "Items could not be retreived at this time." });
+//     });
+// });
 
 // Get all of a user's items with a certain tag
 router.get("/search/:user/:tag", (req, res) => {

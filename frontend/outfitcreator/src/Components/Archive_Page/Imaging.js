@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { ROOT_URL } from '../../config'; 
 
-const TESTUSER = '5b772cde26426245c86f0eea';
+const TESTUSER = '5b745597a48cb52b0c1baedf';
 
 class Imaging extends React.Component {
     constructor(props) {
