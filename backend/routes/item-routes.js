@@ -33,14 +33,11 @@ router.post("/", upload.single("image"), (req, res) => {
   cloudinary.uploader.upload(`./uploads/${originalname}`, result => {
     fs.unlinkSync(`./uploads/${originalname}`);
     const { width, height, url } = result;
-    let cropWidth = width,
-      cropHeight = height;
+    let cropWidth = width, cropHeight = height;
     while (cropWidth >= 300 || cropHeight >= 200) {
       (cropWidth *= 0.9), (cropHeight *= 0.9);
     }
-    const crop = `/upload/w_${cropWidth.toFixed(0)},h_${cropHeight.toFixed(
-      0
-    )}/`;
+    const crop = `/upload/w_${cropWidth.toFixed(0)},h_${cropHeight.toFixed(0)}/`;
     const [partOne, partTwo] = url.split("/upload/");
     const image = partOne + crop + partTwo;
     Item.create({ user, name, image, type, tags })
@@ -48,7 +45,7 @@ router.post("/", upload.single("image"), (req, res) => {
         res.status(201).json(item);
       })
       .catch(err => {
-      res.status(500).json({ error: err.message });
+        res.status(500).json({ error: err.message });
       });
   });
 });
