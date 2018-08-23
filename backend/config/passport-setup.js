@@ -1,4 +1,8 @@
+const jwt = require("jsonwebtoken");
 const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const JwtStrategy = require("passport-jwt").Strategy;
+const { ExtractJwt } = require("passport-jwt");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const GitHubStrategy = require("passport-github2").Strategy;
@@ -6,6 +10,8 @@ const GitHubStrategy = require("passport-github2").Strategy;
 require("dotenv").config();
 
 const Guser = require("../models/gusermodel");
+const User = require("../models/userModel");
+const secret = process.env.SECRET;
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
