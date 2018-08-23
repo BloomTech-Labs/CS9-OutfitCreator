@@ -110,7 +110,11 @@ server.post("/signup", (req, res) => {
 });
 
 //HTTPS: server start
-https.createServer(certification, server).listen(5000);
+// Catch-all error handler
+server.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).send({ err });
+})
 
 // Start the server
 server.listen(port, () => {
