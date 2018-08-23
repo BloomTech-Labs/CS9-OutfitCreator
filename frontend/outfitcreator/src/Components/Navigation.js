@@ -6,7 +6,7 @@ import './Navigation.css';
 
 class Navigation extends Component {
   signOut = () => {
-    axios.get('http://localhost:5000/local-auth/logout')
+    axios.get(`${process.env.SERVER || 'http://localhost:5000'}/local-auth/logout`)
       .then(res => {
         console.log(res);
       })
