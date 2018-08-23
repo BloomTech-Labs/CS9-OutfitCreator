@@ -116,7 +116,7 @@ router.post("/tags/:id", (req, res) => {
 });
 
 // Get items by type for a user
-router.get("/:user/:type", (req, res) => {
+router.get("/type/:user/:type", (req, res) => {
   const { user, type } = req.params;
   Item.find({
     type,
@@ -150,19 +150,3 @@ router.get("/search/:user/:tag", (req, res) => {
 });
 
 module.exports = router;
-
-// Get items by type
-// Should probably be deprecated, keeping the code just in case
-// router.get("/items/:type", (req, res) => {
-//     const { type } = req.params;
-//     Item.find({
-//       type
-//     })
-//       .populate()
-//       .then(items => {
-//         res.status(200).json(items);
-//       })
-//       .catch(err => {
-//         res.status(500).json({ message: 'Items could not be retreived at this time.' })
-//       });
-//   });
