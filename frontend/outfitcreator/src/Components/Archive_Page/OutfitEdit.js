@@ -13,7 +13,7 @@ class OutfitEdit extends React.Component {
         this.state = {
             outfit: '',
             name: '',
-            lastWorn: '',
+            worn: Date,
             top: '',
             bottom: '',
             shoes: ''
@@ -28,7 +28,9 @@ class OutfitEdit extends React.Component {
         const outfitId = this.props.location.pathname.split('Edit/')[1];
         axios.get(`${ROOT_URL}/outfits/${testUser}/${outfitId}`)
             .then(response => {
-                this.setState({ outfit: response.data, name: response.data.name, lastworn: response.data.worn })
+                const { data } = response;
+                const lastWorn = data.worn.split('T')[0];
+                this.setState({ outfit: data, name: data.name, worn: lastWorn })
             })
             .catch(err => {
                 console.log(err);
@@ -47,6 +49,25 @@ class OutfitEdit extends React.Component {
 
     handleInput = event => {
         this.setState({ [event.target.name]: event.target.value });
+    }
+
+    redirectArchive = () => {
+        this.props.location.pathname = '/Archive/';
+        window.location = this.props.location.pathname;
+    }
+
+    submitChanges = () => {
+        const outfitId = this.props.location.pathname.split('Edit/')[1];
+        const {name, worn} = this.state;
+        const newInfo = { name, worn};
+        axios.put(`${ROOT_URL}/outfits/${testUser}/${outfitId}`, newInfo)
+        .then(response => {
+            console.log(response);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+        this.redirectArchive();
     }
 
     render() {
@@ -98,17 +119,17 @@ class OutfitEdit extends React.Component {
                             </div>
                             <div className='edit--footer'>
                                 Worn on: <input
-                                    type='date'
-                                    name='lastWorn'
-                                    value={this.state.lastWorn}
+                                    type='text'
+                                    name='worn'
+                                    value={this.state.worn}
                                     onChange={this.handleInput}
                                     className='edit--input'
                                 />
                             </div>
                         </div>
                         <div className='edit--buttons'>
-                            <button className='edit--submit'>Submit</button>
-                            <button className='edit--cancel'>Cancel</button>
+                            <button className='edit--submit' onClick={this.submitChanges}>Submit</button>
+                            <button className='edit--cancel' onClick={this.redirectArchive}>Cancel</button>
                         </div>
                     </div>
                 </div>
