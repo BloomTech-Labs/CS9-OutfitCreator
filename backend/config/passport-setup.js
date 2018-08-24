@@ -86,64 +86,64 @@ passport.use(
   )
 );
 
-// passport.use(
-//   new FacebookStrategy(
-//     {
-//       callbackURL: "https://localhost:5000/auth/facebook/callback",
-//       clientID: process.env.FB_CLIENT_ID,
-//       clientSecret: process.env.FB_CLIENT_SECRET,
-//       profileFields: ["id", "displayName", "name", "gender", "photos", "email"]
-//     },
-//     (accessToken, refreshToken, profile, done) => {
-//       Guser.findOne({ "facebook.facebookId": profile.id }).then(currentUser => {
-//         if (currentUser) {
-//           done(null, currentUser);
-//         } else {
-//           new Guser({
-//             "facebook.facebookId": profile.id,
-//             "facebook.username": profile.displayName,
-//             "facebook.picture": profile._json.picture.data.url,
-//             "facebook.token": accessToken,
-//             "facebook.email": profile.emails[0].value
-//           })
-//             .save()
-//             .then(newUser => {
-//               done(null, newUser);
-//             });
-//         }
-//       });
-//     }
-//   )
-// );
+passport.use(
+  new FacebookStrategy(
+    {
+      callbackURL: "https://localhost:5000/auth/facebook/callback",
+      clientID: process.env.FB_CLIENT_ID,
+      clientSecret: process.env.FB_CLIENT_SECRET,
+      profileFields: ["id", "displayName", "name", "gender", "photos", "email"]
+    },
+    (accessToken, refreshToken, profile, done) => {
+      Guser.findOne({ "facebook.facebookId": profile.id }).then(currentUser => {
+        if (currentUser) {
+          done(null, currentUser);
+        } else {
+          new Guser({
+            "facebook.facebookId": profile.id,
+            "facebook.username": profile.displayName,
+            "facebook.picture": profile._json.picture.data.url,
+            "facebook.token": accessToken,
+            "facebook.email": profile.emails[0].value
+          })
+            .save()
+            .then(newUser => {
+              done(null, newUser);
+            });
+        }
+      });
+    }
+  )
+);
 
-// passport.use(
-//   new GitHubStrategy(
-//     {
-//       callbackURL: "/auth/github/callback",
-//       clientID: process.env.GH_CLIENT_ID,
-//       clientSecret: process.env.GH_CLIENT_SECRET,
-//       scope: "user"
-//     },
-//     (accessToken, refreshToken, profile, done) => {
-//       Guser.findOne({ "github.githubId": profile.id }).then(currentUser => {
-//         if (currentUser) {
-//           done(null, currentUser);
-//         } else {
-//           new Guser({
-//             "github.githubId": profile.id,
-//             "github.username": profile.username,
-//             "github.thumbnail": profile._json.avatar_url,
-//             "github.email": profile.emails[0].value
-//           })
-//             .save()
-//             .then(newUser => {
-//               done(null, newUser);
-//             });
-//         }
-//       });
-//     }
-//   )
-// );
+passport.use(
+  new GitHubStrategy(
+    {
+      callbackURL: "/auth/github/callback",
+      clientID: process.env.GH_CLIENT_ID,
+      clientSecret: process.env.GH_CLIENT_SECRET,
+      scope: "user"
+    },
+    (accessToken, refreshToken, profile, done) => {
+      Guser.findOne({ "github.githubId": profile.id }).then(currentUser => {
+        if (currentUser) {
+          done(null, currentUser);
+        } else {
+          new Guser({
+            "github.githubId": profile.id,
+            "github.username": profile.username,
+            "github.thumbnail": profile._json.avatar_url,
+            "github.email": profile.emails[0].value
+          })
+            .save()
+            .then(newUser => {
+              done(null, newUser);
+            });
+        }
+      });
+    }
+  )
+);
 
 // passport global middleware
 passport.use(localStrategy);
