@@ -71,7 +71,7 @@ class App extends Component {
           } />
           <Route path='/Edit' render={props =>
             <div>
-              <OutfitEdit {...props} userID={this.userID}/>
+              <OutfitEdit token={this.state.token} user={this.state.user}/>
               <Navigation />
             </div>
           } />
