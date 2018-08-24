@@ -129,6 +129,8 @@ router.post("/tags/:id", (req, res) => {
 });
 
 // Delete a specific tag from a specific item
+// This is not currently working -- needs troubleshooting
+// When it's working, add a similar route to Outfits
 router.post("/tags/delete/:id/:tag", (req, res) => {
   const { id, tag } = req.params;
   Item.findById(id)
