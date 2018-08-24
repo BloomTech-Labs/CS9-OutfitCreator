@@ -1,4 +1,5 @@
 import React from 'react';
+import {   CardImg   } from 'reactstrap';
 import axios from 'axios';
 
 const TESTUSER = '5b745597a48cb52b0c1baedf';
@@ -29,9 +30,11 @@ class Imaging extends React.Component {
     render() {
         return (
             this.state.image ? (
-                <div>
-                    <img src={this.state.image.image} alt={this.state.image.name} />
-                </div>
+                    <CardImg
+                        width="80%"
+                        src={this.state.image.image}
+                        alt="Card image cap"
+                    />
             ) : (
                     <div>
                         Loading

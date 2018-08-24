@@ -1,6 +1,6 @@
 import React from 'react';
+import { Card, CardText, CardImg, CardImgOverlay, CardDeck, Button, Input } from 'reactstrap';
 import axios from 'axios';
-import Imaging from './Imaging';
 import { withRouter } from 'react-router';
 import './OutfitEdit.css';
 
@@ -14,6 +14,9 @@ class OutfitEdit extends React.Component {
             outfit: '',
             name: '',
             lastWorn: '',
+            top: '',
+            bottom: '',
+            shoes: ''
         }
     }
 
@@ -32,48 +35,82 @@ class OutfitEdit extends React.Component {
             })
     }
 
+    populate = id => {
+        axios.get(`${ROOT_URL}/items/${testUser}/${id}`)
+            .then(response => {
+                this.setState({ [response.data.type]: response.data })
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
     handleInput = event => {
         this.setState({ [event.target.name]: event.target.value });
     }
 
     render() {
-        console.log(this.props)
-        const { outfit } = this.state;
+        const { outfit, top, bottom, shoes } = this.state;
         const sources = [];
         if (outfit) {
             sources.push(...outfit.top, ...outfit.bottom, outfit.shoes);
         }
-        console.log(sources)
-        console.log(this.props.name)
+        if (!top && !bottom && !shoes) {
+            sources.forEach((id) => this.populate(id));
+        }
+        console.log(this.state)
         return (
             outfit ? (
-                <div className='container--archive'>
-                    <div className='container--edit' key={outfit.key}>
+                <div className="createContainer">
+                    <CardDeck>
+                        <Card inverse>
+                            <CardImg
+                                width="80%"
+                                src={top.image}
+                                alt="Card image cap"
+                            />
+                        </Card>
+                        <Card inverse>
+                            <CardImg
+                                width="80%"
+                                src={bottom.image}
+                                alt="Card image cap"
+                            />
+                        </Card>
+                        <Card inverse>
+                            <CardImg
+                                width="80%"
+                                src={shoes.image}
+                                alt="Card image cap"
+                            />
+                        </Card>
+                    </CardDeck>
+                    <div className='container--editbox'>
                         <div className='edit--header'>
                             <div className='header--title'>
                                 Name: <input
+                                    type='text'
                                     name='name'
                                     value={this.state.name}
                                     onChange={this.handleInput}
+                                    className='edit--input'
+                                />
+                            </div>
+                            <div className='edit--footer'>
+                                Worn on: <input
+                                    type='date'
+                                    name='lastWorn'
+                                    value={this.state.lastWorn}
+                                    onChange={this.handleInput}
+                                    className='edit--input'
                                 />
                             </div>
                         </div>
-                        <div className='edit--images'>
-                            {sources.map((item) => {
-                                if (item) {
-                                    return <Imaging key={item} urlSrc={item} />
-                                } else return null;
-                            })}
-                        </div>
-                        <div className='edit--footer'>
-                            Worn on: <input
-                                name='lastWorn'
-                                value={this.state.lastWorn}
-                                onChange={this.handleInput}
-                            />
+                        <div className='edit--buttons'>
+                            <button className='edit--submit'>Submit</button>
+                            <button className='edit--cancel'>Cancel</button>
                         </div>
                     </div>
-                    <button className='edit--return'>Return</button>
                 </div>
             ) : (
                     <div className='container--archive'>

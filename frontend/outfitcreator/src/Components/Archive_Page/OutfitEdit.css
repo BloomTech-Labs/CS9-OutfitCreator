@@ -1,15 +1,26 @@
+.container--editbox {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.container--archive {
+    border: 1px solid blue;
+    display: flex;
+    flex-direction: column;
+
+}
+
 .container--edit {
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 1200px;
-    height: 1000px;
-    min-width: 800px;
-    min-height: 800px;
-    overflow-y: auto;
-    margin: 10px;
-    padding: 10px;
+    border: 1px solid black;
+    left: 10px;
+    max-width: 70vw;
+    margin-top: 4.5em;
+    width: 95%;
+    min-height: 700px;
+    margin-left: 1em;
 }
 
 .edit--header {
@@ -23,11 +34,31 @@
     background: transparent;
 }
 
-.edit--button {
-    border: none;
-    height: 25px;
-    width: 25px;
-    background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACkSURBVEhL7ZDNCQIxEEbTwipsMV60CgXtRBC3CMVutAr7cO+CvlkzEEIWIZnc8uCRn8P3JeManiO+cDedjDnjx/tG85IBtUBLtljM2q9CXCLjKkLHIqsSlpzkIpdw5qkSMZs4PFWSzVy4usFs/oVXGYvawpMWhQtLvGGVcKVH8/ADrn7biQ71JyYvv+CIYckCzcbyQHltXGLGE+94xb1cNCrj3Bd0W2O4MZVXCgAAAABJRU5ErkJggg==');
+.edit--images {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.edit--input {
+    border-radius: 5px;
+}
+
+.edit--buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit--submit, .edit--cancel {
+    border-radius: 5px;
+    width: 100px;
+    height: 50px;
+}
+
+.edit--submit:hover, .edit--cancel:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    animation-duration: .5s;
 }
 
 
