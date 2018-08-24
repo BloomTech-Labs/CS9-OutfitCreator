@@ -10,6 +10,7 @@
 .landingPage--modals {
     align-self: flex-end;
     display: flex;
+    margin-right: 50px;
 }
 
 .landingPage--carousel {
