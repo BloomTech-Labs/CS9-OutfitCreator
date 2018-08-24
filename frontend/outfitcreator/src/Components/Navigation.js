@@ -9,7 +9,8 @@ class Navigation extends Component {
   signOut = () => {
     axios.get(`${ROOT_URL.API}/local-auth/logout`)
       .then(res => {
-        console.log(res);
+        localStorage.removeItem('authToken');
+        window.location.reload();
       })
       .catch(err => {
         console.log(err);
