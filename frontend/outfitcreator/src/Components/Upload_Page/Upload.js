@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { CardImg, Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import { ROOT_URL } from '../../config'; 
 import TagSearch from './TagSearch';
 import './Upload.css';
 
@@ -30,7 +31,7 @@ class Upload extends Component {
         // formData.image = this.state.image;
         // formData.imageName = 'image name';
         // console.log(formData);
-        axios.post(`${process.env.SERVER || 'http://localhost:5000'}/items`, {
+        axios.post(`${ROOT_URL.API}/items`, {
             // user: 'jekm321',
             name: 'jekms\'s test',
             image: this.state.image,
@@ -54,7 +55,7 @@ class Upload extends Component {
         e.preventDefault();
         const { name, image, tags, type } = this.state;
 
-        axios.post(`${process.env.SERVER || 'http://localhost:5000'}/items`, {
+        axios.post(`${ROOT_URL.API}/items`, {
             name, image, tags, type
         })
         .then(response => {

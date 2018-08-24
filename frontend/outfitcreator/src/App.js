@@ -11,20 +11,26 @@ import Upload from './Components/Upload_Page/Upload';
 import Archive from './Components/Archive_Page/Archive';
 import Settings from './Components/Settings_Page/Settings';
 import Billing from './Components/Billing_Page/Billing';
+import OutfitEdit from './Components/Archive_Page/OutfitEdit';
 import './App.css';
 
 library.add(faShareAlt);
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      userID: null,
-    }
+  state = {
+    user: null,
+    token: null
   }
 
-  updateUserID = (ID) => {
-    this.setState({userID: ID});
+  signInSuccess = (data) => {
+    this.setState({ user: data.user});
+    localStorage.setItem('authToken', `Bearer ${data.token}`);
+    this.updateToken();
+  }
+
+  updateToken = () => {
+    const token = localStorage.getItem('authToken');
+    this.setState({ token })
   }
 
   render() {
@@ -32,38 +38,40 @@ class App extends Component {
       <div className="App">
 
         <Switch>
-          <Route exact path='/' render={props =>
-            <div>
-              <Landing {...props} userID={this.userID} login={this.updateUserID}/>
-            </div>
-          } />
+          <Route exact path='/' render={props => <Landing {...props} onSignin={this.signInSuccess} />} />
           <Route path='/Create' render={props =>
             <div className='App--create'>
-              <Create {...props} userID={this.userID}/>
-              <Navigation />
+              <Create {...props} />
+              <Navigation token={this.state.token} user={this.state.user} />
             </div>
           } />
           <Route path='/Archive' render={props =>
             <div>
-              <Archive {...props} userID={this.userID}/>
-              <Navigation />
+              <Archive />
+              <Navigation token={this.state.token} user={this.state.user} />
             </div>
           } />
           <Route path='/Settings' render={props =>
             <div>
-              <Settings {...props} userID={this.userID}/>
-              <Navigation />
+              <Settings />
+              <Navigation token={this.state.token} user={this.state.user} />
             </div>
           } />
           <Route path='/Upload' render={props =>
             <div>
-              <Upload {...props} userID={this.userID}/>
-              <Navigation />
+              <Upload />
+              <Navigation token={this.state.token} user={this.state.user} />
             </div>
           } />
           <Route path='/Billing' render={props =>
             <div>
-              <Billing {...props} userID={this.userID}/>
+              <Billing />
+              <Navigation token={this.state.token} user={this.state.user} />
+            </div>
+          } />
+          <Route path='/Edit' render={props =>
+            <div>
+              <OutfitEdit {...props} userID={this.userID}/>
               <Navigation />
             </div>
           } />

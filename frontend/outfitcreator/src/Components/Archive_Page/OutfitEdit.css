@@ -1,0 +1,23 @@
+.container--edit {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 1200px;
+    height: 1000px;
+    min-width: 800px;
+    min-height: 800px;
+    overflow-y: auto;
+    margin: 10px;
+    padding: 10px;
+}
+
+.edit--header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 30px;
+}
+
+.edit--footer{
+    align-self: flex-start;
+}
