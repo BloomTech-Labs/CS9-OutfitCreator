@@ -1,9 +1,11 @@
-const Outfit = require("../models/outfitModel");
-
 const router = require("express").Router();
 
+const { restricted } = require("../config/passport-setup");
+const Outfit = require("../models/outfitModel");
+
+
 // Add a new outfit to the database
-router.post("/", (req, res) => {
+router.post("/", restricted, (req, res) => {
   const { user, name, tags, worn, top, bottom, shoes } = req.body;
   Outfit.create({ user, name, tags, worn, top, bottom, shoes })
     .then(outfit => {
@@ -15,7 +17,7 @@ router.post("/", (req, res) => {
 });
 
 // Get all outfits for a user
-router.get("/:user", (req, res) => {
+router.get("/:user", restricted, (req, res) => {
   const user = req.params.user;
   Outfit.find({
     user
@@ -30,7 +32,7 @@ router.get("/:user", (req, res) => {
 });
 
 // Get a specific outfit by ID
-router.get("/:user/:id", (req, res) => {
+router.get("/:user/:id", restricted, (req, res) => {
   const id = req.params.id;
   Outfit.findById(id)
     .populate()
@@ -43,7 +45,7 @@ router.get("/:user/:id", (req, res) => {
 });
 
 // Delete a specific outfit
-router.delete("/:id", (req, res) => {
+router.delete("/:id", restricted, (req, res) => {
   Outfit.findByIdAndRemove(req.params.id)
     .then(res.status(200).json(`successfully deleted outfit ${req.params.id}`))
     .catch(err => {
@@ -52,7 +54,7 @@ router.delete("/:id", (req, res) => {
 });
 
 // Edit a specific outfit
-router.put("/:id", (req, res) => {
+router.put("/:id", restricted, (req, res) => {
   const {id} = req.params;
   const { name, tags, top, bottom, shoes } = req.body;
   Outfit.findByIdAndUpdate(id, {name, tags, top, bottom, shoes})
@@ -63,7 +65,7 @@ router.put("/:id", (req, res) => {
 });
 
 // Add an array of tags to a specific outfit
-router.post("/tags/:id", (req, res) => {
+router.post("/tags/:id", restricted, (req, res) => {
   const { tags } = req.body;
   const id = req.params.id;
   Outfit.findById(id)
@@ -78,7 +80,7 @@ router.post("/tags/:id", (req, res) => {
 });
 
 // Get all of a user's outfits with a certain tag
-router.get("/search/:user/:tag", (req, res) => {
+router.get("/search/:user/:tag", restricted, (req, res) => {
   const { tag, user } = req.params;
   Outfit.find({
     tags: tag,
