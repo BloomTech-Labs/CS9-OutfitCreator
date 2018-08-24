@@ -152,3 +152,6 @@ This request should have the following format:
 ```
 ## /Outfits/Search/:User/:Tag
 GET - Get outfits by Tag for a specific User. Returns an array of Item objects.
+## /Outfits/Wear/:ID
+POST - Mark an outfit as worn on a specific date.
+The body for this request should contain a date-format string.
