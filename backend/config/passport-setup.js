@@ -11,7 +11,7 @@ require("dotenv").config();
 
 const Guser = require("../models/gusermodel");
 const User = require("../models/userModel");
-const secret = process.env.SECRET;
+const secret = process.env.SECRET || "SECRET!";
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
