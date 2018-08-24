@@ -42,6 +42,20 @@ router.get("/:user/:id", (req, res) => {
     });
 });
 
+// Update an outfit by id
+router.put('/:user/:id', (req, res) => {
+  const id = req.params.id;
+  const newInfo = req.body;
+  Outfit.findByIdAndUpdate(id, newInfo)
+  .then(outfit => {
+    console.log(outfit)
+    res.status(200).json(outfit);
+  })
+  .catch(err => {
+    res.status(500).json({ error: err});
+  });
+});
+
 // Delete a specific outfit
 router.delete("/:id", (req, res) => {
   Outfit.findByIdAndRemove(req.params.id)
