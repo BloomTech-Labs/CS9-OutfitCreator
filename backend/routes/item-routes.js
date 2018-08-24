@@ -115,6 +115,27 @@ router.post("/tags/:id", (req, res) => {
     });
 });
 
+// Delete a specific tag from a specific item
+router.post("/tags/delete/:id/:tag", (req, res) => {
+  const { id, tag } = req.params;
+  Item.findById(id)
+    .then(item => {
+      console.log(item.tags);
+      console.log(item.tags.indexOf(tag));
+      if (item.tags.indexOf(tag) != -1){
+      let tags = item.tags.splice((item.tags.indexOf(tag)), 1, 'test');
+      console.log(tags);
+      item.tags = tags;
+      };
+      console.log(item);
+      item.save();
+    })
+    .then(res.status(200).json("success!"))
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 // Get items by type for a user
 router.get("/type/:user/:type", (req, res) => {
   const { user, type } = req.params;
