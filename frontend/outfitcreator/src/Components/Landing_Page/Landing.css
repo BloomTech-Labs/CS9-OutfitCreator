@@ -1,21 +1,21 @@
 .container--landingPage {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-content: center;
     width: 1200px;
-    height: 800px;
+    height: 1500px;
+    min-width: 500px;
+    margin-top: 20px;
 }
 
 .landingPage--modals {
     align-self: flex-end;
     display: flex;
     margin-right: 50px;
+    margin-bottom: 50px;
 }
 
-.landingPage--carousel {
-    align-self: center;
-    width: 67%;
+.description--opening {
+  margin-top: 20px;
 }
 
 .landingPage--description {
@@ -26,11 +26,6 @@
     align-content: center;
     height: 18.75%;
     margin: 20px 0;
-}
-
-.description--opening {
-    align-self: flex-start;
-    margin-left: 15px;
 }
 
 .description--list {

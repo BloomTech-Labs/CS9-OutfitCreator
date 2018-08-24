@@ -87,19 +87,7 @@ class Landing extends Component {
                     <Route exact path='/signin' render={props => <SignIn {...props} onSignin={this.props.onSignin} />} />
                     <SignIn onSignin={this.props.onSignin} />
                 </div>
-                <p>Outfit Maker</p>
-                <div className='landingPage--carousel'>
-                    <Carousel
-                        activeIndex={activeIndex}
-                        next={this.next}
-                        previous={this.previous}
-                    >
-                        <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
-                        {slides}
-                        <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-                        <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
-                    </Carousel>
-                </div>
+           
                 {/* <div className='landingPage--animations'>
                     <div className='animation--top'>
                     <img src='https://res.cloudinary.com/cloudtesting/image/upload/w_300,h_400/v1534808124/icons8-t-shirt-480.png' alt='top' className='animation--top' />
@@ -118,6 +106,7 @@ class Landing extends Component {
                     </div>
                 </div> */}
                 <div className='landingPage--description'>
+                    <h1>Outfit Maker</h1>
                     <div className='description--opening'>The easy way to:</div>
                     <ul className='description--list'>
                         <li className='list--item'>
