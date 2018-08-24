@@ -32,9 +32,12 @@ const itemRoutes = require("./routes/item-routes");
 
 // set up server
 const server = express();
+const originUrl = process.env.NODE_ENV === 'production' ? `https://lambda-outfit-creator.herokuapp.com` : `http://localhost:3000`
 const corsOptions = {
-  origin: "*",
-  credentials: true
+  origin: (originUrl),
+  credentials: true,
+  methods: ['GET', 'PUT', 'POST', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 // set up middlewares
@@ -42,7 +45,6 @@ server.use(cors(corsOptions));
 server.use(helmet());
 server.use(express.urlencoded({ extended:false }));
 server.use(express.json());
-// server.use(cors());
 
 // //set up cookie-session
 // server.use(
