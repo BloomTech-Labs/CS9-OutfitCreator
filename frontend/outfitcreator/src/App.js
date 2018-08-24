@@ -17,9 +17,14 @@ import './App.css';
 library.add(faShareAlt);
 
 class App extends Component {
-  state = {
-    user: null,
-    token: null
+  getUserID() {
+    const token = localStorage.getItem('authToken');
+
+    if (token) {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace('-', '+').replace('_', '/');
+      return JSON.parse(window.atob(base64)).sub;
+    }
   }
 
   signInSuccess = (data) => {
