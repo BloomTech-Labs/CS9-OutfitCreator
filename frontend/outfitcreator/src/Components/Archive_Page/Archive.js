@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import OutfitCard from './OutfitCard';
+import { ROOT_URL } from '../../config'; 
 import './Archive.css';
 
-const testUser = '5b772cde26426245c86f0eea';
+const testUser = '5b745597a48cb52b0c1baedf';
 
 class Archive extends React.Component {
     constructor(props) {
@@ -11,118 +12,6 @@ class Archive extends React.Component {
         this.state = {
             search: '',
             searching: false,
-            outfits: [{
-                id: 0,
-                name: 'Evening Gown',
-                tags: ['Hot', 'expensive', 'red', 'silk', 'night wear', 'cloth'],
-                image: 'blank for now sorry',
-                date: '08/15/2018'
-            },
-            {
-                id: 1,
-                name: 'day suit',
-                tags: ['Hot', 'blue', 'cheap', 'cloth'],
-                image: 'blank for now sorry',
-                date: '08/15/2018'
-            },
-            {
-                id: 2,
-                name: 'night Gown',
-                tags: ['expensive', 'purple', 'silk'],
-                image: 'blank for now sorry',
-                date: '08/15/2018'
-            },
-            {
-                id: 3,
-                name: 'ski gear',
-                tags: ['sexy', 'red', 'polyester'],
-                image: 'blank for now sorry',
-                date: '08/15/2018'
-            },
-            {
-                id: 4,
-                name: 'Evening Gown',
-                tags: ['Hot', 'expensive', 'red', 'silk', 'night wear', 'cloth'],
-                image: 'blank for now sorry',
-                date: '08/15/2018'
-            },
-            {
-                id: 5,
-                name: 'day suit',
-                tags: ['Hot', 'blue', 'cheap', 'cloth'],
-                image: 'blank for now sorry',
-                date: '08/15/2018'
-            },
-            {
-                id: 6,
-                name: 'night Gown',
-                tags: ['expensive', 'purple', 'silk'],
-                image: 'blank for now sorry',
-                date: '08/15/2018'
-            },
-            {
-                id: 7,
-                name: 'ski gear',
-                tags: ['sexy', 'red', 'polyester'],
-                image: 'blank for now sorry',
-                date: '08/15/2018'
-            },
-            {
-                id: 8,
-                name: 'Evening Gown',
-                tags: ['Hot', 'expensive', 'red', 'silk', 'night wear', 'cloth'],
-                image: 'blank for now sorry',
-                date: '08/15/2018'
-            },
-            {
-                id: 9,
-                name: 'day suit',
-                tags: ['Hot', 'blue', 'cheap', 'cloth'],
-                image: 'blank for now sorry',
-                date: '08/15/2018'
-            },
-            {
-                id: 10,
-                name: 'night Gown',
-                tags: ['expensive', 'purple', 'silk'],
-                image: 'blank for now sorry',
-                date: '08/15/2018'
-            },
-            {
-                id: 11,
-                name: 'ski gear',
-                tags: ['sexy', 'red', 'polyester'],
-                image: 'blank for now sorry',
-                date: '08/15/2018'
-            },
-            {
-                id: 12,
-                name: 'Evening Gown',
-                tags: ['Hot', 'expensive', 'red', 'silk', 'night wear', 'cloth'],
-                image: 'blank for now sorry',
-                date: '08/15/2018'
-            },
-            {
-                id: 13,
-                name: 'day suit',
-                tags: ['Hot', 'blue', 'cheap', 'cloth'],
-                image: 'blank for now sorry',
-                date: '08/15/2018'
-            },
-            {
-                id: 14,
-                name: 'night Gown',
-                tags: ['expensive', 'purple', 'silk'],
-                image: 'blank for now sorry',
-                date: '08/15/2018'
-            },
-            {
-                id: 15,
-                name: 'ski gear',
-                tags: ['sexy', 'red', 'polyester'],
-                image: 'blank for now sorry',
-                date: '08/15/2018'
-            }],
             searchedOutfits: [],
             myOutfits: []
         };
@@ -133,14 +22,15 @@ class Archive extends React.Component {
     }
 
     getOutfits = () => {
-        axios.get(`http://localhost:5000/outfits/${testUser}`)
-            .then(response => {
+        axios.get(`${ROOT_URL.API}/outfits/${testUser}/`)
+            .then(response => { 
+
                 this.setState({ myOutfits: response.data })
             })
             .catch(err => {
                 console.log(err);
             });
-        console.log(this.state)
+        // console.log(this.state)
     }
 
     filter = () => {
@@ -160,6 +50,8 @@ class Archive extends React.Component {
                     ))) {
                     count++;
                 }
+                //this is what makes it return false when something doesnt match
+                //allowing for exact match filtering
                 else break;
             }
             if (count === searchWords.length) return true;
@@ -189,15 +81,18 @@ class Archive extends React.Component {
                         onKeyUp={this.filter}
                     />
                 </div>
+                {/* ternary to check if outfits loaded correctly*/}
                 {this.state.myOutfits ?
-                    this.state.searching ? (
+                    // ternary to check if filter is being run or not
+                    (this.state.searching ? (
                         < div className='archive--collection'>
                             {this.state.searchedOutfits.map((outfit) => (
                                 <OutfitCard
                                     key={outfit._id}
+                                    outfitId={outfit._id}
                                     name={outfit.name}
-                                    src={outfit.image}
-                                    lastWorn={outfit.date}
+                                    src={[...outfit.top, ...outfit.bottom, outfit.shoes]}
+                                    lastWorn={outfit.worn}
                                 />
                             ))}
                         </div>
@@ -206,25 +101,20 @@ class Archive extends React.Component {
                                 {this.state.myOutfits.map((outfit) => (
                                     <OutfitCard
                                         key={outfit._id}
+                                        outfitId={outfit._id}
                                         name={outfit.name}
-                                        src={outfit.image}
-                                        lastWorn={outfit.date}
+                                        src={[...outfit.top, ...outfit.bottom, outfit.shoes]}
+                                        lastWorn={outfit.worn}
                                     />
                                 ))}
                             </div>
-                        )
+                        ))
+                        //end of the inner ternary for the filter check
                     :
                     <div className='archive--collection'>
-                        {this.state.outfits.map((outfit) => (
-                            <OutfitCard
-                                key={outfit.id}
-                                name={outfit.name}
-                                src={outfit.image}
-                                lastWorn={outfit.date}
-                            />
-                        ))}
+                        Error Loading Collection
                     </div>
-                }
+                } {/*end of the outer ternary to check if outfits loaded correctly*/}
             </div>
         );
     }

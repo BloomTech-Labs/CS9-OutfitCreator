@@ -1,6 +1,7 @@
 import './billing.css';
 import React from 'react';
 import axios from 'axios';
+import { ROOT_URL } from '../../config'; 
 require('dotenv').config();
 
 
@@ -12,7 +13,7 @@ class Cancel extends React.Component {
 
     cancel = () => {
         axios
-            .post(`${process.env.SERVER || 'http://localhost:5000'}/pay/cancel`, this.props.subscription)
+            .post(`${ROOT_URL.API}/pay/cancel`, this.props.subscription)
             .then(this.setState({canceled: true}))
             .catch(err => console.log(err))
     }
@@ -20,6 +21,7 @@ class Cancel extends React.Component {
         if (this.state.canceled) return (<h1>Canceled Successfully!</h1>)
         return (
             <div>
+                <h1>We're sorry to see you go!</h1>
                 <button className="button" onClick={this.cancel}>Cancel My Subscription</button>
             </div>
         );
