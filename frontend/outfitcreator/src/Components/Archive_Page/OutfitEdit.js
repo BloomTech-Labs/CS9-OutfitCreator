@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardText, CardImg, CardImgOverlay, CardDeck, Button, Input } from 'reactstrap';
+import { Card,  CardImg,  CardDeck } from 'reactstrap';
 import axios from 'axios';
 import { withRouter } from 'react-router';
 import './OutfitEdit.css';

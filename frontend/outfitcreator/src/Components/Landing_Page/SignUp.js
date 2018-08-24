@@ -17,10 +17,12 @@ class SignUp extends React.Component {
     signUp = () => {
         const { username, password } = this.state;
           
-        axios.post(`${ROOT_URL.API}/signup`, { username, password })
+        axios.post(`${ROOT_URL.API}/local-auth/signup`, { username, password })
             .then(res => {
               // Redirect to create page once logged in
-              window.location = `${ROOT_URL.WEB}/Create`;
+            //   this.props.history.push(`/signin`);
+                console.log("Successfully signed up");
+                // window.location = 'http://localhost:3000/Create';
             })
             .catch(err => {
               // Alert message for failed user creation

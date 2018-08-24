@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import OutfitCard from './OutfitCard';
+import { ROOT_URL } from '../../config'; 
 import './Archive.css';
 
 const testUser = '5b745597a48cb52b0c1baedf';
-const ROOT_URL = process.env.NODE_ENV === 'production' ? 'https://lambda-outfit-creator-api.herokuapp.com/' : 'http://localhost:5000';
 
 class Archive extends React.Component {
     constructor(props) {
@@ -22,14 +22,14 @@ class Archive extends React.Component {
     }
 
     getOutfits = () => {
-        axios.get(`${ROOT_URL}/outfits/${testUser}/`)
-            .then(response => {
+        axios.get(`${ROOT_URL.API}/outfits/${testUser}/`)
+            .then(response => { 
+
                 this.setState({ myOutfits: response.data })
             })
             .catch(err => {
                 console.log(err);
             });
-        // console.log(this.state)
     }
 
     filter = () => {
@@ -67,6 +67,8 @@ class Archive extends React.Component {
     }
 
     render() {
+        console.log(this.state)
+        console.log(this.props)
         return (
             <div className='container--archive'>
                 <div className='archive--search'>

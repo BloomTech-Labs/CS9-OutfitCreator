@@ -8,9 +8,9 @@ const User = require("./models/userModel");
 
 require("dotenv").config();
 
-const cookieSession = require("cookie-session");
+// const cookieSession = require("cookie-session");
 const passport = require("passport");
-//const passportSetup = require("./config/passport-setup");
+// const passportSetup = require("./config/passport-setup");
 
 const localAuthRoutes = require("./routes/local-auth-routes");
 const authRoutes = require("./routes/auth-routes");
@@ -42,15 +42,15 @@ server.use(cors(corsOptions));
 server.use(helmet());
 server.use(express.urlencoded({ extended:false }));
 server.use(express.json());
-server.use(cors());
+// server.use(cors());
 
-//set up cookie-session
-server.use(
-  cookieSession({
-    maxAge: 24 * 60 * 60 * 1000,
-    keys: [process.env.COOKIE_KEY]
-  })
-);
+// //set up cookie-session
+// server.use(
+//   cookieSession({
+//     maxAge: 24 * 60 * 60 * 1000,
+//     keys: [process.env.COOKIE_KEY]
+//   })
+// );
 
 // const upload = multer({
 //   dest: './uploads/',
@@ -60,19 +60,19 @@ server.use(
 // });
 
 // set up passport. Initialize
-server.use(passport.initialize());
-server.use(passport.session());
+// server.use(passport.initialize());
+// server.use(passport.session());
 
 // Allow passport to utilize sessions
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
+// passport.serializeUser((user, done) => {
+//   done(null, user.id);
+// });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
-});
+// passport.deserializeUser((id, done) => {
+//   User.findById(id, (err, user) => {
+//     done(err, user);
+//   });
+// });
 
 mongoose
   .connect(
@@ -99,20 +99,27 @@ server.use("/items", itemRoutes);
 server.use("/outfits", outfitRoutes);
 
 // Add a new user to the database
-server.post("/signup", (req, res) => {
-  const { username, password, email } = req.body;
-  User.create({ username, password, email })
-    .then(user => {
-      passport.authenticate('local', { successRedirect: '/' });
-      res.status(201).json(user);
-    })
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    })
-});
+// QUESTION: Is this being used anywhere??
+// server.post("/signup", (req, res) => {
+//   const { username, password, email } = req.body;
+//   User.create({ username, password, email })
+//     .then(user => {
+//       passport.authenticate('local', { successRedirect: '/' });
+//       res.status(201).json(user);
+//     })
+//     .catch(err => {
+//       res.status(500).json({ error: err.message });
+//     })
+// });
 
-// //HTTPS: server start
+//HTTPS: server start
 // https.createServer(certification, server).listen(5000);
+
+// Catch-all error handler
+server.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).send({ err });
+})
 
 // Start the server
 server.listen(port, () => {
