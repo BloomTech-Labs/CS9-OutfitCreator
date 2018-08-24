@@ -26,21 +26,29 @@ class Create extends Component {
     }
 
     componentDidMount() {
-        axios.all([ 
-            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/top`),
-            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/bottom`),
-            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/shoes`),
-            axios.get(`${ROOT_URL.API}/items/type/${testUserId}/top`),
-            axios.get(`${ROOT_URL.API}/items/type/${testUserId}/bottom`),
-            axios.get(`${ROOT_URL.API}/items/type/${testUserId}/shoes`),
-        ])
-        .then(res => {
-            this.setState({ allTops: res[0].data, allBottoms: res[1].data, allShoes: res[2].data, user: testUserId });
-            this.randomize();
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        const authToken = localStorage.getItem('authToken');
+        const requestOptions = {
+            headers: {
+                Authorization: authToken
+            }
+        }
+        if(authToken) {
+            axios.all([ 
+                axios.get(`${ROOT_URL.API}/items/type/${testUserId}/top`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/type/${testUserId}/bottom`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/type/${testUserId}/shoes`, requestOptions),
+            ])
+            .then(res => {
+                this.setState({ allTops: res[0].data, allBottoms: res[1].data, allShoes: res[2].data, user: testUserId });
+                this.randomize();
+            })
+            .catch(err => {
+                console.log(err);
+                this.props.history.push('/');
+            })
+        } else {
+            this.props.history.push('/');
+        }
     }
 
     // method to retrieve random items of all types
