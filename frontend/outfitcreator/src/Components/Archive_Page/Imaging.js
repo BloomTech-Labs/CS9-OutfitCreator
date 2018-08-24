@@ -5,6 +5,7 @@ import axios from 'axios';
 const TESTUSER = '5b745597a48cb52b0c1baedf';
 const ROOT_URL = process.env.NODE_ENV === 'production' ? 'https://lambda-outfit-creator-api.herokuapp.com/' : 'http://localhost:5000';
 
+
 class Imaging extends React.Component {
     constructor(props) {
         super(props);
@@ -30,7 +31,7 @@ class Imaging extends React.Component {
     render() {
         return (
             this.state.image ? (
-                    <CardImg
+                    <img
                         width="80%"
                         src={this.state.image.image}
                         alt="Card image cap"

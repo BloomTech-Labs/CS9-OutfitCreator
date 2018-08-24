@@ -3,11 +3,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-width: 600px;
-    max-height: 250px;
+    max-width: 400px;
+    max-height: 300px;
     min-width: 400px;
     min-height: 300px;
     overflow-y: auto;
+    overflow-x: hidden;
     margin: 10px;
     padding: 10px;
 }
@@ -16,6 +17,17 @@
     display: flex;
     justify-content: space-between;
     padding-bottom: 30px;
+}
+
+.card--images {
+    display: flex;
+}
+
+.card--images img {
+    width: 125px;
+    object-fit: contain;
+    /* height: 33%;
+    width: 33%; */
 }
 
 .header--edit{
