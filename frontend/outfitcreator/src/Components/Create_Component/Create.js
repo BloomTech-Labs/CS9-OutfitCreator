@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import './Create.css';
 
-const testUserId = '5b761531cdcd6d00043d420e';
+// const testUserId = '5b761531cdcd6d00043d420e';
 
 class Create extends Component {
     constructor(props) {
@@ -26,30 +26,51 @@ class Create extends Component {
     }
 
     componentDidMount() {
-        axios.all([ 
-            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/top`),
-            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/bottom`),
-            // axios.get(`https://lambda-outfit-creator-api.herokuapp.com/${testUserId}/items/shoes`),
-            axios.get(`${ROOT_URL.API}/items/type/${testUserId}/top`),
-            axios.get(`${ROOT_URL.API}/items/type/${testUserId}/bottom`),
-            axios.get(`${ROOT_URL.API}/items/type/${testUserId}/shoes`),
-        ])
-        .then(res => {
-            this.setState({ allTops: res[0].data, allBottoms: res[1].data, allShoes: res[2].data, user: testUserId });
-            this.randomize();
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        const user = this.props.getUserID();
+        const authToken = localStorage.getItem('authToken');
+        const requestOptions = {
+            headers: {
+                Authorization: authToken
+            }
+        }
+        if(authToken) {
+            axios.all([ 
+                axios.get(`${ROOT_URL.API}/items/type/${user}/top`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`, requestOptions),
+            ])
+            .then(res => {
+                this.setState({ allTops: res[0].data, allBottoms: res[1].data, allShoes: res[2].data, user });
+                this.randomize();
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        } else {
+            this.props.history.push('/');
+        }
     }
 
     // method to retrieve random items of all types
     randomize = () => {
         const { allTops, allBottoms, allShoes } = this.state;
-        const selectedTop = allTops[Math.floor(Math.random() * allTops.length)];
-        const selectedBottom = allBottoms[Math.floor(Math.random() * allBottoms.length)];
-        const selectedShoe = allShoes[Math.floor(Math.random() * allShoes.length)];
-        const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
+        let selectedTop, selectedBottom, selectedShoe;
+        let selectedTopTags = [];
+        let selectedBottomTags = [];
+        let selectedShoeTags = [];
+        if(allTops.length > 0) {
+            selectedTop = allTops[Math.floor(Math.random() * allTops.length)];
+            selectedTopTags = selectedTop.tags;
+        }
+        if(allBottoms.length > 0) {
+            selectedBottom = allBottoms[Math.floor(Math.random() * allBottoms.length)];
+            selectedBottomTags = selectedBottom.tags;
+        }
+        if(allShoes.length > 0) {
+            selectedShoe = allShoes[Math.floor(Math.random() * allShoes.length)];
+            selectedShoeTags = selectedShoe.tags;
+        }
+        const tags = [...new Set([...selectedTopTags, ...selectedBottomTags, ...selectedShoeTags])]
         this.setState({ selectedTop, selectedBottom, selectedShoe, tags });
     }
 
@@ -100,13 +121,23 @@ class Create extends Component {
 
     render() {
         const { selectedTop, selectedBottom, selectedShoe } = this.state;
+        let topImage, bottomImage, shoeImage;
+        if(!selectedTop) {
+            topImage = `https://picsum.photos/g/200/300?image=951`
+        }
+        if(!selectedBottom) {
+            bottomImage = `https://picsum.photos/g/200/300?image=951`
+        }
+        if(!selectedShoe) {
+            shoeImage = `https://picsum.photos/g/200/300?image=951`
+        }
         return (
             <div className="createContainer">
                 <CardDeck>
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src={selectedTop.image}
+                            src={topImage}
                             alt="Card image cap"
                         />
                         <CardImgOverlay>
@@ -121,7 +152,7 @@ class Create extends Component {
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src={selectedBottom.image}
+                            src={bottomImage}
                             alt="Card image cap"
                         />
                         <CardImgOverlay>
@@ -136,7 +167,7 @@ class Create extends Component {
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src={selectedShoe.image}
+                            src={shoeImage}
                             alt="Card image cap"
                         />
                         <CardImgOverlay>

@@ -17,20 +17,20 @@ import './App.css';
 library.add(faShareAlt);
 
 class App extends Component {
-  state = {
-    user: null,
-    token: null
-  }
+  getUserID() {
+    const token = localStorage.getItem('authToken');
+
+    if (token) {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace('-', '+').replace('_', '/');
+      return JSON.parse(window.atob(base64)).sub;
+    }
+}
 
   signInSuccess = (data) => {
+    console.log(data);
     this.setState({ user: data.user});
     localStorage.setItem('authToken', `Bearer ${data.token}`);
-    this.updateToken();
-  }
-
-  updateToken = () => {
-    const token = localStorage.getItem('authToken');
-    this.setState({ token })
   }
 
   render() {
@@ -41,37 +41,37 @@ class App extends Component {
           <Route exact path='/' render={props => <Landing {...props} onSignin={this.signInSuccess} />} />
           <Route path='/Create' render={props =>
             <div className='App--create'>
-              <Create {...props} />
-              <Navigation token={this.state.token} user={this.state.user} />
+              <Create {...props} getUserID={this.getUserID} />
+              <Navigation />
             </div>
           } />
           <Route path='/Archive' render={props =>
             <div>
               <Archive />
-              <Navigation token={this.state.token} user={this.state.user} />
+              <Navigation />
             </div>
           } />
           <Route path='/Settings' render={props =>
             <div>
               <Settings />
-              <Navigation token={this.state.token} user={this.state.user} />
+              <Navigation />
             </div>
           } />
           <Route path='/Upload' render={props =>
             <div>
               <Upload />
-              <Navigation token={this.state.token} user={this.state.user} />
+              <Navigation />
             </div>
           } />
           <Route path='/Billing' render={props =>
             <div>
               <Billing />
-              <Navigation token={this.state.token} user={this.state.user} />
+              <Navigation />
             </div>
           } />
           <Route path='/Edit' render={props =>
             <div>
-              <OutfitEdit {...props} userID={this.userID}/>
+              <OutfitEdit />
               <Navigation />
             </div>
           } />
