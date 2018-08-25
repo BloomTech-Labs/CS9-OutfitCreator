@@ -62,6 +62,21 @@ router.put("/:id", (req, res) => {
     });
 });
 
+// Mark a specific outfit as worn
+router.post("/wear/:id", (req, res) => {
+  const {id} = req.params;
+  const { date } = req.body;
+  Outfit.findById(id)
+    .then(outfit => {
+      outfit.worn = outfit.worn.concat(date);
+      outfit.save();
+    })
+    .then(res.status(200).json("success!"))
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 // Add an array of tags to a specific outfit
 router.post("/tags/:id", (req, res) => {
   const { tags } = req.body;
