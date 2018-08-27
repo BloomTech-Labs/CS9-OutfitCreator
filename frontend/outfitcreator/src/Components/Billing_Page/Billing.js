@@ -25,7 +25,6 @@ class Billing extends React.Component {
             }
         }
         if (authToken){
-            console.log("authtoken!")
             axios.get(`${ROOT_URL.API}/user/info/${user}`, requestOptions)
                 .then(res => {
                     console.log(res.data);

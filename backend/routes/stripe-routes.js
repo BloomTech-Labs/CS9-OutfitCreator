@@ -48,6 +48,7 @@ router.post("/charge", cors(corsOptions), async (req, res) => {
 router.post("/cancel", cors(corsOptions), async (req, res) => {
     console.log("canceling sub ", req.body.sub);
     stripe.subscriptions.del(req.body.sub, {at_period_end: true});
+    res.status(200).json("success");
 })
 
 module.exports = router;
