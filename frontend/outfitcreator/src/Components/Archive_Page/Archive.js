@@ -15,6 +15,8 @@ class Archive extends React.Component {
             searchedOutfits: [],
             myOutfits: []
         };
+        this.token = props.token;
+        this.user = props.user;
     }
 
     componentDidMount() {
@@ -68,7 +70,8 @@ class Archive extends React.Component {
 
     render() {
         console.log(this.state)
-        console.log(this.props)
+        console.log(this.token)
+        console.log(this.user)
         return (
             <div className='container--archive'>
                 <div className='archive--search'>
