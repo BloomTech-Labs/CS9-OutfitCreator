@@ -1,6 +1,6 @@
 import './Landing.css';
 import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import { Button } from 'reactstrap';
@@ -19,8 +19,7 @@ class Landing extends Component {
             <div className='container--landingPage'>
                 <div className='landingPage--modals'>
                     <SignUp />
-                    <Route exact path='/signin' render={props => <SignIn {...props} onSignin={this.props.onSignin} />} />
-                    <SignIn onSignin={this.props.onSignin} />
+                    <SignIn />
                 </div>
            
                 {/* <div className='landingPage--animations'>

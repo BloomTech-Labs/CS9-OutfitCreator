@@ -19,18 +19,11 @@ library.add(faShareAlt);
 class App extends Component {
   getUserID() {
     const token = localStorage.getItem('authToken');
-
     if (token) {
       const base64Url = token.split('.')[1];
       const base64 = base64Url.replace('-', '+').replace('_', '/');
       return JSON.parse(window.atob(base64)).sub;
     }
-}
-
-  signInSuccess = (data) => {
-    console.log(data);
-    this.setState({ user: data.user});
-    localStorage.setItem('authToken', `Bearer ${data.token}`);
   }
 
   render() {
@@ -38,7 +31,7 @@ class App extends Component {
       <div className="App">
 
         <Switch>
-          <Route exact path='/' render={props => <Landing {...props} onSignin={this.signInSuccess} />} />
+          <Route exact path='/' render={props => <Landing {...props} />} />
           <Route path='/Create' render={props =>
             <div className='App--create'>
               <Create {...props} getUserID={this.getUserID} />
@@ -59,7 +52,7 @@ class App extends Component {
           } />
           <Route path='/Upload' render={props =>
             <div>
-              <Upload />
+              <Upload getUserID={this.getUserID} />
               <Navigation />
             </div>
           } />
