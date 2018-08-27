@@ -32,10 +32,11 @@ class Upload extends Component {
         // formData.imageName = 'image name';
         // console.log(formData);
         axios.post(`${ROOT_URL.API}/items`, {
-            // user: 'jekm321',
-            name: 'jekms\'s test',
+            //user: , //needs user value passed in
+            //name: 'jekms\'s test',
             image: this.state.image,
             type: 'top',
+            tags: [],
         })
           .then(response => {
               console.log(response);

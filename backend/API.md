@@ -26,9 +26,9 @@ This request should have the following format:
 ```
 ## /User/Info/:ID
 GET - Get user information by ID. Returns the User object.
-## /User/Info/Subscribe/:ID
+## /User/Subscribe/:ID
 POST - Mark a user as subscribed: true.
-## /User/Info/Unsubscribe/:ID
+## /User/Unsubscribe/:ID
 POST - Mark a user as subscribed: false.
 
 # /Items
