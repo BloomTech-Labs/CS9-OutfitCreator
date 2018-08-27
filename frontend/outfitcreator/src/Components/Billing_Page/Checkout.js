@@ -20,7 +20,7 @@ class Checkout extends React.Component {
           <p>Plan your outfits ahead and get reminders</p>
         <StripeProvider stripe={this.props.stripe}>
           <Elements>
-            <PaymentForm />
+            <PaymentForm userID={this.props.userID}/>
           </Elements>
         </StripeProvider>
       </div>

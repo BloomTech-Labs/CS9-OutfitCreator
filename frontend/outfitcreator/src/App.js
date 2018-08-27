@@ -65,7 +65,7 @@ class App extends Component {
           } />
           <Route path='/Billing' render={props =>
             <div>
-              <Billing />
+              <Billing {...props} getUserID={this.getUserID}/>
               <Navigation />
             </div>
           } />
