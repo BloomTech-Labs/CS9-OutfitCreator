@@ -1,3 +1,11 @@
+:root {
+  --tan: rgb(243,211,197);
+  --pink: rgb(241,175,187);
+  --light-purple: rgb(167,171,223);
+  --med-purple: rgb(160,147,212);
+  --dark-purple: rgb(106,113,197);
+}
+
 .App {
   text-align: center;
   display: flex;
