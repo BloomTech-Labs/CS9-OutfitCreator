@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import { Nav, NavItem, NavLink, Button } from 'reactstrap';
 import { withRouter } from 'react-router';
-import axios from 'axios';
 import { ROOT_URL } from '../config';
 import './Navigation.css';
 
 class Navigation extends Component {
   signOut = () => {
-    axios.get(`${ROOT_URL.API}/local-auth/logout`)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    localStorage.removeItem('authToken');
+    window.location = `${ROOT_URL.WEB}/`;
   }
   
   render() {
@@ -39,7 +33,7 @@ class Navigation extends Component {
             <NavLink href='/Billing' className='Billing'>Billing</NavLink>
           </NavItem>
         </Nav>
-        <NavLink href='/' className='SignOut' onClick={this.signOut}>Sign Out</NavLink>
+        <Button className='SignOut' onClick={this.signOut}>Sign Out</Button>
       </div>
     );
   }
