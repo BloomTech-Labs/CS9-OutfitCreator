@@ -47,8 +47,8 @@ class App extends Component {
           } />
           <Route path='/Archive' render={props =>
             <div>
-              <Archive />
-              <Navigation token={this.state.token} user={this.state.user} />
+              <Archive token={this.state.token} user={this.state.user}/>
+              <Navigation />
             </div>
           } />
           <Route path='/Settings' render={props =>
