@@ -21,10 +21,10 @@ class SignIn extends React.Component {
                 // Redirect to create page once logged in
                 localStorage.setItem('authToken', `Bearer ${res.data.token}`);
                 window.location = `${ROOT_URL.WEB}/Create`;
-                
             })
             .catch(err => {
                 // Alert for invalid credentials
+                alert('Invalid Credentials')
                 localStorage.removeItem('token');
             });
     }
