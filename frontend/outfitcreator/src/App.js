@@ -17,6 +17,15 @@ import './App.css';
 library.add(faShareAlt);
 
 class App extends Component {
+  tokenData() {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace('-', '+').replace('_', '/');
+      return JSON.parse(window.atob(base64));
+    }
+  }
+
   getUserID() {
     const token = localStorage.getItem('authToken');
     if (token) {
@@ -29,43 +38,42 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
         <Switch>
           <Route exact path='/' render={props => <Landing {...props} />} />
           <Route path='/Create' render={props =>
             <div className='App--create'>
               <Create {...props} getUserID={this.getUserID} />
-              <Navigation />
+              <Navigation tokenData={this.tokenData} />
             </div>
           } />
           <Route path='/Archive' render={props =>
             <div>
               <Archive />
-              <Navigation />
+              <Navigation tokenData={this.tokenData} />
             </div>
           } />
           <Route path='/Settings' render={props =>
             <div>
               <Settings />
-              <Navigation />
+              <Navigation tokenData={this.tokenData} />
             </div>
           } />
           <Route path='/Upload' render={props =>
             <div>
               <Upload getUserID={this.getUserID} />
-              <Navigation />
+              <Navigation tokenData={this.tokenData} />
             </div>
           } />
           <Route path='/Billing' render={props =>
             <div>
               <Billing />
-              <Navigation />
+              <Navigation tokenData={this.tokenData} />
             </div>
           } />
           <Route path='/Edit' render={props =>
             <div>
               <OutfitEdit />
-              <Navigation />
+              <Navigation tokenData={this.tokenData} />
             </div>
           } />
         </Switch>
