@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import {ROOT_URL} from '../../config';
 import './closet.css';
+import ClosetCard from './ClosetCard.js';
 
 class Closet extends React.Component {
     constructor(props) {
@@ -45,6 +46,9 @@ class Closet extends React.Component {
                     <button className="closet-button" onClick={() => this.onSelect("top")}>Tops</button>
                     <button className="closet-button" onClick={() => this.onSelect("bottom")}>Bottoms</button>
                     <button className="closet-button" onClick={() => this.onSelect("shoes")}>Shoes</button>
+                </div>
+                <div className="closet-cards">
+                    {this.state.items.map(item =><ClosetCard item={item} key={item._id}/>)}
                 </div>
             </div>
         )
