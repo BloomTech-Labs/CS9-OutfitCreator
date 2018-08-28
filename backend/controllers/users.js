@@ -4,11 +4,20 @@ const { makeToken } = require("../config/passport-setup");
 // Register a new user
 exports.signup = (req, res) => {
     const { username, password, email } = req.body;
-    const newUser = { username, password, email };
-    const user = new User(newUser);
+    // const newUser = { username, password, email };
+    // console.log(newUser) 
+    const user = new User({
+        method: 'local',
+        local: {
+            username,
+            password,
+            email
+        }
+    });
     user.save().then(user => {
+        console.log(user)
         const token = makeToken(user);
-        res.status(201).json({ user, token });
+        res.status(200).json({ token });
     })
     .catch(err => {
         res.status(500).json(err);
