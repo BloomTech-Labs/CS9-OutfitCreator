@@ -1,12 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import {ROOT_URL} from '../../config';
+import Drawer from './Drawer.js';
 
-class MyCloset extends React.Component {
+class Closet extends React.Component {
     constructor() {
         super();
         this.state = {
-            selectedType=null,
+            selectedType: null
         };
     }
     componentDidMount() {

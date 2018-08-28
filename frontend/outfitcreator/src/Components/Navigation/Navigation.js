@@ -59,6 +59,7 @@ class Navigation extends Component {
           <Collapse isOpen={!this.state.collapsed}>
             <NavLink href='/Create' className='Create'>Create</NavLink>
             <NavLink href='/Upload' className='Upload'>Upload</NavLink>
+            <NavLink href='/Closet' className='Closet'>My Closet</NavLink>
             <NavLink href='/Archive' className='Archive'>Archive</NavLink>
             <NavLink href='/Settings' className='Settings'>Settings</NavLink>
             <NavLink href='/Billing' className='Billing'>Billing</NavLink>
