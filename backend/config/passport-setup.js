@@ -13,19 +13,20 @@ const Guser = require("../models/gusermodel");
 const User = require("../models/userModel");
 const secret = process.env.SECRET || "SECRET!";
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
+// passport.serializeUser((user, done) => {
+//   done(null, user.id);
+// });
 
-passport.deserializeUser((id, done) => {
-  Guser.findById(id).then(user => {
-    done(null, user);
-  });
-});
+// passport.deserializeUser((id, done) => {
+//   Guser.findById(id).then(user => {
+//     done(null, user);
+//   });
+// });
 
+// Local Strategy
 const localStrategy = new LocalStrategy(function(username, password, done) {
   // Use async function for awaiting promise in user.validPassword
-  User.findOne({ username }, async function(err, user) {
+  User.findOne({ 'local.username': username }, async function(err, user) {
     if (err) return done(err);
     if (!user) {
       return done(null, false);
@@ -58,33 +59,37 @@ const jwtStrategy = new JwtStrategy(jwtOptions, (payload, done) => {
   })
 })
 
-passport.use(
-  new GoogleStrategy(
-    {
-      callbackURL: "/auth/google/redirect",
-      clientID: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET
-    },
-    (accessToken, refreshToken, profile, done) => {
-      Guser.findOne({ "google.googleId": profile.id }).then(currentUser => {
-        if (currentUser) {
-          done(null, currentUser);
-        } else {
-          new Guser({
-            "google.googleId": profile.id,
-            "google.username": profile.displayName,
-            "google.thumbnail": profile._json.image.url,
-            "google.email": profile.emails[0].value
-          })
-            .save()
-            .then(newUser => {
-              done(null, newUser);
-            });
+// Google OAuth Strategy
+const googleStrategy = new GoogleStrategy({
+    callbackURL: "/auth/google/redirect",
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET
+  }, (accessToken, refreshToken, profile, done) => {
+  console.log(accessToken);
+  console.log(refreshToken);
+  console.log(profile);
+  User.findOne({ "google.id": profile.id }).then(currentUser => {
+    if (currentUser) {
+      done(null, currentUser);
+    } else {
+      new User({
+        method: 'google',
+        google: {
+          id: profile.id,
+          email: profile.emails[0].value,
+          username: profile.displayName,
+          thumbnail: profile._json.image.url,
         }
+      })
+      .save()
+      .then(newUser => {
+        done(null, newUser);
       });
     }
-  )
-);
+  }).catch(err => {
+    done(err, false, err.message);
+  });
+});
 
 // passport.use(
 //   new FacebookStrategy(
@@ -148,18 +153,23 @@ passport.use(
 // passport global middleware
 passport.use(localStrategy);
 passport.use(jwtStrategy);
+passport.use(googleStrategy);
 
 // passport local middleware
 const passportOptions = { session: false };
+const googleOptions = { session: false, scope: ["profile", "email"]};
 const authenticate = passport.authenticate('local', passportOptions);
 const restricted = passport.authenticate('jwt', passportOptions);
+const googleAuthenticate = passport.authenticate('google', googleOptions);
+const googleRedirectAuthenticate = passport.authenticate('google', passportOptions);
 
 function makeToken(user) {
+  console.log('makeToken: ',user._id);
   const timestamp = new Date().getTime();
   const payload = {
+    iss: 'OutfitCreator',
     sub: user._id,
     iat: timestamp,
-    username: user.username
   };
   const options = {
     expiresIn: '24h'
@@ -167,4 +177,25 @@ function makeToken(user) {
   return jwt.sign(payload, secret, options);
 }
 
-module.exports = { authenticate, restricted, makeToken }
+// Issue Token
+const signToken = (req, res) => {
+  const timestamp = new Date().getTime();
+  const payload = {
+    // iss: 'OutfitCreator',
+    sub: req.user._id,
+    iat: timestamp,
+    username: req.user.username
+  };
+  const options = {
+    expiresIn: '24h'
+  };
+  jwt.sign(payload, secret, options, (err, token) => {
+      if(err){
+          res.sendStatus(500);
+      } else {
+          res.json({token});
+      }
+  });
+}
+
+module.exports = { authenticate, restricted, googleAuthenticate, googleRedirectAuthenticate, makeToken, signToken }

@@ -1,9 +1,11 @@
-import './Landing.css';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
+import { Button, NavLink } from 'reactstrap';
+
 import SignIn from './SignIn';
 import SignUp from './SignUp';
-import { Button } from 'reactstrap';
+import Login from './Login';
+import './Landing.css';
 
 class Landing extends Component {
     onExiting = () => {
@@ -18,10 +20,12 @@ class Landing extends Component {
         return (
             <div className='container--landingPage'>
                 <div className='landingPage--modals'>
-                    <SignUp />
-                    <SignIn />
+                    {/* <SignUp /> */}
+                    {/* <Route exact path='/signin' render={props => <SignIn {...props} onSignin={this.props.onSignin} />} /> */}
+                    {/* <SignIn onSignin={this.props.onSignin} /> */}
+                    <NavLink href='/login'>Login</NavLink>
                 </div>
-           
+
                 {/* <div className='landingPage--animations'>
                     <div className='animation--top'>
                     <img src='https://res.cloudinary.com/cloudtesting/image/upload/w_300,h_400/v1534808124/icons8-t-shirt-480.png' alt='top' className='animation--top' />
