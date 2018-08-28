@@ -1,5 +1,16 @@
-body {
+:root {
+  --tan: rgb(243,211,197);
+  --pink: rgb(241,175,187);
+  --light-purple: rgb(167,171,223);
+  --med-purple: rgb(160,147,212);
+  --dark-purple: rgb(106,113,197);
+}
+
+html, body, body > div {
+  background: var(--med-purple);
+  box-sizing: border-box;
+  font-family: sans-serif;
+  height: 100%;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
 }

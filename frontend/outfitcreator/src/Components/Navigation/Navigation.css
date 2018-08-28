@@ -4,6 +4,7 @@
   justify-content: space-between;
   left: 0;
   position: fixed;
+  top: 0;
   width: 100%;
 }
 
@@ -29,8 +30,8 @@
   background: var(--dark-purple);
   background: url('../../dresser.png') center;
   background-size: cover;
-  border-top: none;
-  height: 50px;
+  height: 52px;
+  margin-top: -3px;
   width: 125px;
   z-index: 1;
 }

@@ -1,47 +1,10 @@
-:root {
-  --tan: rgb(243,211,197);
-  --pink: rgb(241,175,187);
-  --light-purple: rgb(167,171,223);
-  --med-purple: rgb(160,147,212);
-  --dark-purple: rgb(106,113,197);
-}
-
 .App {
   text-align: center;
   display: flex;
   justify-content: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  height: 100%;
 }
 
 ul {
   list-style: none;
-}
-
-.App--create {
-  border: 1xp solid blue;
-  display: flex;
 }
