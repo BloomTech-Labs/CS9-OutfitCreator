@@ -53,7 +53,7 @@ class App extends Component {
           } />
           <Route path='/Settings' render={props =>
             <div>
-              <Settings />
+              <Settings tokenData={this.tokenData} />
               <Navigation tokenData={this.tokenData} />
             </div>
           } />
