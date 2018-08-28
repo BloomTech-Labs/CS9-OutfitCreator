@@ -16,6 +16,22 @@ router.get("/info/:id", restricted, (req, res) => {
         });
 });
 
+// Edit a User's profile data
+router.post("/info/:id", restricted, (req, res) => {
+  const id = req.params.id;
+  const { email, phone, rEmails, rTexts } = req.body;
+  User.findByIdAndUpdate(id, {
+
+          rEmails: re
+      })
+      .then(user => {
+          res.status(201).json(user)
+      })
+      .catch(err => {
+          res.send(500).json({error: err.message});
+      });
+});
+
 // Mark a user as subscribed
 router.post("/subscribe/:id", restricted, (req, res) => {
     const id = req.params.id;
