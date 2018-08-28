@@ -14,9 +14,11 @@ const OutfitSchema = new mongoose.Schema({
       type: String
     }
   ],
-  worn: {
-    type: Date
-  }
+  worn: [
+    {
+      type: Date
+    }
+  ]
   ,
   top: [
     {
