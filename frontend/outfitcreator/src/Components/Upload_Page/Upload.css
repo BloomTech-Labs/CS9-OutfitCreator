@@ -1,7 +1,11 @@
 .container--upload {
-    left: 200px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    left: 50%;
     position: absolute;
     top: 75px;
+    transform: translate(-50%);
 }
 
 .upload--columns {
@@ -21,6 +25,10 @@
     align-items: center;
     display: flex;
     flex-flow: column;
+}
+
+.column--right {
+    margin-left: 20px;
 }
 
 .upload--image {
@@ -112,3 +120,9 @@ input[type=checkbox] {
 /* .inputfile + label * {
 	pointer-events: none;
 } */
+
+@media only screen and (max-width: 600px) {
+  .container--upload {
+    left: 60%;
+  }
+}
