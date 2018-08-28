@@ -48,7 +48,6 @@ class Billing extends React.Component {
     
     render() {
         console.log(this.state);
-            //TODO: change subscription prop for Cancel button to a user profile reference.
             return (
                 <div className='container--billing'>
                     {((this.state.subscribed == false) || (this.state.subscribed == null))

@@ -44,7 +44,7 @@ This request should have the following format:
 	"tags": ["black", "formal"]
 }
 ```
-## /Items/:User
+## /Items/User/:User
 GET - Get items for a user by ID. Returns an array of Item objects.
 ## /Items/:ID
 GET - Get a specific item by ID. Returns a single Item object:
