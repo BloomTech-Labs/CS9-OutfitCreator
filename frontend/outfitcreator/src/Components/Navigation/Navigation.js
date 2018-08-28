@@ -16,7 +16,7 @@ class Navigation extends Component {
   toggleNavbar() {
     const navMin = document.querySelector('.navigation--minimize');
     const sideNav = document.querySelector('.navigation--sideNav');
-    const delay = 200;
+    const delay = 250;
 
     if (this.state.collapsed) {
       navMin.classList.toggle('change');
