@@ -23,21 +23,21 @@ class Upload extends Component {
         }
     }
 
-    generateSignature = () => {
-        const { name } = this.state;
-        const newName = name.trim();
-        const timestamp = Date.now();
-        const eager = 'w_400,h_300,c_crop';
-        const object = {
-            newName, timestamp, eager
-        };
-        const toBeStrings = [];
-        Object.entries(object).forEach((key) => {
-            toBeStrings.push(`${key[0]}=${key[1]}`);
-        });
-        const finalString = toBeStrings.sort().join('&') + API_SECRET;
-        return sha1(finalString);
-    }
+    // generateSignature = () => {
+    //     const { name } = this.state;
+    //     const newName = name.trim();
+    //     const timestamp = Date.now();
+    //     const eager = 'w_400,h_300,c_crop';
+    //     const object = {
+    //         newName, timestamp, eager
+    //     };
+    //     const toBeStrings = [];
+    //     Object.entries(object).forEach((key) => {
+    //         toBeStrings.push(`${key[0]}=${key[1]}`);
+    //     });
+    //     const finalString = toBeStrings.sort().join('&') + API_SECRET;
+    //     return sha1(finalString);
+    // }
 
     componentDidMount() {
         const user = this.props.getUserID();
@@ -47,7 +47,7 @@ class Upload extends Component {
                 cloud_name: 'cloudtesting',
                 api_key: CLOUD_API,
                 upload_preset: 'default',
-                sources: ['local', 'url', 'instagram'],
+                sources: ['local', 'url', 'camera', 'image_search', 'instagram', 'facebook'],
                 theme: 'purple'
             },
             (err, result) => {
