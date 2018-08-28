@@ -7,47 +7,55 @@ const Item = require("../models/itemModel");
 const router = require("express").Router();
 
 require("dotenv").config();
-cloudinary.config({
-  cloud_name: "cloudtesting",
-  api_key: "465735684648442",
-  api_secret: "HVxIWBW7bQaBHJygz_qiprAfwok"
-});
+// cloudinary.config({
+//   cloud_name: "cloudtesting",
+//   api_key: "465735684648442",
+//   api_secret: "HVxIWBW7bQaBHJygz_qiprAfwok"
+// });
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./uploads/");
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  }
-});
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     console.log('from storage.destination');
+//     console.log(file);
+//     cb(null, "./uploads/");
+//   },
+//   filename: (req, file, cb) => {
+//     console.log('from storage.filename');
+//     console.log(file);
+//     cb(null, file.originalname);
+//   }
+// });
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
 // const upload = multer({ dest: './uploads' });
 // Add a new item to the database
-router.post("/", upload.single("image"), (req, res) => {
+router.post("/", (req, res) => {
   // console.log('req.body: ' + req.body);
-  const { user, name, type, tags } = req.body;
-  const { originalname } = req.file;
+  console.log(req.body);
+  const { user, name, image, type, tags } = req.body;
+  Item.create({ user, name, image, type, tags })
+    .then(item => {
+      res.status(201).json(item);
+    })
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+  // console.log(req.file.image);
+  // console.log(req.file.originalname);
+  // res.sendStatus(200);
+  // const { originalname } = req.file;
   // console.log(req.file);
-  cloudinary.uploader.upload(`./uploads/${originalname}`, result => {
-    fs.unlinkSync(`./uploads/${originalname}`);
-    const { width, height, url } = result;
-    let cropWidth = width, cropHeight = height;
-    while (cropWidth >= 300 || cropHeight >= 200) {
-      (cropWidth *= 0.9), (cropHeight *= 0.9);
-    }
-    const crop = `/upload/w_${cropWidth.toFixed(0)},h_${cropHeight.toFixed(0)}/`;
-    const [partOne, partTwo] = url.split("/upload/");
-    const image = partOne + crop + partTwo;
-    Item.create({ user, name, image, type, tags })
-      .then(item => {
-        res.status(201).json(item);
-      })
-      .catch(err => {
-        res.status(500).json({ error: err.message });
-      });
-  });
+  // cloudinary.uploader.upload(`./uploads/${originalname}`, result => {
+  //   fs.unlinkSync(`./uploads/${originalname}`);
+  //   const { width, height, url } = result;
+  //   let cropWidth = width, cropHeight = height;
+  //   while (cropWidth >= 300 || cropHeight >= 200) {
+  //     (cropWidth *= 0.9), (cropHeight *= 0.9);
+  //   }
+  //   const crop = `/upload/w_${cropWidth.toFixed(0)},h_${cropHeight.toFixed(0)}/`;
+  //   const [partOne, partTwo] = url.split("/upload/");
+  //   const image = partOne + crop + partTwo;
+  // });
 });
 
 // Get all items for a user
@@ -73,7 +81,7 @@ router.get("/type/:user/:type", (req, res) => {
   })
     .populate()
     .then(items => {
-      const filteredItems = items.filter( (item) => (item.type === type))
+      const filteredItems = items.filter((item) => (item.type === type))
       res.status(200).json(filteredItems);
     })
     .catch(err => {
@@ -104,12 +112,12 @@ router.delete("/:id", (req, res) => {
 
 // Edit a specific item
 router.put("/:id", (req, res) => {
-  const {id} = req.params;
-  const {name, type, tags} = req.body;
-  Item.findByIdAndUpdate(id, {name, type, tags})
+  const { id } = req.params;
+  const { name, type, tags } = req.body;
+  Item.findByIdAndUpdate(id, { name, type, tags })
     .then(res.status(200).json(`successfully updated item`))
     .catch(err => {
-      res.send(500).json({error: err.message});
+      res.send(500).json({ error: err.message });
     });
 });
 
@@ -128,23 +136,46 @@ router.post("/tags/:id", (req, res) => {
     });
 });
 
+// Delete a specific tag from a specific item
+// This is not currently working -- needs troubleshooting
+// When it's working, add a similar route to Outfits
+router.post("/tags/delete/:id/:tag", (req, res) => {
+  const { id, tag } = req.params;
+  Item.findById(id)
+    .then(item => {
+      console.log(item.tags);
+      console.log(item.tags.indexOf(tag));
+      if (item.tags.indexOf(tag) != -1) {
+        let tags = item.tags.splice((item.tags.indexOf(tag)), 1, 'test');
+        console.log(tags);
+        item.tags = tags;
+      };
+      console.log(item);
+      item.save();
+    })
+    .then(res.status(200).json("success!"))
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 // Get items by type for a user
-// router.get("/:user/:type", (req, res) => {
-//   const { user, type } = req.params;
-//   Item.find({
-//     type,
-//     user
-//   })
-//     .populate()
-//     .then(items => {
-//       res.status(200).json(items);
-//     })
-//     .catch(err => {
-//       res
-//         .status(500)
-//         .json({ message: "Items could not be retreived at this time." });
-//     });
-// });
+router.get("/type/:user/:type", (req, res) => {
+  const { user, type } = req.params;
+  Item.find({
+    type,
+    user
+  })
+    .populate()
+    .then(items => {
+      res.status(200).json(items);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ message: "Items could not be retreived at this time." });
+    });
+});
 
 // Get all of a user's items with a certain tag
 router.get("/search/:user/:tag", (req, res) => {
@@ -163,19 +194,3 @@ router.get("/search/:user/:tag", (req, res) => {
 });
 
 module.exports = router;
-
-// Get items by type
-// Should probably be deprecated, keeping the code just in case
-// router.get("/items/:type", (req, res) => {
-//     const { type } = req.params;
-//     Item.find({
-//       type
-//     })
-//       .populate()
-//       .then(items => {
-//         res.status(200).json(items);
-//       })
-//       .catch(err => {
-//         res.status(500).json({ message: 'Items could not be retreived at this time.' })
-//       });
-//   });

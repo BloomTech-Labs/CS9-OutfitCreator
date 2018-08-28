@@ -2,13 +2,40 @@ import './billing.css';
 import React from 'react';
 import Checkout from './Checkout';
 import Cancel from './Cancel';
+import axios from 'axios';
+import { ROOT_URL } from '../../config'; 
 
 class Billing extends React.Component {
     constructor() {
         super();
-        this.state = {stripe: null};
+        this.state = {
+            stripe: null,
+            userID: null,
+            subscribed: null,
+            subscription: null,
+        };
     }
+
     componentDidMount() {
+        const user = this.props.getUserID();
+        const authToken = localStorage.getItem('authToken');
+        const requestOptions = {
+            headers: {
+                Authorization: authToken
+            }
+        }
+        if (authToken){
+            axios.get(`${ROOT_URL.API}/user/info/${user}`, requestOptions)
+                .then(res => {
+                    console.log(res.data);
+                    this.setState({
+                        userID: res.data._id,
+                        subscribed: res.data.paid,
+                        subscription: res.data.stripe_sub,
+                    });
+                })
+        }
+        // get user info from server to see if user is subscribed
         if (window.Stripe) {
             this.setState({stripe: window.Stripe("pk_test_vRQk70zZL34BhEqLJJtqp29z")})
         } else {
@@ -19,13 +46,14 @@ class Billing extends React.Component {
     }
     
     render() {
+        console.log(this.state);
             //TODO: change subscription prop for Cancel button to a user profile reference.
-            //TODO: conditional rendering -- show Cancel if already subscribed, otherwise Checkout
             return (
                 <div className='container--billing'>
-                    <h2>Subscribe to the Outfit Creator!</h2>
-                    <Checkout stripe={this.state.stripe}/>
-                    <Cancel stripe = {this.state.stripe} subscription='sub_DSE0Hm8zCEYQNK'/>
+                    {((this.state.subscribed == false) || (this.state.subscribed == null))
+                    ?<Checkout stripe={this.state.stripe} userID={this.state.userID}/>
+                    :<Cancel stripe = {this.state.stripe} userID={this.state.userID} subscription={this.state.subscription}/>
+                    }
                 </div>
             )};
 };

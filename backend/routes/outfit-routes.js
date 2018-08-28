@@ -44,6 +44,20 @@ router.get("/:user/:id", restricted, (req, res) => {
     });
 });
 
+// Update an outfit by id
+router.put('/:user/:id', (req, res) => {
+  const id = req.params.id;
+  const newInfo = req.body;
+  Outfit.findByIdAndUpdate(id, newInfo)
+  .then(outfit => {
+    console.log(outfit)
+    res.status(200).json(outfit);
+  })
+  .catch(err => {
+    res.status(500).json({ error: err});
+  });
+});
+
 // Delete a specific outfit
 router.delete("/:id", restricted, (req, res) => {
   Outfit.findByIdAndRemove(req.params.id)
@@ -61,6 +75,21 @@ router.put("/:id", restricted, (req, res) => {
     .then(res.status(200).json(`successfully updated outfit`))
     .catch(err => {
       res.send(500).json({error: err.message});
+    });
+});
+
+// Mark a specific outfit as worn
+router.post("/wear/:id", (req, res) => {
+  const {id} = req.params;
+  const { date } = req.body;
+  Outfit.findById(id)
+    .then(outfit => {
+      outfit.worn = outfit.worn.concat(date);
+      outfit.save();
+    })
+    .then(res.status(200).json("success!"))
+    .catch(err => {
+      res.status(500).json({ error: err.message });
     });
 });
 

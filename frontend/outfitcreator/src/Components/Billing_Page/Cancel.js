@@ -12,15 +12,23 @@ class Cancel extends React.Component {
     }
 
     cancel = () => {
+        const authToken = localStorage.getItem('authToken');
+        const requestOptions = {
+            headers: {
+                Authorization: authToken
+            }
+        };
         axios
-            .post(`${ROOT_URL.API}/pay/cancel`, this.props.subscription)
+            .post(`${ROOT_URL.API}/pay/cancel`, {sub: this.props.subscription}, requestOptions)
             .then(this.setState({canceled: true}))
-            .catch(err => console.log(err))
+            .then(axios.post(`${ROOT_URL.API}/user/unsubscribe/${this.props.userID}`, {}, requestOptions))
+            .catch(err => console.log(err.message))
     }
     render() {
         if (this.state.canceled) return (<h1>Canceled Successfully!</h1>)
         return (
             <div>
+                <h1>We're sorry to see you go!</h1>
                 <button className="button" onClick={this.cancel}>Cancel My Subscription</button>
             </div>
         );

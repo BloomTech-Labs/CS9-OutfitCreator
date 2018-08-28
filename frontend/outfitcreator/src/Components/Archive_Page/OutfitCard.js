@@ -6,31 +6,36 @@ import { withRouter } from 'react-router';
 // Will display a card with any information relevent to an outfit such as name, image, etc.
 
 class OutfitCard extends React.Component {
-    renderEdit = () => {
-        this.props.location.pathname = `/Edit/${this.props.outfitId}`
+    editRedirect = () => {
+        this.props.location.pathname = `/Edit/${this.props.outfitId}`;
         window.location = this.props.location.pathname;
     }
     
     render() {
+        const { key, name, src, lastWorn } = this.props;
+        let worn = 'Never Worn';
+        if (lastWorn) {
+            worn = lastWorn.split('T')[0]
+        }
         return (
-            <div className='container--card' key={this.props.key}>
+            <div className='container--card' key={key}>
                 <div className='card--header'>
                     <div className='header--title'>
-                        {this.props.name}
+                        {name}
                     </div>
                     <div className='header--edit'>
-                        <button className='edit--button' onClick={this.renderEdit} />
+                        <button className='edit--button' onClick={this.editRedirect} />
                     </div>
                 </div>
                 <div className='card--images'>
-                    {this.props.src.map((item) => {
+                    {src.map((item) => {
                         if (item) {
                             return <Imaging key={item} urlSrc={item} />
                         } else return null;
                     })}
                 </div>
                 <div className='card--footer'>
-                    Worn on: {this.props.lastWorn}
+                    Worn on: {worn}
                 </div>
             </div>
         )

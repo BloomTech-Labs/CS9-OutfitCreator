@@ -26,9 +26,9 @@ This request should have the following format:
 ```
 ## /User/Info/:ID
 GET - Get user information by ID. Returns the User object.
-## /User/Info/Subscribe/:ID
+## /User/Subscribe/:ID
 POST - Mark a user as subscribed: true.
-## /User/Info/Unsubscribe/:ID
+## /User/Unsubscribe/:ID
 POST - Mark a user as subscribed: false.
 
 # /Items
@@ -152,3 +152,6 @@ This request should have the following format:
 ```
 ## /Outfits/Search/:User/:Tag
 GET - Get outfits by Tag for a specific User. Returns an array of Item objects.
+## /Outfits/Wear/:ID
+POST - Mark an outfit as worn on a specific date.
+The body for this request should contain a date-format string.
