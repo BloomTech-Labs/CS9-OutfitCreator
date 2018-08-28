@@ -5,6 +5,35 @@ import axios from 'axios';
 import './Settings.css';
 
 class Settings extends Component {
+    state = { 
+        oldPassword: '',
+        newPassword: ''
+    }
+
+    componentDidMount() {
+      const userID = this.props.tokenData().sub;
+      const authToken = localStorage.getItem('authToken');
+        const requestOptions = {
+            headers: {
+                Authorization: authToken
+            }
+        }
+
+      axios.get(`${ROOT_URL.API}/user/info/${userID}`, requestOptions)
+          .then(res => {
+              console.log(res.data);
+              this.setState({
+                  email: res.data.email,
+                  phone: '',
+                  rEmails: false,
+                  rTexts: false
+              });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+    }
+    
     render() {
         return (
             <div className="settingsContainer">
