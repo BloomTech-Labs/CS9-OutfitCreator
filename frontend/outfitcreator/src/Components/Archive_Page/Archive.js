@@ -30,7 +30,6 @@ class Archive extends React.Component {
             .catch(err => {
                 console.log(err);
             });
-        // console.log(this.state)
     }
 
     filter = () => {

@@ -4,6 +4,7 @@ import { ROOT_URL } from '../../config';
 
 const TESTUSER = '5b745597a48cb52b0c1baedf';
 
+
 class Imaging extends React.Component {
     constructor(props) {
         super(props);
@@ -29,9 +30,11 @@ class Imaging extends React.Component {
     render() {
         return (
             this.state.image ? (
-                <div>
-                    <img src={this.state.image.image} alt={this.state.image.name} />
-                </div>
+                    <img
+                        width="80%"
+                        src={this.state.image.image}
+                        alt={this.state.image.name}
+                    />
             ) : (
                     <div>
                         Loading
