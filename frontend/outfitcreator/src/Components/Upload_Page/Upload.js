@@ -34,7 +34,7 @@ class Upload extends Component {
         const toBeStrings = [];
         Object.entries(object).forEach((key) => {
             toBeStrings.push(`${key[0]}=${key[1]}`);
-        })
+        }
         const finalString = toBeStrings.sort().join('&') + API_SECRET;
         return sha1(finalString);
     }
