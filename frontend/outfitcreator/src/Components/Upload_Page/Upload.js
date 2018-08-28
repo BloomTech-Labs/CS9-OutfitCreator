@@ -30,11 +30,11 @@ class Upload extends Component {
         const eager = 'w_400,h_300,c_crop';
         const object = {
             newName, timestamp, eager
-        }
+        };
         const toBeStrings = [];
         Object.entries(object).forEach((key) => {
             toBeStrings.push(`${key[0]}=${key[1]}`);
-        })
+        });
         const finalString = toBeStrings.sort().join('&') + API_SECRET;
         return sha1(finalString);
     }
