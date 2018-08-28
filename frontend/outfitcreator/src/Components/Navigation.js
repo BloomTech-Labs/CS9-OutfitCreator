@@ -7,7 +7,7 @@ import './Navigation.css';
 class Navigation extends Component {
   signOut = () => {
     localStorage.removeItem('authToken');
-    window.location = `${ROOT_URL.WEB}/`;
+    window.location.reload();
   }
   
   render() {
