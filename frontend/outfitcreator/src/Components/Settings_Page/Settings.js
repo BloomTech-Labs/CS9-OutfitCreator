@@ -33,6 +33,21 @@ class Settings extends Component {
             console.log(err);
           });
     }
+
+    updateUserInfo() {
+
+    }
+
+    changePassword() {
+      
+    }
+
+    handleInputChange = (e) => {
+        if (['rEmails', 'rTexts'].includes(e.target.name)) {
+          console.log(e.target.checked);
+          this.setState({ [e.target.name]: e.target.checked });
+        } else this.setState({ [e.target.name]: e.target.value });
+    }
     
     render() {
         return (
