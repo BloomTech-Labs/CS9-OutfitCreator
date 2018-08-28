@@ -6,7 +6,7 @@
   --dark-purple: rgb(106,113,197);
 }
 
-html, body, body > div {
+html, body, body #root {
   background: var(--med-purple);
   box-sizing: border-box;
   font-family: sans-serif;
