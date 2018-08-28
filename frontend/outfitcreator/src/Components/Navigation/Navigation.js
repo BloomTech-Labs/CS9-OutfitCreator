@@ -65,7 +65,9 @@ class Navigation extends Component {
             <NavLink href='/' className='SignOut' onClick={this.signOut}>Sign Out</NavLink>
           </Collapse>
         </Nav>
+        { this.props.tokenData() ?
         <div className='navigation--user'>{this.props.tokenData().username}</div>
+        : <div className='navigation--user'>...</div> }
       </div>
     );
   }
