@@ -1,14 +1,18 @@
 const router = require("express").Router();
+const { restricted } = require("../config/passport-setup");
 
-const authCheck = (req, res, next) => {
-  if (!req.user) {
-    res.redirect("/auth/login");
-  } else {
-    next();
-  }
-};
+/* facebook and github are still using sessions. To use comment out this block
+  of code and change the middleware
+*/
+// const authCheck = (req, res, next) => {
+//   if (!req.user) {
+//     res.redirect("/auth/login");
+//   } else {
+//     next();
+//   }
+// };
 
-router.get("/", authCheck, (req, res) => {
+router.get("/", restricted, (req, res) => {
   if (req.user.google.username !== undefined) {
     res.send(
       `Successfully logged in with Google+ OAuth! This is your profile: ${
