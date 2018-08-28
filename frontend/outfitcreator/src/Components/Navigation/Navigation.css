@@ -1,25 +1,22 @@
 .Navigation {
   background: var(--med-purple);
   display: flex;
-  height: 100%;
   justify-content: space-between;
   left: 0;
-  position: absolute;
-  width: 100vw;
-  z-index: -1;
+  position: fixed;
+  width: 100%;
 }
 
 .BreadCrumbs {
+  font-weight: bold;
+  left: 80px;
   position: absolute;
   top: -3px;
-  left: -40px;
   transform: skew(-40deg);
 }
 
 .BreadCrumbs > * {
   background: white;
-  /* border-bottom: 2px solid black;
-  border-right: 2px solid black; */
   border-radius: 0;
   padding: 10px 50px;
 }
@@ -28,31 +25,75 @@
   transform: skew(40deg);
 }
 
+.navigation--dresser {
+  background: var(--dark-purple);
+  background: url('../../dresser.png') center;
+  background-size: cover;
+  border-top: none;
+  height: 50px;
+  width: 125px;
+  z-index: 1;
+}
+
 .SideNav {
   align-content: center;
-  background: var(--med-purple);
+  background: url('../../drawer.jpg') no-repeat;
+  background-size: 150px 500px;
+  border-top: none;
+  box-shadow: inset 0 0 25px #000000;
   display: flex;
   flex-flow: column;
-  margin-top: 70px;
+  left: 0;
+  margin-left: 5px;
+  position: absolute;
+  padding-bottom: 5px;
+  top: 0;
   text-align: left;
-  width: 125px;
+  width: 110px;
 }
 
 .SideNav * {
-  align-items: center;
-  background: var(--light-purple);
-  background: white;
-  border-radius: 0 30px 30px 0;
-  /* clip-path: polygon(0% 0%, 70% 0%, 100% 50%, 70% 100%, 0% 100%, 0% 50%); */
-  color: black;
-  display: flex;
-  font-weight: bold;
-  height: 50px;
-  margin: 10px 0;
+  color: white;
+  padding: 15px 0;
+  text-align: center;
 }
 
 
+.SideNav *:hover {
+  color: var(--light-purple);
+}
 
-.SignOut {
-  
+.navigation--minimize {
+  display: inline-block;
+  cursor: pointer;
+  padding: 9px 5px;
+  width: 50px;
+}
+
+.bar1, .bar2, .bar3 {
+  width: 30px;
+  height: 4px;
+  background-color: white; 
+  margin: 5px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 { 
+  transform: translate(0, 9px) ;
+}
+
+.change .bar2 { 
+  opacity: 0;
+}
+
+.change .bar3 { 
+  transform: translate(0, -9px);
+}
+
+.cross .bar1 { 
+  transform: rotate(-45deg) translate(-5px, 7px);
+}
+
+.cross .bar3 { 
+  transform: rotate(45deg) translate(-5px, -7px);
 }
