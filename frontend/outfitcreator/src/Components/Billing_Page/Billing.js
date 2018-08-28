@@ -34,6 +34,7 @@ class Billing extends React.Component {
                         subscription: res.data.stripe_sub,
                     });
                 })
+                .catch(err => console.log(err.message));
         }
         // get user info from server to see if user is subscribed
         if (window.Stripe) {
