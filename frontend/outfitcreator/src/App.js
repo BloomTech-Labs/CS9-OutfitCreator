@@ -5,6 +5,7 @@ import { faShareAlt } from '@fortawesome/free-solid-svg-icons';
 
 
 import Landing from './Components/Landing_Page/Landing';
+import Login from './Components/Landing_Page/Login';
 import Navigation from './Components/Navigation';
 import Create from './Components/Create_Component/Create';
 import Upload from './Components/Upload_Page/Upload';
@@ -39,6 +40,7 @@ class App extends Component {
 
         <Switch>
           <Route exact path='/' render={props => <Landing {...props} onSignin={this.signInSuccess} />} />
+          <Route exact path='/login' render={props => <Login {...props} onSignin={this.signInSuccess} />} />
           <Route path='/Create' render={props =>
             <div className='App--create'>
               <Create {...props} getUserID={this.getUserID} />
