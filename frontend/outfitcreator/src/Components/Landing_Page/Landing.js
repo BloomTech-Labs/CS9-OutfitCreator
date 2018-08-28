@@ -57,6 +57,9 @@ class Landing extends Component {
                     <div className='description--closing'>AND we can even randomize your options to try and come up with new combinations!</div>
                 </div>
                 <div className='landingPage--button'>
+                    <Link to='/Create'>
+                        <Button color='success'>Check it out </Button>
+                    </Link>
                 </div>
             </div>
         );
