@@ -15,7 +15,7 @@ class Navigation extends Component {
 
   toggleNavbar() {
     const navMin = document.querySelector('.navigation--minimize');
-    const sideNav = document.querySelector('.SideNav');
+    const sideNav = document.querySelector('.navigation--sideNav');
     const delay = 200;
 
     if (this.state.collapsed) {
@@ -43,11 +43,7 @@ class Navigation extends Component {
   
   render() {
     return (
-      <div className='Navigation'>
-        <Breadcrumb className='BreadCrumbs' tag="nav">
-          <BreadcrumbItem tag="a" href="/">Home</BreadcrumbItem>
-          <BreadcrumbItem active tag="span">{this.props.location.pathname.slice(1)}</BreadcrumbItem>
-        </Breadcrumb>
+      <div className='navigation--container'>
         <div className='navigation--dresser'>
            <div className='navigation--minimize' onClick={this.toggleNavbar}>
             <div className="bar1"></div>
@@ -55,7 +51,11 @@ class Navigation extends Component {
             <div className="bar3"></div>
           </div>
         </div>
-        <Nav className='SideNav'>
+        <Breadcrumb className='navigation--breadCrumbs' tag="nav">
+          <BreadcrumbItem tag="a" href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem active tag="span">{this.props.location.pathname.slice(1)}</BreadcrumbItem>
+        </Breadcrumb>
+        <Nav className='navigation--sideNav'>
           <Collapse isOpen={!this.state.collapsed}>
             <NavLink href='/Create' className='Create'>Create</NavLink>
             <NavLink href='/Upload' className='Upload'>Upload</NavLink>
@@ -65,6 +65,7 @@ class Navigation extends Component {
             <NavLink href='/' className='SignOut' onClick={this.signOut}>Sign Out</NavLink>
           </Collapse>
         </Nav>
+        <div className='navigation--user'>{this.props.tokenData().username}</div>
       </div>
     );
   }
