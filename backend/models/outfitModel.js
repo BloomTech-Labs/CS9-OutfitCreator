@@ -14,11 +14,10 @@ const OutfitSchema = new mongoose.Schema({
       type: String
     }
   ],
-  worn: [
-    {
-      type: Date
-    }
-  ],
+  worn: {
+    type: Date
+  }
+  ,
   top: [
     {
       // changing this to an array to account for layers

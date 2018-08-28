@@ -14,7 +14,7 @@ class Navigation extends Component {
     return (
       <div className='Navigation'>
         <div className='BreadCrumbs'>
-          <a href='/' className='Home'>Home</a> > {this.props.location.pathname.slice(1)}
+          <a href='/' className='Home'>Home</a> > {this.props.location.pathname.split('/')[1]}
         </div>
         <Nav vertical className='SideNav'>
           <NavItem>
