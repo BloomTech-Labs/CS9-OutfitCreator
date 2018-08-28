@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faShareAlt } from '@fortawesome/free-solid-svg-icons';
 
-
 import Landing from './Components/Landing_Page/Landing';
 import Navigation from './Components/Navigation/Navigation';
 import Create from './Components/Create_Component/Create';
