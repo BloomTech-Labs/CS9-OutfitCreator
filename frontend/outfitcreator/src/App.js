@@ -59,7 +59,7 @@ class App extends Component {
           } />
           <Route path='/Upload' render={props =>
             <div>
-              <Upload />
+              <Upload getUserID={this.getUserID} />
               <Navigation />
             </div>
           } />
