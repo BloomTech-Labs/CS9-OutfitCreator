@@ -110,6 +110,14 @@ UserSchema.methods.validPassword = async function(passwordGuess) {
         console.log(err);
     }
 };
+
+UserSchema.methods.newPassword = async function(password) {
+    try {
+        return await bcrypt.hash(password, saltRounds);
+    } catch(err) {
+        console.log(err);
+    }
+};
   
 
 module.exports = mongoose.model("User", UserSchema);
