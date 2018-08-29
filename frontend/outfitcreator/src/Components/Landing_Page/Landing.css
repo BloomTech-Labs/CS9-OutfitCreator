@@ -62,6 +62,44 @@
     border-radius: 5px;
 }
 
+.landingPage--login-nav{
+    margin: 10px;
+}
+
+.landingPage--app-title{
+    font-family: 'Homemade Apple', cursive;
+    font-size: 3em;
+    color: var(--dark-purple);
+}
+
+.landing--button {
+    background: var(--dark-purple);
+    border: 2px solid var(--dark-purple);
+    border-radius: 10px;
+    margin: 10px;
+    font-weight: bold;
+    color: var(--pale-purple);
+    font-family: 'Homemade Apple', cursive;
+}
+
+.landing--button:hover {
+    background: var(--light-purple);
+    border: 2px solid var(--dark-purple);
+    border-radius: 10px;
+    margin: 10px;
+    color: var(--dark-purple);
+    font-weight: bold;
+}
+
+.input--login {
+    padding: 10px;
+    margin: 10px;
+    background-color: var(--light-purple);
+    color: var(--dark-purple);
+    border: 3px solid var(--dark-purple);
+    border-radius: 5px;
+}
+
 .landingPage--animations {
     border: 1px solid blue;
     height: 1500px;
