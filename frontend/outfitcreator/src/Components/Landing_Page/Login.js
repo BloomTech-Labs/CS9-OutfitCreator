@@ -21,7 +21,9 @@ class Login extends React.Component {
           
         axios.post(`${ROOT_URL.API}/auth/signup`, { username, password, email })
             .then(res => {
-                this.toggle('2');
+                localStorage.setItem('authToken', `Bearer ${res.data.token}`);
+                // Redirect to create page once logged in
+                window.location = `${ROOT_URL.WEB}/Create`;
             })
             .catch(err => {
               alert('Failed to sign up. Please try again.');
