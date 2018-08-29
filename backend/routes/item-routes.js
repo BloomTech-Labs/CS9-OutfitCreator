@@ -59,7 +59,7 @@ router.post("/", (req, res) => {
 });
 
 // Get all items for a user
-router.get("/:user", (req, res) => {
+router.get("/user/:user", (req, res) => {
   const user = req.params.user;
   Item.find({
     user
@@ -77,11 +77,11 @@ router.get("/:user", (req, res) => {
 router.get("/type/:user/:type", (req, res) => {
   const { user, type } = req.params;
   Item.find({
-    user
+    user,
   })
     .populate()
     .then(items => {
-      const filteredItems = items.filter((item) => (item.type === type))
+      const filteredItems = items.filter((item) => (item.type == type))
       res.status(200).json(filteredItems);
     })
     .catch(err => {

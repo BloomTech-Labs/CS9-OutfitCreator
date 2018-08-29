@@ -1,0 +1,29 @@
+.closet-text {}
+
+.closet-menu {}
+
+.closet-button {
+    margin: 10px 5px;
+}
+
+.closet-cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.closet-card {
+    border: solid 3px var(--dark-purple);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background: var(--tan);
+}
+
+.closet-image {
+    border-radius: 5px;
+    width: 150px;
+    height: 90px;
+    overflow: hidden;
+}
