@@ -19,11 +19,10 @@ router.get("/info/:id", restricted, (req, res) => {
 // Edit a User's profile data
 router.post("/info/:id", restricted, (req, res) => {
   const id = req.params.id;
-  const { email, phone, rEmails, rTexts } = req.body;
-  User.findByIdAndUpdate(id, {
-
-          rEmails: re
-      })
+  const updatedInfo = { ...req.body };
+  console.log(updatedInfo);
+  
+  User.findByIdAndUpdate(id, updatedInfo)
       .then(user => {
           res.status(201).json(user)
       })
