@@ -11,7 +11,7 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeTab: '1',
+            activeTab: '2',
             username: '',
             password: '',
             email: ''
@@ -21,11 +21,14 @@ class Login extends React.Component {
     signUp = () => {
         const { username, password, email } = this.state;
           
-        axios.post(`${ROOT_URL.API}/auth/signup`, { username, password })
+        axios.post(`${ROOT_URL.API}/auth/signup`, { username, password, email })
             .then(res => {
-                this.toggle('2');
+                localStorage.setItem('authToken', `Bearer ${res.data.token}`);
+                // Redirect to create page once logged in
+                window.location = `${ROOT_URL.WEB}/Create`;
             })
             .catch(err => {
+              alert('Failed to sign up. Please try again.');
               console.log(err);
             });
     }
@@ -34,12 +37,14 @@ class Login extends React.Component {
         const { username, password } = this.state;
         axios.post(`${ROOT_URL.API}/auth/login`, { username, password })
             .then(res => {
-                this.props.onSignin(res.data);
-              // Redirect to create page once logged in
-              window.location = `${ROOT_URL.WEB}/Create`;
+                // this.props.onSignin(res.data);
+                localStorage.setItem('authToken', `Bearer ${res.data.token}`);
+                // Redirect to create page once logged in
+                window.location = `${ROOT_URL.WEB}/Create`;
             })
             .catch(err => {
                 // Alert for invalid credentials
+                alert('Invalid Credentials');
                 localStorage.removeItem('token');
             });
     }

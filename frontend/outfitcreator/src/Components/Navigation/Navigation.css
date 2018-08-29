@@ -45,7 +45,7 @@
 }
 
 .cross .bar1 { 
-  transform: rotate(-45deg) translate(-5px, 7px);
+  transform: rotate(-45deg) translate(-6px, 7px);
 }
 
 .cross .bar3 { 
