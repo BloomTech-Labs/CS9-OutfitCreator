@@ -44,14 +44,14 @@ class Navigation extends Component {
 
     if (this.state.collapsed) {
       navMin.classList.toggle('change');
-      sideNav.style.top = '40px';
+      sideNav.style.marginTop = '-3px';
       setTimeout(() => {
         navMin.classList.toggle('cross');
       }, delay);
     } else {
       navMin.classList.toggle('cross');
       setTimeout(() => {
-        sideNav.style.top = '0px';
+        sideNav.style.marginTop = '-6px';
         navMin.classList.toggle('change');
       }, delay);
     }
@@ -63,7 +63,7 @@ class Navigation extends Component {
 
   signOut = () => {
     localStorage.removeItem('authToken');
-    window.location.reload();
+    window.location = `${ROOT_URL.WEB}/`;
   }
   
   render() {
@@ -76,10 +76,6 @@ class Navigation extends Component {
             <div className="bar3"></div>
           </div>
         </div>
-        <Breadcrumb className='navigation--breadCrumbs' tag="nav">
-          <BreadcrumbItem tag="a" href="/">Home</BreadcrumbItem>
-          <BreadcrumbItem active tag="span">{this.props.location.pathname.slice(1)}</BreadcrumbItem>
-        </Breadcrumb>
         <Nav className='navigation--sideNav'>
           <Collapse isOpen={!this.state.collapsed}>
             <NavLink href='/Create' className='Create'>Create Outfit</NavLink>
@@ -91,7 +87,10 @@ class Navigation extends Component {
             <NavLink href='/' className='SignOut' onClick={this.signOut}>Sign Out</NavLink>
           </Collapse>
         </Nav>
-        <div className='navigation--user'>{this.state.username}</div>
+        <div className='navigation--topRight'>
+          <div className='navigation--user'>{this.state.username}</div>
+          <div onClick={this.signOut} className='navigation--logout'>logout</div>
+        </div>
       </div>
     );
   }
