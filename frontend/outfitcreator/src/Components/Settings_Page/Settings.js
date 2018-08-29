@@ -35,22 +35,24 @@ class Settings extends Component {
             }
         }
 
-        axios.post(`${ROOT_URL.API}/user/info/${userID}`, this.state, requestOptions)
+        axios.put(`${ROOT_URL.API}/user/info/${userID}`, this.state, requestOptions)
             .then(res => {
+                alert('Info updated');
                 console.log(res.data);
             })
             .catch(err => {
+                alert('Failed to updated Information');
                 console.log(err);
             });
     }
-
-    changePassword() {
-
-    }
-
+    
     handleInputChange = (e) => {
         if (['rEmails', 'rTexts'].includes(e.target.name)) {
           this.setState({ [e.target.name]: e.target.checked });
+        } else if (e.target.name === 'email') {
+          const local = { ...this.state.local };
+          local.email = e.target.value;
+          this.setState({ local: local });
         } else this.setState({ [e.target.name]: e.target.value });
     }
     
