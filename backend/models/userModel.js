@@ -1,23 +1,66 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const saltRounds = 11;
 
 const UserSchema = new mongoose.Schema({
-    username: {
+    method: {
         type: String,
-        unique: true,
-        required: true,
-        lowercase: true,
+        enum: ['local', 'google', 'facebook'],
+        required: true
     },
-    password: {
-        type: String,
-        required: true,
+    local: {
+        username: {
+            type: String,
+            // unique: true,
+            lowercase: true,
+        },
+        password: {
+            type: String,
+        },
+        email: {
+            type: String,
+            lowercase: true,
+            // unique: true,
+        }
     },
-    email: {
-        type: String,
-        lowercase: true,
+    google: {
+        id: {
+            type: String
+        },
+        username: {
+            type: String,
+            // unique: true,
+            lowercase: true,
+        },
+        email: {
+            type: String,
+            lowercase: true,
+            // unique: true,
+        },
+        thumbnail: {
+            type: String
+        }
+    },
+    facebook: {
+        id: {
+            type: String
+        },
+        username: {
+            type: String,
+            // unique: true,
+            lowercase: true,
+        },
+        email: {
+            type: String,
+            lowercase: true,
+            // unique: true,
+        },
+        picture: String,
+        token: String
     },
     phone: {
         type: String,
+        unique: true,
     },
     paid: {
         type: Boolean,
@@ -34,16 +77,26 @@ const UserSchema = new mongoose.Schema({
 
 // Hash passwords when user is created
 UserSchema.pre('save', function(next) {
-    bcrypt.hash(this.password, 11, (err, hash) => {
+    console.log('entered');
+    if(this.method !== 'local') {
+        next();
+    }
+    bcrypt.hash(this.local.password, saltRounds, (err, hash) => {
         if (err) return next(err);
-        this.password = hash;
+        console.log('success');
+        this.local.password = hash;
+        console.log(this.local.password);
         next();
     });
 })
 
-// Hash password guess and check against user password
-UserSchema.methods.validPassword = function(passwordGuess) {
-  return bcrypt.compare(passwordGuess, this.password);
+// Method to check user inputted password against hashed password
+UserSchema.methods.validPassword = async function(passwordGuess) {
+    try {
+        return await bcrypt.compare(passwordGuess, this.local.password);
+    } catch(err) {
+        console.log(err);
+    }
 };
   
 

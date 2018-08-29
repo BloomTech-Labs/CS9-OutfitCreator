@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Collapse, Nav, NavLink, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { withRouter } from 'react-router';
-import './Navigation.css';
+import './Navigation.css'; 
 
 class Navigation extends Component {
   constructor(props) {
@@ -39,6 +39,7 @@ class Navigation extends Component {
 
   signOut = () => {
     localStorage.removeItem('authToken');
+    window.location.reload();
   }
   
   render() {
