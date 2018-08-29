@@ -19,14 +19,13 @@ class SignUp extends React.Component {
           
         axios.post(`${ROOT_URL.API}/local-auth/signup`, { username, password })
             .then(res => {
-              // Redirect to create page once logged in
-            //   this.props.history.push(`/signin`);
-                console.log("Successfully signed up");
-                // window.location = 'http://localhost:3000/Create';
+                // Redirect to create page once logged in
+                localStorage.setItem('authToken', `Bearer ${res.data.token}`);
+                window.location = `${ROOT_URL.WEB}/Create`;
             })
             .catch(err => {
-              // Alert message for failed user creation
-              alert('Failed to sign up. Username taken.')
+                // Alert message for failed user creation
+                alert('Failed to sign up. Please try again.')
             });
     }
 
