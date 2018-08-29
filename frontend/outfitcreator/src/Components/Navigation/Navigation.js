@@ -84,7 +84,6 @@ class Navigation extends Component {
             <NavLink href='/Archive' className='Archive'>Archive</NavLink>
             <NavLink href='/Settings' className='Settings'>Settings</NavLink>
             <NavLink href='/Billing' className='Billing'>Billing</NavLink>
-            <NavLink href='/' className='SignOut' onClick={this.signOut}>Sign Out</NavLink>
           </Collapse>
         </Nav>
         <div className='navigation--topRight'>
