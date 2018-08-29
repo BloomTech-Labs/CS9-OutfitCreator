@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faShareAlt } from '@fortawesome/free-solid-svg-icons';
 
-
 import Landing from './Components/Landing_Page/Landing';
 import Login from './Components/Landing_Page/Login';
 import Navigation from './Components/Navigation/Navigation';
@@ -41,8 +40,12 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Route exact path='/' render={props => <Landing {...props} onSignin={this.signInSuccess} />} />
-          <Route exact path='/login' render={props => <Login {...props} onSignin={this.signInSuccess} />} />
+          <Route exact path='/' render={props => 
+            <Landing {...props} onSignin={this.signInSuccess} />
+          } />
+          <Route exact path='/login' render={props => 
+            <Login {...props} onSignin={this.signInSuccess} />
+          } />
           <Route path='/Create' render={props =>
             <div className='App--create'>
               <Create {...props} getUserID={this.getUserID} />
@@ -57,7 +60,7 @@ class App extends Component {
           } />
           <Route path='/Settings' render={props =>
             <div>
-              <Settings />
+              <Settings tokenData={this.tokenData} />
               <Navigation tokenData={this.tokenData} />
             </div>
           } />
