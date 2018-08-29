@@ -44,6 +44,33 @@ li {
     margin-right: auto;
 }
 
+.landingPage--login-nav{
+    margin: 10px;
+}
+
+.login--button {
+    background: var(--med-purple);
+    border: solid 3px var(--dark-purple);
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.login--button:hover {
+    background: var(--dark-purple);
+    border: solid 3px var(--dark-purple);
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.input--login {
+    padding: 10px;
+    margin: 10px;
+    background-color: var(--light-purple);
+    color: var(--dark-purple);
+    border: 3px solid var(--dark-purple);
+    border-radius: 5px;
+}
+
 .landingPage--animations {
     border: 1px solid blue;
     height: 1500px;
