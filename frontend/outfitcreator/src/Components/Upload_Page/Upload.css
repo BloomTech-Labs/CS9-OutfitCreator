@@ -121,3 +121,9 @@ input[type=checkbox] {
 /* .inputfile + label * {
 	pointer-events: none;
 } */
+
+@media screen and (max-width: 900px) {
+    .upload--columns {
+      width: 50vw;
+  }
+}
