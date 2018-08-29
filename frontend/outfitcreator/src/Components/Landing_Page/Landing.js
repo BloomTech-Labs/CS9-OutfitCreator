@@ -19,7 +19,6 @@ class Landing extends Component {
     render() {
         return (
             <div className="container--landingPage">
-                <img src="./landing.jpg"></img>
                 <div className='landingPage--modals'>
                     {/* <SignUp /> */}
                     {/* <Route exact path='/signin' render={props => <SignIn {...props} onSignin={this.props.onSignin} />} /> */}

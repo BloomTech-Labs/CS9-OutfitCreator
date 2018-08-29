@@ -5,7 +5,9 @@
     height: 100%;
     min-width: 500px;
     padding-top: 20px;
-    background-image: "./landing.jpg";
+    background-image: url("./landing.jpg");
+    background-position: top;
+    background-size: cover;
 }
 
 .landingPage--modals {
