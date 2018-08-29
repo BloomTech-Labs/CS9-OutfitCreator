@@ -135,8 +135,8 @@ class Settings extends Component {
                       </Col>
                   </FormGroup>
                   <FormGroup check row>
-                      <Col sm={{ size: 10, offset: 2 }}>
-                          <Button onClick={this.updateUserInfo}>Save</Button>
+                      <Col sm={{ size: 10, offset: 4 }}>
+                          <Button className="settings--save" onClick={this.updateUserInfo}>Save</Button>
                       </Col>
                     </FormGroup>
                 </Form>
