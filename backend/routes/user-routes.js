@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const passport = require("passport");
+const bcrypt = require("bcrypt");
 
 const { restricted } = require("../config/passport-setup");
 const User = require("../models/userModel");
@@ -17,18 +18,30 @@ router.get("/info/:id", restricted, (req, res) => {
 });
 
 // Edit a User's profile data
-router.post("/info/:id", restricted, (req, res) => {
-  const id = req.params.id;
-  const updatedInfo = { ...req.body };
-  console.log(updatedInfo);
-  
-  User.findByIdAndUpdate(id, updatedInfo)
-      .then(user => {
-          res.status(201).json(user)
-      })
-      .catch(err => {
-          res.send(500).json({error: err.message});
-      });
+router.put("/info/:id", restricted, async (req, res) => {
+    const id = req.params.id;
+    const settingsInfo = { ...req.body };
+    console.log(settingsInfo);
+
+    await User.findById(id)
+        .then(async user => {
+            const match = await user.validPassword(settingsInfo.oldPassword);
+            console.log(match);
+            if (match) {
+              settingsInfo.local.password = await user.newPassword(settingsInfo.newPassword);
+            }
+
+            User.findByIdAndUpdate(id, settingsInfo)
+              .then(user => {
+                  res.status(201).json(user)
+              })
+              .catch(err => {
+                  res.status(500).json({error: err.message});
+              });
+        })
+        .catch(err => {
+            console.log(err);
+       });
 });
 
 // Mark a user as subscribed
