@@ -5,6 +5,7 @@
     height: 100%;
     min-width: 500px;
     padding-top: 20px;
+    background-image: "./landing.jpg";
 }
 
 .landingPage--modals {
