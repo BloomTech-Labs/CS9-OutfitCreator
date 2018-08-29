@@ -9,6 +9,7 @@ class ClosetCard extends React.Component {
             <div className="closet-card">
                 <h3>{this.props.item.name}</h3>
                 {this.props.item.tags.map(tag => <span className="closet-tag">{tag}</span>)}
+                <img className="closet-image" src={this.props.item.image} />
             </div>
         )
     }

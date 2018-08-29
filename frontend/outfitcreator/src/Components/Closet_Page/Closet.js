@@ -37,7 +37,7 @@ class Closet extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="closet">
                 <div className="closet-text">
                     <h1>My Closet</h1>
                     <p>Here, you can view all the items you've already uploaded. Click a category to get started:</p>
