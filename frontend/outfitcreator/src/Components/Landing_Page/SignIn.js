@@ -19,12 +19,13 @@ class SignIn extends React.Component {
         axios.post(`${ROOT_URL.API}/local-auth/login`, { username, password })
             .then(res => {
                 // Redirect to create page once logged in
+                alert('Failed to sign up. Please try again.')
                 localStorage.setItem('authToken', `Bearer ${res.data.token}`);
                 window.location = `${ROOT_URL.WEB}/Create`;
-                
             })
             .catch(err => {
                 // Alert for invalid credentials
+                alert('Invalid Credentials')
                 localStorage.removeItem('token');
             });
     }

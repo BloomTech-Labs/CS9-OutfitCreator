@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Collapse, Nav, NavLink, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { withRouter } from 'react-router';
+import { ROOT_URL } from '../../config.js';
+import axios from 'axios';
 import './Navigation.css'; 
 
 class Navigation extends Component {
@@ -9,14 +11,36 @@ class Navigation extends Component {
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
-      collapsed: true
+      collapsed: true,
+      username: ''
     };
+  }
+
+  componentDidMount() {
+    const token = this.props.tokenData();
+
+    if (token) {
+      const userID = token.sub;
+      const authToken = localStorage.getItem('authToken');
+      const requestOptions = {
+          headers: { Authorization: authToken }
+      }
+  
+      axios.get(`${ROOT_URL.API}/user/info/${userID}`, requestOptions)
+          .then(res => {
+              console.log(res.data);
+              this.setState({ username: res.data.local.username });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+    }
   }
 
   toggleNavbar() {
     const navMin = document.querySelector('.navigation--minimize');
     const sideNav = document.querySelector('.navigation--sideNav');
-    const delay = 200;
+    const delay = 250;
 
     if (this.state.collapsed) {
       navMin.classList.toggle('change');
@@ -58,8 +82,8 @@ class Navigation extends Component {
         </Breadcrumb>
         <Nav className='navigation--sideNav'>
           <Collapse isOpen={!this.state.collapsed}>
-            <NavLink href='/Create' className='Create'>Create</NavLink>
-            <NavLink href='/Upload' className='Upload'>Upload</NavLink>
+            <NavLink href='/Create' className='Create'>Create Outfit</NavLink>
+            <NavLink href='/Upload' className='Upload'>Upload Item</NavLink>
             <NavLink href='/Closet' className='Closet'>My Closet</NavLink>
             <NavLink href='/Archive' className='Archive'>Archive</NavLink>
             <NavLink href='/Settings' className='Settings'>Settings</NavLink>
@@ -67,9 +91,7 @@ class Navigation extends Component {
             <NavLink href='/' className='SignOut' onClick={this.signOut}>Sign Out</NavLink>
           </Collapse>
         </Nav>
-        { this.props.tokenData() ?
-        <div className='navigation--user'>{this.props.tokenData().username}</div>
-        : <div className='navigation--user'>...</div> }
+        <div className='navigation--user'>{this.state.username}</div>
       </div>
     );
   }

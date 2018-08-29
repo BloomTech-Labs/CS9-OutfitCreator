@@ -11,16 +11,18 @@ const UserSchema = new mongoose.Schema({
     local: {
         username: {
             type: String,
-            // unique: true,
+            unique: true,
             lowercase: true,
+            required: true,
         },
         password: {
             type: String,
+            required: true,
         },
         email: {
             type: String,
             lowercase: true,
-            // unique: true,
+            unique: true,
         }
     },
     google: {
@@ -60,7 +62,7 @@ const UserSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        unique: true,
+        default: '',
     },
     paid: {
         type: Boolean,
@@ -72,7 +74,17 @@ const UserSchema = new mongoose.Schema({
     },
     stripe_sub: {
         type: String,
-    }
+    },
+    rEmails: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+    rTexts: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
 });
 
 // Hash passwords when user is created
@@ -94,6 +106,14 @@ UserSchema.pre('save', function(next) {
 UserSchema.methods.validPassword = async function(passwordGuess) {
     try {
         return await bcrypt.compare(passwordGuess, this.local.password);
+    } catch(err) {
+        console.log(err);
+    }
+};
+
+UserSchema.methods.newPassword = async function(password) {
+    try {
+        return await bcrypt.hash(password, saltRounds);
     } catch(err) {
         console.log(err);
     }
