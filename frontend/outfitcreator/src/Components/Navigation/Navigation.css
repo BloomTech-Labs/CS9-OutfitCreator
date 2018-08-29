@@ -54,6 +54,7 @@
   flex-flow: column;
   margin-top: -6px;
   margin-left: -3px;
+  position: absolute;
   width: 150px;
 }
 
