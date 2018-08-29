@@ -39,8 +39,12 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Route exact path='/' render={props => <Landing {...props} onSignin={this.signInSuccess} />} />
-          <Route exact path='/login' render={props => <Login {...props} onSignin={this.signInSuccess} />} />
+          <Route exact path='/' render={props => 
+            <Landing {...props} onSignin={this.signInSuccess} />
+          } />
+          <Route exact path='/login' render={props => 
+            <Login {...props} onSignin={this.signInSuccess} />
+          } />
           <Route path='/Create' render={props =>
             <div className='App--create'>
               <Create {...props} getUserID={this.getUserID} />
