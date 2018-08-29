@@ -13,44 +13,49 @@ class Settings extends Component {
     componentDidMount() {
       const userID = this.props.tokenData().sub;
       const authToken = localStorage.getItem('authToken');
-        const requestOptions = {
-            headers: {
-                Authorization: authToken
-            }
-        }
+      const requestOptions = {
+          headers: { Authorization: authToken }
+      }
 
       axios.get(`${ROOT_URL.API}/user/info/${userID}`, requestOptions)
           .then(res => {
-              console.log(res.data);
-              this.setState({
-                  email: res.data.email,
-                  phone: '',
-                  rEmails: false,
-                  rTexts: false
-              });
+              this.setState(res.data);
           })
           .catch(err => {
             console.log(err);
           });
     }
 
-    updateUserInfo() {
+    updateUserInfo = () => {
+        const userID = this.props.tokenData().sub;
+        const authToken = localStorage.getItem('authToken');
+        const requestOptions = {
+            headers: {
+                Authorization: authToken
+            }
+        }
 
+        axios.post(`${ROOT_URL.API}/user/info/${userID}`, this.state, requestOptions)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     changePassword() {
-      
+
     }
 
     handleInputChange = (e) => {
         if (['rEmails', 'rTexts'].includes(e.target.name)) {
-          console.log(e.target.checked);
           this.setState({ [e.target.name]: e.target.checked });
         } else this.setState({ [e.target.name]: e.target.value });
     }
     
     render() {
-        return (
+      return this.state.local ?
             <div className="settingsContainer">
                 <Form>
                   <FormGroup row>
@@ -61,7 +66,7 @@ class Settings extends Component {
                               name="email" 
                               id="userEmail" 
                               placeholder="user@gmail.com"
-                              value={ this.state ? this.state.email : '' }
+                              value={this.state.local.email}
                               onChange={this.handleInputChange}
                           />
                       </Col>
@@ -74,7 +79,7 @@ class Settings extends Component {
                               name="phone" 
                               id="userPhone" 
                               placeholder="555-789-1234"
-                              value={ this.state ? this.state.phone : '' }
+                              value={this.state.phone}
                               onChange={this.handleInputChange}
                           />
                       </Col>
@@ -84,7 +89,7 @@ class Settings extends Component {
                           <Input 
                               type="checkbox"
                               name="rEmails"
-                              checked={this.state ? this.state.rEmails : false }
+                              checked={this.state.rEmails}
                               onClick={this.handleInputChange}
                           />
                           Emails?
@@ -95,7 +100,7 @@ class Settings extends Component {
                           <Input 
                               type="checkbox"
                               name="rTexts"
-                              checked={this.state ? this.state.rTexts : false }
+                              checked={this.state.rTexts}
                               onClick={this.handleInputChange}
                           />
                           Texts?
@@ -109,6 +114,7 @@ class Settings extends Component {
                               name="oldPassword" 
                               id="userOldPassword" 
                               placeholder="Enter old password"
+                              value={this.state.oldPassword}
                               onChange={this.handleInputChange} 
                           />
                       </Col>
@@ -121,18 +127,19 @@ class Settings extends Component {
                               name="newPassword" 
                               id="userNewPassword" 
                               placeholder="Enter new password"
+                              value={this.state.newPassword}
                               onChange={this.handleInputChange} 
                           />
                       </Col>
                   </FormGroup>
                   <FormGroup check row>
                       <Col sm={{ size: 10, offset: 2 }}>
-                          <Button>Save</Button>
+                          <Button onClick={this.updateUserInfo}>Save</Button>
                       </Col>
                     </FormGroup>
                 </Form>
             </div>
-        )
+        : <div>Loading...</div> ;
     }
 };
 
