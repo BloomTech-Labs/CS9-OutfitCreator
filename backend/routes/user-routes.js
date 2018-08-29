@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const passport = require("passport");
-const bcrypt = require("bcrypt");
 
 const { restricted } = require("../config/passport-setup");
 const User = require("../models/userModel");
