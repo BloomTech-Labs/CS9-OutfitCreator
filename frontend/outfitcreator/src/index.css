@@ -8,6 +8,9 @@
 
 html, body, body #root {
   background: var(--med-purple);
+  background-image: linear-gradient(var(--dark-purple), var(--med-purple));
+  background-size: cover;
+  background-repeat: no-repeat;
   box-sizing: border-box;
   font-family: sans-serif;
   height: 100%;
