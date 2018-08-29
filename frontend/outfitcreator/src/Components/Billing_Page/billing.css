@@ -1,14 +1,14 @@
 .container--billing {
+  background: white;
+  border-radius: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  position: absolute;
   left: 50px;
   max-width: 70vw;
   margin-top: 4.5em;
-  width: 400px;
-  margin-left: 10em;
+  padding: 40px;
 }
 
 .StripeElement {
