@@ -17,20 +17,24 @@ class Navigation extends Component {
   }
 
   componentDidMount() {
-    const userID = this.props.tokenData().sub;
-    const authToken = localStorage.getItem('authToken');
-    const requestOptions = {
-        headers: { Authorization: authToken }
-    }
+    const token = this.props.tokenData();
 
-    axios.get(`${ROOT_URL.API}/user/info/${userID}`, requestOptions)
-        .then(res => {
-            console.log(res.data);
-            this.setState({ username: res.data.local.username });
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    if (token) {
+      const userID = token.sub;
+      const authToken = localStorage.getItem('authToken');
+      const requestOptions = {
+          headers: { Authorization: authToken }
+      }
+  
+      axios.get(`${ROOT_URL.API}/user/info/${userID}`, requestOptions)
+          .then(res => {
+              console.log(res.data);
+              this.setState({ username: res.data.local.username });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+    }
   }
 
   toggleNavbar() {
