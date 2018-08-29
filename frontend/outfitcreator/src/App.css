@@ -8,3 +8,18 @@
 ul {
   list-style: none;
 }
+
+.button{
+  background: var(--med-purple);
+  color: var(--pale-purple);
+  border: solid 3px var(--dark-purple);
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.button:hover {
+  background: var(--dark-purple);
+  border: solid 3px var(--dark-purple);
+  border-radius: 10px;
+  margin: 10px;
+}

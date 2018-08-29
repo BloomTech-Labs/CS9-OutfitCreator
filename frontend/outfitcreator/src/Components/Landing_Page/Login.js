@@ -121,7 +121,7 @@ class Login extends React.Component {
                         value={this.state.password}
                         onChange={this.handleInputChange}
                     /><br/>
-                    <Button className="login--button" onClick={this.signUp}>Sign Up</Button>
+                    <Button className="button" onClick={this.signUp}>Sign Up</Button>
                 </form>
                 <div>
                     <a href={`${ROOT_URL.API}/auth/google`}><GoogleLoginButton/></a>
@@ -156,7 +156,7 @@ class Login extends React.Component {
                         value={this.state.password}
                         onChange={this.handleInputChange}
                     /><br/>
-                    <Button className="login--button" onClick={this.signIn}>Sign In</Button>
+                    <Button className="button" onClick={this.signIn}>Sign In</Button>
                 </form>
                 <div>
                     <a href={`${ROOT_URL.API}/auth/google.png`}><GoogleLoginButton/></a>
