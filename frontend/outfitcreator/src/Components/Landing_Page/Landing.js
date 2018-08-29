@@ -44,25 +44,13 @@ class Landing extends Component {
                     </div>
                 </div> */}
                 
-                <div className='landingPage--description'>
-                    <h1>Outfit Maker</h1>
-                    <div className='description--opening'>The easy way to:</div>
-                    <ul className='description--list'>
-                        <li className='list--item'>
-                            - Keep track of your favorite styles
-                        </li>
-                        <li className='list--item'>
-                            - Remember when an outfit was last worn
-                        </li>
-                        <li className='list--item'>
-                            - See different combinations without messing up your closet
-                        </li>
-                    </ul>
-                    <div className='description--closing'>AND we can even randomize your options to try and come up with new combinations!</div>
+                <div>
+                    <div className="landingPage--app-title">Closet Roulette</div>
+                    <div className="landingPage--description">Find your next style without messing up your closet!</div>
                 </div>
                 <div className='landingPage--button'>
-                    <Link to='/Create'>
-                        <Button color='success'>Check it out </Button>
+                    <Link to='/login'>
+                        <Button className='get-started--button'>Check it out </Button>
                     </Link>
                 </div>
             </div>

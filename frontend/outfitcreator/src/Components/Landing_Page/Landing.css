@@ -17,46 +17,40 @@
     margin-bottom: 50px;
 }
 
-.description--opening {
-  margin-top: 20px;
-}
-
 .landingPage--description {
     display: flex;
     flex-direction: column;
-    margin-bottom: 50px;
-}
-
-.landingPage--description * {
-  margin-top: 5px;
-}
-
-.description--list {
-    align-self: center;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.list--item {
-    align-self: center;
-}
-
-li {
-    margin-right: auto;
+    font-size: 1.75em;
+    font-weight: bold;
+    font-family: 'Nothing You Could Do', cursive;
 }
 
 .landingPage--login-nav{
     margin: 10px;
 }
 
-.login--button {
-    background: var(--med-purple);
-    border: solid 3px var(--dark-purple);
+.landingPage--app-title{
+    font-family: 'Homemade Apple', cursive;
+    font-size: 3em;
+    color: var(--dark-purple);
+}
+
+.get-started--button {
+    background: var(--dark-purple);
+    border: 2px solid var(--dark-purple);
+    border-radius: 10px;
+    margin: 10px;
+    font-weight: bold;
+    color: var(--pale-purple);
+}
+
+.get-started--button:hover {
+    background: var(--light-purple);
+    border: 2px solid var(--dark-purple);
     border-radius: 10px;
     margin: 10px;
     color: var(--dark-purple);
+    font-weight: bold;
 }
 
 .login--button:hover {
