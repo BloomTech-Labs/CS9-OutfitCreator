@@ -6,6 +6,7 @@ const User = require("../models/userModel");
 
 // Get a User's profile data
 router.get("/info/:id", restricted, (req, res) => {
+    console.log(req.params.id);
     const id = req.params.id;
     User.findById(id)
         .then(user => {

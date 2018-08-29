@@ -22,7 +22,14 @@ class Archive extends React.Component {
     }
 
     getOutfits = () => {
-        axios.get(`${ROOT_URL.API}/outfits/${testUser}/`)
+        const user = this.props.getUserID();
+        const authToken = localStorage.getItem('authToken');
+        const requestOptions = {
+            headers: {
+                Authorization: authToken
+            }
+        }
+        axios.get(`${ROOT_URL.API}/outfits/${user}/`, requestOptions)
             .then(response => { 
 
                 this.setState({ myOutfits: response.data })

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Collapse, Nav, NavLink, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { withRouter } from 'react-router';
-import './Navigation.css'; 
+import './Navigation.css';
+
+import { ROOT_URL } from '../../config';
 
 class Navigation extends Component {
   constructor(props) {
@@ -9,9 +12,24 @@ class Navigation extends Component {
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
-      collapsed: true
+      collapsed: true,
+      user: '',
     };
+    this.user = '';
   }
+
+  componentDidMount() {
+    const userID = this.props.tokenData().sub;
+    console.log(userID)
+    axios.get(`${ROOT_URL.API}/user/info/${userID}`)
+      .then(response => {
+        console.log(response);
+        this.user = response.data.local.username;
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }  
 
   toggleNavbar() {
     const navMin = document.querySelector('.navigation--minimize');
@@ -41,12 +59,13 @@ class Navigation extends Component {
     localStorage.removeItem('authToken');
     window.location.reload();
   }
-  
+
   render() {
+    console.log(this.props)
     return (
       <div className='navigation--container'>
         <div className='navigation--dresser'>
-           <div className='navigation--minimize' onClick={this.toggleNavbar}>
+          <div className='navigation--minimize' onClick={this.toggleNavbar}>
             <div className="bar1"></div>
             <div className="bar2"></div>
             <div className="bar3"></div>
@@ -67,9 +86,9 @@ class Navigation extends Component {
             <NavLink href='/' className='SignOut' onClick={this.signOut}>Sign Out</NavLink>
           </Collapse>
         </Nav>
-        { this.props.tokenData() ?
-        <div className='navigation--user'>{this.props.tokenData().username}</div>
-        : <div className='navigation--user'>...</div> }
+        {this.props.username ?
+          <div className='navigation--user'>{this.props.username}</div>
+          : <div className='navigation--user'>...</div>}
       </div>
     );
   }

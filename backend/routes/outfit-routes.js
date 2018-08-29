@@ -5,7 +5,7 @@ const Outfit = require("../models/outfitModel");
 
 
 // Add a new outfit to the database
-router.post("/", restricted, (req, res) => {
+router.post("/", (req, res) => {
   const { user, name, tags, worn, top, bottom, shoes } = req.body;
   Outfit.create({ user, name, tags, worn, top, bottom, shoes })
     .then(outfit => {

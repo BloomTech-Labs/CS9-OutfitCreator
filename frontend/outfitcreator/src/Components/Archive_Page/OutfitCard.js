@@ -14,8 +14,10 @@ class OutfitCard extends React.Component {
     render() {
         const { key, name, src, lastWorn } = this.props;
         let worn = 'Never Worn';
-        if (lastWorn) {
-            worn = lastWorn.split('T')[0]
+        if (lastWorn.length > 0) {
+            let worn = lastWorn[0];
+            console.log(worn);
+            // worn = lastWorn[0].split('T')[0]
         }
         return (
             <div className='container--card' key={key}>

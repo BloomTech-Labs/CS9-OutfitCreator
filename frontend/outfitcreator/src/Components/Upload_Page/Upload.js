@@ -47,6 +47,10 @@ class Upload extends Component {
                 cloud_name: 'cloudtesting',
                 api_key: CLOUD_API,
                 upload_preset: 'default',
+                multiple: false,
+                cropping: 'server',
+                cropping_show_dimensions: true,
+                cropping_show_back_button: true,
                 sources: ['local', 'url', 'camera', 'image_search', 'instagram', 'facebook'],
                 theme: 'purple'
             },
@@ -66,7 +70,6 @@ class Upload extends Component {
     }
 
     saveTest = event => {
-        event.preventDefault();
         console.log(this.state);
     }
 
@@ -79,7 +82,8 @@ class Upload extends Component {
         })
             .then(response => {
                 console.log(response);
-                this.setState({ image: '', name: '', tags: [], type: 'top' });
+                this.setState({ image: '', name: '', tags: [] });
+                this.saveTest();
             })
             .catch(error => {
                 console.log(error);
