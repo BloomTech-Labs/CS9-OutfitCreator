@@ -13,6 +13,7 @@ import Archive from './Components/Archive_Page/Archive';
 import Settings from './Components/Settings_Page/Settings';
 import Billing from './Components/Billing_Page/Billing';
 import OutfitEdit from './Components/Archive_Page/OutfitEdit';
+import Closet from './Components/Closet_Page/Closet.js';
 import './App.css';
 
 library.add(faShareAlt);
@@ -75,6 +76,12 @@ class App extends Component {
           <Route path='/Edit' render={props =>
             <div>
               <OutfitEdit />
+              <Navigation tokenData={this.tokenData} />
+            </div>
+          } />
+          <Route path='/Closet' render={props =>
+            <div>
+              <Closet {...props} getUserID={this.getUserID}/>
               <Navigation tokenData={this.tokenData} />
             </div>
           } />
