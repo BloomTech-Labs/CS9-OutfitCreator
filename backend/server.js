@@ -1,5 +1,6 @@
 const express = require("express");
 const helmet = require("helmet");
+const morgan = require("morgan");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
@@ -12,7 +13,7 @@ require("dotenv").config();
 const passport = require("passport");
 // const passportSetup = require("./config/passport-setup");
 
-const localAuthRoutes = require("./routes/local-auth-routes");
+// const localAuthRoutes = require("./routes/local-auth-routes");
 const authRoutes = require("./routes/auth-routes");
 const profileRoutes = require("./routes/profile-routes");
 const stripeRoutes = require("./routes/stripe-routes");
@@ -44,6 +45,8 @@ const corsOptions = {
 server.use(cors(corsOptions));
 server.use(helmet());
 server.use(express.urlencoded({ extended:false }));
+server.use(morgan('dev'));
+server.use(passport.initialize());
 server.use(express.json());
 
 // //set up cookie-session
@@ -92,7 +95,7 @@ server.get("/", (req, res) => {
 
 
 // set up routes
-server.use("/local-auth", localAuthRoutes);
+// server.use("/local-auth", localAuthRoutes);
 server.use("/auth", authRoutes);
 server.use("/profile", profileRoutes);
 server.use("/pay", stripeRoutes);
