@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Collapse, Nav, NavLink, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { withRouter } from 'react-router';
+import { ROOT_URL } from '../../config.js';
+import axios from 'axios';
 import './Navigation.css'; 
 
 class Navigation extends Component {
@@ -9,8 +11,26 @@ class Navigation extends Component {
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
-      collapsed: true
+      collapsed: true,
+      username: ''
     };
+  }
+
+  componentDidMount() {
+    const userID = this.props.tokenData().sub;
+    const authToken = localStorage.getItem('authToken');
+    const requestOptions = {
+        headers: { Authorization: authToken }
+    }
+
+    axios.get(`${ROOT_URL.API}/user/info/${userID}`, requestOptions)
+        .then(res => {
+            console.log(res.data);
+            this.setState({ username: res.data.local.username });
+        })
+        .catch(err => {
+          console.log(err);
+        });
   }
 
   toggleNavbar() {
@@ -66,9 +86,7 @@ class Navigation extends Component {
             <NavLink href='/' className='SignOut' onClick={this.signOut}>Sign Out</NavLink>
           </Collapse>
         </Nav>
-        { this.props.tokenData() ?
-        <div className='navigation--user'>{this.props.tokenData().username}</div>
-        : <div className='navigation--user'>...</div> }
+        <div className='navigation--user'>{this.state.username}</div>
       </div>
     );
   }
