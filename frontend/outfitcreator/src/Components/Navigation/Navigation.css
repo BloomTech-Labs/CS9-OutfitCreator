@@ -68,7 +68,7 @@
 
 .navigation--sideNav * {
   color: white;
-  padding: 15px 0;
+  padding: 7px 0px;
   text-align: center;
 }
 
@@ -97,4 +97,30 @@
 .navigation--logout {
   cursor: pointer;
   text-decoration: underline;
+}
+
+.nav--item {
+  background: var(--med-purple);
+  border: solid 2px var(--med-purple);
+  font-family: 'Homemade Apple', cursive;
+  font-weight: bold;
+  text-shadow:
+    -1px -1px var(--pale-purple),
+    1px -1px var(--pale-purple),
+    -1px 1px var(--pale-purple),
+    1px 1px var(--pale-purple);
+  color: var(--dark-purple);
+}
+
+.nav--item:hover {
+  background: var(--med-purple);
+  border: solid 2px var(--med-purple);
+  font-family: 'Homemade Apple', cursive;
+  font-weight: bold;
+  text-shadow:
+    -1px -1px white,
+    1px -1px white,
+    -1px 1px white,
+    1px 1px white;
+    color: var(--dark-purple);
 }
