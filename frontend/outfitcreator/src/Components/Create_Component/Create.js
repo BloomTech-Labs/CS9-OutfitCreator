@@ -36,6 +36,7 @@ class Create extends Component {
     }
 
     componentDidMount() {
+        this.setAuthToken();
         const user = this.props.getUserID();
         const authToken = localStorage.getItem('authToken');
         const requestOptions = {
@@ -65,9 +66,9 @@ class Create extends Component {
     randomize = () => {
         const { allTops, allBottoms, allShoes } = this.state;
         let selectedTop, selectedBottom, selectedShoe;
-        let selectedTopTags = [];
-        let selectedBottomTags = [];
-        let selectedShoeTags = [];
+        // let selectedTopTags = [];
+        // let selectedBottomTags = [];
+        // let selectedShoeTags = [];
         if (allTops.length > 0) {
             selectedTop = allTops[Math.floor(Math.random() * allTops.length)];
             // selectedTopTags = selectedTop.tags;
@@ -86,7 +87,7 @@ class Create extends Component {
 
     // method to retrieve a single random item
     randomizeSingle = (event) => {
-        const { allTops, allBottoms, allShoes, selectedTop, selectedBottom, selectedShoe } = this.state;
+        const { allTops, allBottoms, allShoes } = this.state;
 
         if (event.target.parentNode.classList.contains('top')) {
             const selectedTop = allTops[Math.floor(Math.random() * allTops.length)];
@@ -118,20 +119,15 @@ class Create extends Component {
         const bottom = [selectedBottom._id];
         const shoes = selectedShoe._id;
         const outfit = { user, name, worn, tags, top, bottom, shoes };
-        console.log(outfit);
         axios
             .post(`${ROOT_URL.API}/outfits`, outfit)
-            .then(savedOutfit => {
-                console.log(savedOutfit);
-                this.props.history.push('/Archive');
-            })
+            .then(() => this.props.history.push('/Archive'))
             .catch(err => {
                 console.log(err);
             });
     };
 
     render() {
-        // this.setAuthToken();
         const { selectedTop, selectedBottom, selectedShoe } = this.state;
         let topImage, bottomImage, shoeImage;
         if (!selectedTop) {
