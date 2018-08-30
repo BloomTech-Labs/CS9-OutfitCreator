@@ -50,7 +50,6 @@ router.put('/:user/:id', (req, res) => {
   const newInfo = req.body;
   Outfit.findByIdAndUpdate(id, newInfo)
   .then(outfit => {
-    console.log(outfit)
     res.status(200).json(outfit);
   })
   .catch(err => {
