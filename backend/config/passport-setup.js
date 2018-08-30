@@ -85,7 +85,8 @@ const googleStrategy = new GoogleStrategy({
           thumbnail: profile._json.image.url,
         }
       })
-      .save()
+      newUser.local.email = profile.emails[0].value;
+      newUser.save()
       .then(newUser => {
         done(null, newUser);
       });
