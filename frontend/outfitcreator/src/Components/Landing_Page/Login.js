@@ -33,8 +33,8 @@ class Login extends React.Component {
         axios.post(`${ROOT_URL.API}/auth/login`, { email, password })
             .then(res => {
                 this.props.onSignin(res.data);
-              // Redirect to create page once logged in
-              window.location = `${ROOT_URL.WEB}/Create`;
+                // Redirect to create page once logged in
+                window.location = `${ROOT_URL.WEB}/Create`;
             })
             .catch(err => {
                 // Alert for invalid credentials
@@ -90,7 +90,7 @@ class Login extends React.Component {
                     <a href={`${ROOT_URL.API}/auth/google`}><Button color='success'>Sign Up with Google</Button></a>
                 </div>
                 <div>
-                    <Button color='success'>Sign Up with Facebook</Button>
+                    <a href={`${ROOT_URL.API}/auth/facebook`}><Button color='success'>Sign Up with Facebook</Button></a>
                 </div>
                 <div>
                     <Button color='success'>Sign Up with Github</Button>
