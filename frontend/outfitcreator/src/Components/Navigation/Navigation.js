@@ -84,12 +84,12 @@ class Navigation extends Component {
         </div>
         <Nav className='navigation--sideNav'>
           <Collapse isOpen={!this.state.collapsed}>
-            <NavLink href='/Create' className='Create'>Create Outfit</NavLink>
-            <NavLink href='/Upload' className='Upload'>Upload Item</NavLink>
-            <NavLink href='/Closet' className='Closet'>My Closet</NavLink>
-            <NavLink href='/Archive' className='Archive'>Archive</NavLink>
-            <NavLink href='/Settings' className='Settings'>Settings</NavLink>
-            <NavLink href='/Billing' className='Billing'>Billing</NavLink>
+            <NavLink href='/Create'><button className='nav--item'>Create Outfit</button></NavLink>
+            <NavLink href='/Upload'><button className='nav--item'>Upload Item</button></NavLink>
+            <NavLink href='/Closet'><button className='nav--item'>My Closet</button></NavLink>
+            <NavLink href='/Archive'><button className='nav--item'>Archive</button></NavLink>
+            <NavLink href='/Settings'><button className='nav--item'>Settings</button></NavLink>
+            <NavLink href='/Billing'><button className='nav--item'>Billing</button></NavLink>
           </Collapse>
         </Nav>
         <div className='navigation--topRight'>
