@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Switch, Route } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faShareAlt } from '@fortawesome/free-solid-svg-icons';
@@ -19,28 +18,6 @@ import './App.css';
 library.add(faShareAlt);
 
 class App extends Component {
-  setAuthToken = () => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      axios.defaults.headers.common.Authorization = token;
-    } else {
-      delete axios.defaults.headers.common.Authorization;
-    }
-  }
-
-  getUserID() {
-    const userID = this.props.tokenData().sub;
-    console.log(userID)
-    axios.get(`${ROOT_URL.API}/user/info/${userID}`)
-      .then(response => {
-        console.log(response);
-        this.state.user = response.data.local.username;
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
-
   tokenData() {
     const token = localStorage.getItem('authToken');
     if (token) {
@@ -51,7 +28,6 @@ class App extends Component {
   }
 
   signInSuccess = (data) => {
-    console.log(data);
     this.setState({ user: data.user });
     localStorage.setItem('authToken', `Bearer ${data.token}`);
   }
@@ -107,7 +83,7 @@ class App extends Component {
           } />
           <Route path='/Edit' render={props =>
             <div>
-              <OutfitEdit />
+              <OutfitEdit {...props} getUserID={this.getUserID}/>
               <Navigation tokenData={this.tokenData} />
             </div>
           } />
