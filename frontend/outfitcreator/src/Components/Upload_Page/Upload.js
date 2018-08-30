@@ -199,7 +199,7 @@ class Upload extends Component {
                         </Form>
                     </div>
                 </div>
-                <Button className="upload--save" onClick={this.saveItem}>Save</Button>
+                <Button className="button" onClick={this.saveItem}>Save</Button>
             </div>
         );
     }

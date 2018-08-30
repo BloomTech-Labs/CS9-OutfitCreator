@@ -182,8 +182,8 @@ class Create extends Component {
                 <div className="outfitPickerContainer">
                     <Input type="text" name="name" placeholder="Outfit Nickname" onChange={this.handleInputChange} value={this.state.name} className="outfitInput" />
                     <div className="outfitPickerDecision">
-                        <Button onClick={this.handleCreateOutfit}>Yes!</Button>
-                        <Button onClick={this.randomize}>Randomize</Button>
+                        <Button className="button" onClick={this.handleCreateOutfit}>Yes!</Button>
+                        <Button className="button" onClick={this.randomize}>Randomize</Button>
                         <FontAwesomeIcon icon="share-alt" size="4x" onClick={this.handleButtonClick} />
                     </div>
                 </div>

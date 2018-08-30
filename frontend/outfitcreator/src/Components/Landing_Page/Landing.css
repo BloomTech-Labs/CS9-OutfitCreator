@@ -21,7 +21,7 @@
     flex-direction: column;
     font-size: 1.75em;
     font-weight: bold;
-    font-family: 'Nothing You Could Do', cursive;
+    font-family: 'Arsenal', sans-serif;
 }
 
 .landingPage--login-nav{
@@ -89,15 +89,6 @@
     margin: 10px;
     color: var(--dark-purple);
     font-weight: bold;
-}
-
-.input--login {
-    padding: 10px;
-    margin: 10px;
-    background-color: var(--light-purple);
-    color: var(--dark-purple);
-    border: 3px solid var(--dark-purple);
-    border-radius: 5px;
 }
 
 .landingPage--animations {

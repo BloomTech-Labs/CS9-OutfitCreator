@@ -49,7 +49,7 @@
 
 .navigation--sideNav {
   align-content: center;
-  background: var(--med-purple);
+  background: var(--dark-purple);
   border: 3px solid var(--dark-purple);
   display: flex;
   flex-flow: column;
@@ -92,16 +92,19 @@
 
 .navigation--user {
   border-right: 1px solid white;
+  font-weight: bold;
+  font-family: 'Homemade Apple', cursive;
 }
 
 .navigation--logout {
   cursor: pointer;
-  text-decoration: underline;
+  font-family: 'Homemade Apple', cursive;
+
 }
 
 .nav--item {
-  background: var(--med-purple);
-  border: solid 2px var(--med-purple);
+  background: var(--dark-purple);
+  border: solid 2px var(--dark-purple);
   font-family: 'Homemade Apple', cursive;
   font-weight: bold;
   text-shadow:
@@ -113,8 +116,8 @@
 }
 
 .nav--item:hover {
-  background: var(--med-purple);
-  border: solid 2px var(--med-purple);
+  background: var(--dark-purple);
+  border: solid 2px var(--dark-purple);
   font-family: 'Homemade Apple', cursive;
   font-weight: bold;
   text-shadow:

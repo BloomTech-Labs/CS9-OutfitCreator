@@ -30,7 +30,7 @@ class Landing extends Component {
                     {/* <Route exact path='/signin' render={props => <SignIn {...props} onSignin={this.props.onSignin} />} /> */}
                     {/* <SignIn onSignin={this.props.onSignin} /> */}
                     <Link to='/login'>
-                        <Button className='landing--button'>Login</Button>
+                        <Button className='button'>Login</Button>
                     </Link>                </div>
 
                 {/* <div className='landingPage--animations'>
@@ -57,7 +57,7 @@ class Landing extends Component {
                 </div>
                 <div>
                     <Link to='/login'>
-                        <Button className='landing--button'>Let's go! >></Button>
+                        <Button className='button'>Let's go!</Button>
                     </Link>
                 </div>
             </div>
