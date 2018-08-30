@@ -11,7 +11,6 @@ const UserSchema = new mongoose.Schema({
     local: {
         username: {
             type: String,
-            // unique: true,
             lowercase: true,
         },
         password: {
@@ -20,7 +19,7 @@ const UserSchema = new mongoose.Schema({
         email: {
             type: String,
             lowercase: true,
-            // unique: true,
+            unique: true,
         }
     },
     google: {
@@ -29,13 +28,11 @@ const UserSchema = new mongoose.Schema({
         },
         username: {
             type: String,
-            // unique: true,
             lowercase: true,
         },
         email: {
             type: String,
             lowercase: true,
-            // unique: true,
         },
         thumbnail: {
             type: String
@@ -47,13 +44,12 @@ const UserSchema = new mongoose.Schema({
         },
         username: {
             type: String,
-            // unique: true,
+            unique: true,
             lowercase: true,
         },
         email: {
             type: String,
             lowercase: true,
-            // unique: true,
         },
         picture: String,
         token: String
