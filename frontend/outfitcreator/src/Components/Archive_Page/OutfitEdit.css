@@ -66,10 +66,12 @@
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
+    transition: .5s;
     background: var(--tan);
 }
 
 .outfit--card:hover {
+    transform: translateY(-10px);
     cursor: pointer;
     box-shadow: 1px 1px;
 }
