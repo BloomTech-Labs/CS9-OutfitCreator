@@ -2,10 +2,10 @@ import React from 'react';
 import { Card, CardImg, CardDeck } from 'reactstrap';
 import axios from 'axios';
 import { withRouter } from 'react-router';
+import { ROOT_URL } from '../../config';
 import './OutfitEdit.css';
 
 const testUser = '5b745597a48cb52b0c1baedf';
-const ROOT_URL = process.env.NODE_ENV === 'production' ? 'https://lambda-outfit-creator-api.herokuapp.com/' : 'http://localhost:5000';
 
 class OutfitEdit extends React.Component {
     constructor(props) {
@@ -30,7 +30,7 @@ class OutfitEdit extends React.Component {
         const authToken = localStorage.getItem('authToken');
         const requestOptions = { headers: { Authorization: authToken } }
         const outfitId = this.props.location.pathname.split('Edit/')[1];
-        axios.get(`${ROOT_URL}/outfits/${user}/${outfitId}`, requestOptions)
+        axios.get(`${ROOT_URL.API}/outfits/${user}/${outfitId}`, requestOptions)
             .then(response => {
                 const { data } = response;
                 let lastWorn = data.worn[0];
@@ -45,7 +45,7 @@ class OutfitEdit extends React.Component {
     }
 
     populate = id => {
-        axios.get(`${ROOT_URL}/items/${testUser}/${id}`)
+        axios.get(`${ROOT_URL.API}/items/${testUser}/${id}`)
             .then(response => {
                 this.setState({ [response.data.type]: response.data })
             })
@@ -65,11 +65,12 @@ class OutfitEdit extends React.Component {
     }
 
     submitChanges = () => {
+        const userID = this.props.getUserID();
         const outfitId = this.props.location.pathname.split('Edit/')[1];
         const { name, worn, lastWorn } = this.state;
         if (lastWorn) worn.unshift(lastWorn);
         const newInfo = { name, worn };
-        axios.put(`${ROOT_URL}/outfits/${testUser}/${outfitId}`, newInfo)
+        axios.put(`${ROOT_URL.API}/outfits/${userID}/${outfitId}`, newInfo)
             .then()
             .catch(err => {
                 console.log(err);

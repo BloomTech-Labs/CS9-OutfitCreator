@@ -1,7 +1,9 @@
 .createContainer {
-    max-width: 70vw;
-    margin: 4.5em;
-    width: 80%;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 -1px 10px;
+    margin: 100px;
+    padding: 50px 30px;
 }
 
 .cardText {
@@ -13,6 +15,10 @@
     top: 50%;
     transform: translate(-50%, -50%);
     font-size: 2em;
+}
+
+.card-deck {
+  margin-bottom: 50px;
 }
 
 .outfitPickerContainer {

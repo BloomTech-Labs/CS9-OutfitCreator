@@ -50,14 +50,14 @@ class Navigation extends Component {
 
     if (this.state.collapsed) {
       navMin.classList.toggle('change');
-      sideNav.style.marginTop = '-3px';
+      sideNav.classList.toggle('sideNav--expanded');
       setTimeout(() => {
         navMin.classList.toggle('cross');
       }, delay);
     } else {
       navMin.classList.toggle('cross');
       setTimeout(() => {
-        sideNav.style.marginTop = '-6px';
+        sideNav.classList.toggle('sideNav--expanded');
         navMin.classList.toggle('change');
       }, delay);
     }

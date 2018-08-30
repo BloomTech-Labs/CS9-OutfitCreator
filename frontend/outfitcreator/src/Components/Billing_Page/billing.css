@@ -1,13 +1,14 @@
 .container--billing {
   background: white;
-  border-radius: 25px;
+  border-radius: 10px;
+  box-shadow: 0 -1px 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
   left: 50px;
   max-width: 70vw;
-  margin-top: 4.5em;
+  margin-top: 100px;
   padding: 40px;
 }
 
