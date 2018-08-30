@@ -19,7 +19,7 @@ class Login extends React.Component {
     signUp = () => {
         const { username, password, email } = this.state;
           
-        axios.post(`${ROOT_URL.API}/auth/signup`, { username, password })
+        axios.post(`${ROOT_URL.API}/auth/signup`, { username, password, email })
             .then(res => {
                 this.toggle('2');
             })
