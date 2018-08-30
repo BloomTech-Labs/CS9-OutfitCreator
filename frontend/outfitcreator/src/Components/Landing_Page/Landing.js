@@ -29,9 +29,7 @@ class Landing extends Component {
                     {/* <SignUp /> */}
                     {/* <Route exact path='/signin' render={props => <SignIn {...props} onSignin={this.props.onSignin} />} /> */}
                     {/* <SignIn onSignin={this.props.onSignin} /> */}
-                    <Link to='/login'>
-                        <Button className='button'>Login</Button>
-                    </Link>                </div>
+                </div>
 
                 {/* <div className='landingPage--animations'>
                     <div className='animation--top'>
@@ -54,11 +52,9 @@ class Landing extends Component {
                 <div>
                     <div className="landingPage--app-title">Closet Roulette</div>
                     <div className="landingPage--description">Find your next style without messing up your closet!</div>
-                </div>
-                <div>
-                    <Link to='/login'>
+                    <div><Link to='/login'>
                         <Button className='button'>Let's go!</Button>
-                    </Link>
+                    </Link></div>
                 </div>
             </div>
         );
