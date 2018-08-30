@@ -92,19 +92,6 @@ class Login extends React.Component {
           <TabPane tabId="1">
             <Row>
               <Col sm="12">
-<<<<<<< HEAD
-                <div>
-                    <a href={`${ROOT_URL.API}/auth/google`}><Button color='success'>Sign Up with Google</Button></a>
-                </div>
-                <div>
-                    <a href={`${ROOT_URL.API}/auth/facebook`}><Button color='success'>Sign Up with Facebook</Button></a>
-                </div>
-                <div>
-                    <Button color='success'>Sign Up with Github</Button>
-                </div>
-                <div>Or</div>
-=======
->>>>>>> master
                 <form className='modal--input'>
                     <label htmlFor='username'>Username</label>
                     <br/>
@@ -142,7 +129,7 @@ class Login extends React.Component {
                 </form>
                 <div>
                     <a href={`${ROOT_URL.API}/auth/google`}><GoogleLoginButton/></a>
-                    <FacebookLoginButton/>
+                    <a href={`${ROOT_URL.API}/auth/facebook`}><FacebookLoginButton/></a>
                     <GithubLoginButton/>
                 </div>
               </Col>
@@ -151,36 +138,15 @@ class Login extends React.Component {
           <TabPane tabId="2">
             <Row>
               <Col sm="12">
-<<<<<<< HEAD
-              <div>
-                    <a href={`${ROOT_URL.API}/auth/google`}><Button color='success'>Sign in with Google</Button></a>
-                </div>
-                <div>
-                    <a href={`${ROOT_URL.API}/auth/facebook`}><Button color='success'>Sign in with Facebook</Button></a>
-                </div>
-                <div>
-                    <Button color='success'>Sign in with Github</Button>
-                </div>
-                <div>Or</div>
-=======
->>>>>>> master
                 <form className='modal--input'>
                     <label htmlFor='email'>Email:</label>
                     <br/>
                     <input 
-<<<<<<< HEAD
-                        type='email'
+                        type="text"
                         name='email'
                         placeholder='Email'
-                        className='input--email'
-                        value={this.state.email}
-=======
-                        type="text"
-                        name='username'
-                        placeholder='Username'
                         className='input--login'
-                        value={this.state.username}
->>>>>>> master
+                        value={this.state.email}
                         onChange={this.handleInputChange}
                         />
                     <br/>                                
@@ -197,10 +163,10 @@ class Login extends React.Component {
                     <Button className="button" onClick={this.signIn}>Sign In</Button>
                 </form>
                 <div>
-                    <a href={`${ROOT_URL.API}/auth/google.png`}><GoogleLoginButton/></a>
+                    <a href={`${ROOT_URL.API}/auth/google`}><GoogleLoginButton/></a>
                 </div>
                 <div>
-                    <FacebookLoginButton/>
+                    <a href={`${ROOT_URL.API}/auth/facebook`}><FacebookLoginButton/></a>
                 </div>
                 <div>
                     <GithubLoginButton/>
