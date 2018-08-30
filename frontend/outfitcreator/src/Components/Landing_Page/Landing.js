@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { Button, NavLink } from 'reactstrap';
 
-import SignIn from './SignIn';
-import SignUp from './SignUp';
 import Login from './Login';
 import './Landing.css';
 
