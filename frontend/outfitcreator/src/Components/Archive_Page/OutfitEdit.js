@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { ROOT_URL } from '../../config'; 
+import { ROOT_URL } from '../../config';
 import { withRouter } from 'react-router';
 import { Card, CardImg, CardDeck } from 'reactstrap';
 import './OutfitEdit.css';
@@ -73,7 +73,7 @@ class OutfitEdit extends React.Component {
         const { name, worn, lastWorn } = this.state;
         if (lastWorn) worn.unshift(lastWorn);
         const newInfo = { name, worn };
-        axios.put(`${ROOT_URL}/outfits/${user}/${outfitId}`, newInfo)
+        axios.put(`${ROOT_URL.API}/outfits/${user}/${outfitId}`, newInfo)
             .then()
             .catch(err => {
                 console.log(err);
@@ -94,21 +94,21 @@ class OutfitEdit extends React.Component {
             outfit ? (
                 <div className="createContainer">
                     <CardDeck>
-                        <Card inverse>
+                        <Card className='outfit--card' inverse>
                             <CardImg
                                 width="80%"
                                 src={top.image}
                                 alt="Card image cap"
                             />
                         </Card>
-                        <Card inverse>
+                        <Card className='outfit--card' inverse>
                             <CardImg
                                 width="80%"
                                 src={bottom.image}
                                 alt="Card image cap"
                             />
                         </Card>
-                        <Card inverse>
+                        <Card className='outfit--card' inverse>
                             <CardImg
                                 width="80%"
                                 src={shoes.image}
@@ -117,30 +117,32 @@ class OutfitEdit extends React.Component {
                         </Card>
                     </CardDeck>
                     <div className='container--editbox'>
-                        <div className='edit--header'>
-                            <div className='header--title'>
-                                Name: <input
-                                    type='text'
-                                    name='name'
-                                    value={this.state.name}
-                                    onChange={this.handleInput}
-                                    className='edit--input'
-                                />
+                        <form>
+                            <div className='edit--header'>
+                                <div className='header--title'>
+                                    Name: <input
+                                        type='text'
+                                        name='name'
+                                        value={this.state.name}
+                                        onChange={this.handleInput}
+                                        className='edit--input'
+                                    />
+                                </div>
+                                <div className='edit--footer'>
+                                    Worn on: <input
+                                        type='text'
+                                        name='lastWorn'
+                                        value={this.state.lastWorn}
+                                        onChange={this.handleInput}
+                                        className='edit--input'
+                                    />
+                                </div>
                             </div>
-                            <div className='edit--footer'>
-                                Worn on: <input
-                                    type='text'
-                                    name='lastWorn'
-                                    value={this.state.lastWorn}
-                                    onChange={this.handleInput}
-                                    className='edit--input'
-                                />
+                            <div className='edit--buttons'>
+                                <button className='edit--submit' onClick={this.submitChanges}>Submit</button>
+                                <button className='edit--cancel' onClick={this.redirectArchive}>Cancel</button>
                             </div>
-                        </div>
-                        <div className='edit--buttons'>
-                            <button className='edit--submit' onClick={this.submitChanges}>Submit</button>
-                            <button className='edit--cancel' onClick={this.redirectArchive}>Cancel</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             ) : (
