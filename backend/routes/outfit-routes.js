@@ -5,7 +5,7 @@ const Outfit = require("../models/outfitModel");
 
 
 // Add a new outfit to the database
-router.post("/", restricted, (req, res) => {
+router.post("/", (req, res) => {
   const { user, name, tags, worn, top, bottom, shoes } = req.body;
   Outfit.create({ user, name, tags, worn, top, bottom, shoes })
     .then(outfit => {
@@ -50,7 +50,6 @@ router.put('/:user/:id', (req, res) => {
   const newInfo = req.body;
   Outfit.findByIdAndUpdate(id, newInfo)
   .then(outfit => {
-    console.log(outfit)
     res.status(200).json(outfit);
   })
   .catch(err => {
