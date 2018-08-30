@@ -65,14 +65,18 @@ const googleStrategy = new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET
   }, (accessToken, refreshToken, profile, done) => {
-  console.log(accessToken);
-  console.log(refreshToken);
-  console.log(profile);
-  User.findOne({ "google.id": profile.id }).then(currentUser => {
-    if (currentUser) {
-      done(null, currentUser);
+  User.findOne({ $or: [{ "google.id": profile.id }, { "local.email": profile.emails[0].value }]}).then(existingUser => {
+    if (existingUser) {
+      if(existingUser.google.id == undefined) {
+        existingUser.google.id = profile.id;
+        existingUser.google.username = profile.displayName;
+        existingUser.google.email = profile.emails[0].value;
+        existingUser.google.thumbnail = profile._json.image.url;
+        existingUser.save();
+      }
+      done(null, existingUser);
     } else {
-      new User({
+      let newUser = new User({
         method: 'google',
         google: {
           id: profile.id,
