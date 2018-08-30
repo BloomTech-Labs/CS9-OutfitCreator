@@ -148,14 +148,14 @@ class Login extends React.Component {
                 </div>
                 <div>Or</div>
                 <form className='modal--input'>
-                    <label htmlFor='username'>Username</label>
+                    <label htmlFor='email'>Email:</label>
                     <br/>
                     <input 
-                        type='username'
-                        name='username'
-                        placeholder='Username'
-                        className='input--username'
-                        value={this.state.username}
+                        type='email'
+                        name='email'
+                        placeholder='Email'
+                        className='input--email'
+                        value={this.state.email}
                         onChange={this.handleInputChange}
                         />
                     <br/>                                
