@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import { ROOT_URL } from '../../config';
 import { withRouter } from 'react-router';
-import { ROOT_URL } from '../../config';
 import { Card, CardImg, CardDeck } from 'reactstrap';
 import './OutfitEdit.css';
 
