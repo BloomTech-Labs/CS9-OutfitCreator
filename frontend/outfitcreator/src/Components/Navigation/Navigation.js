@@ -84,8 +84,8 @@ class Navigation extends Component {
         </div>
         <Nav className='navigation--sideNav'>
           <Collapse isOpen={!this.state.collapsed}>
-            <NavLink href='/Create'><button className='nav--item'>Create Outfit</button></NavLink>
-            <NavLink href='/Upload'><button className='nav--item'>Upload Item</button></NavLink>
+            <NavLink href='/Create'><button className='nav--item'>New Outfit</button></NavLink>
+            <NavLink href='/Upload'><button className='nav--item'>Add Item</button></NavLink>
             <NavLink href='/Closet'><button className='nav--item'>My Closet</button></NavLink>
             <NavLink href='/Archive'><button className='nav--item'>Archive</button></NavLink>
             <NavLink href='/Settings'><button className='nav--item'>Settings</button></NavLink>
