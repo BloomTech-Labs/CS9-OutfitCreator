@@ -24,9 +24,9 @@ const secret = process.env.SECRET || "SECRET!";
 // });
 
 // Local Strategy
-const localStrategy = new LocalStrategy(function(username, password, done) {
+const localStrategy = new LocalStrategy({usernameField: 'email'}, function(email, password, done) {
   // Use async function for awaiting promise in user.validPassword
-  User.findOne({ 'local.username': username }, async function(err, user) {
+  User.findOne({ 'local.email': email }, async function(err, user) {
     if (err) return done(err);
     if (!user) {
       return done(null, false);
