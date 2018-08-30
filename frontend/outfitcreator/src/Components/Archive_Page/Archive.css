@@ -1,17 +1,13 @@
 .container--archive {
-    position: absolute;
+  align-items: flex-start;
+    background: white;
+    box-shadow: 0 -1px 10px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    top: 8vh;
-    left: 200px;
-    height: 80vh;
+    border-radius: 25px;
+    margin: 100px 0;
     width: 75vw;
-    min-width: 750px;
-    min-height: 500px;
-    overflow-y: auto;
-    z-index: 1;
-    padding: 0 10px;
+    padding: 30px;
 }
 
 ::-webkit-scrollbar{
@@ -37,8 +33,7 @@
 }
 
 .archive--collection {
+    justify-content: center;
     display: flex;
     flex-wrap: wrap;
-    min-width: 500px;
-    min-height: 500px;
 }
