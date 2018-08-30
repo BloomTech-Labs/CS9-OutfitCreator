@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col} from 'reactstrap';
+import {TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col} from 'reactstrap';
 import {FacebookLoginButton, GithubLoginButton, GoogleLoginButton} from "react-social-login-buttons";
 import classnames from 'classnames';
 import './Landing.css'
@@ -47,13 +47,6 @@ class Login extends React.Component {
                 localStorage.removeItem('token');
             });
     }
-
-    // signUpGoogle = () => {
-    //     axios.get(`${ROOT_URL.API}/local-auth/google`)
-    //     .then(res => {
-    //         console.log(res);
-    //     })
-    // }
 
     toggle = (tab) => {
         if (this.state.activeTab !== tab) {
