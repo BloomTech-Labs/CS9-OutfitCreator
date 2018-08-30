@@ -41,6 +41,11 @@ class App extends Component {
     }
   }
 
+  signInSuccess = (data) => {
+    console.log(data);
+    localStorage.setItem('authToken', `Bearer ${data.token}`);
+  }
+
   render() {
     return (
       <div className="App">
@@ -48,7 +53,7 @@ class App extends Component {
           <Route exact path='/' render={props => 
             <Landing {...props} onSignin={this.signInSuccess} />
           } />
-          <Route exact path='/login' render={props => 
+          <Route exact path='/login' render={props =>
             <Login {...props} onSignin={this.signInSuccess} />
           } />
           <Route path='/Create' render={props =>

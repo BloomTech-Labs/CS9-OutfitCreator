@@ -1,19 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import {
-    TabContent,
-    TabPane,
-    Nav,
-    NavItem,
-    NavLink,
-    // Card, 
-    Button,
-    // CardTitle, 
-    // CardText, 
-    Row,
-    Col
-} from 'reactstrap';
-import { FacebookLoginButton, GithubLoginButton, GoogleLoginButton } from "react-social-login-buttons";
+import {TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col} from 'reactstrap';
+import {FacebookLoginButton, GithubLoginButton, GoogleLoginButton} from "react-social-login-buttons";
 import classnames from 'classnames';
 import './Landing.css'
 
@@ -46,11 +34,10 @@ class Login extends React.Component {
     }
 
     signIn = () => {
-        const { username, password } = this.state;
-        axios.post(`${ROOT_URL.API}/auth/login`, { username, password })
+        const { email, password } = this.state;
+        axios.post(`${ROOT_URL.API}/auth/login`, { email, password })
             .then(res => {
-                // this.props.onSignin(res.data);
-                localStorage.setItem('authToken', `Bearer ${res.data.token}`);
+                this.props.onSignin(res.data);
                 // Redirect to create page once logged in
                 window.location = `${ROOT_URL.WEB}/Create`;
             })
@@ -60,13 +47,6 @@ class Login extends React.Component {
                 localStorage.removeItem('token');
             });
     }
-
-    // signUpGoogle = () => {
-    //     axios.get(`${ROOT_URL.API}/local-auth/google`)
-    //     .then(res => {
-    //         console.log(res);
-    //     })
-    // }
 
     toggle = (tab) => {
         if (this.state.activeTab !== tab) {
@@ -82,7 +62,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="landingPage--login">
                 <Nav pills className="landingPage--login-nav">
                     <NavItem>
                         <NavLink
@@ -99,96 +79,96 @@ class Login extends React.Component {
                         >
                             Sign In
             </NavLink>
-                    </NavItem>
-                </Nav>
-                <TabContent activeTab={this.state.activeTab}>
-                    <TabPane tabId="1">
-                        <Row>
-                            <Col sm="12">
-                                <form className='modal--input'>
-                                    <label htmlFor='username'>Username</label>
-                                    <br />
-                                    <input
-                                        type="text"
-                                        name='username'
-                                        placeholder='Username'
-                                        className='input--login'
-                                        value={this.state.username}
-                                        onChange={this.handleInputChange}
-                                    />
-                                    <br />
-                                    <label htmlFor='username'>Email</label>
-                                    <br />
-                                    <input
-                                        type="text"
-                                        name='email'
-                                        placeholder='Email'
-                                        className='input--login'
-                                        value={this.state.email}
-                                        onChange={this.handleInputChange}
-                                    />
-                                    <br />
-                                    <label htmlFor='password'>Password</label>
-                                    <br />
-                                    <input
-                                        type='password'
-                                        name='password'
-                                        placeholder='Password'
-                                        className='input--login'
-                                        value={this.state.password}
-                                        onChange={this.handleInputChange}
-                                    /><br />
-                                    <Button className="button" onClick={this.signUp}>Sign Up</Button>
-                                </form>
-                                <div>
-                                    <a href={`${ROOT_URL.API}/auth/google`}><GoogleLoginButton /></a>
-                                    <FacebookLoginButton />
-                                    <GithubLoginButton />
-                                </div>
-                            </Col>
-                        </Row>
-                    </TabPane>
-                    <TabPane tabId="2">
-                        <Row>
-                            <Col sm="12">
-                                <form className='modal--input'>
-                                    <label htmlFor='username'>Username</label>
-                                    <br />
-                                    <input
-                                        type="text"
-                                        name='username'
-                                        placeholder='Username'
-                                        className='input--login'
-                                        value={this.state.username}
-                                        onChange={this.handleInputChange}
-                                    />
-                                    <br />
-                                    <label htmlFor='password'>Password</label>
-                                    <br />
-                                    <input
-                                        type='password'
-                                        name='password'
-                                        placeholder='Password'
-                                        className='input--login'
-                                        value={this.state.password}
-                                        onChange={this.handleInputChange}
-                                    /><br />
-                                    <Button className="button" onClick={this.signIn}>Sign In</Button>
-                                </form>
-                                <div>
-                                    <a href={`${ROOT_URL.API}/auth/google.png`}><GoogleLoginButton /></a>
-                                </div>
-                                <div>
-                                    <FacebookLoginButton />
-                                </div>
-                                <div>
-                                    <GithubLoginButton />
-                                </div>
-                            </Col>
-                        </Row>
-                    </TabPane>
-                </TabContent>
-            </div>
+          </NavItem>
+        </Nav>
+        <TabContent activeTab={this.state.activeTab}>
+          <TabPane tabId="1">
+            <Row>
+              <Col sm="12">
+                <form className='modal--input'>
+                    <label htmlFor='username'>Username</label>
+                    <br/>
+                    <input 
+                        type="text"
+                        name='username'
+                        placeholder='Username'
+                        className='input--login'
+                        value={this.state.username}
+                        onChange={this.handleInputChange}
+                        />
+                    <br/>
+                    <label htmlFor='username'>Email</label>
+                    <br/>
+                    <input 
+                        type="text"
+                        name='email'
+                        placeholder='Email'
+                        className='input--login'
+                        value={this.state.email}
+                        onChange={this.handleInputChange}
+                        />
+                    <br/>                                    
+                    <label htmlFor='password'>Password</label>
+                    <br/>
+                    <input 
+                        type='password'
+                        name='password'
+                        placeholder='Password'
+                        className='input--login'
+                        value={this.state.password}
+                        onChange={this.handleInputChange}
+                    /><br/>
+                    <Button className="button" onClick={this.signUp}>Sign Up</Button>
+                </form>
+                <div>
+                    <a href={`${ROOT_URL.API}/auth/google`}><GoogleLoginButton/></a>
+                    <a href={`${ROOT_URL.API}/auth/facebook`}><FacebookLoginButton/></a>
+                    <GithubLoginButton/>
+                </div>
+              </Col>
+            </Row>
+          </TabPane>
+          <TabPane tabId="2">
+            <Row>
+              <Col sm="12">
+                <form className='modal--input'>
+                    <label htmlFor='email'>Email:</label>
+                    <br/>
+                    <input 
+                        type="text"
+                        name='email'
+                        placeholder='Email'
+                        className='input--login'
+                        value={this.state.email}
+                        onChange={this.handleInputChange}
+                        />
+                    <br/>                                
+                    <label htmlFor='password'>Password</label>
+                    <br/>
+                    <input 
+                        type='password'
+                        name='password'
+                        placeholder='Password'
+                        className='input--login'
+                        value={this.state.password}
+                        onChange={this.handleInputChange}
+                    /><br/>
+                    <Button className="button" onClick={this.signIn}>Sign In</Button>
+                </form>
+                <div>
+                    <a href={`${ROOT_URL.API}/auth/google`}><GoogleLoginButton/></a>
+                </div>
+                <div>
+                    <a href={`${ROOT_URL.API}/auth/facebook`}><FacebookLoginButton/></a>
+                </div>
+                <div>
+                    <GithubLoginButton/>
+                </div>
+              </Col>
+            </Row>
+          </TabPane>
+        </TabContent>
+      </div>
         )
     }
 }
