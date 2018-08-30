@@ -37,6 +37,10 @@ class Create extends Component {
     }
 
     componentDidMount() {
+        const hash = queryString.parse(this.props.location.hash);
+        if(hash){
+            localStorage.setItem('authToken', `Bearer ${hash.token}`);
+        }
         this.setAuthToken();
         const user = this.props.getUserID();
         const authToken = localStorage.getItem('authToken');
