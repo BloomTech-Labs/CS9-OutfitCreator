@@ -214,7 +214,8 @@ const signToken = (req, res) => {
     if(err){
         res.sendStatus(500);
     } else {
-        res.json({token});
+        // res.redirect(`http://localhost:3000/create?token=${token}`);
+        res.status(200).json({token});
     }
   });
 }
