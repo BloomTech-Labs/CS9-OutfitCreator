@@ -1,4 +1,6 @@
 .modal {
+    position: absolute;
+
     display: flex;
     border-radius: 4%;
     flex-direction: column;
