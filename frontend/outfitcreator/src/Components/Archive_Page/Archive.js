@@ -4,8 +4,6 @@ import OutfitCard from './OutfitCard';
 import { ROOT_URL } from '../../config'; 
 import './Archive.css';
 
-const testUser = '5b745597a48cb52b0c1baedf';
-
 class Archive extends React.Component {
     constructor(props) {
         super(props);
@@ -22,7 +20,14 @@ class Archive extends React.Component {
     }
 
     getOutfits = () => {
-        axios.get(`${ROOT_URL.API}/outfits/${testUser}/`)
+        const user = this.props.getUserID();
+        const authToken = localStorage.getItem('authToken');
+        const requestOptions = {
+            headers: {
+                Authorization: authToken
+            }
+        }
+        axios.get(`${ROOT_URL.API}/outfits/${user}/`, requestOptions)
             .then(response => { 
 
                 this.setState({ myOutfits: response.data })

@@ -27,6 +27,11 @@ class App extends Component {
     }
   }
 
+  signInSuccess = (data) => {
+    this.setState({ user: data.user });
+    localStorage.setItem('authToken', `Bearer ${data.token}`);
+  }
+
   getUserID() {
     const token = localStorage.getItem('authToken');
     if (token) {
@@ -54,7 +59,7 @@ class App extends Component {
           } />
           <Route path='/Archive' render={props =>
             <div>
-              <Archive />
+              <Archive getUserID={this.getUserID} />
               <Navigation tokenData={this.tokenData} />
             </div>
           } />
@@ -72,19 +77,19 @@ class App extends Component {
           } />
           <Route path='/Billing' render={props =>
             <div>
-              <Billing {...props} getUserID={this.getUserID}/>
+              <Billing {...props} getUserID={this.getUserID} />
               <Navigation tokenData={this.tokenData} />
             </div>
           } />
           <Route path='/Edit' render={props =>
             <div>
-              <OutfitEdit />
+              <OutfitEdit {...props} getUserID={this.getUserID}/>
               <Navigation tokenData={this.tokenData} />
             </div>
           } />
           <Route path='/Closet' render={props =>
             <div>
-              <Closet {...props} getUserID={this.getUserID}/>
+              <Closet {...props} getUserID={this.getUserID} />
               <Navigation tokenData={this.tokenData} />
             </div>
           } />

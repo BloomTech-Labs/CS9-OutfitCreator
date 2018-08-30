@@ -7,15 +7,16 @@ import { withRouter } from 'react-router';
 
 class OutfitCard extends React.Component {
     editRedirect = () => {
-        this.props.location.pathname = `/Edit/${this.props.outfitId}`;
-        window.location = this.props.location.pathname;
+        this.props.history.push(`/Edit/${this.props.outfitId}`);
+        // this.props.location.pathname = `/Edit/${this.props.outfitId}`;
+        // window.location = this.props.location.pathname;
     }
     
     render() {
         const { key, name, src, lastWorn } = this.props;
         let worn = 'Never Worn';
-        if (lastWorn) {
-            worn = lastWorn.split('T')[0]
+        if (lastWorn.length > 0) {
+            worn = lastWorn[0].split('T')[0]
         }
         return (
             <div className='container--card' key={key}>
