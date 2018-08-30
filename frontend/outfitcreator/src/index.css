@@ -8,11 +8,10 @@
 }
 
 html, body, body #root {
-  background: var(--pale-purple);
+  background: white;
   background-image: linear-gradient( 
-      var(--dark-purple),
-      var(--med-purple),
-      var(--pale-purple)
+      var(--pale-purple),
+      rgb(255, 255, 255)
   );
   background-repeat: no-repeat;
   background-size: cover;
