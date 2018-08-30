@@ -82,7 +82,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="landingPage--login">
                 <Nav pills className="landingPage--login-nav">
                     <NavItem>
                         <NavLink

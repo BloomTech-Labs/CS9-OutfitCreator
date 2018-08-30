@@ -24,9 +24,17 @@
     font-family: 'Nothing You Could Do', cursive;
 }
 
-.landingPage--login-nav{
-    margin: 10px;
+.landingPage--login {
+    background: white;
+    border-radius: 10px;
+    margin: 50px;
+    padding: 50px;
 }
+
+.landingPage--login-nav {
+  
+}
+
 
 .landingPage--app-title{
     font-family: 'Homemade Apple', cursive;
