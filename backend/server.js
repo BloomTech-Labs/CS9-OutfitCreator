@@ -13,7 +13,6 @@ require("dotenv").config();
 const passport = require("passport");
 // const passportSetup = require("./config/passport-setup");
 
-// const localAuthRoutes = require("./routes/local-auth-routes");
 const authRoutes = require("./routes/auth-routes");
 const profileRoutes = require("./routes/profile-routes");
 const stripeRoutes = require("./routes/stripe-routes");
@@ -68,17 +67,6 @@ server.use(express.json());
 // server.use(passport.initialize());
 // server.use(passport.session());
 
-// Allow passport to utilize sessions
-// passport.serializeUser((user, done) => {
-//   done(null, user.id);
-// });
-
-// passport.deserializeUser((id, done) => {
-//   User.findById(id, (err, user) => {
-//     done(err, user);
-//   });
-// });
-
 mongoose
   .connect(
     process.env.DB_URI,
@@ -95,7 +83,6 @@ server.get("/", (req, res) => {
 
 
 // set up routes
-// server.use("/local-auth", localAuthRoutes);
 server.use("/auth", authRoutes);
 server.use("/profile", profileRoutes);
 server.use("/pay", stripeRoutes);
