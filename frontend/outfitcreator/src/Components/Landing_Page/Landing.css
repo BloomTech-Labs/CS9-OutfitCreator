@@ -32,7 +32,8 @@
 }
 
 .landingPage--login-nav {
-  
+    display: flex;
+    justify-content: center;
 }
 
 
