@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { Collapse, Nav, NavLink, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import {
+  Collapse,
+  Nav,
+  NavLink,
+  //  Breadcrumb, 
+  // BreadcrumbItem
+} from 'reactstrap';
 import { withRouter } from 'react-router';
 import { ROOT_URL } from '../../config.js';
 import axios from 'axios';
-import './Navigation.css'; 
+import './Navigation.css';
 
 class Navigation extends Component {
   constructor(props) {
@@ -25,17 +30,16 @@ class Navigation extends Component {
       const userID = token.sub;
       const authToken = localStorage.getItem('authToken');
       const requestOptions = {
-          headers: { Authorization: authToken }
+        headers: { Authorization: authToken }
       }
-  
+
       axios.get(`${ROOT_URL.API}/user/info/${userID}`, requestOptions)
-          .then(res => {
-              console.log(res.data);
-              this.setState({ username: res.data.local.username });
-          })
-          .catch(err => {
-            console.log(err);
-          });
+        .then(res => {
+          this.setState({ username: res.data.local.username });
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 
@@ -69,7 +73,6 @@ class Navigation extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className='navigation--container'>
         <div className='navigation--dresser'>

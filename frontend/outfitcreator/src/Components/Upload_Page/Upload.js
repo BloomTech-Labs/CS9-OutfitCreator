@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Image, CloudinaryContext } from 'cloudinary-react';
+import { CloudinaryContext } from 'cloudinary-react';
 import { CardImg, Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import { ROOT_URL } from '../../config';
 import TagSearch from './TagSearch';
 import './Upload.css';
-import sha1 from 'sha1';
+// import sha1 from 'sha1';
 
 const CLOUD_API = '465735684648442';
-const API_SECRET = 'HVxIWBW7bQaBHJygz_qiprAfwok';
+// const API_SECRET = 'HVxIWBW7bQaBHJygz_qiprAfwok';
 
 class Upload extends Component {
     constructor(props) {
@@ -56,7 +56,6 @@ class Upload extends Component {
             },
             (err, result) => {
                 if (result) {
-                    console.log(result['0']);
                     this.setState({ image: result['0'].secure_url, result: result['0'] });
                 }
             });
@@ -64,8 +63,6 @@ class Upload extends Component {
     }
 
     fileChanged = event => {
-        console.log(event.target.files);
-        // this.setState({ image: event.target.files[0] });
         this.setState({ image: URL.createObjectURL(event.target.files[0]) });
     }
 
