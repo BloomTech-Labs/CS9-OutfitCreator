@@ -141,10 +141,10 @@ class Login extends React.Component {
                     <a href={`${ROOT_URL.API}/auth/google`}><Button color='success'>Sign in with Google</Button></a>
                 </div>
                 <div>
-                    <Button color='success'>Sign in with Facebook</Button>
+                    <a href={`${ROOT_URL.API}/auth/facebook`}><Button color='success'>Sign in with Facebook</Button></a>
                 </div>
                 <div>
-                    <Button color='success'>Sign Up with Github</Button>
+                    <Button color='success'>Sign in with Github</Button>
                 </div>
                 <div>Or</div>
                 <form className='modal--input'>
