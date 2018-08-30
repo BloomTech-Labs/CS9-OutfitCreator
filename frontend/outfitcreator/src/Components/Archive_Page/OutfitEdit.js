@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card,  CardImg,  CardDeck } from 'reactstrap';
+import { Card, CardImg, CardDeck } from 'reactstrap';
 import axios from 'axios';
 import { withRouter } from 'react-router';
 import './OutfitEdit.css';
@@ -13,6 +13,7 @@ class OutfitEdit extends React.Component {
         this.state = {
             outfit: '',
             name: '',
+            lastWorn: Date,
             worn: Date,
             top: '',
             bottom: '',
@@ -25,12 +26,18 @@ class OutfitEdit extends React.Component {
     }
 
     getOutfit = () => {
+        const user = this.props.getUserID();
+        const authToken = localStorage.getItem('authToken');
+        const requestOptions = { headers: { Authorization: authToken } }
         const outfitId = this.props.location.pathname.split('Edit/')[1];
-        axios.get(`${ROOT_URL}/outfits/${testUser}/${outfitId}`)
+        axios.get(`${ROOT_URL}/outfits/${user}/${outfitId}`, requestOptions)
             .then(response => {
                 const { data } = response;
-                const lastWorn = data.worn.split('T')[0];
-                this.setState({ outfit: data, name: data.name, worn: lastWorn })
+                let lastWorn = data.worn[0];
+                if (lastWorn) {
+                    lastWorn = lastWorn.split('T')[0];
+                }
+                this.setState({ outfit: data, name: data.name, worn: data.worn, lastWorn })
             })
             .catch(err => {
                 console.log(err);
@@ -52,21 +59,21 @@ class OutfitEdit extends React.Component {
     }
 
     redirectArchive = () => {
-        this.props.location.pathname = '/Archive/';
-        window.location = this.props.location.pathname;
+        this.props.history.push('/Archive');
+        // this.props.location.pathname = '/Archive/';
+        // window.location = this.props.location.pathname;
     }
 
     submitChanges = () => {
         const outfitId = this.props.location.pathname.split('Edit/')[1];
-        const {name, worn} = this.state;
-        const newInfo = { name, worn};
+        const { name, worn, lastWorn } = this.state;
+        if (lastWorn) worn.unshift(lastWorn);
+        const newInfo = { name, worn };
         axios.put(`${ROOT_URL}/outfits/${testUser}/${outfitId}`, newInfo)
-        .then(response => {
-            console.log(response);
-        })
-        .catch(err => {
-            console.log(err);
-        });
+            .then()
+            .catch(err => {
+                console.log(err);
+            });
         this.redirectArchive();
     }
 
@@ -79,7 +86,6 @@ class OutfitEdit extends React.Component {
         if (!top && !bottom && !shoes) {
             sources.forEach((id) => this.populate(id));
         }
-        console.log(this.state)
         return (
             outfit ? (
                 <div className="createContainer">
@@ -120,8 +126,8 @@ class OutfitEdit extends React.Component {
                             <div className='edit--footer'>
                                 Worn on: <input
                                     type='text'
-                                    name='worn'
-                                    value={this.state.worn}
+                                    name='lastWorn'
+                                    value={this.state.lastWorn}
                                     onChange={this.handleInput}
                                     className='edit--input'
                                 />

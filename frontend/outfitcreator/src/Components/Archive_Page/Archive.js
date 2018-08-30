@@ -4,8 +4,6 @@ import OutfitCard from './OutfitCard';
 import { ROOT_URL } from '../../config'; 
 import './Archive.css';
 
-const testUser = '5b745597a48cb52b0c1baedf';
-
 class Archive extends React.Component {
     constructor(props) {
         super(props);
