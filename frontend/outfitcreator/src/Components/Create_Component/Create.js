@@ -152,9 +152,6 @@ class Create extends Component {
                             <Button className="close top" aria-label="Close" onClick={this.randomizeSingle}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
-                            <CardText className="cardText">
-                                Top
-                            </CardText>
                         </CardImgOverlay>
                     </Card>
                     <Card inverse>
@@ -167,9 +164,6 @@ class Create extends Component {
                             <Button className="close bottom" aria-label="Close" onClick={this.randomizeSingle}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
-                            <CardText className="cardText">
-                                Bottom
-                            </CardText>
                         </CardImgOverlay>
                     </Card>
                     <Card inverse>
@@ -182,9 +176,6 @@ class Create extends Component {
                             <Button className="close shoe" aria-label="Close" onClick={this.randomizeSingle}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
-                            <CardText className="cardText">
-                                Shoes
-                            </CardText>
                         </CardImgOverlay>
                     </Card>
                 </CardDeck>
