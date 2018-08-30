@@ -1,13 +1,14 @@
 :root {
-  --tan: rgb(243,211,197);
-  --pink: rgb(241,175,187);
-  --light-purple: rgb(167,171,223);
-  --med-purple: rgb(160,147,212);
-  --dark-purple: rgb(106,113,197);
+  --tan: rgb(255, 225, 225);
+  --pale-pink: rgb(250,210,210);
+  --pale-purple: rgb(225,225,255);
+  --light-purple: rgb(194,194,235);
+  --med-purple: rgb(141,141,200);
+  --dark-purple: rgb(80,80,160);
 }
 
 html, body, body #root {
-  background: var(--med-purple);
+  background: var(--pale-purple);
   box-sizing: border-box;
   font-family: sans-serif;
   height: 100%;

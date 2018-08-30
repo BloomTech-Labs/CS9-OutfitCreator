@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import {TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col} from 'reactstrap';
+import {FacebookLoginButton, GithubLoginButton, GoogleLoginButton} from "react-social-login-buttons";
 import classnames from 'classnames';
+import './Landing.css'
 
 import { ROOT_URL } from '../../config';
 
@@ -9,7 +11,7 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeTab: '1',
+            activeTab: '2',
             username: '',
             password: '',
             email: ''
@@ -21,9 +23,12 @@ class Login extends React.Component {
           
         axios.post(`${ROOT_URL.API}/auth/signup`, { username, password, email })
             .then(res => {
-                this.toggle('2');
+                localStorage.setItem('authToken', `Bearer ${res.data.token}`);
+                // Redirect to create page once logged in
+                window.location = `${ROOT_URL.WEB}/Create`;
             })
             .catch(err => {
+              alert('Failed to sign up. Please try again.');
               console.log(err);
             });
     }
@@ -38,6 +43,7 @@ class Login extends React.Component {
             })
             .catch(err => {
                 // Alert for invalid credentials
+                alert('Invalid Credentials');
                 localStorage.removeItem('token');
             });
     }
@@ -64,7 +70,7 @@ class Login extends React.Component {
     render() {
         return (
             <div>
-        <Nav tabs>
+        <Nav pills className="landingPage--login-nav">
           <NavItem>
             <NavLink
               className={classnames({ active: this.state.activeTab === '1' })}
@@ -86,6 +92,7 @@ class Login extends React.Component {
           <TabPane tabId="1">
             <Row>
               <Col sm="12">
+<<<<<<< HEAD
                 <div>
                     <a href={`${ROOT_URL.API}/auth/google`}><Button color='success'>Sign Up with Google</Button></a>
                 </div>
@@ -96,14 +103,16 @@ class Login extends React.Component {
                     <Button color='success'>Sign Up with Github</Button>
                 </div>
                 <div>Or</div>
+=======
+>>>>>>> master
                 <form className='modal--input'>
                     <label htmlFor='username'>Username</label>
                     <br/>
                     <input 
-                        type='username'
+                        type="text"
                         name='username'
                         placeholder='Username'
-                        className='input--username'
+                        className='input--login'
                         value={this.state.username}
                         onChange={this.handleInputChange}
                         />
@@ -111,10 +120,10 @@ class Login extends React.Component {
                     <label htmlFor='username'>Email</label>
                     <br/>
                     <input 
-                        type='email'
+                        type="text"
                         name='email'
                         placeholder='Email'
-                        className='input--email'
+                        className='input--login'
                         value={this.state.email}
                         onChange={this.handleInputChange}
                         />
@@ -125,18 +134,24 @@ class Login extends React.Component {
                         type='password'
                         name='password'
                         placeholder='Password'
-                        className='input--password'
+                        className='input--login'
                         value={this.state.password}
                         onChange={this.handleInputChange}
-                    />
-                    <Button color='success' onClick={this.signUp}>Sign Up</Button>
+                    /><br/>
+                    <Button className="button" onClick={this.signUp}>Sign Up</Button>
                 </form>
+                <div>
+                    <a href={`${ROOT_URL.API}/auth/google`}><GoogleLoginButton/></a>
+                    <FacebookLoginButton/>
+                    <GithubLoginButton/>
+                </div>
               </Col>
             </Row>
           </TabPane>
           <TabPane tabId="2">
             <Row>
               <Col sm="12">
+<<<<<<< HEAD
               <div>
                     <a href={`${ROOT_URL.API}/auth/google`}><Button color='success'>Sign in with Google</Button></a>
                 </div>
@@ -147,15 +162,25 @@ class Login extends React.Component {
                     <Button color='success'>Sign in with Github</Button>
                 </div>
                 <div>Or</div>
+=======
+>>>>>>> master
                 <form className='modal--input'>
                     <label htmlFor='email'>Email:</label>
                     <br/>
                     <input 
+<<<<<<< HEAD
                         type='email'
                         name='email'
                         placeholder='Email'
                         className='input--email'
                         value={this.state.email}
+=======
+                        type="text"
+                        name='username'
+                        placeholder='Username'
+                        className='input--login'
+                        value={this.state.username}
+>>>>>>> master
                         onChange={this.handleInputChange}
                         />
                     <br/>                                
@@ -165,12 +190,21 @@ class Login extends React.Component {
                         type='password'
                         name='password'
                         placeholder='Password'
-                        className='input--password'
+                        className='input--login'
                         value={this.state.password}
                         onChange={this.handleInputChange}
-                    />
-                    <Button color='success' onClick={this.signIn}>Sign In</Button>
+                    /><br/>
+                    <Button className="button" onClick={this.signIn}>Sign In</Button>
                 </form>
+                <div>
+                    <a href={`${ROOT_URL.API}/auth/google.png`}><GoogleLoginButton/></a>
+                </div>
+                <div>
+                    <FacebookLoginButton/>
+                </div>
+                <div>
+                    <GithubLoginButton/>
+                </div>
               </Col>
             </Row>
           </TabPane>

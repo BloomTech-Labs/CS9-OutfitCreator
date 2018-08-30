@@ -16,13 +16,14 @@ class Landing extends Component {
 
     render() {
         return (
-            <div className='container--landingPage'>
+            <div className="container--landingPage">
                 <div className='landingPage--modals'>
                     {/* <SignUp /> */}
                     {/* <Route exact path='/signin' render={props => <SignIn {...props} onSignin={this.props.onSignin} />} /> */}
                     {/* <SignIn onSignin={this.props.onSignin} /> */}
-                    <NavLink href='/login'>Login</NavLink>
-                </div>
+                    <Link to='/login'>
+                        <Button className='landing--button'>Login</Button>
+                    </Link>                </div>
 
                 {/* <div className='landingPage--animations'>
                     <div className='animation--top'>
@@ -42,25 +43,13 @@ class Landing extends Component {
                     </div>
                 </div> */}
                 
-                <div className='landingPage--description'>
-                    <h1>Outfit Maker</h1>
-                    <div className='description--opening'>The easy way to:</div>
-                    <ul className='description--list'>
-                        <li className='list--item'>
-                            - Keep track of your favorite styles
-                        </li>
-                        <li className='list--item'>
-                            - Remember when an outfit was last worn
-                        </li>
-                        <li className='list--item'>
-                            - See different combinations without messing up your closet
-                        </li>
-                    </ul>
-                    <div className='description--closing'>AND we can even randomize your options to try and come up with new combinations!</div>
+                <div>
+                    <div className="landingPage--app-title">Closet Roulette</div>
+                    <div className="landingPage--description">Find your next style without messing up your closet!</div>
                 </div>
-                <div className='landingPage--button'>
-                    <Link to='/Create'>
-                        <Button color='success'>Check it out </Button>
+                <div>
+                    <Link to='/login'>
+                        <Button className='landing--button'>Let's go! >></Button>
                     </Link>
                 </div>
             </div>

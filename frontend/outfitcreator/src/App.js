@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faShareAlt } from '@fortawesome/free-solid-svg-icons';
 
-
 import Landing from './Components/Landing_Page/Landing';
 import Login from './Components/Landing_Page/Login';
 import Navigation from './Components/Navigation/Navigation';
@@ -13,6 +12,7 @@ import Archive from './Components/Archive_Page/Archive';
 import Settings from './Components/Settings_Page/Settings';
 import Billing from './Components/Billing_Page/Billing';
 import OutfitEdit from './Components/Archive_Page/OutfitEdit';
+import Closet from './Components/Closet_Page/Closet.js';
 import './App.css';
 
 library.add(faShareAlt);
@@ -45,8 +45,12 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Route exact path='/' render={props => <Landing {...props} onSignin={this.signInSuccess} />} />
-          <Route exact path='/login' render={props => <Login {...props} onSignin={this.signInSuccess} />} />
+          <Route exact path='/' render={props => 
+            <Landing {...props} onSignin={this.signInSuccess} />
+          } />
+          <Route exact path='/login' render={props => 
+            <Login {...props} onSignin={this.signInSuccess} />
+          } />
           <Route path='/Create' render={props =>
             <div className='App--create'>
               <Create {...props} getUserID={this.getUserID} />
@@ -61,7 +65,7 @@ class App extends Component {
           } />
           <Route path='/Settings' render={props =>
             <div>
-              <Settings />
+              <Settings tokenData={this.tokenData} />
               <Navigation tokenData={this.tokenData} />
             </div>
           } />
@@ -80,6 +84,12 @@ class App extends Component {
           <Route path='/Edit' render={props =>
             <div>
               <OutfitEdit />
+              <Navigation tokenData={this.tokenData} />
+            </div>
+          } />
+          <Route path='/Closet' render={props =>
+            <div>
+              <Closet {...props} getUserID={this.getUserID}/>
               <Navigation tokenData={this.tokenData} />
             </div>
           } />
