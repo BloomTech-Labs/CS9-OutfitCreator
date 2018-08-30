@@ -31,7 +31,6 @@ require("dotenv").config();
 // Add a new item to the database
 router.post("/", (req, res) => {
   // console.log('req.body: ' + req.body);
-  console.log(req.body);
   const { user, name, image, type, tags } = req.body;
   Item.create({ user, name, image, type, tags })
     .then(item => {

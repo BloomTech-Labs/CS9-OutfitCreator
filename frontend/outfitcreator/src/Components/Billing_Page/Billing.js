@@ -50,7 +50,7 @@ class Billing extends React.Component {
         console.log(this.state);
             return (
                 <div className='container--billing'>
-                    {((this.state.subscribed == false) || (this.state.subscribed == null))
+                    {((this.state.subscribed === false) || (this.state.subscribed === null))
                     ?<Checkout stripe={this.state.stripe} userID={this.state.userID}/>
                     :<Cancel stripe = {this.state.stripe} userID={this.state.userID} subscription={this.state.subscription}/>
                     }

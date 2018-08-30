@@ -20,7 +20,7 @@ class Login extends React.Component {
 
     signUp = () => {
         const { username, password, email } = this.state;
-          
+
         axios.post(`${ROOT_URL.API}/auth/signup`, { username, password, email })
             .then(res => {
                 localStorage.setItem('authToken', `Bearer ${res.data.token}`);
@@ -28,8 +28,8 @@ class Login extends React.Component {
                 window.location = `${ROOT_URL.WEB}/Create`;
             })
             .catch(err => {
-              alert('Failed to sign up. Please try again.');
-              console.log(err);
+                alert('Failed to sign up. Please try again.');
+                console.log(err);
             });
     }
 
@@ -51,7 +51,7 @@ class Login extends React.Component {
     toggle = (tab) => {
         if (this.state.activeTab !== tab) {
             this.setState({
-              activeTab: tab
+                activeTab: tab
             });
         }
     }
@@ -63,21 +63,21 @@ class Login extends React.Component {
     render() {
         return (
             <div>
-        <Nav pills className="landingPage--login-nav">
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === '1' })}
-              onClick={() => { this.toggle('1'); }}
-            >
-              Sign Up
+                <Nav pills className="landingPage--login-nav">
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: this.state.activeTab === '1' })}
+                            onClick={() => { this.toggle('1'); }}
+                        >
+                            Sign Up
             </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === '2' })}
-              onClick={() => { this.toggle('2'); }}
-            >
-              Sign In
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: this.state.activeTab === '2' })}
+                            onClick={() => { this.toggle('2'); }}
+                        >
+                            Sign In
             </NavLink>
           </NavItem>
         </Nav>

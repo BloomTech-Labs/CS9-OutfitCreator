@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardText, CardImg, CardImgOverlay, CardDeck, Button, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ROOT_URL } from '../../config'; 
+import { ROOT_URL } from '../../config';
 import axios from 'axios';
 
 import './Create.css';
@@ -23,9 +23,20 @@ class Create extends Component {
             selectedBottom: [],
             selectedShoe: []
         }
+        this.setAuthToken();
+    }
+
+    setAuthToken = () => {
+        const token = localStorage.getItem('authToken');
+        if (token) {
+            axios.defaults.headers.common.Authorization = token;
+        } else {
+            delete axios.defaults.headers.common.Authorization;
+        }
     }
 
     componentDidMount() {
+        this.setAuthToken();
         const user = this.props.getUserID();
         const authToken = localStorage.getItem('authToken');
         const requestOptions = {
@@ -33,19 +44,19 @@ class Create extends Component {
                 Authorization: authToken
             }
         }
-        if(authToken) {
-            axios.all([ 
+        if (authToken) {
+            axios.all([
                 axios.get(`${ROOT_URL.API}/items/type/${user}/top`, requestOptions),
                 axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`, requestOptions),
                 axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`, requestOptions),
             ])
-            .then(res => {
-                this.setState({ allTops: res[0].data, allBottoms: res[1].data, allShoes: res[2].data, user });
-                this.randomize();
-            })
-            .catch(err => {
-                console.log(err);
-            })
+                .then(res => {
+                    this.setState({ allTops: res[0].data, allBottoms: res[1].data, allShoes: res[2].data, user });
+                    this.randomize();
+                })
+                .catch(err => {
+                    console.log(err);
+                })
         } else {
             this.props.history.push('/');
         }
@@ -55,41 +66,41 @@ class Create extends Component {
     randomize = () => {
         const { allTops, allBottoms, allShoes } = this.state;
         let selectedTop, selectedBottom, selectedShoe;
-        let selectedTopTags = [];
-        let selectedBottomTags = [];
-        let selectedShoeTags = [];
-        if(allTops.length > 0) {
+        // let selectedTopTags = [];
+        // let selectedBottomTags = [];
+        // let selectedShoeTags = [];
+        if (allTops.length > 0) {
             selectedTop = allTops[Math.floor(Math.random() * allTops.length)];
-            selectedTopTags = selectedTop.tags;
+            // selectedTopTags = selectedTop.tags;
         }
-        if(allBottoms.length > 0) {
+        if (allBottoms.length > 0) {
             selectedBottom = allBottoms[Math.floor(Math.random() * allBottoms.length)];
-            selectedBottomTags = selectedBottom.tags;
+            // selectedBottomTags = selectedBottom.tags;
         }
-        if(allShoes.length > 0) {
+        if (allShoes.length > 0) {
             selectedShoe = allShoes[Math.floor(Math.random() * allShoes.length)];
-            selectedShoeTags = selectedShoe.tags;
+            // selectedShoeTags = selectedShoe.tags;
         }
-        const tags = [...new Set([...selectedTopTags, ...selectedBottomTags, ...selectedShoeTags])]
-        this.setState({ selectedTop, selectedBottom, selectedShoe, tags });
+        // const tags = [...new Set([...selectedTopTags, ...selectedBottomTags, ...selectedShoeTags])]
+        this.setState({ selectedTop, selectedBottom, selectedShoe });
     }
 
     // method to retrieve a single random item
     randomizeSingle = (event) => {
-        const { allTops, allBottoms, allShoes, selectedTop, selectedBottom, selectedShoe } = this.state;
-        
-        if(event.target.parentNode.classList.contains('top')) {
+        const { allTops, allBottoms, allShoes } = this.state;
+
+        if (event.target.parentNode.classList.contains('top')) {
             const selectedTop = allTops[Math.floor(Math.random() * allTops.length)];
-            const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
-            this.setState({ selectedTop, tags })
-        } else if(event.target.parentNode.classList.contains('bottom')) {
+            // const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
+            this.setState({ selectedTop })
+        } else if (event.target.parentNode.classList.contains('bottom')) {
             const selectedBottom = allBottoms[Math.floor(Math.random() * allBottoms.length)];
-            const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
-            this.setState({ selectedBottom, tags })
-        } else if(event.target.parentNode.classList.contains('shoe')) {
+            // const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
+            this.setState({ selectedBottom })
+        } else if (event.target.parentNode.classList.contains('shoe')) {
             const selectedShoe = allShoes[Math.floor(Math.random() * allShoes.length)];
-            const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
-            this.setState({ selectedShoe, tags })
+            // const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
+            this.setState({ selectedShoe })
         }
     }
 
@@ -107,13 +118,10 @@ class Create extends Component {
         const top = [selectedTop._id];
         const bottom = [selectedBottom._id];
         const shoes = selectedShoe._id;
-        const outfit = { user, name, worn, tags, top, bottom, shoes};
+        const outfit = { user, name, worn, tags, top, bottom, shoes };
         axios
             .post(`${ROOT_URL.API}/outfits`, outfit)
-            .then(savedOutfit => {
-                console.log(savedOutfit);
-                this.props.history.push('/Archive');
-            })
+            .then(() => this.props.history.push('/Archive'))
             .catch(err => {
                 console.log(err);
             });
@@ -122,61 +130,52 @@ class Create extends Component {
     render() {
         const { selectedTop, selectedBottom, selectedShoe } = this.state;
         let topImage, bottomImage, shoeImage;
-        if(!selectedTop) {
+        if (!selectedTop) {
             topImage = `https://picsum.photos/g/200/300?image=951`
-        }
-        if(!selectedBottom) {
+        } else topImage = selectedTop;
+        if (!selectedBottom) {
             bottomImage = `https://picsum.photos/g/200/300?image=951`
-        }
-        if(!selectedShoe) {
+        } else bottomImage = selectedBottom;
+        if (!selectedShoe) {
             shoeImage = `https://picsum.photos/g/200/300?image=951`
-        }
+        } else shoeImage = selectedShoe;
         return (
             <div className="createContainer">
                 <CardDeck>
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src={topImage}
+                            src={topImage.image}
                             alt="Card image cap"
                         />
                         <CardImgOverlay>
                             <Button className="close top" aria-label="Close" onClick={this.randomizeSingle}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
-                            <CardText className="cardText">
-                                Top
-                            </CardText>
                         </CardImgOverlay>
                     </Card>
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src={bottomImage}
+                            src={bottomImage.image}
                             alt="Card image cap"
                         />
                         <CardImgOverlay>
                             <Button className="close bottom" aria-label="Close" onClick={this.randomizeSingle}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
-                            <CardText className="cardText">
-                                Bottom
-                            </CardText>
                         </CardImgOverlay>
                     </Card>
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src={shoeImage}
+                            src={shoeImage.image}
                             alt="Card image cap"
                         />
                         <CardImgOverlay>
                             <Button className="close shoe" aria-label="Close" onClick={this.randomizeSingle}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
-                            <CardText className="cardText">
-                                Shoes
-                            </CardText>
                         </CardImgOverlay>
                     </Card>
                 </CardDeck>
@@ -185,7 +184,7 @@ class Create extends Component {
                     <div className="outfitPickerDecision">
                         <Button onClick={this.handleCreateOutfit}>Yes!</Button>
                         <Button onClick={this.randomize}>Randomize</Button>
-                        <FontAwesomeIcon icon="share-alt" size="4x" onClick={this.handleButtonClick}/>
+                        <FontAwesomeIcon icon="share-alt" size="4x" onClick={this.handleButtonClick} />
                     </div>
                 </div>
             </div>

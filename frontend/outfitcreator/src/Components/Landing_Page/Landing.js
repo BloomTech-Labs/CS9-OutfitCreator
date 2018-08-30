@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
-import { Button, NavLink } from 'reactstrap';
+import {
+    Link,
+    // Route
+} from 'react-router-dom';
+import {
+    Button,
+    // NavLink
+} from 'reactstrap';
 
 import Login from './Login';
 import './Landing.css';
@@ -42,7 +48,7 @@ class Landing extends Component {
                     <img src='' alt='shoes' />
                     </div>
                 </div> */}
-                
+
                 <div>
                     <div className="landingPage--app-title">Closet Roulette</div>
                     <div className="landingPage--description">Find your next style without messing up your closet!</div>
