@@ -29,8 +29,8 @@ class Login extends React.Component {
     }
 
     signIn = () => {
-        const { username, password } = this.state;
-        axios.post(`${ROOT_URL.API}/auth/login`, { username, password })
+        const { email, password } = this.state;
+        axios.post(`${ROOT_URL.API}/auth/login`, { email, password })
             .then(res => {
                 this.props.onSignin(res.data);
               // Redirect to create page once logged in
