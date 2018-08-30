@@ -7,6 +7,8 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const GitHubStrategy = require("passport-github2").Strategy;
 
+const { ROOT_URL } = require('./keys.js');
+
 require("dotenv").config();
 
 // const Guser = require("../models/gusermodel");
@@ -214,7 +216,7 @@ const signToken = (req, res) => {
     if(err){
         res.sendStatus(500);
     } else {
-        res.redirect(`http://localhost:3000/create#token=${token}`);
+        res.redirect(`${ROOT_URL.WEB}/create#token=${token}`);
         // res.status(200).json({token});
     }
   });
