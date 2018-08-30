@@ -82,7 +82,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="landingPage--login">
                 <Nav pills className="landingPage--login-nav">
                     <NavItem>
                         <NavLink
@@ -140,7 +140,7 @@ class Login extends React.Component {
                                     /><br />
                                     <Button className="button" onClick={this.signUp}>Sign Up</Button>
                                 </form>
-                                <div>
+                                <div className="login--social-buttons">
                                     <a href={`${ROOT_URL.API}/auth/google`}><GoogleLoginButton /></a>
                                     <FacebookLoginButton />
                                     <GithubLoginButton />
@@ -175,13 +175,9 @@ class Login extends React.Component {
                                     /><br />
                                     <Button className="button" onClick={this.signIn}>Sign In</Button>
                                 </form>
-                                <div>
+                                <div className="login--social-buttons">
                                     <a href={`${ROOT_URL.API}/auth/google.png`}><GoogleLoginButton /></a>
-                                </div>
-                                <div>
                                     <FacebookLoginButton />
-                                </div>
-                                <div>
                                     <GithubLoginButton />
                                 </div>
                             </Col>

@@ -24,8 +24,22 @@
     font-family: 'Nothing You Could Do', cursive;
 }
 
-.landingPage--login-nav{
-    margin: 10px;
+.landingPage--login {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 -1px 10px;
+    margin: 50px;
+    padding: 30px 50px 50px;
+}
+
+.landingPage--login-nav {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.login--social-buttons {
+  padding-top: 20px;
 }
 
 .landingPage--app-title{
