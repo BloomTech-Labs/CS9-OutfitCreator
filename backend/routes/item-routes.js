@@ -1,6 +1,6 @@
-const multer = require("multer");
-const fs = require("fs");
-const cloudinary = require("cloudinary");
+// const multer = require("multer");
+// const fs = require("fs");
+// const cloudinary = require("cloudinary");
 
 const Item = require("../models/itemModel");
 
