@@ -17,6 +17,7 @@ class Settings extends Component {
           headers: { Authorization: authToken }
       }
 
+      if(authToken) {
       axios.get(`${ROOT_URL.API}/user/info/${userID}`, requestOptions)
           .then(res => {
               this.setState(res.data);
@@ -24,6 +25,9 @@ class Settings extends Component {
           .catch(err => {
             console.log(err);
           });
+      } else {
+            this.props.history.push('/');
+      }
     }
 
     updateUserInfo = () => {
