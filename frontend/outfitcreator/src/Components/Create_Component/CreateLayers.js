@@ -17,12 +17,63 @@ class Create extends Component {
             name: '',
             worn: [],
             tags: [],
-            allTops: [],
-            allBottoms: [],
-            allShoes: [],
-            selectedTop: [],
-            selectedBottom: [],
-            selectedShoe: [],
+            items: {
+                top: {
+                    show: false,
+                    allTops: [],
+                    selectedTop: null
+                },
+                shirt: {
+                    show: false,
+                    allShirts: [],
+                    selectedShirt: null,
+                },
+                sweater: {
+                    show: false,
+                    allSweaters: [],
+                    selectedSweater: null,
+                },
+                jacket: {
+                    show: false,
+                    allJackets: [],
+                    selectedJacket: null,
+                },
+                bottom: {
+                    show: false,
+                    allBottoms: [],
+                    selectedBottom: null,
+                },
+                pants: {
+                    show: false,
+                    allPants: [],
+                    selectedPants: null,
+                },
+                shorts: {
+                    show: false,
+                    allShorts: [],
+                    selectedShorts: null,
+                },
+                skirt: {
+                    show: false,
+                    allSkirts: [],
+                    selectedSkirt: null,
+                },
+                leggings: {
+                    show: false,
+                    allLeggings: [],
+                    selectedLeggings: null,
+                },
+                dress: {
+                    show: false,
+                    allDresses: [],
+                    selectedDress: null,
+                },
+                shoes: {
+                    show: false,
+                    allShoes: [],
+                    selectedShoes: null,
+                },
+            }
         }
         this.setAuthToken();
     }
@@ -71,22 +122,15 @@ class Create extends Component {
     randomize = () => {
         const { allTops, allBottoms, allShoes } = this.state;
         let selectedTop, selectedBottom, selectedShoe;
-        // let selectedTopTags = [];
-        // let selectedBottomTags = [];
-        // let selectedShoeTags = [];
         if (allTops.length > 0) {
             selectedTop = allTops[Math.floor(Math.random() * allTops.length)];
-            // selectedTopTags = selectedTop.tags;
         }
         if (allBottoms.length > 0) {
             selectedBottom = allBottoms[Math.floor(Math.random() * allBottoms.length)];
-            // selectedBottomTags = selectedBottom.tags;
         }
         if (allShoes.length > 0) {
             selectedShoe = allShoes[Math.floor(Math.random() * allShoes.length)];
-            // selectedShoeTags = selectedShoe.tags;
         }
-        // const tags = [...new Set([...selectedTopTags, ...selectedBottomTags, ...selectedShoeTags])]
         this.setState({ selectedTop, selectedBottom, selectedShoe });
     }
 
@@ -96,15 +140,12 @@ class Create extends Component {
 
         if (event.target.parentNode.classList.contains('top')) {
             const selectedTop = allTops[Math.floor(Math.random() * allTops.length)];
-            // const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
             this.setState({ selectedTop })
         } else if (event.target.parentNode.classList.contains('bottom')) {
             const selectedBottom = allBottoms[Math.floor(Math.random() * allBottoms.length)];
-            // const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
             this.setState({ selectedBottom })
         } else if (event.target.parentNode.classList.contains('shoe')) {
             const selectedShoe = allShoes[Math.floor(Math.random() * allShoes.length)];
-            // const tags = [...new Set([...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags])]
             this.setState({ selectedShoe })
         }
     }
