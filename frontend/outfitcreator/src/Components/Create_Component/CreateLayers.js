@@ -174,13 +174,13 @@ class Create extends Component {
     };
 
     render() {
-        const types = Object.keys(this.state.items);//.filter(key => this.state.items[key].show == true);
+        const types = Object.keys(this.state.items);
         const selected = types.filter(key => this.state.items[key].show == true)
         console.log(selected);
         return (
             <div className="createContainer">
                 <CardDeck>
-                    {}
+                    {selected.forEach(key)}
                 </CardDeck>
                 <div className="outfitPickerContainer">
                     <Input type="text" name="name" placeholder="Outfit Nickname" onChange={this.handleInputChange} value={this.state.name} className="outfitInput" />

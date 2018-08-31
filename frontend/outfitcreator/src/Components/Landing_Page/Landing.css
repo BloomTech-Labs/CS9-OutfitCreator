@@ -54,6 +54,7 @@
     font-size: 1.75em;
     font-weight: bold;
     font-family: 'Arsenal', sans-serif;
+    color: var(--med--purple);
 }
 
 .landingPage--login-nav{

@@ -7,7 +7,7 @@ class CreateCard extends React.Component {
         console.log(newURL);
         return (
             <div className="create-card">
-                <Card inverse className="ITEM-TYPE">
+                <Card inverse>
                         <CardImg
                             width="80%"
                             src={topImage.image}
