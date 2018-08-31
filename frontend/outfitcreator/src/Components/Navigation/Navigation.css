@@ -1,5 +1,4 @@
 .navigation--container {
-  box-shadow: 0 0 10px 1px;
   left: 0;
   position: fixed;
   top: 0;
@@ -10,7 +9,7 @@
   background: var(--dark-purple);
   height: 50px;
   width: 100%;
-  z-index: 1;
+  box-shadow: 0 0 10px 1px;
 }
 
 .navigation--minimize {
@@ -51,6 +50,7 @@
   align-content: center;
   background: var(--dark-purple);
   border: 3px solid var(--dark-purple);
+  border-bottom-right-radius: 10px;
   display: flex;
   flex-flow: column;
   margin-top: -100px;
@@ -62,18 +62,17 @@
 }
 
 .sideNav--expanded {
-  box-shadow: 1px 0 10px 1px;
   margin-top: -3px;
 }
 
 .navigation--sideNav * {
   color: white;
-  padding: 7px 0px;
+  padding: 10px 0px;
   text-align: center;
 }
 
 .navigation--sideNav *:hover {
-  color: var(--light-purple);
+  color: var(--dark-purple);
 }
 
 .navigation--topRight {
@@ -98,6 +97,12 @@
 
 .navigation--logout {
   cursor: pointer;
+  text-decoration: underline;
+}
+
+.nav--item {
+  background: var(--dark-purple);
+  border: solid 2px var(--dark-purple);
   font-family: 'Homemade Apple', cursive;
 
 }
