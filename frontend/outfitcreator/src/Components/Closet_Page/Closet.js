@@ -38,14 +38,11 @@ class Closet extends React.Component {
     render() {
         return (
             <div className="closet">
-                <div className="closet-text">
-                    <h1>My Closet</h1>
-                    <p>Here, you can view all the items you've already uploaded. Click a category to get started:</p>
-                </div>
+                <div className="closet-title">My Closet</div>
                 <div className="closet-menu">
-                    <button className="button" onClick={() => this.onSelect("top")}>Tops</button>
-                    <button className="button" onClick={() => this.onSelect("bottom")}>Bottoms</button>
-                    <button className="button" onClick={() => this.onSelect("shoes")}>Shoes</button>
+                    <button className={this.state.selectedType=="top"?"closet-button--active":"closet-button"} onClick={() => this.onSelect("top")}>Tops</button>
+                    <button className={this.state.selectedType=="bottom"?"closet-button--active":"closet-button"} onClick={() => this.onSelect("bottom")}>Bottoms</button>
+                    <button className={this.state.selectedType=="shoes"?"closet-button--active":"closet-button"} onClick={() => this.onSelect("shoes")}>Shoes</button>
                 </div>
                 <div className="closet-cards">
                     {this.state.items.map(item =><ClosetCard item={item} key={item._id}/>)}

@@ -150,7 +150,7 @@ class Create extends Component {
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src={topImage}
+                            src={topImage.image}
                             alt="Card image cap"
                             className="cardImage"
                         />
@@ -163,7 +163,7 @@ class Create extends Component {
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src={bottomImage}
+                            src={bottomImage.image}
                             alt="Card image cap"
                             className="cardImage"
                         />
@@ -176,7 +176,7 @@ class Create extends Component {
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src={shoeImage}
+                            src={shoeImage.image}
                             alt="Card image cap"
                             className="cardImage"
                         />
