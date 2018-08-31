@@ -1,7 +1,6 @@
 .navigation--container {
   align-items: center;
   background: var(--dark-purple);
-  box-shadow: 0 0 10px 1px;
   display: flex;
   height: 50px;
   justify-content: space-between;
@@ -12,6 +11,15 @@
   z-index: 1;
 }
 
+.navigation--container:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  box-shadow: 0 0 10px 1px;
+  height: 50px;
+  z-index: -1;
+}
+
 .navigation--pages, .navigation--topRight, .nav-link {
   align-content: center;
   display: flex;
@@ -20,6 +28,10 @@
 .navigation--pages *, .navigation--topRight * {
   padding: 0 10px;
   color: white;
+}
+
+.navigation--pages {
+  margin-left: 10px;
 }
 
 .navigation--topRight {
@@ -40,38 +52,40 @@
   border: solid 2px var(--dark-purple);
 }
 
-@media screen and (max-width: 700px) {
-  .navigation--container {
-    /* border: 1px solid yellow; */
-    border-bottom: 1px solid black;
-  }
+.nav--active {
+  text-decoration: underline;
+}
 
+/* .nav--active:after {
+  content: '';
+  width: 50px;
+  height: 20px;
+  position: absolute;
+  border-bottom: 1px solid white;
+} */
+
+@media screen and (max-width: 700px) {
   .navigation--pages {
-    /* border: 1px solid red; */
     position: absolute;
     left: 0;
     top: -50px;
     justify-content: center;
     width: 100%;
     z-index: -1;
+    margin: 0;
   }
 
-  /* .collapse {
-    position: absolute;
-    z-index: -1;
-  } */
-
   .sideNav--expanded {
-    /* border: 1px solid blue; */
+    filter: drop-shadow(inset5px 5px 10px black);
     top: 50px;
   }
   
   .sideNav--expanded * {
-    position: relative;
     background: var(--dark-purple);
+    padding: 5px 0;
     width: 100%;
   }
-  
+
   /* Animation related */
   .navigation--minimize {
     cursor: pointer;
