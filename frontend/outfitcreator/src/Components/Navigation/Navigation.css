@@ -91,6 +91,8 @@
 
 .navigation--user {
   border-right: 1px solid white;
+  font-weight: bold;
+  font-family: 'Homemade Apple', cursive;
 }
 
 .navigation--logout {
@@ -102,16 +104,10 @@
   background: var(--dark-purple);
   border: solid 2px var(--dark-purple);
   font-family: 'Homemade Apple', cursive;
-  font-weight: bold;
-  text-shadow:
-    -1px -1px var(--pale-purple),
-    1px -1px var(--pale-purple),
-    -1px 1px var(--pale-purple),
-    1px 1px var(--pale-purple);
-  color: var(--dark-purple);
+
 }
 
-.nav--item:hover {
+.navigation--site-title {
   background: var(--dark-purple);
   border: solid 2px var(--dark-purple);
   font-family: 'Homemade Apple', cursive;
@@ -121,5 +117,5 @@
     1px -1px white,
     -1px 1px white,
     1px 1px white;
-    color: var(--dark-purple);
+  color: var(--dark-purple);
 }
