@@ -20,58 +20,58 @@ class Create extends Component {
             items: {
                 top: {
                     show: true,
-                    allTops: [],
-                    selectedTop: null
+                    all: [],
+                    selected: null
                 },
                 shirt: {
                     show: false,
-                    allShirts: [],
-                    selectedShirt: null,
+                    all: [],
+                    selected: null,
                 },
                 sweater: {
                     show: false,
-                    allSweaters: [],
-                    selectedSweater: null,
+                    all: [],
+                    selected: null,
                 },
                 jacket: {
                     show: false,
-                    allJackets: [],
-                    selectedJacket: null,
+                    all: [],
+                    selected: null,
                 },
                 bottom: {
                     show: true,
-                    allBottoms: [],
-                    selectedBottom: null,
+                    all: [],
+                    selected: null,
                 },
                 pants: {
                     show: false,
-                    allPants: [],
-                    selectedPants: null,
+                    all: [],
+                    selected: null,
                 },
                 shorts: {
                     show: false,
-                    allShorts: [],
-                    selectedShorts: null,
+                    all: [],
+                    selected: null,
                 },
                 skirt: {
                     show: false,
-                    allSkirts: [],
-                    selectedSkirt: null,
+                    all: [],
+                    selected: null,
                 },
                 leggings: {
                     show: false,
-                    allLeggings: [],
-                    selectedLeggings: null,
+                    all: [],
+                    selected: null,
                 },
                 dress: {
                     show: false,
-                    allDresses: [],
-                    selectedDress: null,
+                    all: [],
+                    selected: null,
                 },
                 shoes: {
                     show: true,
-                    allShoes: [],
-                    selectedShoes: null,
+                    all: [],
+                    selected: null,
                 },
             }
         }
@@ -180,7 +180,9 @@ class Create extends Component {
         return (
             <div className="createContainer">
                 <CardDeck>
-                    {selected.forEach(key)}
+                    {selected.forEach(key=>{
+                        console.log(this.state.items[key].selected)
+                        })}
                 </CardDeck>
                 <div className="outfitPickerContainer">
                     <Input type="text" name="name" placeholder="Outfit Nickname" onChange={this.handleInputChange} value={this.state.name} className="outfitInput" />

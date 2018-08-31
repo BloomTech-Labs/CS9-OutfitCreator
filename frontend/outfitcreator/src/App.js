@@ -7,7 +7,7 @@ import Landing from './Components/Landing_Page/Landing';
 import Login from './Components/Landing_Page/Login';
 import Navigation from './Components/Navigation/Navigation';
 import Create from './Components/Create_Component/Create';
-//import CreateLayers from './Components/Create_Component/CreateLayers';
+import CreateLayers from './Components/Create_Component/CreateLayers';
 import Upload from './Components/Upload_Page/Upload';
 import Archive from './Components/Archive_Page/Archive';
 import Settings from './Components/Settings_Page/Settings';
@@ -63,12 +63,12 @@ class App extends Component {
               <Navigation tokenData={this.tokenData} />
             </div>
           } />
-          {/* <Route path='/Layers' render={props =>
+          <Route path='/Layers' render={props =>
             <div className='App--create-layers'>
               <CreateLayers {...props} getUserID={this.getUserID} />
               <Navigation tokenData={this.tokenData} />
             </div>
-          } /> */}
+          } />
           <Route path='/Archive' render={props =>
             <div>
               <Archive getUserID={this.getUserID} />

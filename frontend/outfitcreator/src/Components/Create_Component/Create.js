@@ -22,7 +22,7 @@ class Create extends Component {
             allShoes: [],
             selectedTop: [],
             selectedBottom: [],
-            selectedShoe: [],
+            selectedShoe: []
         }
         this.setAuthToken();
     }
