@@ -174,21 +174,10 @@ class Create extends Component {
     };
 
     render() {
-        const { selectedTop, selectedBottom, selectedShoe } = this.state;
-        let topImage, bottomImage, shoeImage;
-        if (!selectedTop) {
-            topImage = `https://picsum.photos/g/200/300?image=951`
-        } else topImage = selectedTop;
-        if (!selectedBottom) {
-            bottomImage = `https://picsum.photos/g/200/300?image=951`
-        } else bottomImage = selectedBottom;
-        if (!selectedShoe) {
-            shoeImage = `https://picsum.photos/g/200/300?image=951`
-        } else shoeImage = selectedShoe;
         return (
             <div className="createContainer">
                 <CardDeck>
-                    <Card inverse>
+                    <Card inverse className="ITEM-TYPE">
                         <CardImg
                             width="80%"
                             src={topImage.image}
@@ -201,28 +190,15 @@ class Create extends Component {
                             </Button>
                         </CardImgOverlay>
                     </Card>
-                    <Card inverse>
+                    <Card inverse className="ITEM-TYPE">
                         <CardImg
                             width="80%"
-                            src={bottomImage.image}
+                            src={topImage.image}
                             alt="Card image cap"
                             className="cardImage"
                         />
-                        <CardImgOverlay>
-                            <Button className="close bottom" aria-label="Close" onClick={this.randomizeSingle}>
-                                <span aria-hidden="true">&times;</span>
-                            </Button>
-                        </CardImgOverlay>
-                    </Card>
-                    <Card inverse>
-                        <CardImg
-                            width="80%"
-                            src={shoeImage.image}
-                            alt="Card image cap"
-                            className="cardImage"
-                        />
-                        <CardImgOverlay>
-                            <Button className="close shoe" aria-label="Close" onClick={this.randomizeSingle}>
+                        <CardImgOverlay className="test">
+                            <Button className="close top" aria-label="Close" onClick={this.randomizeSingle}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
                         </CardImgOverlay>
