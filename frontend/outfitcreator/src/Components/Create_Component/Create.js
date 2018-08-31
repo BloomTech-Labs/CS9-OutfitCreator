@@ -116,10 +116,11 @@ class Create extends Component {
 
     // method handle creating an outfit
     handleCreateOutfit = () => {
-        const { user, name, worn, tags, selectedTop, selectedBottom, selectedShoe } = this.state;
+        const { user, name, worn, selectedTop, selectedBottom, selectedShoe } = this.state;
         const top = [selectedTop._id];
         const bottom = [selectedBottom._id];
         const shoes = selectedShoe._id;
+        const tags = [...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags]
         const outfit = { user, name, worn, tags, top, bottom, shoes };
         axios
             .post(`${ROOT_URL.API}/outfits`, outfit)
@@ -145,7 +146,7 @@ class Create extends Component {
         return (
             <div className="createContainer">
                 <CardDeck>
-                    {items.map((item, index) => {
+                    {/* {items.map((item, index) => {
                         return (<Card key={index}inverse>
                             <CardImg
                                 key={item._id}
@@ -160,8 +161,8 @@ class Create extends Component {
                                 </Button>
                             </CardImgOverlay>
                         </Card>)
-                    })}
-                    {/* <Card inverse>
+                    })} */}
+                    <Card inverse>
                         <CardImg
                             width="80%"
                             src={topImage.image}
@@ -199,7 +200,7 @@ class Create extends Component {
                                 <span aria-hidden="true">&times;</span>
                             </Button>
                         </CardImgOverlay>
-                    </Card> */}
+                    </Card>
                 </CardDeck>
                 <div className="outfitPickerContainer">
                     <Input type="text" name="name" placeholder="Outfit Nickname" onChange={this.handleInputChange} value={this.state.name} className="outfitInput" />

@@ -16,9 +16,13 @@ class OutfitEdit extends React.Component {
             lastWorn: Date,
             worn: Date,
             top: '',
+            topTags: [],
             bottom: '',
+            bottomTags: [],
             shoes: '',
+            shoesTags: [],
             oldID: '',
+            tags: [],
             itemSelection: [],
             editItem: false,
         }
@@ -60,7 +64,7 @@ class OutfitEdit extends React.Component {
         const { user } = this.state;
         axios.get(`${ROOT_URL.API}/items/${user}/${id}`)
             .then(response => {
-                this.setState({ [response.data.type]: response.data })
+                this.setState({ [response.data.type]: response.data, [response.data.type + 'Tags']: response.data.tags })
             })
             .catch(err => {
                 console.log(err);
@@ -76,10 +80,11 @@ class OutfitEdit extends React.Component {
     }
 
     submitChanges = () => {
-        const { user, name, worn, lastWorn, top, bottom, shoes } = this.state;
+        const { user, name, worn, lastWorn, top, topTags, bottom, bottomTags, shoes, shoesTags } = this.state;
         const outfitId = this.props.location.pathname.split('Edit/')[1];
         if (lastWorn) worn.unshift(lastWorn);
-        const newInfo = { name, worn, top, bottom, shoes };
+        const tags = [...topTags, ...bottomTags, ...shoesTags];
+        const newInfo = { name, worn, tags, top, bottom, shoes, tags };
         axios.put(`${ROOT_URL.API}/outfits/${user}/${outfitId}`, newInfo)
             .then()
             .catch(err => {
@@ -144,7 +149,7 @@ class OutfitEdit extends React.Component {
                 */}
                 {editItem ?
                     <div onClick={this.toggle}>
-                    {/*this will map out hte possible items to be selected to replace the selected one*/}
+                        {/*this will map out hte possible items to be selected to replace the selected one*/}
                         <div className="createContainer">
                             <CardDeck>
                                 {itemSelection.map((item, index) => {
