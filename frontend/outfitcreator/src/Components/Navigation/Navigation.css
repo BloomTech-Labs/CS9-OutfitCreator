@@ -44,6 +44,8 @@
 
 .navigation--user {
   border-right: 1px solid white;
+  font-weight: bold;
+  font-family: 'Homemade Apple', cursive;
 }
 
 .nav--item, .nav--item:hover  {
@@ -120,4 +122,19 @@
   .cross .bar3 { 
     transform: rotate(45deg) translate(-5px, -7px);
   }
+  font-family: 'Homemade Apple', cursive;
+
+}
+
+.navigation--site-title {
+  background: var(--dark-purple);
+  border: solid 2px var(--dark-purple);
+  font-family: 'Homemade Apple', cursive;
+  font-weight: bold;
+  text-shadow:
+    -1px -1px white,
+    1px -1px white,
+    -1px 1px white,
+    1px 1px white;
+  color: var(--dark-purple);
 }

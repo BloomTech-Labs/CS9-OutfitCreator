@@ -14,7 +14,6 @@ class Upload extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // pairWith: [], // currently not used
             image: '',
             name: '',
             search: '',
@@ -155,51 +154,13 @@ class Upload extends Component {
                                 <option>Shoes</option>
                             </Input>
                         </FormGroup>
-                    </div>
-                    <div className="column--right">
                         <TagSearch
                             state={this.state}
                             passState={this.passState}
                         />
-                        <Label>Pair With:</Label>
-                        <Form className='upload--pairWith'>
-                            <FormGroup check>
-                                <Label check>
-                                    <Input
-                                        type='checkbox'
-                                        id='upload--topsCheckbox'
-                                        name='tops'
-                                        onChange={this.testInput}
-                                    />
-                                    Tops
-                            </Label>
-                            </FormGroup>
-                            <FormGroup check>
-                                <Label check>
-                                    <Input
-                                        type='checkbox'
-                                        id='upload--bottomsCheckbox'
-                                        name='bottom'
-                                        onChange={this.testInput}
-                                    />
-                                    Bottoms
-                            </Label>
-                            </FormGroup>
-                            <FormGroup check>
-                                <Label check>
-                                    <Input
-                                        type='checkbox'
-                                        id='upload--shoesCheckbox'
-                                        name='shoes'
-                                        onChange={this.testInput}
-                                    />
-                                    Shoes
-                            </Label>
-                            </FormGroup>
-                        </Form>
                     </div>
                 </div>
-                <Button className="upload--save" onClick={this.saveItem}>Save</Button>
+                <Button className="button" onClick={this.saveItem}>Save</Button>
             </div>
         );
     }
