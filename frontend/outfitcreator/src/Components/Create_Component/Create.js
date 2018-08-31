@@ -147,8 +147,9 @@ class Create extends Component {
                             width="80%"
                             src={topImage.image}
                             alt="Card image cap"
+                            className="cardImage"
                         />
-                        <CardImgOverlay>
+                        <CardImgOverlay className="test">
                             <Button className="close top" aria-label="Close" onClick={this.randomizeSingle}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
@@ -159,6 +160,7 @@ class Create extends Component {
                             width="80%"
                             src={bottomImage.image}
                             alt="Card image cap"
+                            className="cardImage"
                         />
                         <CardImgOverlay>
                             <Button className="close bottom" aria-label="Close" onClick={this.randomizeSingle}>
@@ -171,6 +173,7 @@ class Create extends Component {
                             width="80%"
                             src={shoeImage.image}
                             alt="Card image cap"
+                            className="cardImage"
                         />
                         <CardImgOverlay>
                             <Button className="close shoe" aria-label="Close" onClick={this.randomizeSingle}>
