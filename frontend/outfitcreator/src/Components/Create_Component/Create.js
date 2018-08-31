@@ -161,6 +161,45 @@ class Create extends Component {
                             </CardImgOverlay>
                         </Card>)
                     })}
+                    {/* <Card inverse>
+                        <CardImg
+                            width="80%"
+                            src={topImage.image}
+                            alt="Card image cap"
+                            className="cardImage"
+                        />
+                        <CardImgOverlay className="test">
+                            <Button className="close top" aria-label="Close" onClick={this.randomizeSingle}>
+                                <span aria-hidden="true">&times;</span>
+                            </Button>
+                        </CardImgOverlay>
+                    </Card>
+                    <Card inverse>
+                        <CardImg
+                            width="80%"
+                            src={bottomImage.image}
+                            alt="Card image cap"
+                            className="cardImage"
+                        />
+                        <CardImgOverlay>
+                            <Button className="close bottom" aria-label="Close" onClick={this.randomizeSingle}>
+                                <span aria-hidden="true">&times;</span>
+                            </Button>
+                        </CardImgOverlay>
+                    </Card>
+                    <Card inverse>
+                        <CardImg
+                            width="80%"
+                            src={shoeImage.image}
+                            alt="Card image cap"
+                            className="cardImage"
+                        />
+                        <CardImgOverlay>
+                            <Button className="close shoe" aria-label="Close" onClick={this.randomizeSingle}>
+                                <span aria-hidden="true">&times;</span>
+                            </Button>
+                        </CardImgOverlay>
+                    </Card> */}
                 </CardDeck>
                 <div className="outfitPickerContainer">
                     <Input type="text" name="name" placeholder="Outfit Nickname" onChange={this.handleInputChange} value={this.state.name} className="outfitInput" />
