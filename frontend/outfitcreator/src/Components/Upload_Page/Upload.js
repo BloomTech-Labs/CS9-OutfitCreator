@@ -50,7 +50,14 @@ class Upload extends Component {
                 // cropping: 'server',
                 // cropping_show_dimensions: true,
                 // cropping_show_back_button: true,
-                sources: ['local', 'url', 'camera', 'image_search', 'instagram', 'facebook'],
+                sources: [
+                    'local',
+                     'url',
+                     'camera',
+                    //  'image_search',
+                     'instagram',
+                     'facebook'
+                    ],
                 theme: 'purple'
             },
             (err, result) => {
