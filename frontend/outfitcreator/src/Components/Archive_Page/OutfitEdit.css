@@ -67,7 +67,7 @@
     margin: 10px;
     padding: 10px;
     transition: .5s;
-    background: var(--dark-purple);
+    /* background: var(--dark-purple); */
 }
 
 .outfit--card:hover {
