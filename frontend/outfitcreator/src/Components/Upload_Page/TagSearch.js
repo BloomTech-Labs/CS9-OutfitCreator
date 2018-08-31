@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Input, InputGroup, InputGroupAddon,  } from 'reactstrap';
 import './TagSearch.css';
-import SearchIcon from '../../search.png';
+import Icon from './tag.png';
 
 class TagSearch extends Component {
     constructor(props) {
@@ -38,13 +38,13 @@ class TagSearch extends Component {
                 <InputGroupAddon 
                     className='tagSearch--icon' 
                     addonType='prepend'>
-                    <img src={SearchIcon} alt='Magnifying Glass' />
+                    <img src={Icon} alt='Magnifying Glass' />
                 </InputGroupAddon>
                 <Input 
                     className='tagSearch--input' 
                     type='text' 
-                    name='search' 
-                    placeholder='Search' 
+                    name='tags' 
+                    placeholder='Add a Tag...' 
                     value={this.props.state.search} 
                     onChange={this.handleInputChange} 
                     onKeyPress={this.addTag} 
