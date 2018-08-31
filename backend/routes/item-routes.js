@@ -31,8 +31,8 @@ require("dotenv").config();
 // Add a new item to the database
 router.post("/", (req, res) => {
   // console.log('req.body: ' + req.body);
-  const { user, name, image, type, tags } = req.body;
-  Item.create({ user, name, image, type, tags })
+  const { user, name, image, type, subtype, tags } = req.body;
+  Item.create({ user, name, image, type, subtype, tags })
     .then(item => {
       res.status(201).json(item);
     })
@@ -163,6 +163,24 @@ router.get("/type/:user/:type", (req, res) => {
   const { user, type } = req.params;
   Item.find({
     type,
+    user
+  })
+    .populate()
+    .then(items => {
+      res.status(200).json(items);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ message: "Items could not be retreived at this time." });
+    });
+});
+
+// Get items by SUBtype for a user
+router.get("/subtype/:user/:subtype", (req, res) => {
+  const { user, subtype } = req.params;
+  Item.find({
+    subtype,
     user
   })
     .populate()

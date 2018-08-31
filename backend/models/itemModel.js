@@ -19,6 +19,11 @@ const ItemSchema = new mongoose.Schema({
     required: true,
     enum: ["top", "bottom", "shoes"]
   },
+  subtype: {
+    type: String,
+    required: false,
+    enum: ["shirt", "sweater", "jacket", "pants", "shorts", "skirt", "leggings", "dress", "formal shoes", "casual shoes"]
+  },
   tags: [
     {
       type: String
