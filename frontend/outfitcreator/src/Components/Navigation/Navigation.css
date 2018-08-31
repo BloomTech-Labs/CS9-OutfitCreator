@@ -1,5 +1,4 @@
 .navigation--container {
-  
   left: 0;
   position: fixed;
   top: 0;
@@ -63,8 +62,6 @@
 }
 
 .sideNav--expanded {
-  /* box-shadow: 0 1px 1px 0; */
-  /* border: 1px solid black; */
   margin-top: -3px;
 }
 
