@@ -3,11 +3,8 @@ import { Card, CardText, CardImg, CardImgOverlay, CardDeck, Button, Input } from
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import queryString from 'query-string';
-
 import { ROOT_URL } from '../../config';
 import './Create.css';
-
-// const testUserId = '5b761531cdcd6d00043d420e';
 
 class Create extends Component {
     constructor(props) {
