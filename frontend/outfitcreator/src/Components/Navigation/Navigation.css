@@ -1,117 +1,132 @@
 .navigation--container {
+  align-items: center;
+  background: var(--dark-purple);
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
   left: 0;
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 1;
 }
 
-.navigation--dresser {
-  background: var(--dark-purple);
-  height: 50px;
+.navigation--container:after {
+  content: '';
+  position: absolute;
   width: 100%;
   box-shadow: 0 0 10px 1px;
-}
-
-.navigation--minimize {
-  cursor: pointer;
-  padding: 9px 20px;
-  width: 50px;
-}
-
-.bar1, .bar2, .bar3 {
-  width: 30px;
-  height: 4px;
-  background-color: white; 
-  margin: 5px 0;
-  transition: 0.4s;
-}
-
-.change .bar1 { 
-  transform: translate(0, 9px) ;
-}
-
-.change .bar2 { 
-  opacity: 0;
-}
-
-.change .bar3 { 
-  transform: translate(0, -9px);
-}
-
-.cross .bar1 { 
-  transform: rotate(-45deg) translate(-6px, 7px);
-}
-
-.cross .bar3 { 
-  transform: rotate(45deg) translate(-5px, -7px);
-}
-
-.navigation--sideNav {
-  align-content: center;
-  background: var(--dark-purple);
-  border: 3px solid var(--dark-purple);
-  border-bottom-right-radius: 10px;
-  display: flex;
-  flex-flow: column;
-  margin-top: -100px;
-  margin-left: -3px;
-  position: absolute;
-  transition: 0.4s;
-  width: 150px;
+  height: 50px;
   z-index: -1;
 }
 
-.sideNav--expanded {
-  margin-top: -3px;
+.navigation--pages, .navigation--topRight, .nav-link {
+  align-content: center;
+  display: flex;
 }
 
-.navigation--sideNav * {
+.navigation--pages *, .navigation--topRight * {
+  padding: 0 10px;
   color: white;
-  padding: 10px 0px;
-  text-align: center;
 }
 
-.navigation--sideNav *:hover {
-  color: var(--dark-purple);
+.navigation--pages {
+  margin-left: 10px;
 }
 
 .navigation--topRight {
-  display: flex;
-  justify-content: space-between;
-  position: absolute;
-  top: 0;
-  right: 0;
-  color: white;
-  padding: 12px;
+  margin-right: 20px;
 }
 
-.navigation--topRight * {
-  padding: 0 15px;
+.navigation--user, .navigation--logout {
+  cursor: pointer;
 }
 
 .navigation--user {
   border-right: 1px solid white;
+  font-weight: bold;
+  font-family: 'Homemade Apple', cursive;
 }
 
-.navigation--logout {
+.nav--item, .nav--item:hover  {
   cursor: pointer;
+  background: var(--dark-purple);
+  border: solid 2px var(--dark-purple);
+}
+
+.nav--active {
   text-decoration: underline;
 }
 
-.nav--item {
-  background: var(--dark-purple);
-  border: solid 2px var(--dark-purple);
+/* .nav--active:after {
+  content: '';
+  width: 50px;
+  height: 20px;
+  position: absolute;
+  border-bottom: 1px solid white;
+} */
+
+@media screen and (max-width: 700px) {
+  .navigation--pages {
+    position: absolute;
+    left: 0;
+    top: -50px;
+    justify-content: center;
+    width: 100%;
+    z-index: -1;
+    margin: 0;
+  }
+
+  .sideNav--expanded {
+    filter: drop-shadow(inset5px 5px 10px black);
+    top: 50px;
+  }
+  
+  .sideNav--expanded * {
+    background: var(--dark-purple);
+    padding: 5px 0;
+    width: 100%;
+  }
+
+  /* Animation related */
+  .navigation--minimize {
+    cursor: pointer;
+    padding: 9px 20px;
+    width: 50px;
+  }
+
+  .bar1, .bar2, .bar3 {
+    width: 30px;
+    height: 4px;
+    background-color: white; 
+    margin: 5px 0;
+    transition: 0.4s;
+  }
+
+  .change .bar1 { 
+    transform: translate(0, 9px) ;
+  }
+
+  .change .bar2 { 
+    opacity: 0;
+  }
+
+  .change .bar3 { 
+    transform: translate(0, -9px);
+  }
+
+  .cross .bar1 { 
+    transform: rotate(-45deg) translate(-6px, 7px);
+  }
+
+  .cross .bar3 { 
+    transform: rotate(45deg) translate(-5px, -7px);
+  }
   font-family: 'Homemade Apple', cursive;
-  font-weight: bold;
-  text-shadow:
-    -1px -1px var(--pale-purple),
-    1px -1px var(--pale-purple),
-    -1px 1px var(--pale-purple),
-    1px 1px var(--pale-purple);
-  color: var(--dark-purple);
+
 }
 
-.nav--item:hover {
+.navigation--site-title {
   background: var(--dark-purple);
   border: solid 2px var(--dark-purple);
   font-family: 'Homemade Apple', cursive;
@@ -121,5 +136,5 @@
     1px -1px white,
     -1px 1px white,
     1px 1px white;
-    color: var(--dark-purple);
+  color: var(--dark-purple);
 }

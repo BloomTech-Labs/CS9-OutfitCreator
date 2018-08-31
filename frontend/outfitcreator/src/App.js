@@ -71,6 +71,7 @@ class App extends Component {
           <Route path='/Settings' render={props =>
             <div>
               <Settings tokenData={this.tokenData} />
+              <Billing {...props} getUserID={this.getUserID} />
               <Navigation tokenData={this.tokenData} />
             </div>
           } />

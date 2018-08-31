@@ -27,7 +27,7 @@
 .landingPage--login {
     background: white;
     border-radius: 10px;
-    box-shadow: 0 -1px 10px;
+    box-shadow: 0 -1px 5px;
     margin: 50px;
     padding: 30px 50px 50px;
 }
@@ -35,7 +35,6 @@
 .landingPage--login-nav {
     display: flex;
     justify-content: center;
-    padding-bottom: 20px;
 }
 
 .login--social-buttons {
@@ -68,12 +67,16 @@
 }
 
 .input--login {
-    padding: 10px;
+    padding: 0 10px;
     margin: 10px;
     background-color: var(--light-purple);
     color: var(--dark-purple);
     border: 3px solid var(--dark-purple);
     border-radius: 5px;
+}
+
+.modal--input {
+  margin: 30px 0;
 }
 
 .landingPage--login-nav{

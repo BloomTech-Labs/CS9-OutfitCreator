@@ -26,7 +26,13 @@
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
-    background: var(--tan);
+    background: var(--pale-purple);
+    color: var(--dark-purple);
+}
+
+.closet-card--name{
+    font-size: 1.5em;
+    font-family: 'Homemade Apple', cursive;
 }
 
 .closet-image {

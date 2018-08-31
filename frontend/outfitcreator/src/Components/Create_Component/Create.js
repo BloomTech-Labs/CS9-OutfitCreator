@@ -150,10 +150,11 @@ class Create extends Component {
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src={topImage.image}
+                            src={topImage}
                             alt="Card image cap"
+                            className="cardImage"
                         />
-                        <CardImgOverlay>
+                        <CardImgOverlay className="test">
                             <Button className="close top" aria-label="Close" onClick={this.randomizeSingle}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
@@ -162,8 +163,9 @@ class Create extends Component {
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src={bottomImage.image}
+                            src={bottomImage}
                             alt="Card image cap"
+                            className="cardImage"
                         />
                         <CardImgOverlay>
                             <Button className="close bottom" aria-label="Close" onClick={this.randomizeSingle}>
@@ -174,8 +176,9 @@ class Create extends Component {
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src={shoeImage.image}
+                            src={shoeImage}
                             alt="Card image cap"
+                            className="cardImage"
                         />
                         <CardImgOverlay>
                             <Button className="close shoe" aria-label="Close" onClick={this.randomizeSingle}>
@@ -187,8 +190,8 @@ class Create extends Component {
                 <div className="outfitPickerContainer">
                     <Input type="text" name="name" placeholder="Outfit Nickname" onChange={this.handleInputChange} value={this.state.name} className="outfitInput" />
                     <div className="outfitPickerDecision">
-                        <Button onClick={this.handleCreateOutfit}>Yes!</Button>
-                        <Button onClick={this.randomize}>Randomize</Button>
+                        <Button className="button" onClick={this.handleCreateOutfit}>Yes!</Button>
+                        <Button className="button" onClick={this.randomize}>Randomize</Button>
                         <FontAwesomeIcon icon="share-alt" size="4x" onClick={this.handleButtonClick} />
                     </div>
                 </div>
