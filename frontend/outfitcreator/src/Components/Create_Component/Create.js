@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Card, CardText, CardImg, CardImgOverlay, CardDeck, Button, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ROOT_URL } from '../../config';
 import axios from 'axios';
+import queryString from 'query-string';
 
+import { ROOT_URL } from '../../config';
 import './Create.css';
 
 // const testUserId = '5b761531cdcd6d00043d420e';
@@ -36,6 +37,10 @@ class Create extends Component {
     }
 
     componentDidMount() {
+        const hash = queryString.parse(this.props.location.hash);
+        if(hash.token){
+            localStorage.setItem('authToken', `Bearer ${hash.token}`);
+        }
         this.setAuthToken();
         const user = this.props.getUserID();
         const authToken = localStorage.getItem('authToken');

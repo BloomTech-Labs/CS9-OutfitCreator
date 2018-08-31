@@ -8,9 +8,7 @@ import {
     // NavLink
 } from 'reactstrap';
 
-// import SignIn from './SignIn';
-// import SignUp from './SignUp';
-// import Login from './Login';
+import Login from './Login';
 import './Landing.css';
 
 class Landing extends Component {

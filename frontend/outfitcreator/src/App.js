@@ -41,6 +41,11 @@ class App extends Component {
     }
   }
 
+  signInSuccess = (data) => {
+    console.log(data);
+    localStorage.setItem('authToken', `Bearer ${data.token}`);
+  }
+
   render() {
     return (
       <div className="App">

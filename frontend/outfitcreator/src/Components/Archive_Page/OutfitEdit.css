@@ -12,6 +12,7 @@
 .container--edit {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     justify-content: space-between;
     border: 1px solid black;
     left: 10px;
@@ -65,7 +66,14 @@
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
+    transition: .5s;
     background: var(--tan);
+}
+
+.outfit--card:hover {
+    transform: translateY(-10px);
+    cursor: pointer;
+    box-shadow: 1px 1px;
 }
 
 .edit--footer{
