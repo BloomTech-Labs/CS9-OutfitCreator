@@ -19,7 +19,7 @@ class Create extends Component {
             tags: [],
             items: {
                 top: {
-                    show: false,
+                    show: true,
                     allTops: [],
                     selectedTop: null
                 },
@@ -39,7 +39,7 @@ class Create extends Component {
                     selectedJacket: null,
                 },
                 bottom: {
-                    show: false,
+                    show: true,
                     allBottoms: [],
                     selectedBottom: null,
                 },
@@ -69,7 +69,7 @@ class Create extends Component {
                     selectedDress: null,
                 },
                 shoes: {
-                    show: false,
+                    show: true,
                     allShoes: [],
                     selectedShoes: null,
                 },
@@ -174,35 +174,13 @@ class Create extends Component {
     };
 
     render() {
+        const types = Object.keys(this.state.items);//.filter(key => this.state.items[key].show == true);
+        const selected = types.filter(key => this.state.items[key].show == true)
+        console.log(selected);
         return (
             <div className="createContainer">
                 <CardDeck>
-                    <Card inverse className="ITEM-TYPE">
-                        <CardImg
-                            width="80%"
-                            src={topImage.image}
-                            alt="Card image cap"
-                            className="cardImage"
-                        />
-                        <CardImgOverlay className="test">
-                            <Button className="close top" aria-label="Close" onClick={this.randomizeSingle}>
-                                <span aria-hidden="true">&times;</span>
-                            </Button>
-                        </CardImgOverlay>
-                    </Card>
-                    <Card inverse className="ITEM-TYPE">
-                        <CardImg
-                            width="80%"
-                            src={topImage.image}
-                            alt="Card image cap"
-                            className="cardImage"
-                        />
-                        <CardImgOverlay className="test">
-                            <Button className="close top" aria-label="Close" onClick={this.randomizeSingle}>
-                                <span aria-hidden="true">&times;</span>
-                            </Button>
-                        </CardImgOverlay>
-                    </Card>
+                    {}
                 </CardDeck>
                 <div className="outfitPickerContainer">
                     <Input type="text" name="name" placeholder="Outfit Nickname" onChange={this.handleInputChange} value={this.state.name} className="outfitInput" />
