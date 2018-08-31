@@ -3,7 +3,7 @@
     border-radius: 10px;
     box-shadow: 0 -1px 10px;
     margin: 100px;
-    padding: 50px 30px;
+    padding: 30px;
 }
 
 .cardText {
@@ -19,6 +19,17 @@
 
 .card-deck {
   margin-bottom: 50px;
+}
+
+.test{
+    border: 0px;
+    box-shadow: none;
+}
+
+.cardImage {
+    border: 3px solid var(--dark-purple);
+    border-radius: 5px;
+    box-shadow: none;
 }
 
 .outfitPickerContainer {

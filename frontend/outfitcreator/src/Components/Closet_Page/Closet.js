@@ -43,9 +43,9 @@ class Closet extends React.Component {
                     <p>Here, you can view all the items you've already uploaded. Click a category to get started:</p>
                 </div>
                 <div className="closet-menu">
-                    <button className="closet-button" onClick={() => this.onSelect("top")}>Tops</button>
-                    <button className="closet-button" onClick={() => this.onSelect("bottom")}>Bottoms</button>
-                    <button className="closet-button" onClick={() => this.onSelect("shoes")}>Shoes</button>
+                    <button className="button" onClick={() => this.onSelect("top")}>Tops</button>
+                    <button className="button" onClick={() => this.onSelect("bottom")}>Bottoms</button>
+                    <button className="button" onClick={() => this.onSelect("shoes")}>Shoes</button>
                 </div>
                 <div className="closet-cards">
                     {this.state.items.map(item =><ClosetCard item={item} key={item._id}/>)}

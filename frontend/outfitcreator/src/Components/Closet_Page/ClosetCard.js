@@ -7,7 +7,7 @@ class ClosetCard extends React.Component {
     render() {
         return (
             <div className="closet-card">
-                <h3>{this.props.item.name}</h3>
+                <div className="closet-card--name">{this.props.item.name}</div>
                 <img className="closet-image" src={this.props.item.image} alt={this.props.item.name} />
                 <br/>
                 {this.props.item.tags.map((tag, index) => <span key={index} className="closet-tag">{`${tag} `}</span>)}
