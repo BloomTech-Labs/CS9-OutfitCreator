@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardText, CardImg, CardImgOverlay, CardDeck, Button, Input } from 'reactstrap';
+import CreateCard from './CreateCard.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import queryString from 'query-string';
@@ -19,7 +20,7 @@ class Create extends Component {
             tags: [],
             items: {
                 top: {
-                    show: true,
+                    show: false,
                     all: [],
                     selected: null
                 },
@@ -39,7 +40,7 @@ class Create extends Component {
                     selected: null,
                 },
                 bottom: {
-                    show: true,
+                    show: false,
                     all: [],
                     selected: null,
                 },
@@ -69,7 +70,7 @@ class Create extends Component {
                     selected: null,
                 },
                 shoes: {
-                    show: true,
+                    show: false,
                     all: [],
                     selected: null,
                 },
@@ -116,6 +117,13 @@ class Create extends Component {
         } else {
             this.props.history.push('/');
         }
+    }
+
+    activateCategory = (category) => {
+        const show = this.state.items[category].show;
+        const items = this.state.items;
+        items[category].show = !items[category].show;
+        this.setState({items})
     }
 
     // method to retrieve random items of all types
@@ -179,9 +187,12 @@ class Create extends Component {
         console.log(selected);
         return (
             <div className="createContainer">
+                <div className="layerSelect">
+                    <button onClick={()=>{this.activateCategory("top")}}>Top</button>
+                </div>
                 <CardDeck>
                     {selected.forEach(key=>{
-                        console.log(this.state.items[key].selected)
+                        return(<CreateCard item={this.state.items[key].selected}/>)
                         })}
                 </CardDeck>
                 <div className="outfitPickerContainer">
