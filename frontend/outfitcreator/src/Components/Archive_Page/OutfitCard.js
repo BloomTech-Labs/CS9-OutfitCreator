@@ -8,13 +8,12 @@ import { withRouter } from 'react-router';
 class OutfitCard extends React.Component {
     editRedirect = () => {
         this.props.history.push(`/Edit/${this.props.outfitId}`);
-        // this.props.location.pathname = `/Edit/${this.props.outfitId}`;
-        // window.location = this.props.location.pathname;
     }
     
     render() {
         const { key, name, src, lastWorn } = this.props;
         let worn = 'Never Worn';
+        // worn is an array of dates worn, will always try to access latest day (stored at the front) if ever worn
         if (lastWorn.length > 0) {
             worn = lastWorn[0].split('T')[0]
         }
