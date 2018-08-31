@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   height: 100%;
+  width: 100%;
 }
 
 ul {
@@ -14,7 +15,7 @@ ul {
   border: 2px solid var(--dark-purple);
   border-radius: 10px;
   padding: 5px 12px;
-  font-size: 1.5em;
+  font-size: 1em;
   font-weight: bold;
   color: var(--pale-purple);
   font-family: 'Arsenal', sans-serif;
@@ -26,6 +27,6 @@ ul {
   border-radius: 10px;
   padding: 5px 12px;
   color: var(--dark-purple);
-  font-size: 1.5em;
+  font-size: 1em;
   font-weight: bold;
 }

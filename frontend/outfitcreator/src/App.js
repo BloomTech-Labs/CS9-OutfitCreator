@@ -94,7 +94,7 @@ class App extends Component {
             </div>
           } />
           <Route path='/Closet' render={props =>
-            <div>
+            <div className="App">
               <Closet {...props} getUserID={this.getUserID} />
               <Navigation tokenData={this.tokenData} />
             </div>
