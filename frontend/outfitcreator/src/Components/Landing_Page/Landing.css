@@ -16,6 +16,10 @@
     margin-right: 50px;
 }
 
+.login--social-buttons {
+  padding-top: 20px;
+}
+
 .landingPage--app-title{
     font-family: 'Homemade Apple', cursive;
     font-size: 3em;
