@@ -4,33 +4,54 @@ import axios from 'axios';
 import classnames from 'classnames';
 
 import { ROOT_URL } from '../../config';
+import Checkout from './Checkout';
+import Cancel from './Cancel';
 import './Settings.css';
+import './billing.css';
 
 class Settings extends Component {
     state = { 
         oldPassword: '',
         newPassword: '',
-        activeTab: '1'
+        activeTab: '1',
+        stripe: null,
+        userID: null,
+        subscribed: null,
+        subscription: null,
     }
 
     componentDidMount() {
-      const userID = this.props.tokenData().sub;
-      const authToken = localStorage.getItem('authToken');
-      const requestOptions = {
-          headers: { Authorization: authToken }
-      }
+        const userID = this.props.tokenData().sub;
+        const authToken = localStorage.getItem('authToken');
+        const requestOptions = {
+            headers: { Authorization: authToken }
+        }
 
-      if(authToken) {
-        axios.get(`${ROOT_URL.API}/user/info/${userID}`, requestOptions)
-        .then(res => {
-            this.setState(res.data);
-        })
-        .catch(err => {
-        console.log(err);
-        });
-      } else {
+        if(authToken) {
+            axios.get(`${ROOT_URL.API}/user/info/${userID}`, requestOptions)
+            .then(res => {
+                this.setState(res.data);
+                this.setState({
+                    userID: res.data._id,
+                    subscribed: res.data.paid,
+                    subscription: res.data.stripe_sub,
+                })
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        } else {
             this.props.history.push('/');
-      }
+        }
+
+        // get user info from server to see if user is subscribed
+        if (window.Stripe) {
+            this.setState({stripe: window.Stripe("pk_test_vRQk70zZL34BhEqLJJtqp29z")})
+        } else {
+            document.querySelector('#stripe-js').addEventListener('load', () => {
+                this.setState({stripe: window.Stripe("pk_test_vRQk70zZL34BhEqLJJtqp29z")});
+            });
+        };
     }
 
     updateUserInfo = () => {
@@ -183,7 +204,12 @@ class Settings extends Component {
             <TabPane tabId="2">
                 <Row>
                 <Col sm="12">
-                   hi
+                    <div className='container--billing'>
+                        {((this.state.subscribed === false) || (this.state.subscribed === null))
+                        ?<Checkout stripe={this.state.stripe} userID={this.state.userID}/>
+                        :<Cancel stripe = {this.state.stripe} userID={this.state.userID} subscription={this.state.subscription}/>
+                        }
+                    </div>
                 </Col>
                 </Row>
             </TabPane>
