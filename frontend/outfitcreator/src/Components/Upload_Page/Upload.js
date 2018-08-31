@@ -47,14 +47,15 @@ class Upload extends Component {
                 api_key: CLOUD_API,
                 upload_preset: 'default',
                 multiple: false,
-                cropping: 'server',
-                cropping_show_dimensions: true,
-                cropping_show_back_button: true,
+                // cropping: 'server',
+                // cropping_show_dimensions: true,
+                // cropping_show_back_button: true,
                 sources: ['local', 'url', 'camera', 'image_search', 'instagram', 'facebook'],
                 theme: 'purple'
             },
             (err, result) => {
                 if (result) {
+                    console.log(result);
                     this.setState({ image: result['0'].secure_url, result: result['0'] });
                 }
             });
