@@ -3,11 +3,8 @@ import { Card, CardText, CardImg, CardImgOverlay, CardDeck, Button, Input } from
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import queryString from 'query-string';
-
 import { ROOT_URL } from '../../config';
 import './Create.css';
-
-// const testUserId = '5b761531cdcd6d00043d420e';
 
 class Create extends Component {
     constructor(props) {
@@ -38,7 +35,7 @@ class Create extends Component {
 
     componentDidMount() {
         const hash = queryString.parse(this.props.location.hash);
-        if(hash.token){
+        if (hash.token) {
             localStorage.setItem('authToken', `Bearer ${hash.token}`);
         }
         this.setAuthToken();
@@ -119,10 +116,11 @@ class Create extends Component {
 
     // method handle creating an outfit
     handleCreateOutfit = () => {
-        const { user, name, worn, tags, selectedTop, selectedBottom, selectedShoe } = this.state;
+        const { user, name, worn, selectedTop, selectedBottom, selectedShoe } = this.state;
         const top = [selectedTop._id];
         const bottom = [selectedBottom._id];
         const shoes = selectedShoe._id;
+        const tags = [...selectedTop.tags, ...selectedBottom.tags, ...selectedShoe.tags]
         const outfit = { user, name, worn, tags, top, bottom, shoes };
         axios
             .post(`${ROOT_URL.API}/outfits`, outfit)
@@ -144,9 +142,26 @@ class Create extends Component {
         if (!selectedShoe) {
             shoeImage = `https://picsum.photos/g/200/300?image=951`
         } else shoeImage = selectedShoe;
+        const items = [topImage, bottomImage, shoeImage];
         return (
             <div className="createContainer">
                 <CardDeck>
+                    {/* {items.map((item, index) => {
+                        return (<Card key={index}inverse>
+                            <CardImg
+                                key={item._id}
+                                width="80%"
+                                src={item.image}
+                                alt="Card image cap"
+                                className="cardImage"
+                            />
+                            <CardImgOverlay className="test">
+                                <Button className="close top" aria-label="Close" onClick={this.randomizeSingle}>
+                                    <span aria-hidden="true">&times;</span>
+                                </Button>
+                            </CardImgOverlay>
+                        </Card>)
+                    })} */}
                     <Card inverse>
                         <CardImg
                             width="80%"

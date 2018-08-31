@@ -16,9 +16,13 @@ class OutfitEdit extends React.Component {
             lastWorn: Date,
             worn: Date,
             top: '',
+            topTags: [],
             bottom: '',
+            bottomTags: [],
             shoes: '',
+            shoesTags: [],
             oldID: '',
+            tags: [],
             itemSelection: [],
             editItem: false,
         }
@@ -56,10 +60,11 @@ class OutfitEdit extends React.Component {
     }
 
     populate = id => {
+        //used to get the current outfit's top bottom and shoes
         const { user } = this.state;
         axios.get(`${ROOT_URL.API}/items/${user}/${id}`)
             .then(response => {
-                this.setState({ [response.data.type]: response.data })
+                this.setState({ [response.data.type]: response.data, [response.data.type + 'Tags']: response.data.tags })
             })
             .catch(err => {
                 console.log(err);
@@ -75,10 +80,11 @@ class OutfitEdit extends React.Component {
     }
 
     submitChanges = () => {
-        const { user, name, worn, lastWorn, top, bottom, shoes } = this.state;
+        const { user, name, worn, lastWorn, top, topTags, bottom, bottomTags, shoes, shoesTags } = this.state;
         const outfitId = this.props.location.pathname.split('Edit/')[1];
         if (lastWorn) worn.unshift(lastWorn);
-        const newInfo = { name, worn, top, bottom, shoes };
+        const tags = [...topTags, ...bottomTags, ...shoesTags];
+        const newInfo = { name, worn, tags, top, bottom, shoes, tags };
         axios.put(`${ROOT_URL.API}/outfits/${user}/${outfitId}`, newInfo)
             .then()
             .catch(err => {
@@ -88,6 +94,8 @@ class OutfitEdit extends React.Component {
     }
 
     getItems = (type, id) => {
+        //this will get items based on the type of the clothing clicked on (currently top bottom shoes)
+        //will store the id of the clothing being changed so we know what to change from the current outfit
         const { user } = this.state;
         axios.get(`${ROOT_URL.API}/items/type/${user}/${type}`)
             .then(response => {
@@ -99,14 +107,16 @@ class OutfitEdit extends React.Component {
     }
 
     selectItem = (type, id) => {
+        //top and bottom are arrays so we need type to distinguish how we will change the item
+        //we will use the outfit at the index of hte oldid and replace it with the new id
         const { outfit, oldID } = this.state;
-        let index;
         if (type === "top" || type === "bottom") {
-            outfit[type].forEach((itemID, i) => {
-                if (itemID === oldID) index = i;
-            })
-            outfit[type][index] = id;
+            //acessing the outfit of the type either top or bottom
+            //then at the index of the array where the oldid is located at, we replace it with the new id
+            //this way when the outfit's id's are feteched it will get the new id
+            outfit[type][outfit[type].indexOf(oldID)] = id;
         } else {
+            //this would be only shoes at the moment, and shoes isnt an array
             outfit[type] = id;
         }
         this.setState({ outfit, [type]: '' });
@@ -128,11 +138,18 @@ class OutfitEdit extends React.Component {
         const items = [top, bottom, shoes];
         return (
             <div>
+                {/* ternary to check if modal is toggled or not*/}
+                {/* this will be the darkened background*/}
                 {editItem ?
                     <div className='modal--backdrop' onClick={this.toggle}>
                     </div> : null}
+                {/* 
+                    ternary to check if modal is toggled or not
+                    this one will hold the content for screen, either the new options or the current outfit that is being editted
+                */}
                 {editItem ?
                     <div onClick={this.toggle}>
+                        {/*this will map out hte possible items to be selected to replace the selected one*/}
                         <div className="createContainer">
                             <CardDeck>
                                 {itemSelection.map((item, index) => {
@@ -151,9 +168,11 @@ class OutfitEdit extends React.Component {
                     </div>
                     :
                     <div>
+                        {/* another ternary to check if outfit was loaded correctly*/}
                         {outfit ? (
                             <div className="createContainer">
                                 <CardDeck>
+                                    {/*here maps out the items of the current outfit*/}
                                     {items.map((item, index) => {
                                         return (<Card className='outfit--card' key={index} inverse>
                                             <CardImg
@@ -165,31 +184,8 @@ class OutfitEdit extends React.Component {
                                             />
                                         </Card>)
                                     })}
-                                    {/* <Card className='outfit--card' inverse>
-                                        <CardImg
-                                            width="80%"
-                                            src={top.image}
-                                            onClick={() => this.getItems(top.type)}
-                                            alt="Card image cap"
-                                        />
-                                    </Card>
-                                    <Card className='outfit--card' inverse>
-                                        <CardImg
-                                            width="80%"
-                                            src={bottom.image}
-                                            onClick={() => this.getItems(bottom.type)}
-                                            alt="Card image cap"
-                                        />
-                                    </Card>
-                                    <Card className='outfit--card' inverse>
-                                        <CardImg
-                                            width="80%"
-                                            src={shoes.image}
-                                            onClick={() => this.getItems(shoes.type)}
-                                            alt="Card image cap"
-                                        />
-                                    </Card> */}
                                 </CardDeck>
+                                {/* here are the inputs to change the name and last worn date*/}
                                 <div className='container--editbox'>
                                     <form>
                                         <div className='edit--header'>
@@ -213,8 +209,8 @@ class OutfitEdit extends React.Component {
                                             </div>
                                         </div>
                                         <div className='edit--buttons'>
-                                            <button className='edit--submit' onClick={this.submitChanges}>Submit</button>
-                                            <button className='edit--cancel' onClick={this.redirectArchive}>Cancel</button>
+                                            <button className='edit--submit button' onClick={this.submitChanges}>Submit</button>
+                                            <button className='edit--cancel button' onClick={this.redirectArchive}>Cancel</button>
                                         </div>
                                     </form>
                                 </div>
