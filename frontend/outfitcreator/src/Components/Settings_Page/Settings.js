@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { ROOT_URL } from '../../config';
+import { Col, Button, Form, FormGroup, Label, Input, TabContent, TabPane, Nav, NavItem, NavLink, Row } from 'reactstrap';
 import axios from 'axios';
+import classnames from 'classnames';
+
+import { ROOT_URL } from '../../config';
 import './Settings.css';
 
 class Settings extends Component {
     state = { 
         oldPassword: '',
-        newPassword: ''
+        newPassword: '',
+        activeTab: '1'
     }
 
     componentDidMount() {
@@ -18,13 +21,13 @@ class Settings extends Component {
       }
 
       if(authToken) {
-      axios.get(`${ROOT_URL.API}/user/info/${userID}`, requestOptions)
-          .then(res => {
-              this.setState(res.data);
-          })
-          .catch(err => {
-            console.log(err);
-          });
+        axios.get(`${ROOT_URL.API}/user/info/${userID}`, requestOptions)
+        .then(res => {
+            this.setState(res.data);
+        })
+        .catch(err => {
+        console.log(err);
+        });
       } else {
             this.props.history.push('/');
       }
@@ -59,93 +62,133 @@ class Settings extends Component {
           this.setState({ local: local });
         } else this.setState({ [e.target.name]: e.target.value });
     }
+
+    toggle = (tab) => {
+        if (this.state.activeTab !== tab) {
+            this.setState({
+                activeTab: tab
+            });
+        }
+    }
     
     render() {
       return this.state.local ?
-            <div className="settingsContainer">
-                <Form>
-                  <FormGroup row>
-                      <Label for="userEmail" sm={4}>Email:</Label>
-                      <Col sm={8}>
-                          <Input 
-                              type="email" 
-                              name="email" 
-                              id="userEmail" 
-                              placeholder="user@gmail.com"
-                              value={this.state.local.email}
-                              onChange={this.handleInputChange}
-                          />
-                      </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                      <Label for="userPhone" sm={4}>Phone:</Label>
-                      <Col sm={8}>
-                          <Input 
-                              type="text" 
-                              name="phone" 
-                              id="userPhone" 
-                              placeholder="555-789-1234"
-                              value={this.state.phone}
-                              onChange={this.handleInputChange}
-                          />
-                      </Col>
-                  </FormGroup>
-                  <FormGroup check inline>
-                      <Label check>
-                          <Input 
-                              type="checkbox"
-                              name="rEmails"
-                              checked={this.state.rEmails}
-                              onClick={this.handleInputChange}
-                          />
-                          Emails?
-                      </Label>
-                  </FormGroup>
-                  <FormGroup check inline>
-                      <Label check>
-                          <Input 
-                              type="checkbox"
-                              name="rTexts"
-                              checked={this.state.rTexts}
-                              onClick={this.handleInputChange}
-                          />
-                          Texts?
-                      </Label>
-                  </FormGroup>
-                  <FormGroup row>
-                      <Label for="userOldPassword" sm={5}>Old Password</Label>
-                      <Col sm={7}>
-                          <Input 
-                              type="password" 
-                              name="oldPassword" 
-                              id="userOldPassword" 
-                              placeholder="Enter old password"
-                              value={this.state.oldPassword}
-                              onChange={this.handleInputChange} 
-                          />
-                      </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                      <Label for="usernewPassword" sm={5}>New Password</Label>
-                      <Col sm={7}>
-                          <Input 
-                              type="password" 
-                              name="newPassword" 
-                              id="userNewPassword" 
-                              placeholder="Enter new password"
-                              value={this.state.newPassword}
-                              onChange={this.handleInputChange} 
-                          />
-                      </Col>
-                  </FormGroup>
-                  <FormGroup check row>
-                      <Col sm={{ size: 10, offset: 4 }}>
-                          <Button className="settings--save" onClick={this.updateUserInfo}>Save</Button>
-                      </Col>
-                    </FormGroup>
-                </Form>
-            </div>
-        : <div>Loading...</div> ;
+        <div className="landingPage--login">
+            <Nav pills className="landingPage--login-nav">
+                <NavItem>
+                    <NavLink
+                        className={classnames({ active: this.state.activeTab === '1' })}
+                        onClick={() => { this.toggle('1'); }}
+                    >
+                        Settings
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink
+                        className={classnames({ active: this.state.activeTab === '2' })}
+                        onClick={() => { this.toggle('2'); }}
+                    >
+                        Billing
+                    </NavLink>
+                </NavItem>
+            </Nav>
+            <TabContent activeTab={this.state.activeTab}>
+                <TabPane tabId="1">
+                    <Row>
+                        <Col sm="12">
+                            <Form>
+                                <FormGroup row>
+                                    <Label for="userEmail" sm={4}>Email:</Label>
+                                    <Col sm={8}>
+                                        <Input 
+                                            type="email" 
+                                            name="email" 
+                                            id="userEmail" 
+                                            placeholder="user@gmail.com"
+                                            value={this.state.local.email}
+                                            onChange={this.handleInputChange}
+                                        />
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="userPhone" sm={4}>Phone:</Label>
+                                    <Col sm={8}>
+                                        <Input 
+                                            type="text" 
+                                            name="phone" 
+                                            id="userPhone" 
+                                            placeholder="555-789-1234"
+                                            value={this.state.phone}
+                                            onChange={this.handleInputChange}
+                                        />
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup check inline>
+                                    <Label check>
+                                        <Input 
+                                            type="checkbox"
+                                            name="rEmails"
+                                            checked={this.state.rEmails}
+                                            onClick={this.handleInputChange}
+                                        />
+                                        Emails?
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup check inline>
+                                    <Label check>
+                                        <Input 
+                                            type="checkbox"
+                                            name="rTexts"
+                                            checked={this.state.rTexts}
+                                            onClick={this.handleInputChange}
+                                        />
+                                        Texts?
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="userOldPassword" sm={5}>Old Password</Label>
+                                    <Col sm={7}>
+                                        <Input 
+                                            type="password" 
+                                            name="oldPassword" 
+                                            id="userOldPassword" 
+                                            placeholder="Enter old password"
+                                            value={this.state.oldPassword}
+                                            onChange={this.handleInputChange} 
+                                        />
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="usernewPassword" sm={5}>New Password</Label>
+                                    <Col sm={7}>
+                                        <Input 
+                                            type="password" 
+                                            name="newPassword" 
+                                            id="userNewPassword" 
+                                            placeholder="Enter new password"
+                                            value={this.state.newPassword}
+                                            onChange={this.handleInputChange} 
+                                        />
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup check row>
+                                    <Col sm={{ size: 10, offset: 4 }}>
+                                        <Button className="settings--save" onClick={this.updateUserInfo}>Save</Button>
+                                    </Col>
+                                </FormGroup>
+                            </Form>
+                        </Col>
+                    </Row>
+                </TabPane>
+            <TabPane tabId="2">
+                <Row>
+                <Col sm="12">
+                   hi
+                </Col>
+                </Row>
+            </TabPane>
+            </TabContent>
+    </div> : <div>Loading...</div>
     }
 };
 
