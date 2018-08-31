@@ -35,7 +35,7 @@ class Create extends Component {
 
     componentDidMount() {
         const hash = queryString.parse(this.props.location.hash);
-        if(hash.token){
+        if (hash.token) {
             localStorage.setItem('authToken', `Bearer ${hash.token}`);
         }
         this.setAuthToken();
@@ -141,48 +141,26 @@ class Create extends Component {
         if (!selectedShoe) {
             shoeImage = `https://picsum.photos/g/200/300?image=951`
         } else shoeImage = selectedShoe;
+        const items = [topImage, bottomImage, shoeImage];
         return (
             <div className="createContainer">
                 <CardDeck>
-                    <Card inverse>
-                        <CardImg
-                            width="80%"
-                            src={topImage}
-                            alt="Card image cap"
-                            className="cardImage"
-                        />
-                        <CardImgOverlay className="test">
-                            <Button className="close top" aria-label="Close" onClick={this.randomizeSingle}>
-                                <span aria-hidden="true">&times;</span>
-                            </Button>
-                        </CardImgOverlay>
-                    </Card>
-                    <Card inverse>
-                        <CardImg
-                            width="80%"
-                            src={bottomImage}
-                            alt="Card image cap"
-                            className="cardImage"
-                        />
-                        <CardImgOverlay>
-                            <Button className="close bottom" aria-label="Close" onClick={this.randomizeSingle}>
-                                <span aria-hidden="true">&times;</span>
-                            </Button>
-                        </CardImgOverlay>
-                    </Card>
-                    <Card inverse>
-                        <CardImg
-                            width="80%"
-                            src={shoeImage}
-                            alt="Card image cap"
-                            className="cardImage"
-                        />
-                        <CardImgOverlay>
-                            <Button className="close shoe" aria-label="Close" onClick={this.randomizeSingle}>
-                                <span aria-hidden="true">&times;</span>
-                            </Button>
-                        </CardImgOverlay>
-                    </Card>
+                    {items.map((item, index) => {
+                        return (<Card key={index}inverse>
+                            <CardImg
+                                key={item._id}
+                                width="80%"
+                                src={item.image}
+                                alt="Card image cap"
+                                className="cardImage"
+                            />
+                            <CardImgOverlay className="test">
+                                <Button className="close top" aria-label="Close" onClick={this.randomizeSingle}>
+                                    <span aria-hidden="true">&times;</span>
+                                </Button>
+                            </CardImgOverlay>
+                        </Card>)
+                    })}
                 </CardDeck>
                 <div className="outfitPickerContainer">
                     <Input type="text" name="name" placeholder="Outfit Nickname" onChange={this.handleInputChange} value={this.state.name} className="outfitInput" />
