@@ -135,14 +135,16 @@ class Create extends Component {
         let topImage, bottomImage, shoeImage;
         if (!selectedTop) {
             topImage = `https://picsum.photos/g/200/300?image=951`
-        } else topImage = selectedTop;
+        } else topImage = selectedTop.image;
         if (!selectedBottom) {
             bottomImage = `https://picsum.photos/g/200/300?image=951`
-        } else bottomImage = selectedBottom;
+        } else bottomImage = selectedBottom.image;
         if (!selectedShoe) {
             shoeImage = `https://picsum.photos/g/200/300?image=951`
-        } else shoeImage = selectedShoe;
+        } else shoeImage = selectedShoe.image;
+      
         const items = [topImage, bottomImage, shoeImage];
+      
         return (
             <div className="createContainer">
                 <CardDeck>
@@ -165,7 +167,7 @@ class Create extends Component {
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src={topImage.image}
+                            src={topImage}
                             alt="Card image cap"
                             className="cardImage"
                         />
@@ -178,7 +180,7 @@ class Create extends Component {
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src={bottomImage.image}
+                            src={bottomImage}
                             alt="Card image cap"
                             className="cardImage"
                         />
@@ -191,7 +193,7 @@ class Create extends Component {
                     <Card inverse>
                         <CardImg
                             width="80%"
-                            src={shoeImage.image}
+                            src={shoeImage}
                             alt="Card image cap"
                             className="cardImage"
                         />
