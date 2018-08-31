@@ -43,7 +43,7 @@ class Navigation extends Component {
 
   updateDimensions = () => {
     this.selectActivePage();
-    if (window.innerWidth < 800) {
+    if (window.innerWidth < 850) {
       this.setState({ collapseActive: true });
     } else if (this.state.collapseActive) {
       this.setState({ collapsed: true, collapseActive: false });

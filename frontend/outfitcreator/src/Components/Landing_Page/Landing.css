@@ -10,7 +10,7 @@
     background-size: cover;
 }
 
-.button {
+.container--landingPage .button {
   top: 10px;
   right: 20px;;
   position: absolute;
