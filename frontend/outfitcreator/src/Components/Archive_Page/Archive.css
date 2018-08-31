@@ -1,7 +1,6 @@
 .container--archive {
   align-items: flex-start;
     background: white;
-    box-shadow: 0 -1px 10px;
     display: flex;
     flex-direction: column;
     border-radius: 25px;

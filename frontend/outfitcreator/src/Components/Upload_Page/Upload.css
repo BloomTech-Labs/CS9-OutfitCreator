@@ -1,7 +1,6 @@
 .container--upload {
     background: white;
     border-radius: 25px;
-    box-shadow: 0 -1px 10px;
     display: flex;
     flex-flow: column;
     align-items: center;
