@@ -38,7 +38,7 @@ class Archive extends React.Component {
     }
 
     filter = () => {
-        const { search, myOutfits } = this.state;
+        const { search, myOutfits, searching, searchedOutfits } = this.state;
 
         const searchWords = search.trim().toLowerCase().split(' ');
         // Filters from the outfit list based on context in search bar, by name and tag
@@ -62,7 +62,8 @@ class Archive extends React.Component {
             else return false;
         }
 
-        const filteredOutfits = myOutfits.filter(myFilter);
+        let filteredOutfits;
+        searching ? filteredOutfits = myOutfits.filter(myFilter) : filteredOutfits = searchedOutfits.filter(myFilter); 
         if (search.length === 0) this.setState({ searching: false, searchedOutfits: filteredOutfits });
         else this.setState({ searching: true, searchedOutfits: filteredOutfits });
     }
