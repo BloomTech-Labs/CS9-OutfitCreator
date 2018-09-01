@@ -142,8 +142,9 @@ class Create extends Component {
         if (!selectedShoe) {
             shoeImage = `https://picsum.photos/g/200/300?image=951`
         } else shoeImage = selectedShoe.image;
-        
+
         const items = [topImage, bottomImage, shoeImage];
+      
         return (
             <div className="createContainer">
                 <CardDeck>
