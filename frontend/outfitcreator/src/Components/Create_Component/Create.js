@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardText, CardImg, CardImgOverlay, CardDeck, Button, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
+import CreateLayers from './CreateLayers';
 import queryString from 'query-string';
 import { ROOT_URL } from '../../config';
 import './Create.css';
@@ -147,6 +148,7 @@ class Create extends Component {
       
         return (
             <div className="createContainer">
+                <CreateLayers {...this.props} />
                 <CardDeck>
                     {/* {items.map((item, index) => {
                         return (<Card key={index}inverse>
