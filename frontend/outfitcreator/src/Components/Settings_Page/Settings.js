@@ -94,8 +94,8 @@ class Settings extends Component {
     
     render() {
       return this.state.local ?
-        <div className="landingPage--login">
-            <Nav pills className="landingPage--login-nav">
+        <div className="settingsPage">
+            <Nav pills className="settingsPage--login-nav">
                 <NavItem>
                     <NavLink
                         className={classnames({ active: this.state.activeTab === '1' })}
