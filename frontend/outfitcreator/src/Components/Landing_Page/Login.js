@@ -3,11 +3,11 @@ import axios from 'axios';
 import {TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col} from 'reactstrap';
 import {FacebookLoginButton, GithubLoginButton, GoogleLoginButton} from "react-social-login-buttons";
 import classnames from 'classnames';
-import './Landing.css'
 
+import './Landing.css'
 import { ROOT_URL } from '../../config';
 
-class Login extends React.Component {
+class Login extends React.Component { 
     constructor(props) {
         super(props);
         this.state = {
