@@ -22,7 +22,7 @@ const ItemSchema = new mongoose.Schema({
   subtype: {
     type: String,
     required: false,
-    enum: ["shirt", "sweater", "jacket", "pants", "shorts", "skirt", "leggings", "dress", "formal shoes", "casual shoes"]
+    enum: ["shirt", "sweater", "jacket", "pants", "shorts", "skirt", "leggings", "dress", "formalShoes", "casualShoes"]
   },
   tags: [
     {
