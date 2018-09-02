@@ -20,7 +20,7 @@ class Create extends Component {
             tags: [],
             items: {
                 top: {
-                    show: false,
+                    show: true,
                     all: [],
                     selected: null
                 },
@@ -71,9 +71,11 @@ class Create extends Component {
                 },
                 formalShoes: {
                     show: false,
+                    all: []
                 },
                 casualShoes: {
                     show: false,
+                    all: []
                 },
                 shoes: {
                     show: false,
@@ -111,11 +113,33 @@ class Create extends Component {
             axios.all([
                 axios.get(`${ROOT_URL.API}/items/type/${user}/top`, requestOptions),
                 axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`, requestOptions),
-                axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/shirt`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/sweater`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/jacket`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/pants`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/shorts`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/skirt`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/leggings`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/dress`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/formalShoes`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/casualShoes`, requestOptions),
             ])
                 .then(res => {
-                    this.setState({ allTops: res[0].data, allBottoms: res[1].data, allShoes: res[2].data, user });
-                    this.randomize();
+                    const items = this.state.items;
+                    items.top.all = res[0].data;
+                    items.bottom.all = res[1].data;
+                    items.shirt.all = res[2].data;
+                    items.sweater.all = res[3].data;
+                    items.jacket.all = res[4].data;
+                    items.pants.all = res[5].data;
+                    items.shorts.all = res[6].data;
+                    items.skirt.all = res[7].data;
+                    items.leggings.all = res[8].data;
+                    items.dress.all = res[9].data;
+                    items.formalShoes.all = res[10].data;
+                    items.casualShoes.all = res[11].data;
+                    this.setState({items});
+                    //this.randomize();
                 })
                 .catch(err => {
                     console.log(err);
@@ -126,7 +150,6 @@ class Create extends Component {
     }
 
     activateCategory = (category) => {
-        const show = this.state.items[category].show;
         const items = this.state.items;
         items[category].show = !items[category].show;
         this.setState({items})
@@ -188,13 +211,30 @@ class Create extends Component {
     };
 
     render() {
-        const types = Object.keys(this.state.items);
-        const selected = types.filter(key => this.state.items[key].show == true)
-        console.log(selected);
+        console.log(Object.keys(this.state.items));
+        const typesInCloset = Object.keys(this.state.items).filter(type => {
+            this.state.items[type].all.length = 0
+        });
+        const selected = Object.keys(this.state.items).filter(key => this.state.items[key].show == true);
+        console.log(typesInCloset);
         return (
             <div className="createContainer">
                 <div className="layerSelect">
-                    <button className={this.state.items.top.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("top")}}>Top</button>
+                    {/* FOR SOME REASON
+                    THIS MAPPING FUNCTION 
+                    ISN'T WORKING.
+                    I'M NOT SURE 
+                    WHAT IT IS,
+                    BUT THIS IS WHERE YOU SHOULD START. */}
+                    {Object.keys(this.state.items).map(type => {
+                    return(<button
+                        className={this.state.items[type].show
+                            ?"create-button--active"
+                            :"create-button"}
+                        onClick={()=>{this.activateCategory(type)}}>
+                        Text
+                    </button>)})}
+                    {/* <button className={this.state.items.top.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("top")}}>Top</button>
                     <button className={this.state.items.bottom.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("bottom")}}>Bottom</button>
                     <button className={this.state.items.shirt.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("shirt")}}>Shirt</button>
                     <button className={this.state.items.sweater.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("sweater")}}>Sweater</button>
@@ -205,7 +245,7 @@ class Create extends Component {
                     <button className={this.state.items.leggings.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("leggings")}}>Leggings</button>
                     <button className={this.state.items.dress.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("dress")}}>Dress</button>
                     <button className={this.state.items.formalShoes.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("formalShoes")}}>Formal Shoes</button>
-                    <button className={this.state.items.casualShoes.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("casualShoes")}}>Casual Shoes</button>
+                    <button className={this.state.items.casualShoes.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("casualShoes")}}>Casual Shoes</button> */}
                 </div>
                 <CardDeck>
                     {selected.forEach(key=>{
