@@ -20,6 +20,7 @@ class Create extends Component {
             tags: [],
             items: {
                 top: {
+                    typeName: 'top',
                     show: false,
                     all: [],
                     selected: null
@@ -108,12 +109,19 @@ class Create extends Component {
             }
         }
         if (authToken) {
+            const items = { ...this.state.items };
             axios.all([
-                axios.get(`${ROOT_URL.API}/items/type/${user}/top`, requestOptions),
-                axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`, requestOptions),
-                axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`, requestOptions),
+                // axios.get(`${ROOT_URL.API}/items/type/${user}/top`, requestOptions),
+                // axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`, requestOptions),
+                // axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`, requestOptions),
             ])
                 .then(res => {
+                    // items.map(item => {
+                    //     if (item.show) {
+                    //         axios.get(`${ROOT_URL.API}/items/type/${user}/item`, requestOptions),
+                    //     }
+                    // })
+
                     this.setState({ allTops: res[0].data, allBottoms: res[1].data, allShoes: res[2].data, user });
                     this.randomize();
                 })
@@ -191,26 +199,40 @@ class Create extends Component {
         const types = Object.keys(this.state.items);
         const selected = types.filter(key => this.state.items[key].show == true)
         console.log(selected);
+
         return (
             <div className="createContainer">
                 <div className="layerSelect">
-                    <button className={this.state.items.top.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("top")}}>Top</button>
-                    <button className={this.state.items.bottom.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("bottom")}}>Bottom</button>
-                    <button className={this.state.items.shirt.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("shirt")}}>Shirt</button>
-                    <button className={this.state.items.sweater.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("sweater")}}>Sweater</button>
-                    <button className={this.state.items.jacket.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("jacket")}}>Jacket</button>
-                    <button className={this.state.items.pants.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("pants")}}>Pants</button>
-                    <button className={this.state.items.shorts.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("shorts")}}>Shorts</button>
-                    <button className={this.state.items.skirt.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("skirt")}}>Skirt</button>
-                    <button className={this.state.items.leggings.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("leggings")}}>Leggings</button>
-                    <button className={this.state.items.dress.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("dress")}}>Dress</button>
-                    <button className={this.state.items.formalShoes.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("formalShoes")}}>Formal Shoes</button>
-                    <button className={this.state.items.casualShoes.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("casualShoes")}}>Casual Shoes</button>
+                    <button className={this.state.items.top.show ? "create-button--active" : "create-button" } 
+                        onClick={()=>{this.activateCategory("top")}}>Top</button>
+                    <button className={this.state.items.bottom.show ? "create-button--active" : "create-button" } 
+                        onClick={()=>{this.activateCategory("bottom")}}>Bottom</button>
+                    <button className={this.state.items.shirt.show ? "create-button--active" : "create-button" } 
+                        onClick={()=>{this.activateCategory("shirt")}}>Shirt</button>
+                    <button className={this.state.items.sweater.show ? "create-button--active" : "create-button" } 
+                        onClick={()=>{this.activateCategory("sweater")}}>Sweater</button>
+                    <button className={this.state.items.jacket.show ? "create-button--active" : "create-button" } 
+                        onClick={()=>{this.activateCategory("jacket")}}>Jacket</button>
+                    <button className={this.state.items.pants.show ? "create-button--active" : "create-button" } 
+                        onClick={()=>{this.activateCategory("pants")}}>Pants</button>
+                    <button className={this.state.items.shorts.show ? "create-button--active" : "create-button" } 
+                        onClick={()=>{this.activateCategory("shorts")}}>Shorts</button>
+                    <button className={this.state.items.skirt.show ? "create-button--active" : "create-button" } 
+                        onClick={()=>{this.activateCategory("skirt")}}>Skirt</button>
+                    <button className={this.state.items.leggings.show ? "create-button--active" : "create-button" } 
+                        onClick={()=>{this.activateCategory("leggings")}}>Leggings</button>
+                    <button className={this.state.items.dress.show ? "create-button--active" : "create-button" } 
+                        onClick={()=>{this.activateCategory("dress")}}>Dress</button>
+                    <button className={this.state.items.formalShoes.show ? "create-button--active" : "create-button" } 
+                        onClick={()=>{this.activateCategory("formalShoes")}}>Formal Shoes</button>
+                    <button className={this.state.items.casualShoes.show ? "create-button--active" : "create-button" } 
+                        onClick={()=>{this.activateCategory("casualShoes")}}>Casual Shoes</button>
                 </div>
                 <CardDeck>
-                    {selected.forEach(key=>{
+                    {selected.forEach(key =>{
+                        console.log(key);
                         return(<CreateCard item={this.state.items[key].selected}/>)
-                        })}
+                    })}
                 </CardDeck>
                 <div className="outfitPickerContainer">
                     <Input type="text" name="name" placeholder="Outfit Nickname" onChange={this.handleInputChange} value={this.state.name} className="outfitInput" />
