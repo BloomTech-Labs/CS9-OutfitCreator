@@ -10,7 +10,7 @@ import './Create.css';
 
 // const testUserId = '5b761531cdcd6d00043d420e';
 
-class Create extends Component {
+class CreateLayers extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -267,4 +267,4 @@ class Create extends Component {
     }
 };
 
-export default Create;
+export default CreateLayers;
