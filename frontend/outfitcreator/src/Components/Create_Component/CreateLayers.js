@@ -226,7 +226,7 @@ class Create extends Component {
                     I'M NOT SURE 
                     WHAT IT IS,
                     BUT THIS IS WHERE YOU SHOULD START. */}
-                    {Object.keys(this.state.items).map(type => {
+                    {Object.typesInCloset.map(type => {
                     return(<button
                         className={this.state.items[type].show
                             ?"create-button--active"
