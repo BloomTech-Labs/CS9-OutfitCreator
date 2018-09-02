@@ -204,12 +204,10 @@ class Settings extends Component {
             <TabPane tabId="2">
                 <Row>
                 <Col sm="12">
-                    <div className='container--billing'>
-                        {((this.state.subscribed === false) || (this.state.subscribed === null))
-                        ?<Checkout stripe={this.state.stripe} userID={this.state.userID}/>
-                        :<Cancel stripe = {this.state.stripe} userID={this.state.userID} subscription={this.state.subscription}/>
-                        }
-                    </div>
+                    {((this.state.subscribed === false) || (this.state.subscribed === null))
+                    ?<Checkout stripe={this.state.stripe} userID={this.state.userID}/>
+                    :<Cancel stripe = {this.state.stripe} userID={this.state.userID} subscription={this.state.subscription}/>
+                    }
                 </Col>
                 </Row>
             </TabPane>
