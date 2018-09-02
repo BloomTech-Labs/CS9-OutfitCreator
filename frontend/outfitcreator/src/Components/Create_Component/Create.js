@@ -148,7 +148,7 @@ class Create extends Component {
       
         return (
             <div className="createContainer">
-                <CreateLayers {...this.props} />
+                {/* <CreateLayers {...this.props} /> */}
                 <CardDeck>
                     {/* {items.map((item, index) => {
                         return (<Card key={index}inverse>
