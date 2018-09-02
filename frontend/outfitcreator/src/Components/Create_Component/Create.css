@@ -1,8 +1,12 @@
 .createContainer {
     background: white;
     border-radius: 10px;
-    margin: 100px;
+    margin: 30px;
     padding: 30px;
+}
+
+.layerSelect {
+    width: 100%;
 }
 
 .create-button {
@@ -47,6 +51,10 @@
 .test{
     border: 0px;
     box-shadow: none;
+}
+
+.card, .cardImage {
+    height: 200px;
 }
 
 .cardImage {
