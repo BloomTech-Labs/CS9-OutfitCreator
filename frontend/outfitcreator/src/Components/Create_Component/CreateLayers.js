@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Card, CardText, CardImg, CardImgOverlay, CardDeck, Button, Input } from 'reactstrap';
+import { CardDeck, Button, Input } from 'reactstrap';
 import CreateCard from './CreateCard.js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
-import queryString from 'query-string';
-
 import { ROOT_URL } from '../../config';
+import queryString from 'query-string';
+import axios from 'axios';
 import './Create.css';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import topIcon from './top.png';
+import bottomIcon from './bottom.png';
 
 // const testUserId = '5b761531cdcd6d00043d420e';
 
@@ -18,56 +20,73 @@ class CreateLayers extends Component {
             name: '',
             worn: [],
             tags: [],
+            // all: { 
+            //     top: [],
+            //     shirt: [],
+            //     sweater: [],
+            //     jacket: [],
+            //     bottom: [],
+            //     pants: [],
+            //     shorts: [],
+            //     skirt: [],
+            //     leggings: [],
+            //     dress: [],
+            //     formalShoes: [],
+            //     casualShoes: [],
+            //     shoes: [],
+            // },
             items: {
                 top: {
-                    show: true,
+                    show: false,
                     all: [],
-                    selected: null
+                    current: null,
+                    icon: topIcon
                 },
                 shirt: {
                     show: false,
                     all: [],
-                    selected: null,
+                    current: null,
                 },
                 sweater: {
                     show: false,
                     all: [],
-                    selected: null,
+                    current: null,
                 },
                 jacket: {
                     show: false,
                     all: [],
-                    selected: null,
+                    current: null,
                 },
                 bottom: {
                     show: false,
                     all: [],
-                    selected: null,
+                    current: null,
+                    icon: bottomIcon
                 },
                 pants: {
                     show: false,
                     all: [],
-                    selected: null,
+                    current: null,
                 },
                 shorts: {
                     show: false,
                     all: [],
-                    selected: null,
+                    current: null,
                 },
                 skirt: {
                     show: false,
                     all: [],
-                    selected: null,
+                    current: null,
                 },
                 leggings: {
                     show: false,
                     all: [],
-                    selected: null,
+                    current: null,
                 },
                 dress: {
                     show: false,
                     all: [],
-                    selected: null,
+                    current: null,
                 },
                 formalShoes: {
                     show: false,
@@ -80,7 +99,7 @@ class CreateLayers extends Component {
                 shoes: {
                     show: false,
                     all: [],
-                    selected: null,
+                    current: null,
                 },
             }
         }
@@ -110,9 +129,8 @@ class CreateLayers extends Component {
             }
         }
         if (authToken) {
-            const items = { ...this.state.items };
             axios.all([
-                axios.get(`${ROOT_URL.API}/items/type/${user}/top`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/type/${user}/top`),
                 axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`, requestOptions),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/shirt`, requestOptions),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/sweater`, requestOptions),
@@ -124,9 +142,10 @@ class CreateLayers extends Component {
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/dress`, requestOptions),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/formalShoes`, requestOptions),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/casualShoes`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/shoes`, requestOptions),
             ])
                 .then(res => {
-                    const items = this.state.items;
+                    const items = { ...this.state.items };
                     items.top.all = res[0].data;
                     items.bottom.all = res[1].data;
                     items.shirt.all = res[2].data;
@@ -139,7 +158,24 @@ class CreateLayers extends Component {
                     items.dress.all = res[9].data;
                     items.formalShoes.all = res[10].data;
                     items.casualShoes.all = res[11].data;
-                    this.setState({items});
+                    items.shoes.all = res[12].data;
+
+                    // const all = { ...this.state.all };
+                    // all.top = res[0].data;
+                    // all.bottom = res[1].data;
+                    // all.shirt = res[2].data;
+                    // all.sweater = res[3].data;
+                    // all.jacket = res[4].data;
+                    // all.pants = res[5].data;
+                    // all.shorts = res[6].data;
+                    // all.skirt = res[7].data;
+                    // all.leggings = res[8].data;
+                    // all.dress = res[9].data;
+                    // all.formalShoes = res[10].data;
+                    // all.casualShoes = res[11].data;
+                    // all.shoes = [ ...res[10].data, ...res[11].data];
+
+                    this.setState({ items });
                     //this.randomize();
                 })
                 .catch(err => {
@@ -156,20 +192,20 @@ class CreateLayers extends Component {
         this.setState({items})
     }
 
+    getSelected = () => {
+      return Object.keys(this.state.items).filter(type => this.state.items[type].show == true);
+    }
+
     // method to retrieve random items of all types
     randomize = () => {
-        const { allTops, allBottoms, allShoes } = this.state;
-        let selectedTop, selectedBottom, selectedShoe;
-        if (allTops.length > 0) {
-            selectedTop = allTops[Math.floor(Math.random() * allTops.length)];
-        }
-        if (allBottoms.length > 0) {
-            selectedBottom = allBottoms[Math.floor(Math.random() * allBottoms.length)];
-        }
-        if (allShoes.length > 0) {
-            selectedShoe = allShoes[Math.floor(Math.random() * allShoes.length)];
-        }
-        this.setState({ selectedTop, selectedBottom, selectedShoe });
+        const items = this.state.items;
+        const selected = this.getSelected();
+
+        selected.forEach(type => {
+            items[type].current = items[type].all[Math.floor(Math.random() * items[type].all.length)];
+        });
+
+        this.setState({ items });
     }
 
     // method to retrieve a single random item
@@ -212,46 +248,26 @@ class CreateLayers extends Component {
     };
 
     render() {
-        console.log(Object.keys(this.state.items));
         const typesInCloset = Object.keys(this.state.items).filter(type => {
-            this.state.items[type].all.length = 0
+            return this.state.items[type].all.length > 0;
         });
-        const selected = Object.keys(this.state.items).filter(key => this.state.items[key].show == true);
-        console.log(typesInCloset);
+        const selected = this.getSelected();
+
         return (
             <div className="createContainer">
                 <div className="layerSelect">
-                    {/* FOR SOME REASON
-                    THIS MAPPING FUNCTION 
-                    ISN'T WORKING.
-                    I'M NOT SURE 
-                    WHAT IT IS,
-                    BUT THIS IS WHERE YOU SHOULD START. */}
-                    {typesInCloset.map(type => {
-                    return(<button
-                        className={this.state.items[type].show
-                            ?"create-button--active"
-                            :"create-button"}
-                        onClick={()=>{this.activateCategory(type)}}>
-                        Text
-                    </button>)})}
-                    {/* <button className={this.state.items.top.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("top")}}>Top</button>
-                    <button className={this.state.items.bottom.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("bottom")}}>Bottom</button>
-                    <button className={this.state.items.shirt.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("shirt")}}>Shirt</button>
-                    <button className={this.state.items.sweater.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("sweater")}}>Sweater</button>
-                    <button className={this.state.items.jacket.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("jacket")}}>Jacket</button>
-                    <button className={this.state.items.pants.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("pants")}}>Pants</button>
-                    <button className={this.state.items.shorts.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("shorts")}}>Shorts</button>
-                    <button className={this.state.items.skirt.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("skirt")}}>Skirt</button>
-                    <button className={this.state.items.leggings.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("leggings")}}>Leggings</button>
-                    <button className={this.state.items.dress.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("dress")}}>Dress</button>
-                    <button className={this.state.items.formalShoes.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("formalShoes")}}>Formal Shoes</button>
-                    <button className={this.state.items.casualShoes.show ?"create-button--active":"create-button"} onClick={()=>{this.activateCategory("casualShoes")}}>Casual Shoes</button> */}
+                    {typesInCloset.map(type => (
+                        <button
+                            className={this.state.items[type].show ? "create-button--active" :"create-button"}
+                            onClick={()=>{this.activateCategory(type)}}
+                            key={type} >
+                            {type} 
+                        </button>
+                    ))}
                 </div>
                 <CardDeck>
-                    {selected.forEach(key =>{
-                        console.log(key);
-                        return(<CreateCard item={this.state.items[key].selected}/>)
+                    {selected.map(type => {
+                        return(<CreateCard key={type} item={this.state.items[type]}/>)
                     })}
                 </CardDeck>
                 <div className="outfitPickerContainer">

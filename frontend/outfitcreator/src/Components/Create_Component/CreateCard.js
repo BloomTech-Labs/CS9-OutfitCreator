@@ -4,14 +4,15 @@ import './Create.css';
 
 class CreateCard extends React.Component {
     render() {
-        const URL=this.props.item.image;
-        const newURL = URL.slice(0,53)+"h_120/"+URL.slice(53);
+        console.log(this.props);
+        const URL= this.props.item.current ? this.props.item.current.image : null;
+        const newURL = URL ? URL.slice(0,53)+"h_120/"+URL.slice(53) : null;
         return (
             <div className="create-card">
                 <Card inverse>
                         <CardImg
                             width="80%"
-                            src={newURL}
+                            src={newURL || this.props.item.icon}
                             alt="Card image cap"
                             className="cardImage"
                         />

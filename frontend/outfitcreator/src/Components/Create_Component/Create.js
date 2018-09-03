@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Card, CardText, CardImg, CardImgOverlay, CardDeck, Button, Input } from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, CardDeck, Button, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
-import CreateLayers from './CreateLayers';
 import queryString from 'query-string';
 import { ROOT_URL } from '../../config';
 import './Create.css';

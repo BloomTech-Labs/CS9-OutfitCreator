@@ -1,7 +1,7 @@
 .createContainer {
     background: white;
     border-radius: 10px;
-    margin: 30px;
+    margin: 50px 0;
     padding: 30px;
 }
 
@@ -45,7 +45,8 @@
 }
 
 .card-deck {
-  margin-bottom: 50px;
+  margin: 30px 0 20px;
+  justify-content: center;
 }
 
 .test{
@@ -53,9 +54,19 @@
     box-shadow: none;
 }
 
-.card, .cardImage {
+.card-deck .card, .card, .create-card, .cardImage, .card-img-overlay {
     height: 200px;
+    min-width: 300px;
+    max-width: 300px;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    margin: 0 8px 15px;
 }
+
+/* .card-deck .card {
+    margin: 0 8px;
+} */
 
 .cardImage {
     border-radius: 5px;
@@ -82,10 +93,27 @@
 }
 
 .outfitInput {
-    width: 25%;
+    width: 200px;
+    text-align: center;
     margin-bottom: 1em;
 }
 
 .close-icon, .close {
     cursor: pointer;
+}
+
+@media (min-width: 576px) {
+    .card-deck .card {
+      margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 700px) {
+    .card-deck {
+        flex-flow: column;
+    }
+
+    .card {
+        margin: 0 0 15px;
+    }
 }
