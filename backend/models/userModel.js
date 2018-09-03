@@ -71,6 +71,15 @@ const UserSchema = new mongoose.Schema({
     stripe_sub: {
         type: String,
     },
+    verified: {
+        type: Boolean,
+        default: false
+    },
+    signupKey: {
+        key: String,
+        ts: String,
+        exp: String
+    },
     rEmails: {
         type: Boolean,
         required: true,
