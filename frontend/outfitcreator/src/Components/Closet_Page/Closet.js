@@ -40,9 +40,9 @@ class Closet extends React.Component {
             <div className="closet">
                 <div className="closet-title">My Closet</div>
                 <div className="closet-menu">
-                    <button className={this.state.selectedType=="top"?"closet-button--active":"closet-button"} onClick={() => this.onSelect("top")}>Tops</button>
-                    <button className={this.state.selectedType=="bottom"?"closet-button--active":"closet-button"} onClick={() => this.onSelect("bottom")}>Bottoms</button>
-                    <button className={this.state.selectedType=="shoes"?"closet-button--active":"closet-button"} onClick={() => this.onSelect("shoes")}>Shoes</button>
+                    <button className={this.state.selectedType === "top" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("top")}>Tops</button>
+                    <button className={this.state.selectedType === "bottom" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("bottom")}>Bottoms</button>
+                    <button className={this.state.selectedType === "shoes" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("shoes")}>Shoes</button>
                 </div>
                 <div className="closet-cards">
                     {this.state.items.map(item =><ClosetCard item={item} key={item._id}/>)}

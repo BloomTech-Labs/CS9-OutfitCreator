@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardText, CardImg, CardImgOverlay, CardDeck, Button, Input } from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, Button } from 'reactstrap';
 import './Create.css';
 
 class CreateCard extends React.Component {
@@ -17,7 +17,7 @@ class CreateCard extends React.Component {
                             className="cardImage"
                         />
                         <CardImgOverlay>
-                            <Button className="close top" aria-label="Close" onClick={this.randomizeSingle}>
+                            <Button id={this.props.type} className='close' aria-label="Close" onClick={this.props.randomizeSingle}>
                                 <span aria-hidden="true">&times;</span>
                             </Button>
                         </CardImgOverlay>

@@ -5,19 +5,27 @@ import axios from 'axios';
 import './Settings.css';
 
 class Settings extends Component {
-    state = { 
-        oldPassword: '',
-        newPassword: ''
+    constructor(props) {
+        super(props);
+
+        this.state = { 
+            oldPassword: '',
+            newPassword: '',
+            userID: props.getUserID()
+        }
+
+        this.setAuthToken();
+    }
+
+    setAuthToken = () => {
+        const token = localStorage.getItem('authToken');
+
+        if (token) axios.defaults.headers.common.Authorization = token;
+        else delete axios.defaults.headers.common.Authorization;
     }
 
     componentDidMount() {
-      const userID = this.props.tokenData().sub;
-      const authToken = localStorage.getItem('authToken');
-      const requestOptions = {
-          headers: { Authorization: authToken }
-      }
-
-      axios.get(`${ROOT_URL.API}/user/info/${userID}`, requestOptions)
+      axios.get(`${ROOT_URL.API}/user/info/${this.state.userID}`)
           .then(res => {
               this.setState(res.data);
           })
@@ -27,15 +35,7 @@ class Settings extends Component {
     }
 
     updateUserInfo = () => {
-        const userID = this.props.tokenData().sub;
-        const authToken = localStorage.getItem('authToken');
-        const requestOptions = {
-            headers: {
-                Authorization: authToken
-            }
-        }
-
-        axios.put(`${ROOT_URL.API}/user/info/${userID}`, this.state, requestOptions)
+        axios.put(`${ROOT_URL.API}/user/info/${this.state.userID}`, this.state)
             .then(res => {
                 alert('Info updated');
                 console.log(res.data);
@@ -48,16 +48,16 @@ class Settings extends Component {
     
     handleInputChange = (e) => {
         if (['rEmails', 'rTexts'].includes(e.target.name)) {
-          this.setState({ [e.target.name]: e.target.checked });
+            this.setState({ [e.target.name]: e.target.checked });
         } else if (e.target.name === 'email') {
-          const local = { ...this.state.local };
-          local.email = e.target.value;
-          this.setState({ local: local });
+            const local = { ...this.state.local };
+            local.email = e.target.value;
+            this.setState({ local: local });
         } else this.setState({ [e.target.name]: e.target.value });
     }
     
     render() {
-      return this.state.local ?
+        return this.state.local ?
             <div className="settingsContainer">
                 <Form>
                   <FormGroup row>

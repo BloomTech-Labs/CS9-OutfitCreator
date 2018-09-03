@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { CloudinaryContext } from 'cloudinary-react';
-import { CardImg, Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import { CardImg, Button, FormGroup, Input } from 'reactstrap';
 import { ROOT_URL } from '../../config';
 import TagSearch from './TagSearch';
 import './Upload.css';
@@ -19,7 +19,31 @@ class Upload extends Component {
             search: '',
             tags: [],
             type: 'top',
+            options: {},
         }
+
+        props.isUserPaid(paid => {
+            const options = paid ? { 
+                    top: 'Top',
+                    shirt: 'Shirt',
+                    sweater: 'Sweater',
+                    jacket: 'Jacket',
+                    bottom: 'Bottom',
+                    pants: 'Pants',
+                    shorts: 'Shorts',
+                    skirt: 'Skirt',
+                    leggings: 'Leggings',
+                    dress: 'Dress',
+                    formalShoes: 'Formal Shoes',
+                    casualShoes: 'Casual Shoes',
+                    shoes: 'Shoes',
+                } : { 
+                    top: 'Top',
+                    bottom: 'Bottom',
+                    shoes: 'Shoes',
+                }
+            this.setState({ options });
+        });
     }
 
     // generateSignature = () => {
@@ -157,19 +181,10 @@ class Upload extends Component {
                                 type='select'
                                 name='type'
                                 onChange={this.handleInputChange}>
-                                <option>Top</option>
-                                <option>Bottom</option>
-                                <option>Shirt</option>
-                                <option>Sweater</option>
-                                <option>Jacket</option>
-                                <option>Pants</option>
-                                <option>Shorts</option>
-                                <option>Skirts</option>
-                                <option>Leggings</option>
-                                <option>Dress</option>
-                                <option>Formal Shoes</option>
-                                <option>Casual Shoes</option>
-                                <option>Shoes</option>
+                                {this.state.options ?
+                                  Object.keys(this.state.options).map(option => (
+                                    <option key={option}>{this.state.options[option]}</option>
+                                  )) : null }
                             </Input>
                         </FormGroup>
                         <TagSearch

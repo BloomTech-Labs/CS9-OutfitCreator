@@ -193,7 +193,7 @@ class CreateLayers extends Component {
     }
 
     getSelected = () => {
-      return Object.keys(this.state.items).filter(type => this.state.items[type].show == true);
+      return Object.keys(this.state.items).filter(type => this.state.items[type].show === true);
     }
 
     // method to retrieve random items of all types
@@ -209,19 +209,13 @@ class CreateLayers extends Component {
     }
 
     // method to retrieve a single random item
-    randomizeSingle = (event) => {
-        const { allTops, allBottoms, allShoes } = this.state;
+    randomizeSingle = (e) => {
+        const items = this.state.items;
+        const type = e.target.parentNode.id;
 
-        if (event.target.parentNode.classList.contains('top')) {
-            const selectedTop = allTops[Math.floor(Math.random() * allTops.length)];
-            this.setState({ selectedTop })
-        } else if (event.target.parentNode.classList.contains('bottom')) {
-            const selectedBottom = allBottoms[Math.floor(Math.random() * allBottoms.length)];
-            this.setState({ selectedBottom })
-        } else if (event.target.parentNode.classList.contains('shoe')) {
-            const selectedShoe = allShoes[Math.floor(Math.random() * allShoes.length)];
-            this.setState({ selectedShoe })
-        }
+        items[type].current = items[type].all[Math.floor(Math.random() * items[type].all.length)];
+
+        this.setState({ items });
     }
 
     handleButtonClick = () => {
@@ -267,7 +261,10 @@ class CreateLayers extends Component {
                 </div>
                 <CardDeck>
                     {selected.map(type => {
-                        return(<CreateCard key={type} item={this.state.items[type]}/>)
+                        return(<CreateCard key={type} 
+                            item={this.state.items[type]} 
+                            randomizeSingle={this.randomizeSingle}
+                            type={type} />)
                     })}
                 </CardDeck>
                 <div className="outfitPickerContainer">
