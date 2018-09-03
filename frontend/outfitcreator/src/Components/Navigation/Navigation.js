@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Collapse,
-  Nav,
-  NavLink,
-  //  Breadcrumb, 
-  // BreadcrumbItem
-} from 'reactstrap';
+import { Collapse, Nav, NavLink } from 'reactstrap';
 import { withRouter } from 'react-router';
 import { ROOT_URL } from '../../config.js';
 import axios from 'axios';
@@ -15,18 +9,17 @@ class Navigation extends Component {
   constructor(props) {
     super(props);
 
-    // this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
       collapsed: true,
       collapseActive: false,
       username: ''
     };
-    this.user = '';
   }
 
   componentDidMount() {
     this.selectActivePage();
     this.updateDimensions();
+
     window.addEventListener("resize", this.updateDimensions);
 
     const token = this.props.tokenData();
@@ -48,23 +41,34 @@ class Navigation extends Component {
     }
   }
 
-  updateDimensions= () => {
-    if (window.innerWidth < 700 && this.state.collapseActive === false) {
+  updateDimensions = () => {
+    this.selectActivePage();
+    if (window.innerWidth < 850) {
       this.setState({ collapseActive: true });
-    } else if (window.innerWidth > 699 && this.state.collapseActive === true) {
+    } else if (this.state.collapseActive) {
       this.setState({ collapsed: true, collapseActive: false });
     }
   }
 
+  currentPageName = () => {
+    const activePage = this.props.match.path.slice(1);
+    const pageLinks = document.querySelectorAll('.nav--item');
+    let name = '';
+
+    pageLinks.forEach(link => {
+      if (link.classList.contains(activePage)) name = link.innerHTML;
+    });
+
+    return name;
+  }
+
   selectActivePage() {
     const activePage = this.props.match.path.slice(1);
-    const activePageLink = document.querySelector(`.${activePage}`);
     const pageLinks = document.querySelectorAll('.nav--item');
-
-    console.log(pageLinks);
 
     pageLinks.forEach(link => {
       if (link.classList.contains(activePage)) {
+        console.log(activePage);
         link.classList.add('nav--active');
       } else {
         link.classList.remove('nav--active');
@@ -76,15 +80,17 @@ class Navigation extends Component {
     const navMin = document.querySelector('.navigation--minimize');
     const sideNav = document.querySelector('.navigation--pages');
     const delay = 250;
+    this.selectActivePage();
 
     if (this.state.collapsed) {
-      this.selectActivePage();
+
       navMin.classList.toggle('change');
       sideNav.classList.toggle('sideNav--expanded');
       setTimeout(() => {
         navMin.classList.toggle('cross');
       }, delay);
     } else {
+     
       navMin.classList.toggle('cross');
       setTimeout(() => {
         sideNav.classList.toggle('sideNav--expanded');
@@ -115,6 +121,7 @@ class Navigation extends Component {
           <div className="bar2"></div>
           <div className="bar3"></div>
         </div>
+        <div className='navigation--current-page nav--active'>{this.currentPageName()}</div>
         <Nav className='navigation--pages'>
           <Collapse isOpen={!this.state.collapsed}>
             <NavLink href='/Create'><button className='nav--item Create nav--active'>New Outfit</button></NavLink>
@@ -123,24 +130,25 @@ class Navigation extends Component {
             <NavLink href='/Archive'><button className='nav--item Archive'>Archive</button></NavLink>
           </Collapse>
         </Nav>
-        <div className='navigation--topRight'>
+        <div className='navigation--user-options'>
           <div onClick={this.navSettings} className='navigation--user'>{this.state.username}</div>
           <div onClick={this.signOut} className='navigation--logout'>logout</div>
         </div>
       </div>
       :
       <div className='navigation--container'>
-      <Nav className='navigation--pages'>
-      <NavLink href='/Create'><button className='nav--item Create'>New Outfit</button></NavLink>
-            <NavLink href='/Upload'><button className='nav--item Upload'>Add Item</button></NavLink>
-            <NavLink href='/Closet'><button className='nav--item Closet'>My Closet</button></NavLink>
-            <NavLink href='/Archive'><button className='nav--item Archive'>Archive</button></NavLink>
-      </Nav>
-      <div className='navigation--topRight'>
-        <div onClick={this.navSettings} className='navigation--user'>{this.state.username}</div>
-        <div onClick={this.signOut} className='navigation--logout'>logout</div>
+        <div className='navigation--site-title'>ClossetRoulette</div>
+        <Nav className='navigation--pages'>
+          <NavLink href='/Create'><button className='nav--item Create'>New Outfit</button></NavLink>
+          <NavLink href='/Upload'><button className='nav--item Upload'>Add Item</button></NavLink>
+          <NavLink href='/Closet'><button className='nav--item Closet'>My Closet</button></NavLink>
+          <NavLink href='/Archive'><button className='nav--item Archive'>Archive</button></NavLink>
+        </Nav>
+        <div className='navigation--user-options'>
+          <div onClick={this.navSettings} className='navigation--user'>{this.state.username}</div>
+          <div onClick={this.signOut} className='navigation--logout'>logout</div>
+        </div>
       </div>
-    </div>
     );
   }
 }
