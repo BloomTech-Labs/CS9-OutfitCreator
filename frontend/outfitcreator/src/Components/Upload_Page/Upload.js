@@ -159,6 +159,16 @@ class Upload extends Component {
                                 onChange={this.handleInputChange}>
                                 <option>Top</option>
                                 <option>Bottom</option>
+                                <option>Shirt</option>
+                                <option>Sweater</option>
+                                <option>Jacket</option>
+                                <option>Pants</option>
+                                <option>Shorts</option>
+                                <option>Skirts</option>
+                                <option>Leggings</option>
+                                <option>Dress</option>
+                                <option>Formal Shoes</option>
+                                <option>Casual Shoes</option>
                                 <option>Shoes</option>
                             </Input>
                         </FormGroup>
