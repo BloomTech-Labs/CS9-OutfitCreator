@@ -4,8 +4,38 @@ const { makeToken } = require("../config/passport-setup");
 // Register a new user
 exports.signup = (req, res) => {
     const { username, password, email } = req.body;
-    // const newUser = { username, password, email };
-    // console.log(newUser) 
+    
+    User.findOne({ 'local.email': email })
+    .then(existingUser => {
+        // If user with that email exists
+        if(existingUser) {
+            console.log('password: ', existingUser.local.password)
+            // if user already signed up locally
+            if(existingUser.local.password) {
+                return res.status(422);
+            } else {
+                // else user signed up using social auth, link accounts
+                const target = { 'local.email': email }
+                const update = {
+                    local: { username, password }
+                };
+                const options = { new: true };
+                // Update user and generate JWT. User is already verified by social-auth
+                User.findOneAndUpdate(target, update, options)
+                .exec()
+                .then(user => {
+                    const token = makeToken(user);
+                    res.status(201).json({ token });
+                })
+                .catch(err => {
+                    console.log(err);
+                    return next(err);
+                })
+            }
+        } else {
+            
+        }
+    })
     const user = new User({
         method: 'local',
         local: {
