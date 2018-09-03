@@ -104,6 +104,16 @@ UserSchema.pre('save', function(next) {
     });
 })
 
+// Hash passwords on update
+UserSchema.pre('update', function(next) {
+    if(!this.isModified('local.password')) return next();
+    bcrypt.hash(this.local.password, saltRounds, (err, hash) => {
+        if (err) return next(err);
+        this.local.password = hash;
+        next();
+    });
+})
+
 // Method to check user inputed password against hashed password
 UserSchema.methods.validPassword = async function(passwordGuess) {
     try {
