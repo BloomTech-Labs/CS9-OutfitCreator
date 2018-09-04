@@ -4,15 +4,11 @@
   --pale-purple: rgb(225,225,255);
   --light-purple: rgb(194,194,235);
   --med-purple: rgb(141,141,200);
-  --dark-purple: rgb(80,80,160);
+  --dark-purple: rgb(75,54,88);
 }
 
 html, body, body #root {
   background: white;
-  background-image: linear-gradient( 
-      var(--pale-purple),
-      rgb(255, 255, 255)
-  );
   background-repeat: no-repeat;
   background-size: cover;
   box-sizing: border-box;
