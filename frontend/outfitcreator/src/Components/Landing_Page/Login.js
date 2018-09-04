@@ -63,6 +63,9 @@ class Login extends React.Component {
     render() {
         return (
             <div className="landingPage--login">
+                <Button className='close' onClick={() => window.location = `${ROOT_URL.WEB}/`}>
+                    <span>&times;</span>
+                </Button>
                 <Nav pills className="landingPage--login-nav">
                     <NavItem>
                         <NavLink
