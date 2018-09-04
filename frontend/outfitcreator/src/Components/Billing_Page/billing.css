@@ -14,7 +14,7 @@
 .StripeElement {
   background-color: white;
   height: 40px;
-  width: 400px;
+  width: 100%;
   padding: 10px 12px;
   border-radius: 4px;
   border: 1px solid transparent;

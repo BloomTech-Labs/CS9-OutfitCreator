@@ -62,18 +62,16 @@
 }
 
 .outfit--card {
-    border: solid 3px var(--dark-purple);
-    border-radius: 10px;
+    border-radius: 5px;
     margin: 10px;
-    padding: 10px;
+    padding: 5px;
     transition: .5s;
-    background: var(--dark-purple);
 }
 
 .outfit--card:hover {
+    background-color: var(--dark-purple);
     transform: translateY(-10px);
     cursor: pointer;
-    box-shadow: 1px 1px;
 }
 
 .edit--footer{

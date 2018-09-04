@@ -19,7 +19,6 @@
 .landingPage--modals {
     align-self: flex-end;
     display: flex;
-    margin-right: 50px;
 }
 
 .landingPage--description {
@@ -32,10 +31,8 @@
 
 .landingPage--login {
     background: white;
-    border-radius: 10px;
-    box-shadow: 0 -1px 5px;
     margin: 50px;
-    padding: 30px 50px 50px;
+    padding: 10px 50px 50px;
 }
 
 .landingPage--login-nav {
@@ -60,6 +57,7 @@
     font-size: 1.65em;
     font-weight: bold;
     font-family: 'Arsenal', sans-serif;
+    color: var(--med--purple);
 }
 
 .landingPage--login-nav{

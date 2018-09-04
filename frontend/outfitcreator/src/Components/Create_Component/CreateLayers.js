@@ -1,84 +1,115 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { CardDeck, Button, Input } from 'reactstrap';
+import CreateCard from './CreateCard.js';
+import { ROOT_URL } from '../../config';
 import axios from 'axios';
-import {ROOT_URL} from '../../config';
-import './closet.css';
-import ClosetCard from './ClosetCard.js';
+import './Create.css';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Icons } from '../Icons';
 
-class Closet extends React.Component {
+class CreateLayers extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectAll: true,
+            user: '',
+            name: '',
+            worn: [],
+            tags: [],
             items: {
                 top: {
-                    title: 'Tops',
+                    title: 'Top',
                     show: false,
                     all: [],
+                    current: null,
+                    icon: Icons.top,
                 },
                 shirt: {
-                    title: 'Shirts',
+                    title: 'Shirt',
                     show: false,
                     all: [],
+                    current: null,
+                    icon: Icons.shirt,
                 },
                 sweater: {
-                    title: 'Sweaters',
+                    title: 'Sweater',
                     show: false,
                     all: [],
+                    current: null,
+                    icon: Icons.sweater,
                 },
                 jacket: {
-                    title: 'Jackets',
+                    title: 'Jacket',
                     show: false,
                     all: [],
+                    current: null,
+                    icon: Icons.jacket,
                 },
                 bottom: {
-                    title: 'Bottoms',
+                    title: 'Bottom',
                     show: false,
                     all: [],
+                    current: null,
+                    icon: Icons.bottom,
                 },
                 pants: {
                     title: 'Pants',
                     show: false,
                     all: [],
+                    current: null,
+                    icon: Icons.pants,
                 },
                 shorts: {
                     title: 'Shorts',
                     show: false,
                     all: [],
+                    current: null,
+                    icon: Icons.shorts,
                 },
                 skirt: {
-                    title: 'Skirts',
+                    title: 'Skirt',
                     show: false,
                     all: [],
+                    current: null,
+                    icon: Icons.skirt,
                 },
                 leggings: {
                     title: 'Leggings',
                     show: false,
                     all: [],
+                    current: null,
+                    icon: Icons.leggings,
                 },
                 dress: {
-                    title: 'Dresses',
+                    title: 'Dress',
                     show: false,
                     all: [],
+                    current: null,
+                    icon: Icons.dress,
                 },
                 formalShoes: {
-                    title: 'Formal Shoes',
+                    title: 'Fromal Shoes',
                     show: false,
                     all: [],
+                    current: null,
+                    icon: Icons.formalShoes,
                 },
                 casualShoes: {
                     title: 'Casual Shoes',
                     show: false,
                     all: [],
+                    current: null,
+                    icon: Icons.casualShoes,
                 },
                 shoes: {
                     title: 'Shoes',
                     show: false,
                     all: [],
+                    current: null,
+                    icon: Icons.casualShoes,
                 },
             }
-        };
-
+        }
         this.setAuthToken();
     }
 
@@ -92,7 +123,6 @@ class Closet extends React.Component {
     }
 
     componentDidMount() {
-        // this.getItems(this.state.selectedType);
         const user = this.props.getUserID();
 
         if (user) {
@@ -137,18 +167,6 @@ class Closet extends React.Component {
         }
     }
 
-    toggleAll = () => {
-        // const items = { ...this.state.items };
-
-        // Object.keys(items).forEach(type => {
-        //     items[type].show = !items[type].show;
-        // });
-
-        // this.setState({ items });
-
-        this.setState({ selectAll: !this.state.selectAll });
-    }
-
     activateCategory = (category) => {
         const items = this.state.items;
         items[category].show = !items[category].show;
@@ -156,80 +174,90 @@ class Closet extends React.Component {
     }
 
     getSelected = () => {
-        return Object.keys(this.state.items).filter(type => this.state.items[type].show === true);
+      return Object.keys(this.state.items).filter(type => this.state.items[type].show === true);
     }
 
-    // onSelect(category) {
-    //     this.setState({selectedType: category});
-    //     this.getItems(category);
-    // }
+    // method to retrieve random items of all types
+    randomize = () => {
+        const items = this.state.items;
+        const selected = this.getSelected();
 
-    // getItems(category) {
-    //     const user = this.props.getUserID();
-    //     const authToken = localStorage.getItem('authToken');
-    //     const requestOptions = {headers: { Authorization: authToken }}
+        selected.forEach(type => {
+            items[type].current = items[type].all[Math.floor(Math.random() * items[type].all.length)];
+        });
 
-    //     if (category === 'all') {
-    //         axios.get(`${ROOT_URL.API}/items/user/${user}`)
-    //             .then(res => {
-    //                 this.setState({
-    //                   items: res.data
-    //                 });
-    //             })
-    //             .catch(err => console.log(err));
-    //     } else {
-    //         axios.get(`${ROOT_URL.API}/items/type/${user}/${category}`, requestOptions)
-    //             .then(res => {
-    //                 this.setState({
-    //                     items: res.data
-    //                 });
-    //             })
-    //             .catch(err => console.log(err.message));
-    //     }
-    // }
+        this.setState({ items });
+    }
+
+    // method to retrieve a single random item
+    randomizeSingle = (e) => {
+        const items = this.state.items;
+        const type = e.target.parentNode.id;
+
+        items[type].current = items[type].all[Math.floor(Math.random() * items[type].all.length)];
+
+        this.setState({ items });
+    }
+
+    handleButtonClick = () => {
+        console.log('button clicked!')
+    };
+
+    handleInputChange = e => {
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
+    // method handle creating an outfit
+    handleCreateOutfit = () => {
+        const { user, name, worn, tags, selectedTop, selectedBottom, selectedShoe } = this.state;
+        const top = [selectedTop._id];
+        const bottom = [selectedBottom._id];
+        const shoes = selectedShoe._id;
+        const outfit = { user, name, worn, tags, top, bottom, shoes };
+        axios
+            .post(`${ROOT_URL.API}/outfits`, outfit)
+            .then(() => this.props.history.push('/Archive'))
+            .catch(err => {
+                console.log(err);
+            });
+    };
 
     render() {
         const typesInCloset = Object.keys(this.state.items).filter(type => {
             return this.state.items[type].all.length > 0;
         });
         const selected = this.getSelected();
-        console.log(selected);
 
         return (
-            <div className="closet">
-                {/* <div className="closet-title">My Closet</div> */}
-                <div className="closet-menu">
-                <button className={this.state.selectAll ? "closet-button--active" : "closet-button"} onClick={this.toggleAll}>All</button>
+            <div className="createContainer">
+                <div className="layerSelect">
                     {typesInCloset.map(type => (
                         <button
-                            className={this.state.items[type].show ? "closet-button--active" : "closet-button"}
+                            className={this.state.items[type].show ? "create-button--active" : "create-button"}
                             onClick={() => { this.activateCategory(type) }}
                             key={type} > {this.state.items[type].title} 
                         </button>
                     ))}
-                    {/* <button className={this.state.selectedType === "all" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("all")}>All</button>
-                    <button className={this.state.selectedType === "top" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("top")}>Tops</button>
-                    <button className={this.state.selectedType === "bottom" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("bottom")}>Bottoms</button>
-                    <button className={this.state.selectedType === "shoes" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("shoes")}>Shoes</button> */}
                 </div>
-                <div className="closet-cards">
-                    {/* {selected.map(item => <ClosetCard item={item} key={item._id}/>)} */}
-                    {this.state.selectAll ?
-                        typesInCloset.map(type => (
-                            this.state.items[type].all.map(item => (
-                                <ClosetCard item={item} key={item._id}/>
-                            ))
-                        )) : 
-                        selected.map(type => (
-                            this.state.items[type].all.map(item => (
-                                <ClosetCard item={item} key={item._id}/>
-                            ))
-                        ))
-                    }
+                <CardDeck>
+                    {selected.map(type => {
+                        return(<CreateCard key={type} 
+                            item={this.state.items[type]} 
+                            randomizeSingle={this.randomizeSingle}
+                            type={type} />)
+                    })}
+                </CardDeck>
+                <div className="outfitPickerContainer">
+                    <Input type="text" name="name" placeholder="Outfit Nickname" onChange={this.handleInputChange} value={this.state.name} className="outfitInput" />
+                    <div className="outfitPickerDecision">
+                        <Button className="button" onClick={this.handleCreateOutfit}>Yes!</Button>
+                        <Button className="button" onClick={this.randomize}>Randomize</Button>
+                        <FontAwesomeIcon icon="share-alt" size="4x" onClick={this.handleButtonClick} />
+                    </div>
                 </div>
             </div>
-        )
+        );
     }
-}
+};
 
-export default Closet;
+export default CreateLayers;
