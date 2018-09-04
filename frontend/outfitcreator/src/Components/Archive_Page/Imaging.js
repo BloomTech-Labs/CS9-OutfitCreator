@@ -15,12 +15,7 @@ class Imaging extends React.Component {
     }
 
     getImages = () => {
-<<<<<<< HEAD
         axios.get(`${ROOT_URL.API}/items/getitem/${this.props.urlSrc}`)
-=======
-        console.log(this);
-        axios.get(`${ROOT_URL.API}/items/${TESTUSER}/${this.props.urlSrc}`)
->>>>>>> b6141bb14f1dd6db3d05c092680aa454890d570c
             .then(response => {
                 this.setState({ image: response.data });
                 console.log(response.data);
