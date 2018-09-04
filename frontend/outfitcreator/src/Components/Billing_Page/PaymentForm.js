@@ -21,20 +21,24 @@ class PaymentForm extends Component {
             token: token.id,
             email: 'test@testemail.com'
         })
-        .then(res => {
-            this.setState({complete: true});
-            const authToken = localStorage.getItem('authToken');
-            const requestOptions = {
-                headers: {
-                    Authorization: authToken
+            .then(res => {
+                this.setState({complete: true});
+                const authToken = localStorage.getItem('authToken');
+                const requestOptions = {
+                    headers: {
+                        Authorization: authToken
+                    }
                 }
-            }
-            axios.post(`${ROOT_URL.API}/user/subscribe/${this.props.userID}`, {
-                stripe_sub: res.data.stripe_sub,
-                stripe_cust: res.data.stripe_cust
-            }, requestOptions)
-        })
-        .catch(err => console.log(err));
+                axios.post(`${ROOT_URL.API}/user/subscribe/${this.props.userID}`, {
+                    stripe_sub: res.data.stripe_sub,
+                    stripe_cust: res.data.stripe_cust
+                }, requestOptions)
+                // alert('Payment successful! Welcome to Closet Roulette!');
+            })
+            .catch(err => { 
+                console.log(err);
+                // alert('Payment could not go through');
+            });
         }
     }
     

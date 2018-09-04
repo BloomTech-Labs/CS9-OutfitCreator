@@ -37,7 +37,7 @@ class Login extends React.Component {
         const { email, password } = this.state;
         axios.post(`${ROOT_URL.API}/auth/login`, { email, password })
             .then(res => {
-                this.props.onSignin(res.data);
+                localStorage.setItem('authToken', `Bearer ${res.data.token}`);
                 // Redirect to create page once logged in
                 window.location = `${ROOT_URL.WEB}/Create`;
             })

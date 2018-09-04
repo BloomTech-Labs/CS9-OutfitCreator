@@ -21,7 +21,7 @@ class Settings extends Component {
     }
 
     componentDidMount() {
-        const userID = this.props.tokenData().sub;
+        const userID = this.props.getUserID();
         const authToken = localStorage.getItem('authToken');
         const requestOptions = {
             headers: { Authorization: authToken }
@@ -55,15 +55,7 @@ class Settings extends Component {
     }
 
     updateUserInfo = () => {
-        const userID = this.props.tokenData().sub;
-        const authToken = localStorage.getItem('authToken');
-        const requestOptions = {
-            headers: {
-                Authorization: authToken
-            }
-        }
-
-        axios.put(`${ROOT_URL.API}/user/info/${userID}`, this.state, requestOptions)
+        axios.put(`${ROOT_URL.API}/user/info/${this.state.userID}`, this.state)
             .then(res => {
                 alert('Info updated');
                 console.log(res.data);
@@ -76,11 +68,11 @@ class Settings extends Component {
     
     handleInputChange = (e) => {
         if (['rEmails', 'rTexts'].includes(e.target.name)) {
-          this.setState({ [e.target.name]: e.target.checked });
+            this.setState({ [e.target.name]: e.target.checked });
         } else if (e.target.name === 'email') {
-          const local = { ...this.state.local };
-          local.email = e.target.value;
-          this.setState({ local: local });
+            const local = { ...this.state.local };
+            local.email = e.target.value;
+            this.setState({ local: local });
         } else this.setState({ [e.target.name]: e.target.value });
     }
 
@@ -193,9 +185,7 @@ class Settings extends Component {
                                     </Col>
                                 </FormGroup>
                                 <FormGroup check row>
-                                    <Col sm={{ size: 10, offset: 4 }}>
-                                        <Button className="button" onClick={this.updateUserInfo}>Save</Button>
-                                    </Col>
+                                    <Button className="button" onClick={this.updateUserInfo}>Save</Button>
                                 </FormGroup>
                             </Form>
                         </Col>
@@ -203,12 +193,12 @@ class Settings extends Component {
                 </TabPane>
             <TabPane tabId="2">
                 <Row>
-                <Col sm="12">
-                    {((this.state.subscribed === false) || (this.state.subscribed === null))
-                    ?<Checkout stripe={this.state.stripe} userID={this.state.userID}/>
-                    :<Cancel stripe = {this.state.stripe} userID={this.state.userID} subscription={this.state.subscription}/>
-                    }
-                </Col>
+                    <Col sm="12">
+                        {((this.state.subscribed === false) || (this.state.subscribed === null))
+                        ?<Checkout stripe={this.state.stripe} userID={this.state.userID}/>
+                        :<Cancel stripe={this.state.stripe} userID={this.state.userID} subscription={this.state.subscription}/>
+                        }
+                    </Col>
                 </Row>
             </TabPane>
             </TabContent>
