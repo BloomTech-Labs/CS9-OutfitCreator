@@ -10,7 +10,6 @@ const ItemSchema = new mongoose.Schema({
     required: true
   },
   image: {
-    // storing images as URLs for now
     type: String,
     required: true
   },
