@@ -1,31 +1,20 @@
-.settingsContainer {
+.settingsPage {
     background: white;
     border-radius: 10px;
     margin-top: 50px;
     padding: 40px;
-    padding-bottom: 20px;
-    text-align: left;
 }
 
-.settingsContainer .save--button {
-  padding:5px 20px;
-  font-size: 16px;
-}
-
-.settingsContainer .button:hover {
-  padding:5px 20px;
-  font-size: 16px;
-}
-
-.form-check {
-  margin-bottom: 15px;
-}
-
-.settings--save {
+.settingsPage--login-nav {
   display: flex;
   justify-content: center;
 }
 
-.save--button {
+.tab-content {
+  margin-top: 40px;
+}
+
+.settingsPage .row .button, .settingsPage .row .button:hover {
   margin-top: 30px;
+  padding: 8px 20px;
 }
