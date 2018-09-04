@@ -4,7 +4,6 @@ import './Create.css';
 
 class CreateCard extends React.Component {
     render() {
-        console.log(this.props);
         const URL= this.props.item.current ? this.props.item.current.image : null;
         const newURL = URL ? URL.slice(0,53)+"h_120/"+URL.slice(53) : null;
         return (

@@ -11,6 +11,7 @@ import { Icons } from '../Icons';
 class CreateLayers extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             user: '',
             name: '',
@@ -18,88 +19,18 @@ class CreateLayers extends Component {
             tags: [],
             items: {
                 top: {
-                    title: 'Top',
+                    title: 'Tops',
                     show: false,
                     all: [],
                     current: null,
                     icon: Icons.top,
                 },
-                shirt: {
-                    title: 'Shirt',
-                    show: false,
-                    all: [],
-                    current: null,
-                    icon: Icons.shirt,
-                },
-                sweater: {
-                    title: 'Sweater',
-                    show: false,
-                    all: [],
-                    current: null,
-                    icon: Icons.sweater,
-                },
-                jacket: {
-                    title: 'Jacket',
-                    show: false,
-                    all: [],
-                    current: null,
-                    icon: Icons.jacket,
-                },
                 bottom: {
-                    title: 'Bottom',
+                    title: 'Bottoms',
                     show: false,
                     all: [],
                     current: null,
                     icon: Icons.bottom,
-                },
-                pants: {
-                    title: 'Pants',
-                    show: false,
-                    all: [],
-                    current: null,
-                    icon: Icons.pants,
-                },
-                shorts: {
-                    title: 'Shorts',
-                    show: false,
-                    all: [],
-                    current: null,
-                    icon: Icons.shorts,
-                },
-                skirt: {
-                    title: 'Skirt',
-                    show: false,
-                    all: [],
-                    current: null,
-                    icon: Icons.skirt,
-                },
-                leggings: {
-                    title: 'Leggings',
-                    show: false,
-                    all: [],
-                    current: null,
-                    icon: Icons.leggings,
-                },
-                dress: {
-                    title: 'Dress',
-                    show: false,
-                    all: [],
-                    current: null,
-                    icon: Icons.dress,
-                },
-                formalShoes: {
-                    title: 'Fromal Shoes',
-                    show: false,
-                    all: [],
-                    current: null,
-                    icon: Icons.formalShoes,
-                },
-                casualShoes: {
-                    title: 'Casual Shoes',
-                    show: false,
-                    all: [],
-                    current: null,
-                    icon: Icons.casualShoes,
                 },
                 shoes: {
                     title: 'Shoes',
@@ -110,6 +41,8 @@ class CreateLayers extends Component {
                 },
             }
         }
+
+        this.setTypes();
         this.setAuthToken();
     }
 
@@ -122,6 +55,106 @@ class CreateLayers extends Component {
         }
     }
 
+    setTypes = () => {
+        const paidItems = {
+            top: {
+                title: 'Tops',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.top,
+            },
+            shirt: {
+                title: 'Shirt',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.shirt,
+            },
+            sweater: {
+                title: 'Sweater',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.sweater,
+            },
+            jacket: {
+                title: 'Jacket',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.jacket,
+            },
+            dress: {
+                title: 'Dress',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.dress,
+            },
+            bottom: {
+                title: 'Bottoms',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.bottom,
+            },
+            pants: {
+                title: 'Pants',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.pants,
+            },
+            shorts: {
+                title: 'Shorts',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.shorts,
+            },
+            skirt: {
+                title: 'Skirt',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.skirt,
+            },
+            leggings: {
+              title: 'Leggings',
+              show: false,
+              all: [],
+              current: null,
+              icon: Icons.leggings,
+            },
+            formalShoes: {
+              title: 'Fromal Shoes',
+              show: false,
+              all: [],
+              current: null,
+              icon: Icons.formalShoes,
+            },
+            casualShoes: {
+                title: 'Casual Shoes',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.casualShoes,
+            },
+            shoes: {
+                title: 'Shoes',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.casualShoes,
+            },
+        }
+
+        this.props.isUserPaid(paid => {
+            if (paid) this.setState({ items: paidItems });
+        });
+    }
+
     componentDidMount() {
         const user = this.props.getUserID();
 
@@ -129,6 +162,7 @@ class CreateLayers extends Component {
             axios.all([
                 axios.get(`${ROOT_URL.API}/items/type/${user}/top`),
                 axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`),
+                axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/shirt`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/sweater`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/jacket`),
@@ -139,23 +173,28 @@ class CreateLayers extends Component {
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/dress`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/formalShoes`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/casualShoes`),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/shoes`),
             ])
                 .then(res => {
                     const items = { ...this.state.items };
-                    items.top.all = res[0].data;
-                    items.bottom.all = res[1].data;
-                    items.shirt.all = res[2].data;
-                    items.sweater.all = res[3].data;
-                    items.jacket.all = res[4].data;
-                    items.pants.all = res[5].data;
-                    items.shorts.all = res[6].data;
-                    items.skirt.all = res[7].data;
-                    items.leggings.all = res[8].data;
-                    items.dress.all = res[9].data;
-                    items.formalShoes.all = res[10].data;
-                    items.casualShoes.all = res[11].data;
-                    items.shoes.all = res[12].data;
+
+                    Object.keys(items).forEach((item, idx) => {
+                        console.log(item, idx);
+                        items[item].all = res[idx].data;
+                    });
+
+                    // items.top.all = res[0].data;
+                    // items.bottom.all = res[1].data;
+                    // items.shoes.all = res[2].data;
+                    // items.shirt.all = res[3].data;
+                    // items.sweater.all = res[4].data;
+                    // items.jacket.all = res[5].data;
+                    // items.pants.all = res[6].data;
+                    // items.shorts.all = res[7].data;
+                    // items.skirt.all = res[8].data;
+                    // items.leggings.all = res[9].data;
+                    // items.dress.all = res[10].data;
+                    // items.formalShoes.all = res[11].data;
+                    // items.casualShoes.all = res[12].data;
 
                     this.setState({ items });
                 })
@@ -168,8 +207,44 @@ class CreateLayers extends Component {
     }
 
     activateCategory = (category) => {
-        const items = this.state.items;
+        const items = { ...this.state.items };
+
+        // Swap show value of clicked element
         items[category].show = !items[category].show;
+
+        // Special cases after default click?
+        const subtypeMap = {
+            top: ['sweater', 'shirt', 'jacket', 'dress'],
+            bottom: ['pants', 'shorts', 'leggings', 'skirt'],
+            shoes: ['casualShoes', 'formalShoes']
+        }
+
+        const mainTypes = Object.keys(subtypeMap);
+
+        const shoeTypes = ['shoes', ...subtypeMap.shoes];
+
+        // Allow only one shoe type to be active
+        if (shoeTypes.includes(category)) {
+            shoeTypes.forEach(type => {
+                if (category != type) {
+                    if(items[type]) items[type].show = false;
+                }
+            })
+        // If category is of mainType then toggle off all subtypes
+        } else if (mainTypes.includes(category)) {
+            subtypeMap[category].forEach(subtype => {
+                if(items[subtype]) items[subtype].show = false;
+            });
+        // Otherwise toggle off main of subtype
+        } else {
+            Object.entries(subtypeMap).forEach(pair => {
+                console.log(pair, category);
+                if (pair[1].includes(category)) {
+                  items[pair[0]].show = false;
+                }
+            });
+        }
+
         this.setState({items})
     }
 
@@ -209,14 +284,22 @@ class CreateLayers extends Component {
 
     // method handle creating an outfit
     handleCreateOutfit = () => {
-        const { user, name, worn, tags, selectedTop, selectedBottom, selectedShoe } = this.state;
-        const top = [selectedTop._id];
-        const bottom = [selectedBottom._id];
-        const shoes = selectedShoe._id;
+        const selected = this.getSelected();
+        const groups = { top: [], bottom: [], shoes: [] };
+        
+        selected.forEach(type => {
+            const currentItem = this.state.items[type].current;
+            if (currentItem) groups[currentItem.type].push(currentItem);
+        });
+      
+        const { user, name, worn, tags } = this.state;
+        const { top, bottom, shoes } = groups;
         const outfit = { user, name, worn, tags, top, bottom, shoes };
-        axios
-            .post(`${ROOT_URL.API}/outfits`, outfit)
-            .then(() => this.props.history.push('/Archive'))
+
+        axios.post(`${ROOT_URL.API}/outfits`, outfit)
+            .then(() => {
+                this.props.history.push('/Archive')
+            })
             .catch(err => {
                 console.log(err);
             });
@@ -226,6 +309,7 @@ class CreateLayers extends Component {
         const typesInCloset = Object.keys(this.state.items).filter(type => {
             return this.state.items[type].all.length > 0;
         });
+
         const selected = this.getSelected();
 
         return (

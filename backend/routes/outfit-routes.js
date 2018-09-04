@@ -6,6 +6,7 @@ const Outfit = require("../models/outfitModel");
 
 // Add a new outfit to the database
 router.post("/", (req, res) => {
+  // Save items to outfit based on selection
   const { user, name, tags, worn, top, bottom, shoes } = req.body;
   Outfit.create({ user, name, tags, worn, top, bottom, shoes })
     .then(outfit => {
