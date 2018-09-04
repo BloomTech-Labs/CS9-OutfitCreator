@@ -85,20 +85,17 @@ const UserSchema = new mongoose.Schema({
 
 // Hash passwords when user is created
 UserSchema.pre('save', function(next) {
-    console.log('entered');
     if(this.method !== 'local') {
         next();
     }
     bcrypt.hash(this.local.password, saltRounds, (err, hash) => {
         if (err) return next(err);
-        console.log('success');
         this.local.password = hash;
-        console.log(this.local.password);
         next();
     });
 })
 
-// Method to check user inputted password against hashed password
+// Method to check user inputed password against hashed password
 UserSchema.methods.validPassword = async function(passwordGuess) {
     try {
         return await bcrypt.compare(passwordGuess, this.local.password);
