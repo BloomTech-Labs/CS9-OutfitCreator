@@ -16,18 +16,28 @@
 .card--header {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 30px;
+    padding: 5px 0;
+    margin: 5px 0;
 }
 
 .card--images {
+    min-height: 200px;
     display: flex;
 }
 
 .card--images img {
     width: 125px;
+    max-height: 225px;
+    min-height: 210px;
     object-fit: contain;
     /* height: 33%;
     width: 33%; */
+}
+
+.card--footer{
+    display: block;
+    align-self: flex-start;
+    margin: 5px 0;
 }
 
 .header--edit{
@@ -47,8 +57,4 @@
  border: 1px solid black;
  border-radius: 5px;
  box-shadow: 1px 1px;
-}
-
-.card--footer{
-    align-self: flex-start;
 }
