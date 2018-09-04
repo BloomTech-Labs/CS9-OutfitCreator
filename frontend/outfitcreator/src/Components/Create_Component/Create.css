@@ -54,18 +54,13 @@
 }
 
 .card-deck .card, .card, .create-card, .cardImage, .card-img-overlay {
-    height: 200px;
+    max-height: 200px;
     min-width: 300px;
-    max-width: 300px;
     border: none;
     box-shadow: none;
     outline: none;
     margin: 0 8px 15px;
 }
-
-/* .card-deck .card {
-    margin: 0 8px;
-} */
 
 .cardImage {
     border-radius: 5px;

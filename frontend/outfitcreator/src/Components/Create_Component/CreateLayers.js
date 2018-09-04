@@ -7,8 +7,8 @@ import axios from 'axios';
 import './Create.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import topIcon from './top.png';
-import bottomIcon from './bottom.png';
+import { Icons } from './Icons';
+// import bottomIcon from './bottom.png';
 
 // const testUserId = '5b761531cdcd6d00043d420e';
 
@@ -20,86 +20,84 @@ class CreateLayers extends Component {
             name: '',
             worn: [],
             tags: [],
-            // all: { 
-            //     top: [],
-            //     shirt: [],
-            //     sweater: [],
-            //     jacket: [],
-            //     bottom: [],
-            //     pants: [],
-            //     shorts: [],
-            //     skirt: [],
-            //     leggings: [],
-            //     dress: [],
-            //     formalShoes: [],
-            //     casualShoes: [],
-            //     shoes: [],
-            // },
             items: {
                 top: {
                     show: false,
                     all: [],
                     current: null,
-                    icon: topIcon
+                    icon: Icons.top,
                 },
                 shirt: {
                     show: false,
                     all: [],
                     current: null,
+                    icon: Icons.shirt,
                 },
                 sweater: {
                     show: false,
                     all: [],
                     current: null,
+                    icon: Icons.sweater,
                 },
                 jacket: {
                     show: false,
                     all: [],
                     current: null,
+                    icon: Icons.jacket,
                 },
                 bottom: {
                     show: false,
                     all: [],
                     current: null,
-                    icon: bottomIcon
+                    icon: Icons.bottom,
                 },
                 pants: {
                     show: false,
                     all: [],
                     current: null,
+                    icon: Icons.pants,
                 },
                 shorts: {
                     show: false,
                     all: [],
                     current: null,
+                    icon: Icons.shorts,
                 },
                 skirt: {
                     show: false,
                     all: [],
                     current: null,
+                    icon: Icons.skirt,
                 },
                 leggings: {
                     show: false,
                     all: [],
                     current: null,
+                    icon: Icons.leggings,
                 },
                 dress: {
                     show: false,
                     all: [],
                     current: null,
+                    icon: Icons.dress,
                 },
                 formalShoes: {
                     show: false,
-                    all: []
+                    all: [],
+                    current: null,
+                    icon: Icons.formalShoes,
                 },
                 casualShoes: {
                     show: false,
-                    all: []
+                    all: [],
+                    current: null,
+                    icon: Icons.casualShoes,
                 },
                 shoes: {
                     show: false,
                     all: [],
                     current: null,
+                    icon: Icons.casualShoes,
                 },
             }
         }
@@ -160,23 +158,7 @@ class CreateLayers extends Component {
                     items.casualShoes.all = res[11].data;
                     items.shoes.all = res[12].data;
 
-                    // const all = { ...this.state.all };
-                    // all.top = res[0].data;
-                    // all.bottom = res[1].data;
-                    // all.shirt = res[2].data;
-                    // all.sweater = res[3].data;
-                    // all.jacket = res[4].data;
-                    // all.pants = res[5].data;
-                    // all.shorts = res[6].data;
-                    // all.skirt = res[7].data;
-                    // all.leggings = res[8].data;
-                    // all.dress = res[9].data;
-                    // all.formalShoes = res[10].data;
-                    // all.casualShoes = res[11].data;
-                    // all.shoes = [ ...res[10].data, ...res[11].data];
-
                     this.setState({ items });
-                    //this.randomize();
                 })
                 .catch(err => {
                     console.log(err);
@@ -252,10 +234,9 @@ class CreateLayers extends Component {
                 <div className="layerSelect">
                     {typesInCloset.map(type => (
                         <button
-                            className={this.state.items[type].show ? "create-button--active" :"create-button"}
-                            onClick={()=>{this.activateCategory(type)}}
-                            key={type} >
-                            {type} 
+                            className={this.state.items[type].show ? "create-button--active" : "create-button"}
+                            onClick={() => { this.activateCategory(type) }}
+                            key={type} > {type} 
                         </button>
                     ))}
                 </div>

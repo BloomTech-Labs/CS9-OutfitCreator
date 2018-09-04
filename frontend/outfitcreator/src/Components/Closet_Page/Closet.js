@@ -8,13 +8,13 @@ class Closet extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedType: null,
+            selectedType: 'all',
             items: [],
         };
     }
 
     componentDidMount() {
-        this.getItems();
+        this.getItems(this.state.selectedType);
     }
 
     onSelect(category) {
@@ -26,20 +26,32 @@ class Closet extends React.Component {
         const user = this.props.getUserID();
         const authToken = localStorage.getItem('authToken');
         const requestOptions = {headers: { Authorization: authToken }}
-        axios.get(`${ROOT_URL.API}/items/type/${user}/${category}`, requestOptions)
-            .then(res => {
-                this.setState({
-                    items: res.data
-                });
-            })
-            .catch(err => console.log(err.message));
+
+        if (category === 'all') {
+            axios.get(`${ROOT_URL.API}/items/user/${user}`)
+                .then(res => {
+                    this.setState({
+                      items: res.data
+                    });
+                })
+                .catch(err => console.log(err));
+        } else {
+            axios.get(`${ROOT_URL.API}/items/type/${user}/${category}`, requestOptions)
+                .then(res => {
+                    this.setState({
+                        items: res.data
+                    });
+                })
+                .catch(err => console.log(err.message));
+        }
     }
 
     render() {
         return (
             <div className="closet">
-                <div className="closet-title">My Closet</div>
+                {/* <div className="closet-title">My Closet</div> */}
                 <div className="closet-menu">
+                    <button className={this.state.selectedType === "all" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("all")}>All</button>
                     <button className={this.state.selectedType === "top" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("top")}>Tops</button>
                     <button className={this.state.selectedType === "bottom" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("bottom")}>Bottoms</button>
                     <button className={this.state.selectedType === "shoes" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("shoes")}>Shoes</button>

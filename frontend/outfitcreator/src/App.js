@@ -67,13 +67,13 @@ class App extends Component {
           <Route exact path='/login' render={props =>
             <Login {...props} />
           } />
-          <Route path='/Create' render={props =>
+          <Route path='/Create?' render={props =>
             <div className='App--create'>
               <Create {...props} getUserID={this.getUserID} />
               <Navigation getUserID={this.getUserID} />
             </div>
           } />
-          <Route path='/Layers' render={props =>
+          <Route path='/Create' render={props =>
             <div className='App--create-layers'>
               <CreateLayers {...props} getUserID={this.getUserID} />
               <Navigation getUserID={this.getUserID} />

@@ -1,6 +1,7 @@
 .container--tagSearch {
+    margin-top: 10px;
     min-width: 300px;
-    width: 30vw;
+    width: 300px;
 }
 
 .tagSearch--icon {
@@ -39,11 +40,12 @@
     flex-flow: wrap;
     min-width: 300px;
     width: 30vw;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 .tagSearch--delete {
     padding: 0 8px;
+    cursor: pointer;
 }
 
 .tagSearch--tag {

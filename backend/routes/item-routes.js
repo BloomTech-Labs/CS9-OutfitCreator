@@ -32,6 +32,7 @@ require("dotenv").config();
 router.post("/", (req, res) => {
   // console.log('req.body: ' + req.body);
   const { user, name, image, type, subtype, tags } = req.body;
+  
   Item.create({ user, name, image, type, subtype, tags })
     .then(item => {
       res.status(201).json(item);
@@ -81,6 +82,22 @@ router.get("/type/:user/:type", (req, res) => {
     .populate()
     .then(items => {
       const filteredItems = items.filter((item) => (item.type == type))
+      res.status(200).json(filteredItems);
+    })
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+// Get all items for a user filtered by a subtype
+router.get("/type/:user/sub/:subtype", (req, res) => {
+  const { user, subtype } = req.params;
+  Item.find({
+    user,
+  })
+    .populate()
+    .then(items => {
+      const filteredItems = items.filter((item) => (item.subtype == subtype))
       res.status(200).json(filteredItems);
     })
     .catch(err => {
