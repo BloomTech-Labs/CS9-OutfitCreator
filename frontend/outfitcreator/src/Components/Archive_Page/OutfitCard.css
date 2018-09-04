@@ -2,10 +2,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-width: 400px;
+    /* max-width: 400px;
     min-width: 400px;
     max-height: 300px;
-    min-height: 300px;
+    min-height: 300px; */
+    /* width: 200px; */
     overflow-y: auto;
     overflow-x: hidden;
     margin: 10px;
@@ -20,13 +21,15 @@
 
 .card--images {
     display: flex;
+    flex-direction: column;
 }
 
 .card--images img {
-    width: 125px;
-    object-fit: contain;
+    /* width: 125px; */
+    /* object-fit: contain; */
     /* height: 33%;
     width: 33%; */
+    margin: 5px;
 }
 
 .header--edit{
