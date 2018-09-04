@@ -65,7 +65,12 @@ class App extends Component {
             <Landing {...props} />
           } />
           <Route exact path='/login' render={props =>
-            <Login {...props} />
+            <div>
+              <Landing {...props} />
+              <div className='landingPage--faded' onClick={() => { window.location = `${ROOT_URL.WEB}/`} }>
+                <Login {...props} />
+              </div>
+            </div>
           } />
           <Route path='/Create?' render={props =>
             <div className='App--create'>
@@ -75,7 +80,7 @@ class App extends Component {
           } />
           <Route path='/Create' render={props =>
             <div className='App--create-layers'>
-              <CreateLayers {...props} getUserID={this.getUserID} />
+              <CreateLayers {...props} getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
               <Navigation getUserID={this.getUserID} />
             </div>
           } />
