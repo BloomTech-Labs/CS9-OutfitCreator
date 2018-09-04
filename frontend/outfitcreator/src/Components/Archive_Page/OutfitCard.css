@@ -14,9 +14,9 @@
 }
 
 .card--header {
+    color: var(--dark-purple);
     display: flex;
     justify-content: space-between;
-    padding-bottom: 30px;
 }
 
 .card--images {
