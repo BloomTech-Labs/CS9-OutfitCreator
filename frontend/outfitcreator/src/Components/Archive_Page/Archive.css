@@ -1,11 +1,11 @@
 .container--archive {
-  align-items: flex-start;
+    align-items: flex-start;
     background: white;
     display: flex;
     flex-direction: column;
     border-radius: 25px;
-    margin: 100px 0;
-    width: 75vw;
+    margin: 60px 0;
+    width: 100%;
     padding: 30px;
 }
 
@@ -24,11 +24,17 @@
     background: -webkit-linear-gradient(rgb(200,200,200), rgb(150,150,150));
 }
 
+.archive--search {
+  margin: 0 auto;
+  width: 400px;
+}
+
 .search--input {
     border-radius: 50px;
     background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAChSURBVDhPxZFLDgFREABniTgOtlZcyJ5wFUfgCNiz9LuAA4gVVemxmnlPSGQqqfRn0nmdnuLfdHCOF3zguazb+BGHd7jGPnbLaL1Fv2dZ4CrSCvZnkaa5Yi/SCm5yijTNHV27DvveJMsBfakO+8dI00wwd4NppGnG+ESvPkDXNlpvMPsrh3jDEbrJHr2Jh/P6LUzyHjZ+TXPDssSfh5uiKF6jryBed3R9/QAAAABJRU5ErkJggg==') no-repeat left center;
-    padding-left: 20px;
-    margin-bottom: 10px;
+    padding-left: 30px;
+    margin: 10px;
+    width: 100%;
 }
 
 .archive--collection {

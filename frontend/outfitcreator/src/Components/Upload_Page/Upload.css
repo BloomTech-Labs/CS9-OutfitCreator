@@ -5,7 +5,7 @@
     flex-flow: column;
     align-items: center;
     padding: 20px 40px;
-    margin: 100px 0;
+    margin: 50px 0;
 }
 
 .upload--columns {
@@ -34,9 +34,9 @@
 .upload--image {
     border: 4px solid var(--dark-purple);
     min-height: 200px;
+    height: 250px;
     margin-bottom: 30px;
-    min-width: 300px;
-    width: 30vw;
+    width: 400px;
     border-radius: 5px;
 }
 
@@ -53,6 +53,7 @@
     border: 1px solid grey;
     font-size: 12px;
     height: 30px;
+    width: 200px;
 }
 
 .upload--name:focus {
@@ -65,19 +66,14 @@
     border: 1px solid grey;
     font-size: 12px;
     height: 30px;
-    width: 20vw;
+    width: 200px;
 }
 
-.upload--save, .upload--save:focus {
-    background: white;
-    border-radius: 5px;
-    box-shadow: 2px 2px 0 0 black;
-    color: black;
-    margin: 30px auto 20px;
-    font-size: 15px;
+.container--upload .upload--save, .container--upload .upload--save:hover {
+    padding: 5px 10px;
+    font-size: 1.1em;
     width: 100px;
 }
-
 .upload--pairWith {
     line-height: 23px;
     text-align: left;
@@ -124,30 +120,31 @@ input[type=checkbox] {
 	pointer-events: none;
 } */
 
-@media screen and (max-width: 900px) {
-    .upload--columns {
-      width: 50vw;
-  }
-}
 
 .cloudinary-button {
-    background: var(--dark-purple);
-    border: 2px solid var(--dark-purple);
-    border-radius: 10px;
-    padding: 12px 15px;
-    font-weight: bold;
-    font-size: 1.5em;
-    color: var(--pale-purple);
-    font-family: 'Arsenal', cursive;
-  }
+  background: var(--dark-purple);
+  border: 2px solid var(--dark-purple);
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-weight: bold;
+  font-size: 1em;
+  color: var(--pale-purple);
+  font-family: 'Arsenal', cursive;
+}
 
-  .cloudinary-button:hover {
-    background: var(--light-purple);
-    border: 2px solid var(--dark-purple);
-    text-decoration: none;
-    border-radius: 10px;
-    padding: 12px 15px;
-    color: var(--dark-purple);
-    font-weight: bold;
-    font-size: 1.5em;
-  }
+.cloudinary-button:hover {
+  background: var(--light-purple);
+  border: 2px solid var(--dark-purple);
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  color: var(--dark-purple);
+  font-weight: bold;
+  font-size: 1em;
+}
+
+@media screen and (max-width: 900px) {
+    .upload--columns {
+        width: 50vw;
+    }
+}
