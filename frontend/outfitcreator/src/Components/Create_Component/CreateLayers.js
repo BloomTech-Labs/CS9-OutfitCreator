@@ -2,15 +2,11 @@ import React, { Component } from 'react';
 import { CardDeck, Button, Input } from 'reactstrap';
 import CreateCard from './CreateCard.js';
 import { ROOT_URL } from '../../config';
-import queryString from 'query-string';
 import axios from 'axios';
 import './Create.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Icons } from './Icons';
-// import bottomIcon from './bottom.png';
-
-// const testUserId = '5b761531cdcd6d00043d420e';
+import { Icons } from '../Icons';
 
 class CreateLayers extends Component {
     constructor(props) {
@@ -22,78 +18,91 @@ class CreateLayers extends Component {
             tags: [],
             items: {
                 top: {
+                    title: 'Top',
                     show: false,
                     all: [],
                     current: null,
                     icon: Icons.top,
                 },
                 shirt: {
+                    title: 'Shirt',
                     show: false,
                     all: [],
                     current: null,
                     icon: Icons.shirt,
                 },
                 sweater: {
+                    title: 'Sweater',
                     show: false,
                     all: [],
                     current: null,
                     icon: Icons.sweater,
                 },
                 jacket: {
+                    title: 'Jacket',
                     show: false,
                     all: [],
                     current: null,
                     icon: Icons.jacket,
                 },
                 bottom: {
+                    title: 'Bottom',
                     show: false,
                     all: [],
                     current: null,
                     icon: Icons.bottom,
                 },
                 pants: {
+                    title: 'Pants',
                     show: false,
                     all: [],
                     current: null,
                     icon: Icons.pants,
                 },
                 shorts: {
+                    title: 'Shorts',
                     show: false,
                     all: [],
                     current: null,
                     icon: Icons.shorts,
                 },
                 skirt: {
+                    title: 'Skirt',
                     show: false,
                     all: [],
                     current: null,
                     icon: Icons.skirt,
                 },
                 leggings: {
+                    title: 'Leggings',
                     show: false,
                     all: [],
                     current: null,
                     icon: Icons.leggings,
                 },
                 dress: {
+                    title: 'Dress',
                     show: false,
                     all: [],
                     current: null,
                     icon: Icons.dress,
                 },
                 formalShoes: {
+                    title: 'Fromal Shoes',
                     show: false,
                     all: [],
                     current: null,
                     icon: Icons.formalShoes,
                 },
                 casualShoes: {
+                    title: 'Casual Shoes',
                     show: false,
                     all: [],
                     current: null,
                     icon: Icons.casualShoes,
                 },
                 shoes: {
+                    title: 'Shoes',
                     show: false,
                     all: [],
                     current: null,
@@ -114,33 +123,23 @@ class CreateLayers extends Component {
     }
 
     componentDidMount() {
-        const hash = queryString.parse(this.props.location.hash);
-        if(hash.token){
-            localStorage.setItem('authToken', `Bearer ${hash.token}`);
-        }
-        this.setAuthToken();
         const user = this.props.getUserID();
-        const authToken = localStorage.getItem('authToken');
-        const requestOptions = {
-            headers: {
-                Authorization: authToken
-            }
-        }
-        if (authToken) {
+
+        if (user) {
             axios.all([
                 axios.get(`${ROOT_URL.API}/items/type/${user}/top`),
-                axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`, requestOptions),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/shirt`, requestOptions),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/sweater`, requestOptions),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/jacket`, requestOptions),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/pants`, requestOptions),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/shorts`, requestOptions),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/skirt`, requestOptions),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/leggings`, requestOptions),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/dress`, requestOptions),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/formalShoes`, requestOptions),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/casualShoes`, requestOptions),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/shoes`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/shirt`),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/sweater`),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/jacket`),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/pants`),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/shorts`),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/skirt`),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/leggings`),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/dress`),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/formalShoes`),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/casualShoes`),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/shoes`),
             ])
                 .then(res => {
                     const items = { ...this.state.items };
@@ -236,7 +235,7 @@ class CreateLayers extends Component {
                         <button
                             className={this.state.items[type].show ? "create-button--active" : "create-button"}
                             onClick={() => { this.activateCategory(type) }}
-                            key={type} > {type} 
+                            key={type} > {this.state.items[type].title} 
                         </button>
                     ))}
                 </div>

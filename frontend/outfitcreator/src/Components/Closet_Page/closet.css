@@ -72,4 +72,13 @@
 .closet-image {
     border-radius: 3px;
     overflow: hidden;
+    height: 200px;
+    width: 300px;
+}
+
+@media (max-width: 950px) {
+    .closet-image {
+        height: 230px;
+        width: 390px;
+    }
 }
