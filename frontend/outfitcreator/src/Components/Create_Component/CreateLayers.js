@@ -39,7 +39,12 @@ class CreateLayers extends Component {
                     current: null,
                     icon: Icons.casualShoes,
                 },
-            }
+            },
+            subtypeMap: {
+              top: ['sweater', 'shirt', 'jacket', 'dress'],
+              bottom: ['pants', 'shorts', 'leggings', 'skirt'],
+              shoes: ['casualShoes', 'formalShoes']
+            },
         }
 
         this.setTypes();
@@ -127,6 +132,13 @@ class CreateLayers extends Component {
               current: null,
               icon: Icons.leggings,
             },
+            shoes: {
+                title: 'Shoes',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.casualShoes,
+            },
             formalShoes: {
               title: 'Fromal Shoes',
               show: false,
@@ -136,13 +148,6 @@ class CreateLayers extends Component {
             },
             casualShoes: {
                 title: 'Casual Shoes',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.casualShoes,
-            },
-            shoes: {
-                title: 'Shoes',
                 show: false,
                 all: [],
                 current: null,
@@ -161,16 +166,16 @@ class CreateLayers extends Component {
         if (user) {
             axios.all([
                 axios.get(`${ROOT_URL.API}/items/type/${user}/top`),
-                axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`),
-                axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/shirt`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/sweater`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/jacket`),
+                axios.get(`${ROOT_URL.API}/items/subtype/${user}/dress`),
+                axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/pants`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/shorts`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/skirt`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/leggings`),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/dress`),
+                axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/formalShoes`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/casualShoes`),
             ])
@@ -178,23 +183,8 @@ class CreateLayers extends Component {
                     const items = { ...this.state.items };
 
                     Object.keys(items).forEach((item, idx) => {
-                        console.log(item, idx);
                         items[item].all = res[idx].data;
                     });
-
-                    // items.top.all = res[0].data;
-                    // items.bottom.all = res[1].data;
-                    // items.shoes.all = res[2].data;
-                    // items.shirt.all = res[3].data;
-                    // items.sweater.all = res[4].data;
-                    // items.jacket.all = res[5].data;
-                    // items.pants.all = res[6].data;
-                    // items.shorts.all = res[7].data;
-                    // items.skirt.all = res[8].data;
-                    // items.leggings.all = res[9].data;
-                    // items.dress.all = res[10].data;
-                    // items.formalShoes.all = res[11].data;
-                    // items.casualShoes.all = res[12].data;
 
                     this.setState({ items });
                 })
@@ -213,14 +203,9 @@ class CreateLayers extends Component {
         items[category].show = !items[category].show;
 
         // Special cases after default click?
-        const subtypeMap = {
-            top: ['sweater', 'shirt', 'jacket', 'dress'],
-            bottom: ['pants', 'shorts', 'leggings', 'skirt'],
-            shoes: ['casualShoes', 'formalShoes']
-        }
+        const { subtypeMap } = this.state;
 
         const mainTypes = Object.keys(subtypeMap);
-
         const shoeTypes = ['shoes', ...subtypeMap.shoes];
 
         // Allow only one shoe type to be active
@@ -233,7 +218,7 @@ class CreateLayers extends Component {
         // If category is of mainType then toggle off all subtypes
         } else if (mainTypes.includes(category)) {
             subtypeMap[category].forEach(subtype => {
-                if(items[subtype]) items[subtype].show = false;
+                if(items[subtype]) items[subtype].show = items[category].show;
             });
         // Otherwise toggle off main of subtype
         } else {
@@ -249,7 +234,7 @@ class CreateLayers extends Component {
     }
 
     getSelected = () => {
-      return Object.keys(this.state.items).filter(type => this.state.items[type].show === true);
+        return Object.keys(this.state.items).filter(type => this.state.items[type].show === true);
     }
 
     // method to retrieve random items of all types
@@ -268,7 +253,6 @@ class CreateLayers extends Component {
     randomizeSingle = (e) => {
         const items = this.state.items;
         const type = e.target.parentNode.id;
-
         items[type].current = items[type].all[Math.floor(Math.random() * items[type].all.length)];
 
         this.setState({ items });
@@ -284,17 +268,31 @@ class CreateLayers extends Component {
 
     // method handle creating an outfit
     handleCreateOutfit = () => {
+        const items = this.state.items;
         const selected = this.getSelected();
-        const groups = { top: [], bottom: [], shoes: [] };
-        
+        const groups = { top: [], bottom: [], shoes: null };
+        const { subtypeMap } = this.state;
+
         selected.forEach(type => {
-            const currentItem = this.state.items[type].current;
-            if (currentItem) groups[currentItem.type].push(currentItem);
+              if (type.toLowerCase().includes('shoe')) {
+                  groups.shoes = items[type].current;
+              } else {
+                  Object.entries(subtypeMap).forEach(pair => {
+                      const mainType = pair[0];
+                      const subTypes = pair[1];
+    
+                      if (mainType === type || subTypes.includes(type)) {
+                          groups[mainType].push(items[type].current);
+                      }
+                  });
+              }
         });
-      
-        const { user, name, worn, tags } = this.state;
+
+        const user = this.props.getUserID();
+        const { name, worn, tags } = this.state;
         const { top, bottom, shoes } = groups;
         const outfit = { user, name, worn, tags, top, bottom, shoes };
+        console.log(outfit);
 
         axios.post(`${ROOT_URL.API}/outfits`, outfit)
             .then(() => {

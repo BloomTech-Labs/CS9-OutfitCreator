@@ -65,7 +65,12 @@ class App extends Component {
             <Landing {...props} />
           } />
           <Route exact path='/login' render={props =>
-            <Login {...props} />
+            <div>
+              <Landing {...props} />
+              <div className='landingPage--faded' onClick={() => { window.location = `${ROOT_URL.WEB}/`} }>
+                <Login {...props} />
+              </div>
+            </div>
           } />
           <Route path='/Create?' render={props =>
             <div className='App--create'>
