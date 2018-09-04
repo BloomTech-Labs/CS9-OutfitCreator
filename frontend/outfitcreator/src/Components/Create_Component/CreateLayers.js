@@ -197,7 +197,9 @@ class CreateLayers extends Component {
     }
 
     activateCategory = (category) => {
+        const typesInCloset = this.getTypesInCloset();
         const items = { ...this.state.items };
+
 
         // Swap show value of clicked element
         items[category].show = !items[category].show;
@@ -218,7 +220,8 @@ class CreateLayers extends Component {
         // If category is of mainType then toggle off all subtypes
         } else if (mainTypes.includes(category)) {
             subtypeMap[category].forEach(subtype => {
-                if(items[subtype]) items[subtype].show = items[category].show;
+                if(items[subtype] && typesInCloset.includes(subtype)) 
+                    items[subtype].show = items[category].show;
             });
         // Otherwise toggle off main of subtype
         } else {
@@ -303,11 +306,14 @@ class CreateLayers extends Component {
             });
     };
 
-    render() {
-        const typesInCloset = Object.keys(this.state.items).filter(type => {
+    getTypesInCloset = () => { 
+        return Object.keys(this.state.items).filter(type => {
             return this.state.items[type].all.length > 0;
         });
+    }
 
+    render() {
+        const typesInCloset = this.getTypesInCloset();
         const selected = this.getSelected();
 
         return (

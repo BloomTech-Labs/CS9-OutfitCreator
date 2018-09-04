@@ -5,7 +5,8 @@
 }
 
 .layerSelect {
-    width: 100%;
+    margin: 0 auto;
+    width: 70%;
 }
 
 .create-button {
