@@ -35,6 +35,17 @@ class Closet extends React.Component {
             .catch(err => console.log(err.message));
     }
 
+    submit = newInfo => {
+        axios.put(`${ROOT_URL.API}/items/${newInfo.id}`, newInfo)
+        .then(response => {
+            console.log(response);
+            this.onSelect(newInfo.type);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+
     render() {
         return (
             <div className="closet">
@@ -45,7 +56,7 @@ class Closet extends React.Component {
                     <button className={this.state.selectedType=="shoes"?"closet-button--active":"closet-button"} onClick={() => this.onSelect("shoes")}>Shoes</button>
                 </div>
                 <div className="closet-cards">
-                    {this.state.items.map(item =><ClosetCard item={item} key={item._id}/>)}
+                    {this.state.items.map(item =><ClosetCard submit={this.submit} item={item} key={item._id}/>)}
                 </div>
             </div>
         )
