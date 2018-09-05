@@ -205,8 +205,9 @@ class Closet extends React.Component {
 
     render() {
         const typesInCloset = Object.keys(this.state.items).filter(type => {
-            return this.state.items[type].all.length > 0;
+            return ((this.state.items[type].all.length > 0) && (type != "top" && type != "bottom" && type != "shoes"));
         });
+
         const selected = this.getSelected();
         console.log(selected);
         console.log(typesInCloset);
