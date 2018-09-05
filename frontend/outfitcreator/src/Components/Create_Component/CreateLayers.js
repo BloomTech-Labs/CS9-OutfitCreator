@@ -67,7 +67,7 @@ class CreateLayers extends Component {
         const paidItems = {
             top: {
                 title: 'All Tops',
-                show: true,
+                show: false,
                 all: [],
                 current: null,
                 icon: Icons.top,
