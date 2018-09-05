@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import StackGrid from "react-stack-grid";
 import OutfitCard from './OutfitCard';
 import { ROOT_URL } from '../../config'; 
 import './Archive.css';
@@ -90,7 +89,7 @@ class Archive extends React.Component {
                 {this.state.myOutfits ?
                     // ternary to check if filter is being run or not
                     (this.state.searching ? (
-                        <StackGrid columnWidth={225}>
+                        <div>
                             {this.state.searchedOutfits.map((outfit) => (
                                 <OutfitCard
                                     key={outfit._id}
@@ -100,9 +99,8 @@ class Archive extends React.Component {
                                     lastWorn={outfit.worn}
                                 />
                             ))}
-                        </StackGrid>
+                        </div>
                     ) : (
-                            <StackGrid columnWidth={225} gutterHeight={10} horizonal={true}>
                             <div>
                                 {this.state.myOutfits.map((outfit) => (
                                     <div key={outfit._id}>
@@ -116,7 +114,6 @@ class Archive extends React.Component {
                                     </div>
                                 ))}
                             </div>
-                            </StackGrid>
                         ))
                         //end of the inner ternary for the filter check
                     :
