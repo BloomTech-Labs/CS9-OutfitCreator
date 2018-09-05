@@ -34,7 +34,7 @@
 .upload--image {
     min-height: 200px;
     height: 250px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     width: 400px;
     border-radius: 5px;
 }
@@ -53,6 +53,7 @@
     font-size: 12px;
     height: 30px;
     width: 200px;
+    margin-top: 10px;
 }
 
 .upload--name:focus {
