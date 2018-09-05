@@ -10,6 +10,7 @@ router.get('/google', googleAuthenticate);
 router.get('/google/redirect', googleRedirectAuthenticate, signToken);
 router.get('/facebook', facebookAuthenticate);
 router.get('/facebook/callback', facebookRedirectAuthenticate, signToken);
+router.post('/verify', users.verifyEmail)
 
 // // auth with github
 // router.get(
