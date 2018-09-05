@@ -32,6 +32,7 @@
 }
 
 .upload--image {
+    min-height: 200px;
     height: 250px;
     margin-bottom: 30px;
     width: 400px;

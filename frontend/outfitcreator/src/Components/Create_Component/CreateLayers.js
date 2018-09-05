@@ -24,6 +24,7 @@ class CreateLayers extends Component {
                     all: [],
                     current: null,
                     icon: Icons.top,
+                    locked: false,
                 },
                 bottom: {
                     title: 'All Bottoms',
@@ -31,6 +32,7 @@ class CreateLayers extends Component {
                     all: [],
                     current: null,
                     icon: Icons.bottom,
+                    locked: false,
                 },
                 shoes: {
                     title: 'All Shoes',
@@ -38,6 +40,7 @@ class CreateLayers extends Component {
                     all: [],
                     current: null,
                     icon: Icons.casualShoes,
+                    locked: false,
                 },
             },
             subtypeMap: {
@@ -68,6 +71,7 @@ class CreateLayers extends Component {
                 all: [],
                 current: null,
                 icon: Icons.top,
+                locked: false,
             },
             shirt: {
                 title: 'Shirt',
@@ -75,6 +79,7 @@ class CreateLayers extends Component {
                 all: [],
                 current: null,
                 icon: Icons.shirt,
+                locked: false,
             },
             sweater: {
                 title: 'Sweater',
@@ -82,6 +87,7 @@ class CreateLayers extends Component {
                 all: [],
                 current: null,
                 icon: Icons.sweater,
+                locked: false,
             },
             jacket: {
                 title: 'Jacket',
@@ -89,6 +95,7 @@ class CreateLayers extends Component {
                 all: [],
                 current: null,
                 icon: Icons.jacket,
+                locked: false,
             },
             dress: {
                 title: 'Dress',
@@ -96,6 +103,7 @@ class CreateLayers extends Component {
                 all: [],
                 current: null,
                 icon: Icons.dress,
+                locked: false,
             },
             bottom: {
                 title: 'All Bottoms',
@@ -103,6 +111,7 @@ class CreateLayers extends Component {
                 all: [],
                 current: null,
                 icon: Icons.bottom,
+                locked: false,
             },
             pants: {
                 title: 'Pants',
@@ -110,6 +119,7 @@ class CreateLayers extends Component {
                 all: [],
                 current: null,
                 icon: Icons.pants,
+                locked: false,
             },
             shorts: {
                 title: 'Shorts',
@@ -117,6 +127,7 @@ class CreateLayers extends Component {
                 all: [],
                 current: null,
                 icon: Icons.shorts,
+                locked: false,
             },
             skirt: {
                 title: 'Skirt',
@@ -124,13 +135,15 @@ class CreateLayers extends Component {
                 all: [],
                 current: null,
                 icon: Icons.skirt,
+                locked: false,
             },
             leggings: {
-              title: 'Leggings',
-              show: false,
-              all: [],
-              current: null,
-              icon: Icons.leggings,
+                title: 'Leggings',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.leggings,
+                locked: false,
             },
             shoes: {
                 title: 'All Shoes',
@@ -138,13 +151,15 @@ class CreateLayers extends Component {
                 all: [],
                 current: null,
                 icon: Icons.casualShoes,
+                locked: false,
             },
             formalShoes: {
-              title: 'Fromal Shoes',
-              show: false,
-              all: [],
-              current: null,
-              icon: Icons.formalShoes,
+                title: 'Formal Shoes',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.formalShoes,
+                locked: false,
             },
             casualShoes: {
                 title: 'Casual Shoes',
@@ -152,6 +167,7 @@ class CreateLayers extends Component {
                 all: [],
                 current: null,
                 icon: Icons.casualShoes,
+                locked: false,
             },
         }
 
@@ -252,13 +268,20 @@ class CreateLayers extends Component {
         return selected;
     }
 
+    toggleLocked = (type) => {
+        const items = { ...this.state.items };
+        items[type].locked = !items[type].locked;
+        this.setState(items); 
+    }
+
     // method to retrieve random items of all types
     randomize = () => {
         const items = this.state.items;
         const selected = this.getSelected();
 
         selected.forEach(type => {
-            items[type].current = items[type].all[Math.floor(Math.random() * items[type].all.length)];
+            if (!items[type].locked)
+              items[type].current = items[type].all[Math.floor(Math.random() * items[type].all.length)];
         });
 
         this.setState({ items });
@@ -268,14 +291,12 @@ class CreateLayers extends Component {
     randomizeSingle = (e) => {
         const items = this.state.items;
         const type = e.target.parentNode.id;
-        items[type].current = items[type].all[Math.floor(Math.random() * items[type].all.length)];
+        
+        if (!items[type].locked)
+          items[type].current = items[type].all[Math.floor(Math.random() * items[type].all.length)];
 
         this.setState({ items });
     }
-
-    handleButtonClick = () => {
-        console.log('button clicked!')
-    };
 
     handleInputChange = e => {
         this.setState({ [e.target.name]: e.target.value });
@@ -344,6 +365,8 @@ class CreateLayers extends Component {
                         return(<CreateCard key={type} 
                             item={this.state.items[type]} 
                             randomizeSingle={this.randomizeSingle}
+                            locked={this.state.items[type].locked}
+                            toggleLocked={this.toggleLocked}
                             type={type} />)
                     })}
                 </CardDeck>
