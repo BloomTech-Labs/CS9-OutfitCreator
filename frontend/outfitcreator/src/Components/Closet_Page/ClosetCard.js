@@ -8,7 +8,7 @@ class ClosetCard extends React.Component {
             <div className="closet-card">
                 <div className="closet-card--name">{this.props.item.name}</div>
                 <img className="closet-image" 
-                src={`${newURL}`} //split this and add height parameter
+                src={`${newURL}`}
                 alt={this.props.item.name} />
                 <div className="closet-card--tags">
                     {this.props.item.tags.map((tag, index) =>
