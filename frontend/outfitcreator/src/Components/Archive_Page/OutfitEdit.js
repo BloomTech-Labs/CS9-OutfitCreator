@@ -151,19 +151,23 @@ class OutfitEdit extends React.Component {
                     <div onClick={this.toggle}>
                         {/*this will map out hte possible items to be selected to replace the selected one*/}
                         <div className="container--edit">
-                            <CardDeck>
+                            <div className='edit--selections'>
                                 {itemSelection.map((item, index) => {
-                                    return (<Card className='outfit--card' key={index} inverse>
-                                        <CardImg
+                                    const [partOne, partTwo] = item.image.split('upload/');
+                                    const crop = 'upload/w_200,h_250/';
+                                    const newUrl = partOne + crop + partTwo;
+                                    console.log(newUrl);
+                                    return (<div className='outfit--card' key={index}>
+                                        <img
                                             key={item._id}
-                                            width="80%"
-                                            src={item.image}
+                                            // width="300px"
+                                            src={newUrl}
                                             onClick={() => this.selectItem(item.type, item._id)}
                                             alt="Card image cap"
                                         />
-                                    </Card>)
+                                    </div>)
                                 })}
-                            </CardDeck>
+                            </div>
                         </div>
                     </div>
                     :
