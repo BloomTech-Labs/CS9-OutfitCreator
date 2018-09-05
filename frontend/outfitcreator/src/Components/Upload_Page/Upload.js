@@ -127,6 +127,7 @@ class Upload extends Component {
           subtype = null;
         }
 
+        if (subtype){
         axios.post(`${ROOT_URL.API}/items`, {
             user, name, image, tags, type, subtype
         })
@@ -138,6 +139,19 @@ class Upload extends Component {
             .catch(error => {
                 console.log(error);
             });
+        } else {
+            axios.post(`${ROOT_URL.API}/items`, {
+                user, name, image, tags, type
+            })
+                .then(response => {
+                    console.log(response);
+                    this.setState({ image: '', name: '', tags: [] });
+                    this.saveTest();
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
     }
 
     toCamel(string) {
