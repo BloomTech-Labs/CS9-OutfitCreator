@@ -16,6 +16,7 @@ import Settings from './Components/Settings_Page/Settings';
 import Billing from './Components/Billing_Page/Billing';
 import OutfitEdit from './Components/Archive_Page/OutfitEdit';
 import Closet from './Components/Closet_Page/Closet.js';
+import VerifyEmail from './Components/Landing_Page/VerifyEmail';
 import './App.css';
 
 library.add(faShareAlt);
@@ -57,6 +58,12 @@ class App extends Component {
       });
   }
 
+  toLandingPage = (e) => {
+      e.preventDefault();
+      window.location = `${ROOT_URL.WEB}/`;
+      console.log(e.target);
+  }
+
   render() {
     return (
       <div className="App">
@@ -67,17 +74,22 @@ class App extends Component {
           <Route exact path='/login' render={props =>
             <div>
               <Landing {...props} />
-              <div className='landingPage--faded' onClick={() => { window.location = `${ROOT_URL.WEB}/`} }>
+              <div className='landingPage--faded'>
                 <Login {...props} />
               </div>
             </div>
           } />
+
+          <Route exact path='/verify/:key?' render={props =>
+            <VerifyEmail {...props} />
+          } />
           <Route path='/Create?' render={props =>
+          {/* <Route path='/Create?' render={props =>
             <div className='App--create'>
               <Create {...props} getUserID={this.getUserID} />
               <Navigation getUserID={this.getUserID} />
             </div>
-          } />
+          } /> */}
           <Route path='/Create' render={props =>
             <div className='App--create-layers'>
               <CreateLayers {...props} getUserID={this.getUserID} isUserPaid={this.isUserPaid} />

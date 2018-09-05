@@ -12,6 +12,7 @@ class OutfitCard extends React.Component {
     
     render() {
         const { key, name, src, lastWorn } = this.props;
+        console.log(this.props.src);
         let worn = 'Never Worn';
         // worn is an array of dates worn, will always try to access latest day (stored at the front) if ever worn
         if (lastWorn.length > 0) {

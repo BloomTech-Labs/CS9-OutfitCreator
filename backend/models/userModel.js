@@ -71,6 +71,15 @@ const UserSchema = new mongoose.Schema({
     stripe_sub: {
         type: String,
     },
+    verified: {
+        type: Boolean,
+        default: false
+    },
+    signupKey: {
+        key: String,
+        ts: String,
+        exp: String
+    },
     rEmails: {
         type: Boolean,
         required: true,
@@ -88,6 +97,16 @@ UserSchema.pre('save', function(next) {
     if(this.method !== 'local') {
         next();
     }
+    bcrypt.hash(this.local.password, saltRounds, (err, hash) => {
+        if (err) return next(err);
+        this.local.password = hash;
+        next();
+    });
+})
+
+// Hash passwords on update
+UserSchema.pre('update', function(next) {
+    if(!this.isModified('local.password')) return next();
     bcrypt.hash(this.local.password, saltRounds, (err, hash) => {
         if (err) return next(err);
         this.local.password = hash;
