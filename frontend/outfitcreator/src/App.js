@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faShareAlt } from '@fortawesome/free-solid-svg-icons';
+import { ROOT_URL } from './config';
+import axios from 'axios';
 
 import Landing from './Components/Landing_Page/Landing';
 import Login from './Components/Landing_Page/Login';
 import Navigation from './Components/Navigation/Navigation';
 import Create from './Components/Create_Component/Create';
+import CreateLayers from './Components/Create_Component/CreateLayers';
 import Upload from './Components/Upload_Page/Upload';
 import Archive from './Components/Archive_Page/Archive';
 import Settings from './Components/Settings_Page/Settings';
@@ -19,32 +22,40 @@ import './App.css';
 library.add(faShareAlt);
 
 class App extends Component {
-  tokenData() {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace('-', '+').replace('_', '/');
-      return JSON.parse(window.atob(base64));
-    }
+  constructor(props) {
+    super(props);
+
+    this.setAuthToken();
   }
 
-  signInSuccess = (data) => {
-    this.setState({ user: data.user });
-    localStorage.setItem('authToken', `Bearer ${data.token}`);
+  setAuthToken = () => {
+    const token = localStorage.getItem('authToken');
+    
+    if (token) axios.defaults.headers.common.Authorization = token;
+    else delete axios.defaults.headers.common.Authorization;
   }
 
   getUserID() {
     const token = localStorage.getItem('authToken');
+
     if (token) {
       const base64Url = token.split('.')[1];
       const base64 = base64Url.replace('-', '+').replace('_', '/');
+
       return JSON.parse(window.atob(base64)).sub;
     }
   }
 
-  signInSuccess = (data) => {
-    console.log(data);
-    localStorage.setItem('authToken', `Bearer ${data.token}`);
+  // Return user paid status and execute call back function with value
+  // i.e. isUserPaid(paid => console.log(paid)) logs paid status
+  isUserPaid = (cb) => {
+    return axios.get(`${ROOT_URL.API}/user/info/${this.getUserID()}`)
+      .then(res => {
+        cb(res.data.paid);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
@@ -52,54 +63,65 @@ class App extends Component {
       <div className="App">
         <Switch>
           <Route exact path='/' render={props => 
-            <Landing {...props} onSignin={this.signInSuccess} />
+            <Landing {...props} />
           } />
           <Route exact path='/login' render={props =>
-            <Login {...props} onSignin={this.signInSuccess} />
+            <div>
+              <Landing {...props} />
+              <div className='landingPage--faded' onClick={() => { window.location = `${ROOT_URL.WEB}/`} }>
+                <Login {...props} />
+              </div>
+            </div>
           } />
           <Route exact path='/verify/:key?' render={props =>
             <VerifyEmail {...props} />
           } />
-          <Route path='/Create' render={props =>
+          <Route path='/Create?' render={props =>
             <div className='App--create'>
               <Create {...props} getUserID={this.getUserID} />
-              <Navigation tokenData={this.tokenData} />
+              <Navigation getUserID={this.getUserID} />
+            </div>
+          } />
+          <Route path='/Create' render={props =>
+            <div className='App--create-layers'>
+              <CreateLayers {...props} getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
+              <Navigation getUserID={this.getUserID} />
             </div>
           } />
           <Route path='/Archive' render={props =>
             <div>
               <Archive getUserID={this.getUserID} />
-              <Navigation tokenData={this.tokenData} />
+              <Navigation getUserID={this.getUserID} />
             </div>
           } />
           <Route path='/Settings' render={props =>
             <div>
-              <Settings tokenData={this.tokenData} {...props} getUserID={this.getUserID} />
-              <Navigation tokenData={this.tokenData} />
+              <Settings {...props} getUserID={this.getUserID} />
+              <Navigation getUserID={this.getUserID} />
             </div>
           } />
           <Route path='/Upload' render={props =>
             <div>
-              <Upload getUserID={this.getUserID} />
-              <Navigation tokenData={this.tokenData} />
+              <Upload getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
+              <Navigation getUserID={this.getUserID} />
             </div>
           } />
           <Route path='/Billing' render={props =>
             <div>
               <Billing {...props} getUserID={this.getUserID} />
-              <Navigation tokenData={this.tokenData} />
+              <Navigation getUserID={this.getUserID} />
             </div>
           } />
           <Route path='/Edit' render={props =>
             <div>
               <OutfitEdit {...props} getUserID={this.getUserID}/>
-              <Navigation tokenData={this.tokenData} />
+              <Navigation getUserID={this.getUserID} />
             </div>
           } />
           <Route path='/Closet' render={props =>
             <div className="App">
               <Closet {...props} getUserID={this.getUserID} />
-              <Navigation tokenData={this.tokenData} />
+              <Navigation getUserID={this.getUserID} />
             </div>
           } />
         </Switch>

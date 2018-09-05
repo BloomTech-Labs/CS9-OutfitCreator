@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Card, CardText, CardImg, CardImgOverlay, CardDeck, Button, Input } from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, CardDeck, Button, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
-import queryString from 'query-string';
 import { ROOT_URL } from '../../config';
 import './Create.css';
 
@@ -26,31 +25,19 @@ class Create extends Component {
 
     setAuthToken = () => {
         const token = localStorage.getItem('authToken');
-        if (token) {
-            axios.defaults.headers.common.Authorization = token;
-        } else {
-            delete axios.defaults.headers.common.Authorization;
-        }
+
+        if (token) axios.defaults.headers.common.Authorization = token;
+        else delete axios.defaults.headers.common.Authorization;
     }
 
     componentDidMount() {
-        const hash = queryString.parse(this.props.location.hash);
-        if (hash.token) {
-            localStorage.setItem('authToken', `Bearer ${hash.token}`);
-        }
-        this.setAuthToken();
         const user = this.props.getUserID();
-        const authToken = localStorage.getItem('authToken');
-        const requestOptions = {
-            headers: {
-                Authorization: authToken
-            }
-        }
-        if (authToken) {
+
+        if (user) {
             axios.all([
-                axios.get(`${ROOT_URL.API}/items/type/${user}/top`, requestOptions),
-                axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`, requestOptions),
-                axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`, requestOptions),
+                axios.get(`${ROOT_URL.API}/items/type/${user}/top`),
+                axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`),
+                axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`),
             ])
                 .then(res => {
                     this.setState({ allTops: res[0].data, allBottoms: res[1].data, allShoes: res[2].data, user });
@@ -143,10 +130,9 @@ class Create extends Component {
             shoeImage = `https://picsum.photos/g/200/300?image=951`
         } else shoeImage = selectedShoe.image;
       
-        const items = [topImage, bottomImage, shoeImage];
-      
         return (
             <div className="createContainer">
+                {/* <CreateLayers {...this.props} /> */}
                 <CardDeck>
                     {/* {items.map((item, index) => {
                         return (<Card key={index}inverse>

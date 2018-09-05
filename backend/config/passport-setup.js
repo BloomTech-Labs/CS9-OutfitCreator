@@ -191,7 +191,6 @@ const googleRedirectAuthenticate = passport.authenticate('google', passportOptio
 const facebookRedirectAuthenticate = passport.authenticate('google', facebookRedirectOptions);
 
 function makeToken(user) {
-  console.log('makeToken: ',user._id);
   const timestamp = new Date().getTime();
   const payload = {
     iss: 'OutfitCreator',

@@ -41,6 +41,7 @@ This request should have the following format:
     "name": "black flats",
 	"image": "www.thisisarealurl.com/shoes",
 	"type": "shoes",
+    "subtype": "formal shoes",
 	"tags": ["black", "formal"]
 }
 ```
@@ -59,6 +60,7 @@ GET - Get a specific item by ID. Returns a single Item object:
     "name": "red sweater",
     "image": "www.thisisarealurl.com/sweater",
     "type": "top",
+    "subtype": "sweater",
     "__v": 0
 }
 ```
@@ -68,6 +70,7 @@ This request should have the following format:
 {
     "name": "new item name",
     "type": "shoes",
+    "subtype": "formal shoes",
     "tags": ["new tags", "in an array"]
 }
 ```
@@ -80,7 +83,9 @@ This request should have the following format:
 	"tags": ["red", "business-casual"]
 }
 ```
-## /Items/:User/:Type
+## /Items/Type/:User/:Type
+GET - Get items by Type for a specific User. Returns an array of Item objects.
+## /Items/Subtype/:User/:Subtype
 GET - Get items by Type for a specific User. Returns an array of Item objects.
 ## /Items/Search/:User/:Tag
 GET - Get items by Tag for a specific User. Returns an array of Item objects.

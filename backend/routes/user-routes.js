@@ -9,7 +9,7 @@ router.get("/info/:id", restricted, (req, res) => {
     const id = req.params.id;
     User.findById(id)
         .then(user => {
-            res.status(201).json(user)
+            res.status(200).json(user)
         })
         .catch(err => {
             res.send(500).json({error: err.message});

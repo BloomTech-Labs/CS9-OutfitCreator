@@ -10,7 +10,6 @@ const ItemSchema = new mongoose.Schema({
     required: true
   },
   image: {
-    // storing images as URLs for now
     type: String,
     required: true
   },
@@ -18,6 +17,11 @@ const ItemSchema = new mongoose.Schema({
     type: String,
     required: true,
     enum: ["top", "bottom", "shoes"]
+  },
+  subtype: {
+    type: String,
+    required: false,
+    enum: ["shirt", "sweater", "jacket", "pants", "shorts", "skirt", "leggings", "dress", "formalShoes", "casualShoes"]
   },
   tags: [
     {

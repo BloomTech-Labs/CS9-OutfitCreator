@@ -1,10 +1,36 @@
 .createContainer {
     background: white;
-    border-radius: 10px;
-    box-shadow: 0 1px 3px;
-    /* filter: drop-shadow(-1px -1px 3px); */
-    margin: 100px;
-    padding: 30px;
+    margin: 60px 0;
+    padding: 20px;
+}
+
+.layerSelect {
+    margin: 0 auto;
+    width: 70%;
+}
+
+.create-button {
+    background: var(--dark-purple);
+    border: 2px solid var(--dark-purple);
+    border-radius: 5px;
+    padding: 0px 8px;
+    margin: 5px;
+    font-size: 1.25em;
+    font-weight: bold;
+    color: white;
+    font-family: 'Arsenal', sans-serif;
+  }
+
+.create-button--active {
+    background: var(--pale-purple);
+    border: 2px solid var(--dark-purple);
+    border-radius: 5px;
+    padding: 0px 8px;
+    margin: 5px;
+    font-size: 1.25em;
+    font-weight: bold;
+    color: var(--dark-purple);
+    font-family: 'Arsenal', sans-serif;
 }
 
 .cardText {
@@ -19,7 +45,8 @@
 }
 
 .card-deck {
-  margin-bottom: 50px;
+  margin: 30px 0 20px;
+  justify-content: center;
 }
 
 .test{
@@ -27,8 +54,16 @@
     box-shadow: none;
 }
 
+.card-deck .card, .card, .create-card, .cardImage, .card-img-overlay {
+    max-height: 200px;
+    min-width: 300px;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    margin: 0 8px 15px;
+}
+
 .cardImage {
-    border: 3px solid var(--dark-purple);
     border-radius: 5px;
     box-shadow: none;
 }
@@ -53,10 +88,27 @@
 }
 
 .outfitInput {
-    width: 25%;
+    width: 200px;
+    text-align: center;
     margin-bottom: 1em;
 }
 
 .close-icon, .close {
     cursor: pointer;
+}
+
+@media (min-width: 576px) {
+    .card-deck .card {
+      margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 700px) {
+    .card-deck {
+        flex-flow: column;
+    }
+
+    .card {
+        margin: 0 0 15px;
+    }
 }

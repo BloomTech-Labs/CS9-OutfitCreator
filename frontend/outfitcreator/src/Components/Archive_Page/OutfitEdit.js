@@ -84,7 +84,7 @@ class OutfitEdit extends React.Component {
         const outfitId = this.props.location.pathname.split('Edit/')[1];
         if (lastWorn) worn.unshift(lastWorn);
         const tags = [...topTags, ...bottomTags, ...shoesTags];
-        const newInfo = { name, worn, tags, top, bottom, shoes, tags };
+        const newInfo = { name, worn, tags, top, bottom, shoes };
         axios.put(`${ROOT_URL.API}/outfits/${user}/${outfitId}`, newInfo)
             .then()
             .catch(err => {

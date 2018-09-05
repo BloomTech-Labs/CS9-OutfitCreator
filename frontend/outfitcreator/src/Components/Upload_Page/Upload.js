@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { CloudinaryContext } from 'cloudinary-react';
-import { CardImg, Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import { CardImg, Button, FormGroup, Input } from 'reactstrap';
 import { ROOT_URL } from '../../config';
 import TagSearch from './TagSearch';
+import uploadPlacholder from './uploadPlaceholder.png';
 import './Upload.css';
 // import sha1 from 'sha1';
 
@@ -19,7 +20,31 @@ class Upload extends Component {
             search: '',
             tags: [],
             type: 'top',
+            options: {},
         }
+
+        props.isUserPaid(paid => {
+            const options = paid ? { 
+                    top: 'Top',
+                    shirt: 'Shirt',
+                    sweater: 'Sweater',
+                    jacket: 'Jacket',
+                    bottom: 'Bottom',
+                    pants: 'Pants',
+                    shorts: 'Shorts',
+                    skirt: 'Skirt',
+                    leggings: 'Leggings',
+                    dress: 'Dress',
+                    formalShoes: 'Formal Shoes',
+                    casualShoes: 'Casual Shoes',
+                    shoes: 'Shoes',
+                } : { 
+                    top: 'Top',
+                    bottom: 'Bottom',
+                    shoes: 'Shoes',
+                }
+            this.setState({ options });
+        });
     }
 
     // generateSignature = () => {
@@ -79,10 +104,32 @@ class Upload extends Component {
 
     saveItem = e => {
         e.preventDefault();
-        const { user, name, image, tags, type } = this.state;
+        let { user, name, image, tags, type } = this.state;
+        let subtype;
+        const subtypeMap = {
+          top: ['sweater', 'shirt', 'jacket', 'dress'],
+          bottom: ['pants', 'shorts', 'leggings', 'skirt'],
+          shoes: ['casualShoes', 'formalShoes']
+        }
+        
+        // If type is not top, bottom or shoes
+        if (!['top', 'bottom', 'shoes'].includes(type)) {
+          subtype = type;
+          
+          // Search for subtype in subtypeMap and set vars
+          Object.entries(subtypeMap).forEach(pair => {
+            const mainType = pair[0];
+            const subtypeArr = pair[1];
 
+            if (subtypeArr.includes(type)) type = mainType;
+          })
+        } else {
+          subtype = null;
+        }
+
+        if (subtype){
         axios.post(`${ROOT_URL.API}/items`, {
-            user, name, image, tags, type
+            user, name, image, tags, type, subtype
         })
             .then(response => {
                 console.log(response);
@@ -92,11 +139,29 @@ class Upload extends Component {
             .catch(error => {
                 console.log(error);
             });
+        } else {
+            axios.post(`${ROOT_URL.API}/items`, {
+                user, name, image, tags, type
+            })
+                .then(response => {
+                    console.log(response);
+                    this.setState({ image: '', name: '', tags: [] });
+                    this.saveTest();
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+    }
+
+    toCamel(string) {
+        const temp = string.split(' ');
+        return [temp[0].toLowerCase(), temp[1]].join('');
     }
 
     handleInputChange = e => {
         e.target.type === 'select-one' ?
-            this.setState({ [e.target.name]: e.target.value.toLowerCase() }) :
+            this.setState({ [e.target.name]: this.toCamel(e.target.value) }) :
             this.setState({ [e.target.name]: e.target.value });
     }
 
@@ -133,7 +198,7 @@ class Upload extends Component {
                             /> :
                             <CardImg
                                 className="upload--image"
-                                src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
+                                src={uploadPlacholder}
                                 alt="Upload Image Thumbnail"
                             />
                         }
@@ -148,6 +213,7 @@ class Upload extends Component {
                                 className="upload--name"
                                 placeholder="Clothing Name"
                                 autoComplete='off'
+                                value={this.state.name}
                                 onChange={this.handleInputChange}
                             />
                         </FormGroup>
@@ -157,9 +223,10 @@ class Upload extends Component {
                                 type='select'
                                 name='type'
                                 onChange={this.handleInputChange}>
-                                <option>Top</option>
-                                <option>Bottom</option>
-                                <option>Shoes</option>
+                                {this.state.options ?
+                                  Object.keys(this.state.options).map(option => (
+                                    <option key={option}>{this.state.options[option]}</option>
+                                  )) : null }
                             </Input>
                         </FormGroup>
                         <TagSearch
@@ -168,7 +235,7 @@ class Upload extends Component {
                         />
                     </div>
                 </div>
-                <Button className="button" onClick={this.saveItem}>Save</Button>
+                <Button className="button upload--save" onClick={this.saveItem}>Save</Button>
             </div>
         );
     }
