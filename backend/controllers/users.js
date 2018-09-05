@@ -14,7 +14,7 @@ exports.signup = (req, res) => {
             console.log('password: ', existingUser.local.password)
             // if user already signed up locally
             if(existingUser.local.password) {
-                return res.status(422);
+                return res.status(409).json({ message: 'problem signing up' });
             } else {
                 // else user signed up using social auth, link accounts
                 const target = { 'local.email': email }
