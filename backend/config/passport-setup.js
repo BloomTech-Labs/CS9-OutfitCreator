@@ -36,6 +36,9 @@ const localStrategy = new LocalStrategy({usernameField: 'email'}, function(email
     if (!(await user.validPassword(password))) {
       return done(null, false);
     }
+    if (!user.verified) {
+      return done({ message: 'Sorry, you must validate email first' }, false);
+    }
     return done(null, user);
   });
 });
