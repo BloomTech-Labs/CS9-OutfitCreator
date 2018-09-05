@@ -23,7 +23,16 @@ const transport = nodemailer.createTransport({
     }
 });
 
+const generateSignupKey = () => {
+    const buf = crypto.randomBytes(24);
+    const created = Date.now();
 
+    return {
+        key: buf.toString('hex'),
+        ts: created,
+        exp: created + 86400000 //expiration of a day
+    }
+}
 
 const sendEmail = (to, subject, html, text) => {
     return new Promise((resolve, reject) => {
