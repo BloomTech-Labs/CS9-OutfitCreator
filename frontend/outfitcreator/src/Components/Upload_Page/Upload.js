@@ -114,7 +114,7 @@ class Upload extends Component {
 
         this.props.isUserPaid(paid => {
             this.uploadCount(count => {
-                if (!paid && count > 20) {
+                if (!paid && count > 50) {
                     alert('Unpaid upload limit reached. Please subscribe to access our full range of content.');
                     return;
                 }
