@@ -91,6 +91,7 @@ const googleStrategy = new GoogleStrategy({
         }
       })
       newUser.local.email = profile.emails[0].value;
+      newUser.verified = true;
       newUser.save()
       .then(newUser => {
         done(null, newUser);
