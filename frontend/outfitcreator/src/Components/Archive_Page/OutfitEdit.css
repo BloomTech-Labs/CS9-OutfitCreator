@@ -3,24 +3,43 @@
     margin-top: 10px;
 }
 
+.card-deck .card {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    max-height: 500px;
+    max-width: 400px;
+    width: 100%;
+    margin: 4px;
+}
+
+/* .card-img {
+    width: 300px;
+    height: 400px;
+} */
+
+.card-deck .card:hover {
+    border: 1px solid purple;
+}
+
 .container--archive {
     display: flex;
     flex-direction: column;
-
 }
 
 .container--edit {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     justify-content: space-between;
-    border: 1px solid black;
     left: 10px;
     max-width: 70vw;
+    max-height: 90vh;
     margin-top: 4.5em;
     width: 95%;
     min-height: 700px;
     margin-left: 1em;
+    overflow-x: auto;
 }
 
 .edit--header {
@@ -37,6 +56,14 @@
 .edit--images {
     display: flex;
     justify-content: space-evenly;
+}
+
+.edit--selections {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 90vh;
+    max-width: 80vw;
+    overflow-x: auto;
 }
 
 .edit--input {
@@ -63,13 +90,16 @@
 
 .outfit--card {
     border-radius: 5px;
+    max-width: 225px;
     margin: 10px;
     padding: 5px;
     transition: .5s;
+    z-index: 1000;
 }
 
 .outfit--card:hover {
-    background-color: var(--dark-purple);
+    /* border: 1xp solid purple; */
+    background: var(--dark-purple);
     transform: translateY(-10px);
     cursor: pointer;
 }

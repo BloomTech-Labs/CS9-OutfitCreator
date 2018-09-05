@@ -152,6 +152,7 @@ class Closet extends React.Component {
     }
 
     activateCategory = (category) => {
+        console.log(category);
         const items = this.state.items;
         Object.keys(this.state.items).forEach(item => items[item].show = false);
         items[category].show = !items[category].show;
@@ -160,6 +161,17 @@ class Closet extends React.Component {
 
     getSelected = () => {
         return Object.keys(this.state.items).filter(type => this.state.items[type].show === true);
+    }
+
+    submit = newInfo => {
+        axios.put(`${ROOT_URL.API}/items/${newInfo.id}`, newInfo)
+        .then(response => {
+            console.log(response);
+            this.onSelect(newInfo.type);
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
 
     // onSelect(category) {
@@ -197,6 +209,7 @@ class Closet extends React.Component {
         });
         const selected = this.getSelected();
         console.log(selected);
+        console.log(typesInCloset);
 
         return (
             <div className="closet">
@@ -220,12 +233,12 @@ class Closet extends React.Component {
                     {this.state.selectAll ?
                         typesInCloset.map(type => (
                             this.state.items[type].all.map(item => (
-                                <ClosetCard item={item} key={item._id}/>
+                                <ClosetCard submit={this.submit} item={item} key={item._id}/>
                             ))
                         )) : 
                         selected.map(type => (
                             this.state.items[type].all.map(item => (
-                                <ClosetCard item={item} key={item._id}/>
+                                <ClosetCard submit={this.submit} item={item} key={item._id}/>
                             ))
                         ))
                     }
