@@ -12,7 +12,6 @@
     "cloudinary-react": "^1.0.6",
     "express": "^4.16.3",
     "fetch": "^1.1.0",
-    "imagesloaded": "^4.1.4",
     "query-string": "^6.1.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",

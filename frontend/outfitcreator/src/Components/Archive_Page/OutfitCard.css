@@ -22,7 +22,7 @@
 
 .card--images {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .card--images img {

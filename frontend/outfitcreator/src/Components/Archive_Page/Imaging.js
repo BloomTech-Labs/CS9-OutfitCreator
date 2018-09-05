@@ -28,8 +28,8 @@ class Imaging extends React.Component {
         return (
             this.state.image ? (
                     <img
-                        width="150px"
-                        src={this.state.image.image.slice(0,53)+"w_225/"+this.state.image.image.slice(53)}
+                        height="125px"
+                        src={this.state.image.image.slice(0,53)+"h_150/"+this.state.image.image.slice(53)}
                         alt={this.state.image.name}
                     />
             ) : (
