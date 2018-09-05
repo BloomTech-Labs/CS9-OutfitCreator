@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import StackGrid from "react-stack-grid";
 import OutfitCard from './OutfitCard';
 import { ROOT_URL } from '../../config';
 import './Archive.css';
@@ -92,7 +91,6 @@ class Archive extends React.Component {
                     // ternary to check if filter is being run or not
                     (this.state.searching ? (
                         <div className='archive--collection'>
-                            {/* <StackGrid columnWidth={175}> */}
                             {this.state.searchedOutfits.map((outfit) => (
                                 <OutfitCard
                                     key={outfit._id}
@@ -102,21 +100,20 @@ class Archive extends React.Component {
                                     lastWorn={outfit.worn}
                                 />
                             ))}
-                            {/* </StackGrid> */}
                         </div>
                     ) : (
                             <div className='archive--collection'>
-                                {/* <StackGrid columnWidth={175}> */}
                                 {this.state.myOutfits.map((outfit) => (
-                                    <OutfitCard
-                                        key={outfit._id}
-                                        outfitId={outfit._id}
-                                        name={outfit.name}
-                                        src={[...outfit.top, ...outfit.bottom, outfit.shoes]}
-                                        lastWorn={outfit.worn}
-                                    />
+                                    <div key={outfit._id}>
+                                        <OutfitCard
+                                            key={outfit._id}
+                                            outfitId={outfit._id}
+                                            name={outfit.name}
+                                            src={[...outfit.top, ...outfit.bottom, outfit.shoes]}
+                                            lastWorn={outfit.worn}
+                                        />
+                                    </div>
                                 ))}
-                                {/* </StackGrid> */}
                             </div>
                         ))
                     //end of the inner ternary for the filter check

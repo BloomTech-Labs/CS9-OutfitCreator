@@ -1,8 +1,8 @@
 .container--archive {
+    display: flex;
+    flex-direction: row;
     align-items: flex-start;
     background: white;
-    display: flex;
-    flex-direction: column;
     border-radius: 25px;
     margin: 60px 0;
     width: 100%;
@@ -25,8 +25,8 @@
 }
 
 .archive--search {
-  margin: 0 auto;
-  width: 400px;
+    margin: 0 auto;
+    width: 400px;
 }
 
 .search--input {

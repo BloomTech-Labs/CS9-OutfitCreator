@@ -3,10 +3,19 @@
     margin-top: 10px;
 }
 
+.card-deck .card {
+    max-height: none;
+    min-width: none;
+    margin: 4px;
+}
+
+.card-deck .card:hover {
+    border: 1px solid purple;
+}
+
 .container--archive {
     display: flex;
     flex-direction: column;
-
 }
 
 .container--edit {
@@ -16,10 +25,12 @@
     justify-content: space-between;
     left: 10px;
     max-width: 70vw;
+    max-height: 90vh;
     margin-top: 4.5em;
     width: 95%;
     min-height: 700px;
     margin-left: 1em;
+    overflow-x: auto;
 }
 
 .edit--header {
@@ -68,7 +79,8 @@
 }
 
 .outfit--card:hover {
-    background-color: var(--dark-purple);
+    /* border: 1xp solid purple; */
+    background: var(--dark-purple);
     transform: translateY(-10px);
     cursor: pointer;
 }
