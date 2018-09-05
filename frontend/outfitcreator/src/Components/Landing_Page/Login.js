@@ -25,7 +25,7 @@ class Login extends React.Component {
             .then(res => {
                 localStorage.setItem('authToken', `Bearer ${res.data.token}`);
                 // Redirect to create page once logged in
-                window.location = `${ROOT_URL.WEB}/Create`;
+                this.setState({ activeTab: '2'})
             })
             .catch(err => {
                 alert('Failed to sign up. Please try again.');
