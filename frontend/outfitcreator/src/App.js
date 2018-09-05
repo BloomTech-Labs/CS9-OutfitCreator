@@ -78,12 +78,12 @@ class App extends Component {
               </div>
             </div>
           } />
-          <Route path='/Create?' render={props =>
+          {/* <Route path='/Create?' render={props =>
             <div className='App--create'>
               <Create {...props} getUserID={this.getUserID} />
               <Navigation getUserID={this.getUserID} />
             </div>
-          } />
+          } /> */}
           <Route path='/Create' render={props =>
             <div className='App--create-layers'>
               <CreateLayers {...props} getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
