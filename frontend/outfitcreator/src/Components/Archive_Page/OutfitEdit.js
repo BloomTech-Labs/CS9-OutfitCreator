@@ -153,6 +153,7 @@ class OutfitEdit extends React.Component {
                         <div className="container--edit">
                             <div className='edit--selections'>
                                 {itemSelection.map((item, index) => {
+                                    //crops the imageURl from cloudinary before supplying it to the img tag
                                     const [partOne, partTwo] = item.image.split('upload/');
                                     const crop = 'upload/w_200,h_250/';
                                     const newUrl = partOne + crop + partTwo;
