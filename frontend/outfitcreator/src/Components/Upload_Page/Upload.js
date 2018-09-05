@@ -15,6 +15,7 @@ class Upload extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            user: '',
             image: '',
             name: '',
             search: '',
@@ -93,75 +94,91 @@ class Upload extends Component {
             });
         this.setState({ user });
     }
+    
+    uploadCount = (cb) => {
+        axios.get(`${ROOT_URL.API}/items/user/${this.state.user}`)
+            .then(res => {
+                cb(res.data.length);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 
     fileChanged = event => {
         this.setState({ image: URL.createObjectURL(event.target.files[0]) });
     }
 
-    saveTest = event => {
-        console.log(this.state);
-    }
-
     saveItem = e => {
         e.preventDefault();
-        let { user, name, image, tags, type } = this.state;
-        let subtype;
-        const subtypeMap = {
-          top: ['sweater', 'shirt', 'jacket', 'dress'],
-          bottom: ['pants', 'shorts', 'leggings', 'skirt'],
-          shoes: ['casualShoes', 'formalShoes']
-        }
+
+        this.props.isUserPaid(paid => {
+            this.uploadCount(count => {
+                if (!paid && count > 20) {
+                    alert('Unpaid upload limit reached. Please subscribe to access our full range of content.');
+                    return;
+                }
+
+                let { user, name, image, tags, type } = this.state;
+                let subtype;
+                const subtypeMap = {
+                  top: ['sweater', 'shirt', 'jacket', 'dress'],
+                  bottom: ['pants', 'shorts', 'leggings', 'skirt'],
+                  shoes: ['casualShoes', 'formalShoes']
+                }
+                
+                // If type is not top, bottom or shoes
+                if (!['top', 'bottom', 'shoes'].includes(type)) {
+                  subtype = type;
+                  
+                  // Search for subtype in subtypeMap and set vars
+                  Object.entries(subtypeMap).forEach(pair => {
+                    const mainType = pair[0];
+                    const subtypeArr = pair[1];
         
-        // If type is not top, bottom or shoes
-        if (!['top', 'bottom', 'shoes'].includes(type)) {
-          subtype = type;
-          
-          // Search for subtype in subtypeMap and set vars
-          Object.entries(subtypeMap).forEach(pair => {
-            const mainType = pair[0];
-            const subtypeArr = pair[1];
-
-            if (subtypeArr.includes(type)) type = mainType;
-          })
-        } else {
-          subtype = null;
-        }
-
-        if (subtype){
-        axios.post(`${ROOT_URL.API}/items`, {
-            user, name, image, tags, type, subtype
-        })
-            .then(response => {
-                console.log(response);
-                this.setState({ image: '', name: '', tags: [] });
-                this.saveTest();
-            })
-            .catch(error => {
-                console.log(error);
+                    if (subtypeArr.includes(type)) type = mainType;
+                  })
+                } else {
+                    subtype = null;
+                }
+        
+                if (subtype){
+                    axios.post(`${ROOT_URL.API}/items`, {
+                        user, name, image, tags, type, subtype
+                    })
+                        .then(response => {
+                            console.log(response);
+                            this.setState({ image: '', name: '', tags: [] });
+                            this.saveTest();
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                } else {
+                    axios.post(`${ROOT_URL.API}/items`, {
+                        user, name, image, tags, type
+                    })
+                        .then(response => {
+                            console.log(response);
+                            this.setState({ image: '', name: '', tags: [] });
+                            this.saveTest();
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                }
             });
-        } else {
-            axios.post(`${ROOT_URL.API}/items`, {
-                user, name, image, tags, type
-            })
-                .then(response => {
-                    console.log(response);
-                    this.setState({ image: '', name: '', tags: [] });
-                    this.saveTest();
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
+        });
     }
 
-    toCamel(string) {
+    toCamelCase(string) {
         const temp = string.split(' ');
         return [temp[0].toLowerCase(), temp[1]].join('');
     }
 
     handleInputChange = e => {
         e.target.type === 'select-one' ?
-            this.setState({ [e.target.name]: this.toCamel(e.target.value) }) :
+            this.setState({ [e.target.name]: this.toCamelCase(e.target.value) }) :
             this.setState({ [e.target.name]: e.target.value });
     }
 
