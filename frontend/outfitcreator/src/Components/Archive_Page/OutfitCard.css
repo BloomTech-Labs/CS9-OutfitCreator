@@ -6,6 +6,8 @@
     justify-content: space-between;
     max-width: 550px;
     min-width: 350px;
+    min-height: 220px;
+    max-height: 220px;
     overflow-y: auto;
     overflow-x: hidden;
     margin: 15px;
@@ -18,6 +20,7 @@
     font-weight: bold;
     display: flex;
     justify-content: space-between;
+    max-height: 40px;
     padding: 5px 0;
     margin: 5px 0;
 }

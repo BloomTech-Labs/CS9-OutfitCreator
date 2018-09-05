@@ -43,6 +43,7 @@
     justify-content: flex-start;
     align-content: flex-start;
     flex-wrap: wrap;
+    margin: 0 3%;
     /* max-width: 400px;
     min-width: 400px;
     max-height: 300px;
