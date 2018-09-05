@@ -140,7 +140,7 @@ class CreateLayers extends Component {
                 icon: Icons.casualShoes,
             },
             formalShoes: {
-              title: 'Fromal Shoes',
+              title: 'Formal Shoes',
               show: false,
               all: [],
               current: null,
