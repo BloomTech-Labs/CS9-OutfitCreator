@@ -13,6 +13,7 @@ import Settings from './Components/Settings_Page/Settings';
 import Billing from './Components/Billing_Page/Billing';
 import OutfitEdit from './Components/Archive_Page/OutfitEdit';
 import Closet from './Components/Closet_Page/Closet.js';
+import VerifyEmail from './Components/Landing_Page/VerifyEmail';
 import './App.css';
 
 library.add(faShareAlt);
@@ -55,6 +56,9 @@ class App extends Component {
           } />
           <Route exact path='/login' render={props =>
             <Login {...props} onSignin={this.signInSuccess} />
+          } />
+          <Route exact path='/verify/:key?' render={props =>
+            <VerifyEmail {...props} />
           } />
           <Route path='/Create' render={props =>
             <div className='App--create'>
