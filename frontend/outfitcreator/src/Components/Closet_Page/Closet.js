@@ -150,8 +150,10 @@ class Closet extends React.Component {
     }
 
     activateCategory = (category) => {
+        console.log(category);
         const items = this.state.items;
         items[category].show = !items[category].show;
+        console.log(items);
         this.setState({items})
     }
 
@@ -205,6 +207,7 @@ class Closet extends React.Component {
         });
         const selected = this.getSelected();
         console.log(selected);
+        console.log(typesInCloset);
 
         return (
             <div className="closet">

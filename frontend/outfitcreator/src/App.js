@@ -57,6 +57,12 @@ class App extends Component {
       });
   }
 
+  toLandingPage = (e) => {
+      e.preventDefault();
+      window.location = `${ROOT_URL.WEB}/`;
+      console.log(e.target);
+  }
+
   render() {
     return (
       <div className="App">
@@ -67,7 +73,10 @@ class App extends Component {
           <Route exact path='/login' render={props =>
             <div>
               <Landing {...props} />
+<<<<<<< HEAD
               {/* <div className='landingPage--faded' onClick={() => { window.location = `${ROOT_URL.WEB}/`} }> */}
+=======
+>>>>>>> cc5c12d42f4c0ae69fd0d463250a2eaf35beb471
               <div className='landingPage--faded'>
                 <Login {...props} />
               </div>

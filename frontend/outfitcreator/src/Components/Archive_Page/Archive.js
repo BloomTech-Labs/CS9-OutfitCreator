@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import StackGrid from "react-stack-grid";
 import OutfitCard from './OutfitCard';
-import { ROOT_URL } from '../../config'; 
+import { ROOT_URL } from '../../config';
 import './Archive.css';
 
 class Archive extends React.Component {
@@ -29,7 +29,7 @@ class Archive extends React.Component {
             }
         }
         axios.get(`${ROOT_URL.API}/outfits/${user}/`, requestOptions)
-            .then(response => { 
+            .then(response => {
 
                 this.setState({ myOutfits: response.data })
             })
@@ -64,7 +64,7 @@ class Archive extends React.Component {
         }
 
         let filteredOutfits;
-        searching ? filteredOutfits = myOutfits.filter(myFilter) : filteredOutfits = searchedOutfits.filter(myFilter); 
+        searching ? filteredOutfits = myOutfits.filter(myFilter) : filteredOutfits = searchedOutfits.filter(myFilter);
         if (search.length === 0) this.setState({ searching: false, searchedOutfits: filteredOutfits });
         else this.setState({ searching: true, searchedOutfits: filteredOutfits });
     }
@@ -91,7 +91,8 @@ class Archive extends React.Component {
                 {this.state.myOutfits ?
                     // ternary to check if filter is being run or not
                     (this.state.searching ? (
-                        <StackGrid columnWidth={175}>
+                        <div>
+                            {/* <StackGrid columnWidth={175}> */}
                             {this.state.searchedOutfits.map((outfit) => (
                                 <OutfitCard
                                     key={outfit._id}
@@ -101,9 +102,11 @@ class Archive extends React.Component {
                                     lastWorn={outfit.worn}
                                 />
                             ))}
-                        </StackGrid>
+                            {/* </StackGrid> */}
+                        </div>
                     ) : (
-                            <StackGrid columnWidth={175}>
+                            <div>
+                                {/* <StackGrid columnWidth={175}> */}
                                 {this.state.myOutfits.map((outfit) => (
                                     <OutfitCard
                                         key={outfit._id}
@@ -113,9 +116,10 @@ class Archive extends React.Component {
                                         lastWorn={outfit.worn}
                                     />
                                 ))}
-                            </StackGrid>
+                                {/* </StackGrid> */}
+                            </div>
                         ))
-                        //end of the inner ternary for the filter check
+                    //end of the inner ternary for the filter check
                     :
                     <div className='archive--collection'>
                         Error Loading Collection

@@ -237,7 +237,18 @@ class CreateLayers extends Component {
     }
 
     getSelected = () => {
-        return Object.keys(this.state.items).filter(type => this.state.items[type].show === true);
+        let selected = Object.keys(this.state.items).filter(type => this.state.items[type].show === true);
+        
+        Object.entries(this.state.subtypeMap).forEach(pair => {
+            const mainType = pair[0];
+            const subTypes = pair[1];
+
+            if (selected.includes(mainType)) {
+                selected = selected.filter(item => !subTypes.includes(item));
+            }
+        });
+
+        return selected;
     }
 
     // method to retrieve random items of all types

@@ -150,7 +150,7 @@ class OutfitEdit extends React.Component {
                 {editItem ?
                     <div onClick={this.toggle}>
                         {/*this will map out hte possible items to be selected to replace the selected one*/}
-                        <div className="createContainer">
+                        <div className="container--edit">
                             <CardDeck>
                                 {itemSelection.map((item, index) => {
                                     return (<Card className='outfit--card' key={index} inverse>
@@ -170,7 +170,7 @@ class OutfitEdit extends React.Component {
                     <div>
                         {/* another ternary to check if outfit was loaded correctly*/}
                         {outfit ? (
-                            <div className="createContainer">
+                            <div className="container--edit">
                                 <CardDeck>
                                     {/*here maps out the items of the current outfit*/}
                                     {items.map((item, index) => {
