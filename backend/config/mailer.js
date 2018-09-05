@@ -36,7 +36,7 @@ const generateSignupKey = () => {
 
 const sendEmail = (to, subject, html, text) => {
     return new Promise((resolve, reject) => {
-      transport.sendMail({ from: 'outfitcreator', to, subject, html, text }, (err, info) => {
+      transport.sendMail({ from: 'Closet Roulette', to, subject, html, text }, (err, info) => {
         if (err) reject(err);
         resolve(info);
       });

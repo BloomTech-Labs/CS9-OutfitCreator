@@ -150,27 +150,32 @@ class OutfitEdit extends React.Component {
                 {editItem ?
                     <div onClick={this.toggle}>
                         {/*this will map out hte possible items to be selected to replace the selected one*/}
-                        <div className="createContainer">
-                            <CardDeck>
+                        <div className="container--edit">
+                            <div className='edit--selections'>
                                 {itemSelection.map((item, index) => {
-                                    return (<Card className='outfit--card' key={index} inverse>
-                                        <CardImg
+                                    //crops the imageURl from cloudinary before supplying it to the img tag
+                                    const [partOne, partTwo] = item.image.split('upload/');
+                                    const crop = 'upload/w_200,h_250/';
+                                    const newUrl = partOne + crop + partTwo;
+                                    console.log(newUrl);
+                                    return (<div className='outfit--card' key={index}>
+                                        <img
                                             key={item._id}
-                                            width="80%"
-                                            src={item.image}
+                                            // width="300px"
+                                            src={newUrl}
                                             onClick={() => this.selectItem(item.type, item._id)}
                                             alt="Card image cap"
                                         />
-                                    </Card>)
+                                    </div>)
                                 })}
-                            </CardDeck>
+                            </div>
                         </div>
                     </div>
                     :
                     <div>
                         {/* another ternary to check if outfit was loaded correctly*/}
                         {outfit ? (
-                            <div className="createContainer">
+                            <div className="container--edit">
                                 <CardDeck>
                                     {/*here maps out the items of the current outfit*/}
                                     {items.map((item, index) => {

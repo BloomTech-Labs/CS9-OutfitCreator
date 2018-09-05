@@ -11,28 +11,33 @@ exports.signup = (req, res) => {
     .then(existingUser => {
         // If user with that email exists
         if(existingUser) {
-            console.log('password: ', existingUser.local.password)
             // if user already signed up locally
             if(existingUser.local.password) {
-                return res.status(422);
+                return res.status(409).json({ message: 'problem signing up' });
             } else {
                 // else user signed up using social auth, link accounts
-                const target = { 'local.email': email }
-                const update = {
-                    local: { username, password }
-                };
-                const options = { new: true };
-                // Update user and generate JWT. User is already verified by social-auth
-                User.findOneAndUpdate(target, update, options)
-                .exec()
-                .then(user => {
-                    const token = makeToken(user);
-                    res.status(201).json({ token });
+                existingUser.newPassword(password)
+                .then((newPassword) => {
+                    const target = { 'local.email': email }
+                    const update = {
+                        local: { email, username, password: newPassword }
+                    };
+                    const options = { new: true, runValidators: true };
+                    // Update user and generate JWT. User is already verified by social-auth
+                    User.findOneAndUpdate(target, update, options)
+                    .exec()
+                    .then(user => {
+                        const token = makeToken(user);
+                        res.status(201).json({ token });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        return next(err);
+                    })
                 })
                 .catch(err => {
                     console.log(err);
-                    return next(err);
-                })
+                })                
             }
         } else {
             const key = generateSignupKey();
