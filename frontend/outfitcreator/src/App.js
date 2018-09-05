@@ -88,7 +88,7 @@ class App extends Component {
             <VerifyEmail {...props} />
           } />
       
-          {/* <Route path='/Create?' render={props => <Route path='/Create?' render={props =>
+          {/*  <Route path='/Create?' render={props => <Route path='/Create?' render={props =>
             <div className='App--create'>
               <Create {...props} getUserID={this.getUserID} />
               <Navigation getUserID={this.getUserID} />
