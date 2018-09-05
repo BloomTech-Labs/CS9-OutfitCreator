@@ -150,9 +150,12 @@ class Closet extends React.Component {
     }
 
     activateCategory = (category) => {
-        const items = this.state.items;
-        items[category].show = !items[category].show;
-        this.setState({items})
+      console.log(category);
+      const items = this.state.items;
+      Object.keys(this.state.items).forEach(item => items[item].show = false);
+      items[category].show = !items[category].show;
+      console.log(items);
+      this.setState({items, showAll: false })
     }
 
     getSelected = () => {

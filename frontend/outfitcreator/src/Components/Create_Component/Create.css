@@ -57,14 +57,75 @@
 .card-deck .card, .card, .create-card, .cardImage, .card-img-overlay {
     max-height: 200px;
     min-width: 300px;
+    max-width: 400px;
     border: none;
     box-shadow: none;
     outline: none;
     margin: 0 8px 15px;
 }
 
-.cardImage {
+.createContainer .card {
+    margin-left: 0;
+    margin-right: 0;
+    height: 100%;
+}
+
+.card-img-overlay {
+    width: 100%;
     border-radius: 5px;
+    margin: 0;
+    
+}
+
+.locked-border {
+    border: 3px solid var(--dark-purple);
+    /* transition: 0.3s; */
+}
+
+.create-card .close {
+    position: absolute;
+    top: 5px;
+    right: 25px;
+}
+
+.card-lock {
+    border-radius: 5px;
+    width: 35px;
+    height: 30px;
+    left: 5px;
+    top: 5px;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.75);
+}
+
+.lock-icon {
+    width: 45px;
+    height: 30px;
+    position: relative;
+    left: -5px;
+}
+
+.card-refresh {
+    border-radius: 5px;
+    width: 35px;
+    height: 30px;
+    right: 5px;
+    top: 5px;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.75);
+}
+
+.refresh-icon {
+    width: 35px;
+    height: 30px;
+    position: relative;
+}
+
+.cardImage {
+    height: 100%;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
     box-shadow: none;
 }
 
@@ -106,6 +167,7 @@
 @media (max-width: 700px) {
     .card-deck {
         flex-flow: column;
+        align-items: center;
     }
 
     .card {

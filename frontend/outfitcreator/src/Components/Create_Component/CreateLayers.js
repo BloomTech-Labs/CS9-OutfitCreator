@@ -19,21 +19,21 @@ class CreateLayers extends Component {
             tags: [],
             items: {
                 top: {
-                    title: 'Tops',
+                    title: 'All Tops',
                     show: false,
                     all: [],
                     current: null,
                     icon: Icons.top,
                 },
                 bottom: {
-                    title: 'Bottoms',
+                    title: 'All Bottoms',
                     show: false,
                     all: [],
                     current: null,
                     icon: Icons.bottom,
                 },
                 shoes: {
-                    title: 'Shoes',
+                    title: 'All Shoes',
                     show: false,
                     all: [],
                     current: null,
@@ -63,8 +63,8 @@ class CreateLayers extends Component {
     setTypes = () => {
         const paidItems = {
             top: {
-                title: 'Tops',
-                show: false,
+                title: 'All Tops',
+                show: true,
                 all: [],
                 current: null,
                 icon: Icons.top,
@@ -98,7 +98,7 @@ class CreateLayers extends Component {
                 icon: Icons.dress,
             },
             bottom: {
-                title: 'Bottoms',
+                title: 'All Bottoms',
                 show: false,
                 all: [],
                 current: null,
@@ -133,7 +133,7 @@ class CreateLayers extends Component {
               icon: Icons.leggings,
             },
             shoes: {
-                title: 'Shoes',
+                title: 'All Shoes',
                 show: false,
                 all: [],
                 current: null,
@@ -214,11 +214,12 @@ class CreateLayers extends Component {
         if (shoeTypes.includes(category)) {
             shoeTypes.forEach(type => {
                 if (category != type) {
-                    if(items[type]) items[type].show = false;
+                    if (items[type]) items[type].show = false;
                 }
             })
+        } 
         // If category is of mainType then toggle off all subtypes
-        } else if (mainTypes.includes(category)) {
+        if (mainTypes.includes(category)) {
             subtypeMap[category].forEach(subtype => {
                 if(items[subtype] && typesInCloset.includes(subtype)) 
                     items[subtype].show = items[category].show;
