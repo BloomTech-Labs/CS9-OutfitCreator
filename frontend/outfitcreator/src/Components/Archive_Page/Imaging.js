@@ -2,9 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import { ROOT_URL } from '../../config'; 
 
-const TESTUSER = '5b745597a48cb52b0c1baedf';
-
-
 class Imaging extends React.Component {
     constructor(props) {
         super(props);
@@ -18,10 +15,10 @@ class Imaging extends React.Component {
     }
 
     getImages = () => {
-        console.log(this);
-        axios.get(`${ROOT_URL.API}/items/${TESTUSER}/${this.props.urlSrc}`)
+        axios.get(`${ROOT_URL.API}/items/getitem/${this.props.urlSrc}`)
             .then(response => {
                 this.setState({ image: response.data });
+                console.log(response.data);
             })
             .catch(err => {
                 console.log(err);
@@ -32,8 +29,8 @@ class Imaging extends React.Component {
         return (
             this.state.image ? (
                     <img
-                        width="80%"
-                        src={this.state.image.image}
+                        width="150px"
+                        src={this.state.image.image.slice(0,53)+"w_150/"+this.state.image.image.slice(53)}
                         alt={this.state.image.name}
                     />
             ) : (

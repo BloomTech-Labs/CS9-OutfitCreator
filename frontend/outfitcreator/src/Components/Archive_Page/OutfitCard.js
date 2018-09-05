@@ -35,7 +35,9 @@ class OutfitCard extends React.Component {
                     })}
                 </div>
                 <div className='card--footer'>
-                    Worn on: {worn}
+                    {worn == "Never Worn"
+                        ? <div>{worn}</div>
+                        : <div>Worn on: {worn}</div>}
                 </div>
             </div>
         )

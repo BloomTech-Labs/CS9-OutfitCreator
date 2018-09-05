@@ -139,7 +139,7 @@ class Navigation extends Component {
             </div>
             :
             <div className='navigation--container'>
-                <div className='navigation--site-title'>ClosetRoulette</div>
+                <div className='navigation--site-title'>Closet Roulette</div>
                 <Nav className='navigation--pages'>
                     <NavLink href='/Create'><button className='nav--item Create'>New Outfit</button></NavLink>
                     <NavLink href='/Upload'><button className='nav--item Upload'>Add Item</button></NavLink>
