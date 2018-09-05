@@ -1,16 +1,18 @@
 .container--card {
+    border: 1px solid black;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* max-width: 400px;
+    max-width: 400px;
     min-width: 400px;
     max-height: 300px;
-    min-height: 300px; */
+    min-height: 300px;
     /* width: 200px; */
     overflow-y: auto;
     overflow-x: hidden;
     margin: 10px;
-    padding: 10px;
+    padding: 15px;
 }
 
 .card--header {
@@ -22,19 +24,19 @@
 }
 
 .card--images {
-    min-height: 200px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    min-height: 200px;
 }
 
 .card--images img {
     max-height: 225px;
     min-height: 210px;
     margin: 5px;
-    /* width: 125px; */
-    /* object-fit: contain; */
-    /* height: 33%;
-    width: 33%; */
+    width: 125px;
+    object-fit: contain;
+    height: 33%;
+    width: 33%;
 }
 
 .card--footer{
@@ -56,8 +58,8 @@
 }
 
 .edit--button:hover {
- cursor: pointer;
- border: 1px solid black;
- border-radius: 5px;
- box-shadow: 1px 1px;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 1px 1px;
 }

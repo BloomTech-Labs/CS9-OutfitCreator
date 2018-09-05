@@ -91,7 +91,7 @@ class Archive extends React.Component {
                 {this.state.myOutfits ?
                     // ternary to check if filter is being run or not
                     (this.state.searching ? (
-                        <div>
+                        <div className='archive--collection'>
                             {/* <StackGrid columnWidth={175}> */}
                             {this.state.searchedOutfits.map((outfit) => (
                                 <OutfitCard
@@ -105,7 +105,7 @@ class Archive extends React.Component {
                             {/* </StackGrid> */}
                         </div>
                     ) : (
-                            <div>
+                            <div className='archive--collection'>
                                 {/* <StackGrid columnWidth={175}> */}
                                 {this.state.myOutfits.map((outfit) => (
                                     <OutfitCard
