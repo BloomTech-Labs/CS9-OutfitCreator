@@ -16,7 +16,6 @@ const UserSchema = new mongoose.Schema({
         },
         password: {
             type: String,
-            required: true,
         },
         email: {
             type: String,
@@ -92,7 +91,7 @@ const UserSchema = new mongoose.Schema({
     },
 });
 
-// Hash passwords when user is created
+// Hash passwords before saving to database
 UserSchema.pre('save', function(next) {
     if(this.method !== 'local') {
         next();

@@ -58,6 +58,10 @@ class App extends Component {
       });
   }
 
+  signInSuccess = (data) => {
+    localStorage.setItem('authToken', `Bearer ${data.token}`);
+  }
+
   toLandingPage = (e) => {
     e.preventDefault();
     window.location = `${ROOT_URL.WEB}/`;
@@ -75,7 +79,7 @@ class App extends Component {
             <div>
               <Landing {...props} />
               <div className='landingPage--faded'>
-                <Login {...props} />
+                <Login {...props} onSignin={this.signInSuccess} />
               </div>
             </div>
           } />
