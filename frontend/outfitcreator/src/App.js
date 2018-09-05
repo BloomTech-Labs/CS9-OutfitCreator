@@ -58,6 +58,16 @@ class App extends Component {
       });
   }
 
+  signInSuccess = (data) => {
+    localStorage.setItem('authToken', `Bearer ${data.token}`);
+  }
+
+
+  toLandingPage = (e) => {
+    e.preventDefault();
+    window.location = `${ROOT_URL.WEB}/`;
+  }
+
   render() {
     return (
       <div className="App">
@@ -68,15 +78,15 @@ class App extends Component {
           <Route exact path='/login' render={props =>
             <div>
               <Landing {...props} />
-              <div className='landingPage--faded' onClick={() => { window.location = `${ROOT_URL.WEB}/`} }>
-                <Login {...props} />
+              <div className='landingPage--faded'>
+                <Login {...props} onSignin={this.signInSuccess} />
               </div>
             </div>
           } />
           <Route exact path='/verify/:key?' render={props =>
             <VerifyEmail {...props} />
           } />
-          <Route path='/Create?' render={props =>
+          <Route path='/Create' render={props =>
             <div className='App--create'>
               <Create {...props} getUserID={this.getUserID} />
               <Navigation getUserID={this.getUserID} />
