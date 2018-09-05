@@ -4,14 +4,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-width: 425px;
-    min-width: 425px;
-    max-height: 290px;
-    min-height: 290px;
+    max-width: 550px;
+    min-width: 400px;
     overflow-y: auto;
     overflow-x: hidden;
-    margin: 10px;
+    margin: 15px;
     padding: 10px;
+    border: 1px solid black;
 }
 
 .card--header {
@@ -26,18 +25,13 @@
 .card--images {
     display: flex;
     flex-direction: row;
-    min-height: 200px;
-    max-width: 375px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .card--images img {
-    max-height: 225px;
-    min-height: 210px;
     margin: 5px;
-    width: 125px;
-    object-fit: contain;
-    /* height: 33%;
-    width: 33%; */
+    border-radius: 3px;
 }
 
 .card--footer{
