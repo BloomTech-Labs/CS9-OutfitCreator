@@ -4,7 +4,6 @@ class ClosetCard extends React.Component {
     render() {
         const URL=this.props.item.image;
         const newURL = URL.slice(0,53)+"h_120/"+URL.slice(53);
-        console.log(newURL);
         return (
             <div className="closet-card">
                 <div className="closet-card--name">{this.props.item.name}</div>
