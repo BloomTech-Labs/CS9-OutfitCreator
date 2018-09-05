@@ -159,6 +159,17 @@ class Closet extends React.Component {
         return Object.keys(this.state.items).filter(type => this.state.items[type].show === true);
     }
 
+    submit = newInfo => {
+        axios.put(`${ROOT_URL.API}/items/${newInfo.id}`, newInfo)
+        .then(response => {
+            console.log(response);
+            this.onSelect(newInfo.type);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+
     // onSelect(category) {
     //     this.setState({selectedType: category});
     //     this.getItems(category);
@@ -217,12 +228,12 @@ class Closet extends React.Component {
                     {this.state.selectAll ?
                         typesInCloset.map(type => (
                             this.state.items[type].all.map(item => (
-                                <ClosetCard item={item} key={item._id}/>
+                                <ClosetCard submit={this.submit} item={item} key={item._id}/>
                             ))
                         )) : 
                         selected.map(type => (
                             this.state.items[type].all.map(item => (
-                                <ClosetCard item={item} key={item._id}/>
+                                <ClosetCard submit={this.submit} item={item} key={item._id}/>
                             ))
                         ))
                     }

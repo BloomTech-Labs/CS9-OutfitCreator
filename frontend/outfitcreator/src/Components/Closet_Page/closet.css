@@ -62,11 +62,60 @@
     display: flex;
     flex-direction: column;
     justify-content: top;
+    max-width: 175px;
+}
+
+.closet-card:hover {
+    cursor: pointer;
+    transform: translateY(-5px);
 }
 
 .closet-card--name{
     font-weight: bold;
     font-size: 1.25em;
+}
+
+.closet-card--edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.closet-card--input {
+    border: 1px solix black;
+    /* width: 60px; */
+    width: 100%;
+    max-width: 120px;
+    text-align: center;
+}
+
+.closet-card--options {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 120px;
+}
+
+.closet-card--accept {
+    background-color: lightgreen;
+    border: none;
+}
+
+.closet-card--accept:hover {
+    cursor: pointer;
+    color: green;
+    background-color: darkgreen;
+}
+
+.closet-card--cancel {
+    background-color: red;
+    /* color: var(--red); */
+}
+
+.closet-card--cancel:hover {
+    cursor: pointer;
+    background-color: rgba(94, 26, 26, 0.836);
+    color: rgb(177, 38, 61);
 }
 
 .closet-image {
