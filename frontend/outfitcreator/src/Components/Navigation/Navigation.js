@@ -144,7 +144,7 @@ class Navigation extends Component {
                     <NavLink href='/Create'><button className='nav--item Create'>New Outfit</button></NavLink>
                     <NavLink href='/Upload'><button className='nav--item Upload'>Add Item</button></NavLink>
                     <NavLink href='/Closet'><button className='nav--item Closet'>My Closet</button></NavLink>
-                    <NavLink href='/Archive'><button className='nav--item Archive'>Archive</button></NavLink>
+                    <NavLink href='/Archive'><button className='nav--item Archive'>Outfits</button></NavLink>
                 </Nav>
                 <div className='navigation--user-options'>
                     <div onClick={this.navSettings} className='navigation--user'>{this.state.username}</div>

@@ -15,13 +15,14 @@
 
 .card--header {
     color: var(--dark-purple);
+    font-weight: bold;
     display: flex;
     justify-content: space-between;
 }
 
 .card--images {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .card--images img {

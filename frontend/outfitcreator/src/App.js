@@ -62,10 +62,10 @@ class App extends Component {
     localStorage.setItem('authToken', `Bearer ${data.token}`);
   }
 
-
   toLandingPage = (e) => {
-    e.preventDefault();
-    window.location = `${ROOT_URL.WEB}/`;
+      e.preventDefault();
+      window.location = `${ROOT_URL.WEB}/`;
+      console.log(e.target);
   }
 
   render() {
@@ -83,6 +83,7 @@ class App extends Component {
               </div>
             </div>
           } />
+
           <Route exact path='/verify/:key?' render={props =>
             <VerifyEmail {...props} />
           } />
@@ -91,7 +92,7 @@ class App extends Component {
               <Create {...props} getUserID={this.getUserID} />
               <Navigation getUserID={this.getUserID} />
             </div>
-          } />
+          } /> */}
           <Route path='/Create' render={props =>
             <div className='App--create-layers'>
               <CreateLayers {...props} getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
