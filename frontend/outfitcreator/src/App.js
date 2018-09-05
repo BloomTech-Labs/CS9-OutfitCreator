@@ -30,7 +30,7 @@ class App extends Component {
 
   setAuthToken = () => {
     const token = localStorage.getItem('authToken');
-    
+
     if (token) axios.defaults.headers.common.Authorization = token;
     else delete axios.defaults.headers.common.Authorization;
   }
@@ -58,24 +58,28 @@ class App extends Component {
       });
   }
 
+  signInSuccess = (data) => {
+    localStorage.setItem('authToken', `Bearer ${data.token}`);
+  }
+
   toLandingPage = (e) => {
-      e.preventDefault();
-      window.location = `${ROOT_URL.WEB}/`;
-      console.log(e.target);
+    e.preventDefault();
+    window.location = `${ROOT_URL.WEB}/`;
+    console.log(e.target);
   }
 
   render() {
     return (
       <div className="App">
         <Switch>
-          <Route exact path='/' render={props => 
+          <Route exact path='/' render={props =>
             <Landing {...props} />
           } />
           <Route exact path='/login' render={props =>
             <div>
               <Landing {...props} />
               <div className='landingPage--faded'>
-                <Login {...props} />
+                <Login {...props} onSignin={this.signInSuccess} />
               </div>
             </div>
           } />
@@ -83,7 +87,8 @@ class App extends Component {
           <Route exact path='/verify/:key?' render={props =>
             <VerifyEmail {...props} />
           } />
-          {/* <Route path='/Create?' render={props =>
+
+          {/* <Route path='/Create?' render={props => <Route path='/Create?' render={props =>
             <div className='App--create'>
               <Create {...props} getUserID={this.getUserID} />
               <Navigation getUserID={this.getUserID} />
@@ -121,7 +126,7 @@ class App extends Component {
           } />
           <Route path='/Edit' render={props =>
             <div>
-              <OutfitEdit {...props} getUserID={this.getUserID}/>
+              <OutfitEdit {...props} getUserID={this.getUserID} />
               <Navigation getUserID={this.getUserID} />
             </div>
           } />

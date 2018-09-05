@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardDeck, Button, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
+import queryString from 'query-string';
+
 import { ROOT_URL } from '../../config';
 import './Create.css';
 
@@ -31,9 +33,17 @@ class Create extends Component {
     }
 
     componentDidMount() {
+        const hash = queryString.parse(this.props.location.hash);
+        if(hash.token) {
+            console.log(hash.token);
+            localStorage.setItem('authToken', `Bearer ${hash.token}`);
+        }
+        this.setAuthToken();
+        // need to set authToken explicitly here to accomodate social auth
         const user = this.props.getUserID();
+        const authToken = localStorage.getItem('authToken');
 
-        if (user) {
+        if (authToken) {
             axios.all([
                 axios.get(`${ROOT_URL.API}/items/type/${user}/top`),
                 axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`),

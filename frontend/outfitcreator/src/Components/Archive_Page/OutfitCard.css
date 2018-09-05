@@ -1,4 +1,6 @@
 .container--card {
+    border: 1px solid black;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -16,6 +18,8 @@
     font-weight: bold;
     display: flex;
     justify-content: space-between;
+    padding: 5px 0;
+    margin: 5px 0;
 }
 
 .card--images {
@@ -27,6 +31,11 @@
 
 .card--images img {
     margin: 5px;
+
+.card--footer{
+    display: block;
+    align-self: flex-start;
+    margin: 5px 0;
 }
 
 .header--edit{
@@ -42,12 +51,8 @@
 }
 
 .edit--button:hover {
- cursor: pointer;
- border: 1px solid black;
- border-radius: 5px;
- box-shadow: 1px 1px;
-}
-
-.card--footer{
-    align-self: flex-start;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 1px 1px;
 }
