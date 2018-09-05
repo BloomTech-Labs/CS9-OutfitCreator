@@ -15,6 +15,7 @@
 
 .card--header {
     color: var(--dark-purple);
+    font-weight: bold;
     display: flex;
     justify-content: space-between;
 }

@@ -90,7 +90,7 @@ class Archive extends React.Component {
                 {this.state.myOutfits ?
                     // ternary to check if filter is being run or not
                     (this.state.searching ? (
-                        <StackGrid columnWidth={175}>
+                        <StackGrid columnWidth={225}>
                             {this.state.searchedOutfits.map((outfit) => (
                                 <OutfitCard
                                     key={outfit._id}
@@ -102,8 +102,10 @@ class Archive extends React.Component {
                             ))}
                         </StackGrid>
                     ) : (
-                            <StackGrid columnWidth={175}>
+                            <StackGrid columnWidth={225} gutterHeight={10} horizonal={true}>
+                            <div>
                                 {this.state.myOutfits.map((outfit) => (
+                                    <div key={outfit._id}>
                                     <OutfitCard
                                         key={outfit._id}
                                         outfitId={outfit._id}
@@ -111,7 +113,9 @@ class Archive extends React.Component {
                                         src={[...outfit.top, ...outfit.bottom, outfit.shoes]}
                                         lastWorn={outfit.worn}
                                     />
+                                    </div>
                                 ))}
+                            </div>
                             </StackGrid>
                         ))
                         //end of the inner ternary for the filter check
