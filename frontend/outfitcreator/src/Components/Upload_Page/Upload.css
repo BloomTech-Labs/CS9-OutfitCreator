@@ -1,5 +1,5 @@
 .container--upload {
-    background: white;
+    background: rgba(66, 44, 77, 0.4);
     border-radius: 25px;
     display: flex;
     flex-flow: column;

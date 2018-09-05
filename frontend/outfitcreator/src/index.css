@@ -8,7 +8,7 @@
 }
 
 html, body, body #root {
-  background: white;
+  background-image: url(./boutique2.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
   box-sizing: border-box;

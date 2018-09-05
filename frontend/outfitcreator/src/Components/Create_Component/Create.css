@@ -1,5 +1,6 @@
 .createContainer {
-    background: white;
+    background: rgba(66, 44, 77, 0.4);
+    border-radius: 55px;
     margin: 60px 0;
     padding: 20px;
 }
