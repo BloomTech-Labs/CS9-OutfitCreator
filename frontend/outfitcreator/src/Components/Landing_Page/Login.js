@@ -3,6 +3,8 @@ import axios from 'axios';
 import {TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col} from 'reactstrap';
 import {FacebookLoginButton, GithubLoginButton, GoogleLoginButton} from "react-social-login-buttons";
 import classnames from 'classnames';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './Landing.css'
 import { ROOT_URL } from '../../config';
@@ -18,6 +20,12 @@ class Login extends React.Component {
         };
     }
 
+    notifySignUpSuccess = () => toast("Successfully signed up. Please check your email to validate your account");
+    notifySignUpFailure = () => toast("Failed to sign up. Please try again!");
+    notifySignInSuccess = () => toast("Successfully signed in.");
+    notifySignInFailure = () => toast("Failed to sign in. Please try again!");
+    notifySignInValidationFailure = () => toast("You must validate your account. Please check your email.");
+
     signUp = () => {
         const { username, password, email } = this.state;
 
@@ -25,11 +33,14 @@ class Login extends React.Component {
             .then(res => {
                 localStorage.setItem('authToken', `Bearer ${res.data.token}`);
                 // Redirect to create page once logged in
+                // window.location = `${ROOT_URL.WEB}/Create`;
+                this.notifySignUpSuccess();
                 this.setState({ activeTab: '2'})
             })
             .catch(err => {
-                alert('Failed to sign up. Please try again.');
-                console.log(err);
+                // alert('Failed to sign up. Please try again.');
+                this.notifySignUpFailure();
+                console.log(err.response);
             });
     }
 
@@ -37,13 +48,21 @@ class Login extends React.Component {
         const { email, password } = this.state;
         axios.post(`${ROOT_URL.API}/auth/login`, { email, password })
             .then(res => {
+                console.log(res);
                 this.props.onSignin(res.data);
                 // Redirect to create page once logged in
                 window.location = `${ROOT_URL.WEB}/Create`;
+                this.notifySignInSuccess();
             })
             .catch(err => {
-                // Alert for invalid credentials
-                alert('Invalid Credentials');
+                if(err.response.data.err) {
+                    if(err.response.data.err.message === 'Sorry, you must validate email first'){
+                        this.notifySignInValidationFailure();
+                    }
+                }
+                 else {
+                    this.notifySignInFailure();
+                }
                 localStorage.removeItem('token');
             });
     }
@@ -168,6 +187,7 @@ class Login extends React.Component {
             </Row>
           </TabPane>
         </TabContent>
+        <ToastContainer />
       </div>
         )
     }
