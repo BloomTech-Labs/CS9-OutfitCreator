@@ -50,9 +50,6 @@ class CreateOutfit extends Component {
               shoes: ['casualShoes', 'formalShoes']
             },
         }
-
-        this.setTypes();
-        this.setAuthToken();
     }
 
     setAuthToken = () => {
@@ -171,7 +168,7 @@ class CreateOutfit extends Component {
                 locked: false,
             },
         }
-
+        
         this.props.isUserPaid(paid => {
             if (paid) this.setState({ items: paidItems });
         });
@@ -182,6 +179,7 @@ class CreateOutfit extends Component {
         if(hash.token) {
             localStorage.setItem('authToken', `Bearer ${hash.token}`);
             this.setAuthToken();
+            this.setTypes();
         }
         const user = this.props.getUserID();
 
@@ -354,6 +352,9 @@ class CreateOutfit extends Component {
     }
 
     render() {
+      console.log('Render');
+      // this.setTypes();
+      // this.setAuthToken();
         const typesInCloset = this.getTypesInCloset();
         const selected = this.getSelected();
 
