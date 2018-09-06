@@ -136,14 +136,19 @@ class Closet extends React.Component {
     }
 
     toggleAll = () => {
-        const items = this.state.items;
-        Object.keys(this.state.items).forEach(item => items[item].show = false);
+        const typesInCloset = this.typesInCloset();
+        console.log(typesInCloset)
+        const { items } = this.state;
+        Object.keys(items).forEach(item => items[item].show = false);
+        Object.keys(items).forEach((item) => {
+            console.log(item);
+            if (typesInCloset.indexOf(items[item]) > -1) items[item].show = true;
+            console.log(typesInCloset.indexOf(items[item].title));
+        })
         this.setState({ items, selectAll: !this.state.selectAll });
-        console.log(items, this.state)
     }
 
     activateCategory = (category) => {
-        console.log(category);
         const items = this.state.items;
         Object.keys(this.state.items).forEach(item => items[item].show = false);
         items[category].show = !items[category].show;
@@ -154,10 +159,21 @@ class Closet extends React.Component {
         return Object.keys(this.state.items).filter(type => this.state.items[type].show === true);
     }
 
+    typesInCloset = () => {
+        return (Object.keys(this.state.items).filter(type => {
+            return (this.state.items[type].all.length > 0);
+        }));
+    }
+
+    subtypesInCloset = () => {
+        return (Object.keys(this.state.items).filter(type => {
+            return ((this.state.items[type].all.length > 0) && (type != "top" && type != "bottom" && type != "shoes"));
+        }));
+    }
+
     submit = newInfo => {
         axios.put(`${ROOT_URL.API}/items/${newInfo.id}`, newInfo)
-            .then(response => {
-                console.log(response);
+            .then(() => {
                 this.onSelect(newInfo.type);
             })
             .catch(err => {
@@ -166,12 +182,8 @@ class Closet extends React.Component {
     }
 
     render() {
-        const typesInCloset = Object.keys(this.state.items).filter(type => {
-            return (this.state.items[type].all.length > 0);
-        });
-        const subtypesInCloset = Object.keys(this.state.items).filter(type => {
-            return ((this.state.items[type].all.length > 0) && (type != "top" && type != "bottom" && type != "shoes"));
-        });
+        const typesInCloset = this.typesInCloset();
+        const subtypesInCloset = this.subtypesInCloset();
 
         let subtypeItems = [];
         subtypesInCloset.forEach(subtype => {
@@ -187,7 +199,7 @@ class Closet extends React.Component {
         console.log(typesInCloset);
 
         return (
-            <div className="closet">
+            <div className="closet" >
                 <div className="closet-menu">
                     <button className={this.state.selectAll ? "closet-button--active" : "closet-button"} onClick={this.toggleAll}>All</button>
                     {typesInCloset.map(type => (
@@ -203,8 +215,8 @@ class Closet extends React.Component {
                 <div className="closet-cards">
                     {this.state.selectAll ?
                         itemsNoRepeats.map(item => (
-                            <ClosetCard submit={this.submit} item={item} key={item._id}/>
-                        )) : 
+                            <ClosetCard submit={this.submit} item={item} key={item._id} />
+                        )) :
                         selected.map(type => (
                             this.state.items[type].all.map(item => (
                                 <ClosetCard submit={this.submit} item={item} key={item._id} />
