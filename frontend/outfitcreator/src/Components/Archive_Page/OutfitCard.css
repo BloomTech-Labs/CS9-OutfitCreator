@@ -31,8 +31,9 @@
 
 .card--images img {
     margin: 5px;
+}
 
-.card--footer{
+.card--footer {
     display: block;
     align-self: flex-start;
     margin: 5px 0;

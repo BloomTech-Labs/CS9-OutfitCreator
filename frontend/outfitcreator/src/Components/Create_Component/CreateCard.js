@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardImg, CardImgOverlay, Button } from 'reactstrap';
+import { Icons } from '../Icons';
 import './Create.css';
 
 class CreateCard extends React.Component {
@@ -15,10 +16,13 @@ class CreateCard extends React.Component {
                             alt="Card image cap"
                             className="cardImage"
                         />
-                        <CardImgOverlay>
-                            <Button id={this.props.type} className='close' aria-label="Close" onClick={this.props.randomizeSingle}>
-                                <span aria-hidden="true">&times;</span>
-                            </Button>
+                        <CardImgOverlay className={this.props.locked ? "locked-border" : null}>
+                            <div className="card-lock" onClick={() => this.props.toggleLocked(this.props.type)} >
+                                <img className="lock-icon" src={this.props.locked ? Icons.locked : Icons.unlocked} />
+                            </div>
+                            <div id={this.props.type} className="card-refresh" onClick={this.props.randomizeSingle} >
+                                <img className="refresh-icon" src={Icons.refresh} />
+                            </div>
                         </CardImgOverlay>
                     </Card>
             </div>
