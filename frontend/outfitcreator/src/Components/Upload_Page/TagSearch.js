@@ -38,7 +38,7 @@ class TagSearch extends Component {
                 <InputGroupAddon 
                     className='tagSearch--icon' 
                     addonType='prepend'>
-                    <img src={Icon} alt='Magnifying Glass' />
+                    <img src={Icon} alt='Tag Icon' />
                 </InputGroupAddon>
                 <Input 
                     className='tagSearch--input' 

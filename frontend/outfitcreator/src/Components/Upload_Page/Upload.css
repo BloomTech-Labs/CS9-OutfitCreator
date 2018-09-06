@@ -49,24 +49,24 @@
 }
 
 .upload--name {
-    border: 1px solid grey;
-    font-size: 12px;
-    height: 30px;
-    width: 200px;
+    border: 1px solid black;
+    font-size: 15px;
+    height: 35px;
+    width: 250px;
     margin-top: 10px;
 }
 
 .upload--name:focus {
-    border: 1px solid grey;
+    border: 1px solid black;
     box-shadow:none;
     outline: none;
 }
 
 .upload--select {
-    border: 1px solid grey;
-    font-size: 12px;
-    height: 30px;
-    width: 200px;
+    border: 1px solid black;
+    font-size: 15px;
+    height: 35px;
+    width: 250px;
 }
 
 .container--upload .upload--save, .container--upload .upload--save:hover {
