@@ -119,8 +119,7 @@
 .closet-image {
     border-radius: 3px;
     overflow: hidden;
-    height: 200px;
-    width: 300px;
+    height: 150px; /*these images are scaled to a height of 150px but might be variable widths*/
 }
 
 @media (max-width: 950px) {

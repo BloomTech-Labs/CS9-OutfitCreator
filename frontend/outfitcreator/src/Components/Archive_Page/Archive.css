@@ -39,12 +39,8 @@
 
 .archive--collection {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-content: flex-start;
     flex-wrap: wrap;
-    /* max-width: 400px;
-    min-width: 400px;
-    max-height: 300px;
-    min-height: 300px; */
 }

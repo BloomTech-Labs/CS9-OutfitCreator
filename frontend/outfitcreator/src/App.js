@@ -87,6 +87,7 @@ class App extends Component {
           <Route exact path='/verify/:key?' render={props =>
             <VerifyEmail {...props} />
           } />
+
           {/* <Route path='/Create' render={props =>
             <div className='App--create'>
               <Create {...props} getUserID={this.getUserID} />
