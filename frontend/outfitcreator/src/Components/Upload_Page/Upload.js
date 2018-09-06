@@ -3,7 +3,7 @@ import axios from 'axios';
 import { CloudinaryContext } from 'cloudinary-react';
 import { CardImg, Button, FormGroup, Input } from 'reactstrap';
 import { ROOT_URL } from '../../config';
-import TagSearch from './TagSearch';
+import TagInput from './TagInput';
 import uploadPlacholder from './uploadPlaceholder.png';
 import './Upload.css';
 // import sha1 from 'sha1';
@@ -18,7 +18,7 @@ class Upload extends Component {
             user: '',
             image: '',
             name: '',
-            search: '',
+            tag: '',
             tags: [],
             type: 'title',
             options: {},
@@ -50,22 +50,6 @@ class Upload extends Component {
         });
     }
 
-    // generateSignature = () => {
-    //     const { name } = this.state;
-    //     const newName = name.trim();
-    //     const timestamp = Date.now();
-    //     const eager = 'w_400,h_300,c_crop';
-    //     const object = {
-    //         newName, timestamp, eager
-    //     };
-    //     const toBeStrings = [];
-    //     Object.entries(object).forEach((key) => {
-    //         toBeStrings.push(`${key[0]}=${key[1]}`);
-    //     });
-    //     const finalString = toBeStrings.sort().join('&') + API_SECRET;
-    //     return sha1(finalString);
-    // }
-
     componentDidMount() {
         const user = this.props.getUserID();
         window.cloudinary.applyUploadWidget(document.getElementById('cloudinary--uploader'),
@@ -75,14 +59,10 @@ class Upload extends Component {
                 api_key: CLOUD_API,
                 upload_preset: 'default',
                 multiple: false,
-                // cropping: 'server',
-                // cropping_show_dimensions: true,
-                // cropping_show_back_button: true,
                 sources: [
                     'local',
                      'url',
                      'camera',
-                    //  'image_search',
                      'instagram',
                      'facebook'
                     ],
@@ -194,22 +174,6 @@ class Upload extends Component {
     }
 
     render() {
-        // console.log(this.state);
-        // console.log(this.props);
-        // console.log(this.generateSignature(testobject));
-        // let image;
-        // if (this.state.result) {
-        //     console.log(this.state.result);
-        //     const { width, height } = this.state.result;
-        //     let cropWidth = width, cropHeight = height;
-        //     while (cropWidth >= 300 || cropHeight >= 200) {
-        //         (cropWidth *= 0.9), (cropHeight *= 0.9);
-        //     }
-        //     const crop = `/upload/w_${cropWidth.toFixed(0)},h_${cropHeight.toFixed(0)}/`;
-        //     const [partOne, partTwo] = this.state.image.split("/upload/");
-        //     image = partOne + crop + partTwo;
-        //     console.log(image);
-        // }
         return (
             <div className='container--upload'>
                 <div className='upload--columns'>
@@ -253,7 +217,7 @@ class Upload extends Component {
                                   )) : null }
                             </Input>
                         </FormGroup>
-                        <TagSearch
+                        <TagInput
                             state={this.state}
                             passState={this.passState}
                         />
