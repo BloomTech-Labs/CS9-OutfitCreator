@@ -31,7 +31,6 @@
     max-width: 70vw;
     max-height: 90vh;
     margin-top: 4.5em;
-    width: 95%;
     min-height: 700px;
     margin-left: 1em;
     overflow-x: auto;
@@ -55,10 +54,11 @@
 
 .edit--selections {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     max-height: 90vh;
     max-width: 80vw;
-    overflow-x: auto;
+    overflow-x: hidden;
 }
 
 .edit--input {

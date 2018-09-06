@@ -203,12 +203,9 @@ class CreateOutfit extends Component {
             ])
                 .then(res => {
                     const items = { ...this.state.items };
-                    console.log(res);
 
                     Object.keys(items).forEach((item, idx) => {
-                        console.log(item, idx);
                         items[item].all = res[idx].data;
-                        console.log(res[idx].data)
                     });
 
                     this.setState({ items });
@@ -252,7 +249,6 @@ class CreateOutfit extends Component {
         // Otherwise toggle off main of subtype
         } else {
             Object.entries(subtypeMap).forEach(pair => {
-                console.log(pair, category);
                 if (pair[1].includes(category)) {
                   items[pair[0]].show = false;
                 }
@@ -337,7 +333,6 @@ class CreateOutfit extends Component {
         const { name, worn, tags } = this.state;
         const { top, bottom, shoes } = groups;
         const outfit = { user, name, worn, tags, top, bottom, shoes };
-        console.log(outfit);
 
         axios.post(`${ROOT_URL.API}/outfits`, outfit)
             .then(() => {
@@ -357,7 +352,6 @@ class CreateOutfit extends Component {
     render() {
         const typesInCloset = this.getTypesInCloset();
         const selected = this.getSelected();
-        console.log(this.state);
 
         return (
             <div className="createContainer">
