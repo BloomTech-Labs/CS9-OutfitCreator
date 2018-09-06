@@ -64,19 +64,6 @@ class ClosetCard extends React.Component {
                 </div>
             ) : (
                     <div className="closet-card" onClick={this.toggle}>
-                        {/* <div className="closet-card--name">{name}</div>
-                        <img className="closet-image"
-                            src={`${newURL}`} //split this and add height parameter
-                            alt={name} />
-                        <div className="closet-card--tags">
-                            {tags.map((tag, index) =>
-                                <span key={index} className="closet-tag">
-                                    {`${tag}`}
-                                    {(index < tags.length - 1)
-                                        ? ', '
-                                        : ''}
-                                </span>)}
-                        </div> */}
                         <div className="closet-card--name">{this.props.item.name}</div>
                         <img className="closet-image"
                             src={`${newURL}`}
