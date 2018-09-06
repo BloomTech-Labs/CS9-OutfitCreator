@@ -85,6 +85,7 @@
     width: 100%;
     max-width: 120px;
     text-align: center;
+    margin: 5px 0px;
 }
 
 .closet-card--options {
@@ -97,6 +98,7 @@
 .closet-card--accept {
     background-color: lightgreen;
     border: none;
+    margin: 5px;
 }
 
 .closet-card--accept:hover {
@@ -107,6 +109,8 @@
 
 .closet-card--cancel {
     background-color: red;
+    border: none;
+    margin: 5px;
     /* color: var(--red); */
 }
 
