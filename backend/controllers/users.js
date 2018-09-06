@@ -50,13 +50,13 @@ exports.signup = (req, res) => {
                 },
                 signupKey: key
             });
-            user.save().then(user => {                
+            user.save().then(user => {
                 // Send verification email
                 const subject = "Closet Roulette | Email Verification Required";
                 const url = `${ROOT_URL.WEB}/verify/${key.key}`;
-                const html = `Hi there,
+                const html = `Hi ${user.local.username},
                 <br/>
-                Thank you for registering!
+                Thank you for registering for Closet Roulette!
                 <br/><br/>
                 Please verify your email by clicking this link: <a href="${url}">${url}</a>
                 <br/>
