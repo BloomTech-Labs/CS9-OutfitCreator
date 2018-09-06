@@ -70,7 +70,7 @@
     border-radius: 5px;
 }
 
-.edit--buttons {
+.edit--button-group {
     display: flex;
     justify-content: space-between;
 }
@@ -81,7 +81,7 @@
     height: 50px;
 }
 
-.edit--submit:hover, .edit--cancel:hover {
+.edit--button:hover {
     background-color: black;
     color: white;
     cursor: pointer;

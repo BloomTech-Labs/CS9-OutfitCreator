@@ -37,6 +37,8 @@
     display: block;
     align-self: flex-start;
     margin: 5px 0;
+    border-radius: 3px;
+
 }
 
 .card--footer {
@@ -61,5 +63,5 @@
     cursor: pointer;
     border: 1px solid black;
     border-radius: 5px;
-    box-shadow: 1px 1px;
+    box-shadow: 1px 1px rgb(142, 43, 199);
 }
