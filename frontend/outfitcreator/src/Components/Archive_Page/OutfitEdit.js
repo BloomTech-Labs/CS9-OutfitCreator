@@ -25,6 +25,7 @@ class OutfitEdit extends React.Component {
             tags: [],
             itemSelection: [],
             editItem: false,
+            outfitID: '',
         }
     }
 
@@ -44,15 +45,15 @@ class OutfitEdit extends React.Component {
 
     getOutfit = () => {
         const user = this.props.getUserID();
-        const outfitId = this.props.location.pathname.split('Edit/')[1];
-        axios.get(`${ROOT_URL.API}/outfits/${user}/${outfitId}`)
+        const outfitID = this.props.location.pathname.split('Edit/')[1];
+        axios.get(`${ROOT_URL.API}/outfits/${user}/${outfitID}`)
             .then(response => {
                 const { data } = response;
                 let lastWorn = data.worn[0];
                 if (lastWorn) {
                     lastWorn = lastWorn.split('T')[0];
                 }
-                this.setState({ outfit: data, name: data.name, worn: data.worn, lastWorn, user })
+                this.setState({ outfit: data, name: data.name, worn: data.worn, lastWorn, user, outfitID })
             })
             .catch(err => {
                 console.log(err);
@@ -80,16 +81,25 @@ class OutfitEdit extends React.Component {
     }
 
     submitChanges = () => {
-        const { user, name, worn, lastWorn, top, topTags, bottom, bottomTags, shoes, shoesTags } = this.state;
-        const outfitId = this.props.location.pathname.split('Edit/')[1];
+        const { user, name, worn, lastWorn, top, topTags, bottom, bottomTags, shoes, shoesTags, outfitID } = this.state;
         if (lastWorn) worn.unshift(lastWorn);
         const tags = [...topTags, ...bottomTags, ...shoesTags];
         const newInfo = { name, worn, tags, top, bottom, shoes };
-        axios.put(`${ROOT_URL.API}/outfits/${user}/${outfitId}`, newInfo)
+        axios.put(`${ROOT_URL.API}/outfits/${user}/${outfitID}`, newInfo)
             .then()
             .catch(err => {
                 console.log(err);
             });
+        this.redirectArchive();
+    }
+
+    deleteOutfit = () => {
+        const { outfitID } = this.state;
+        axios.delete(`${ROOT_URL.API}/outfits/${outfitID}`)
+        .then()
+        .catch(err => {
+            console.log(err);
+        })
         this.redirectArchive();
     }
 
@@ -214,7 +224,7 @@ class OutfitEdit extends React.Component {
                                         </div>
                                         <div className='edit--button-group '>
                                             <button className='edit--submit edit--button button' onClick={this.submitChanges}>Submit</button>
-                                            <button className='edit--delete edit--button button' onClick={this.submitChanges}>delete</button>
+                                            <button className='edit--delete edit--button button' onClick={this.deleteOutfit}>delete</button>
                                             <button className='edit--cancel edit--button button' onClick={this.redirectArchive}>Cancel</button>
                                         </div>
                                     </form>

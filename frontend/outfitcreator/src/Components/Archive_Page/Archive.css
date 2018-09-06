@@ -1,11 +1,12 @@
-.container--archive {
+.container-archive {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: flex-start;
     background: white;
     border-radius: 25px;
     margin: 60px 0;
-    width: 100%;
+    min-width: 100vw;
     padding: 30px;
 }
 
