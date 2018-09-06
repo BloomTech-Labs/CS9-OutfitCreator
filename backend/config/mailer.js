@@ -34,9 +34,9 @@ const generateSignupKey = () => {
     }
 }
 
-const sendEmail = (to, subject, html, text) => {
+const sendEmail = (to, subject, html) => {
     return new Promise((resolve, reject) => {
-      transport.sendMail({ from: 'Closet Roulette', to, subject, html, text }, (err, info) => {
+      transport.sendMail({ from: 'Closet Roulette <closetroulette@gmail.com>', to, subject, html }, (err, info) => {
         if (err) reject(err);
         resolve(info);
       });
