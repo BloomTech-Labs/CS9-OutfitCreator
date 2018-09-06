@@ -43,7 +43,7 @@
     background: white;
     border-radius: 5px;
     box-shadow: 2px 2px 0 0 black;
-    color: black;
+    color: white;
     font-size: 12px;
     margin: 10px 0 30px;
 }
@@ -73,6 +73,7 @@
     padding: 5px 10px;
     font-size: 1.1em;
     width: 100px;
+    color: white;
 }
 .upload--pairWith {
     line-height: 23px;
@@ -128,7 +129,7 @@ input[type=checkbox] {
   padding: 5px 10px;
   font-weight: bold;
   font-size: 1em;
-  color: var(--pale-purple);
+  color: white;
   font-family: 'Arsenal', cursive;
 }
 

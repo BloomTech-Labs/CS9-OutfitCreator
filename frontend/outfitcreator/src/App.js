@@ -8,7 +8,6 @@ import axios from 'axios';
 import Landing from './Components/Landing_Page/Landing';
 import Login from './Components/Landing_Page/Login';
 import Navigation from './Components/Navigation/Navigation';
-import Create from './Components/Create_Component/Create';
 import CreateLayers from './Components/Create_Component/CreateLayers';
 import Upload from './Components/Upload_Page/Upload';
 import Archive from './Components/Archive_Page/Archive';
@@ -83,16 +82,9 @@ class App extends Component {
               </div>
             </div>
           } />
-
           <Route exact path='/verify/:key?' render={props =>
             <VerifyEmail {...props} />
           } />
-          {/* <Route path='/Create' render={props =>
-            <div className='App--create'>
-              <Create {...props} getUserID={this.getUserID} />
-              <Navigation getUserID={this.getUserID} />
-            </div>
-          } /> */}
           <Route path='/Create' render={props =>
             <div className='App--create-layers'>
               <CreateLayers {...props} getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
