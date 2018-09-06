@@ -20,12 +20,13 @@ class Upload extends Component {
             name: '',
             search: '',
             tags: [],
-            type: 'top',
+            type: 'title',
             options: {},
         }
 
         props.isUserPaid(paid => {
             const options = paid ? {
+                    title: 'Item Type',
                     top: 'Top',
                     shirt: 'Shirt',
                     sweater: 'Sweater',
@@ -40,6 +41,7 @@ class Upload extends Component {
                     casualShoes: 'Casual Shoes',
                     shoes: 'Shoes',
                 } : { 
+                    title: 'Item Category',
                     top: 'Top',
                     bottom: 'Bottom',
                     shoes: 'Shoes',
@@ -111,6 +113,11 @@ class Upload extends Component {
 
     saveItem = e => {
         e.preventDefault();
+
+        if (this.state.type == 'title'){
+            alert('Please select an item type');
+            return;
+        }
 
         this.props.isUserPaid(paid => {
             this.uploadCount(count => {
