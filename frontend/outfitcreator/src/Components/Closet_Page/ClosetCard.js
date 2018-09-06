@@ -43,15 +43,15 @@ class ClosetCard extends React.Component {
         return (
             this.state.edit ? (
                 <div className='closet-card--edit'>
-                    <input
+                    <div className='closet-card--options'>
+                        <button className='closet-card--accept' onClick={this.submit}>&#10004;</button>
+                        <input
                         type='text'
                         name='nameEdit'
                         value={this.state.nameEdit}
                         onChange={this.handleInput}
                         className='closet-card--input'
-                    />
-                    <div className='closet-card--options'>
-                        <button className='closet-card--accept' onClick={this.submit}>&#10004;</button>
+                        />
                         <button className='closet-card--cancel' onClick={this.toggle}>&#10006;</button>
                     </div>
                     <div className="closet-card">
@@ -64,19 +64,6 @@ class ClosetCard extends React.Component {
                 </div>
             ) : (
                     <div className="closet-card" onClick={this.toggle}>
-                        {/* <div className="closet-card--name">{name}</div>
-                        <img className="closet-image"
-                            src={`${newURL}`} //split this and add height parameter
-                            alt={name} />
-                        <div className="closet-card--tags">
-                            {tags.map((tag, index) =>
-                                <span key={index} className="closet-tag">
-                                    {`${tag}`}
-                                    {(index < tags.length - 1)
-                                        ? ', '
-                                        : ''}
-                                </span>)}
-                        </div> */}
                         <div className="closet-card--name">{this.props.item.name}</div>
                         <img className="closet-image"
                             src={`${newURL}`}

@@ -1,5 +1,4 @@
 const router = require("express")();
-// const keys = require("../config/keys.js");
 const cors = require('cors');
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 

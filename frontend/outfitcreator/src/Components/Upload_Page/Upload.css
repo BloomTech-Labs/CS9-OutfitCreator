@@ -43,37 +43,42 @@
     background: white;
     border-radius: 5px;
     box-shadow: 2px 2px 0 0 black;
-    color: black;
+    color: white;
     font-size: 12px;
     margin: 10px 0 30px;
 }
 
 .upload--name {
-    border: 1px solid grey;
-    font-size: 12px;
-    height: 30px;
-    width: 200px;
+    border: 1px solid black;
+    font-size: 15px;
+    height: 35px;
+    width: 250px;
     margin-top: 10px;
 }
 
 .upload--name:focus {
-    border: 1px solid grey;
+    border: 1px solid black;
     box-shadow:none;
     outline: none;
 }
 
 .upload--select {
-    border: 1px solid grey;
-    font-size: 12px;
-    height: 30px;
-    width: 200px;
+    border: 1px solid black;
+    font-size: 15px;
+    height: 35px;
+    width: 250px;
 }
 
 .container--upload .upload--save, .container--upload .upload--save:hover {
-    padding: 5px 10px;
-    font-size: 1.1em;
-    width: 100px;
+    padding: 2px 25px 3px;
+    font-size: 17px;
+    color: white;
 }
+
+.container--upload .upload--save:hover {
+    color: var(--dark-purple);
+}
+
 .upload--pairWith {
     line-height: 23px;
     text-align: left;
@@ -124,11 +129,11 @@ input[type=checkbox] {
 .cloudinary-button {
   background: var(--dark-purple);
   border: 2px solid var(--dark-purple);
-  border-radius: 10px;
-  padding: 5px 10px;
+  border-radius: 5px;
+  padding: 3px 15px 4px;
   font-weight: bold;
-  font-size: 1em;
-  color: var(--pale-purple);
+  font-size: 15px;
+  color: white;
   font-family: 'Arsenal', cursive;
 }
 
@@ -136,11 +141,11 @@ input[type=checkbox] {
   background: var(--light-purple);
   border: 2px solid var(--dark-purple);
   text-decoration: none;
-  border-radius: 10px;
-  padding: 5px 10px;
+  border-radius: 5px;
+  padding: 3px 15px 4px;
   color: var(--dark-purple);
   font-weight: bold;
-  font-size: 1em;
+  font-size: 15px;
 }
 
 @media screen and (max-width: 900px) {

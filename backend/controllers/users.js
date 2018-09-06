@@ -1,7 +1,7 @@
 const User = require("../models/userModel");
 const { makeToken } = require("../config/passport-setup");
 const { generateSignupKey, sendEmail } = require('../config/mailer');
-const { ROOT_URL } = require('../config/keys');
+const { ROOT_URL } = require('../config/root-urls');
 
 // Register a new user
 exports.signup = (req, res) => {
