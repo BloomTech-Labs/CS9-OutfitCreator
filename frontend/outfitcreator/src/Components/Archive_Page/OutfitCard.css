@@ -50,14 +50,14 @@
     background: transparent;
 }
 
-.edit--button {
+.edit--button-archive {
     border: none;
     height: 25px;
     width: 25px;
-    background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACkSURBVEhL7ZDNCQIxEEbTwipsMV60CgXtRBC3CMVutAr7cO+CvlkzEEIWIZnc8uCRn8P3JeManiO+cDedjDnjx/tG85IBtUBLtljM2q9CXCLjKkLHIqsSlpzkIpdw5qkSMZs4PFWSzVy4usFs/oVXGYvawpMWhQtLvGGVcKVH8/ADrn7biQ71JyYvv+CIYckCzcbyQHltXGLGE+94xb1cNCrj3Bd0W2O4MZVXCgAAAABJRU5ErkJggg==');
+    background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACkSURBVEhL7ZDNCQIxEEbTwipsMV60CgXtRBC3CMVutAr7cO+CvlkzEEIWIZnc8uCRn8P3JeManiO+cDedjDnjx/tG85IBtUBLtljM2q9CXCLjKkLHIqsSlpzkIpdw5qkSMZs4PFWSzVy4usFs/oVXGYvawpMWhQtLvGGVcKVH8/ADrn7biQ71JyYvv+CIYckCzcbyQHltXGLGE+94xb1cNCrj3Bd0W2O4MZVXCgAAAABJRU5ErkJggg==') no-repeat center;
 }
 
-.edit--button:hover {
+.edit--button-archive:hover {
     cursor: pointer;
     border: 1px solid black;
     border-radius: 5px;

@@ -25,7 +25,7 @@ class OutfitCard extends React.Component {
                         {name}
                     </div>
                     <div className='header--edit'>
-                        <button className='edit--button' onClick={this.editRedirect} />
+                        <button className='edit--button-archive' onClick={this.editRedirect} />
                     </div>
                 </div>
                 <div className='card--images'>
