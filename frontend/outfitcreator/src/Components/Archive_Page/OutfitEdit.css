@@ -13,11 +13,6 @@
     margin: 4px;
 }
 
-/* .card-img {
-    width: 300px;
-    height: 400px;
-} */
-
 .card-deck .card:hover {
     border: 1px solid purple;
 }

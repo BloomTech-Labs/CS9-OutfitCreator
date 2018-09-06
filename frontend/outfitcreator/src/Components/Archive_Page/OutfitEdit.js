@@ -157,7 +157,6 @@ class OutfitEdit extends React.Component {
                                     const [partOne, partTwo] = item.image.split('upload/');
                                     const crop = 'upload/w_200,h_250/';
                                     const newUrl = partOne + crop + partTwo;
-                                    console.log(newUrl);
                                     return (<div className='outfit--card' key={index}>
                                         <img
                                             key={item._id}
