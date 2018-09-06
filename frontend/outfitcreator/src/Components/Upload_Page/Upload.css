@@ -11,24 +11,9 @@
 .upload--columns {
     align-items: center;
     display: flex;
-    flex-flow: wrap;
-    justify-content: space-around;
-    width: 70vw;
-}
-
-.column--left, .column--right {
-    min-width: 300px;
-    margin-top: 25px;
-}
-
-.column--left {
-    align-items: center;
-    display: flex;
     flex-flow: column;
-}
-
-.column--right {
-    margin-left: 20px;
+    justify-content: space-around;
+    width: 80%;
 }
 
 .upload--image {
