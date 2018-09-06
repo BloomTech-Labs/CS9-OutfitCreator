@@ -6,25 +6,13 @@
   width: 80%;
 }
 
-/* .closet-text {}
-
-.closet-menu {} */
-
-.closet-title {
-    font-family: "Homemade Apple", cursive;
-    font-size: 2em;
-    font-weight: bold;
-    color: var(--dark-purple);
-    margin-bottom: 15px;
-}
-
 .closet-button {
     background: var(--dark-purple);
     border: 2px solid var(--dark-purple);
     border-radius: 5px;
     padding: 0px 8px;
     margin: 5px;
-    font-size: 1.25em;
+    font-size: 15px;
     font-weight: bold;
     color: var(--pale-purple);
     font-family: 'Arsenal', sans-serif;
@@ -36,7 +24,7 @@
     border-radius: 5px;
     padding: 0px 8px;
     margin: 5px;
-    font-size: 1.25em;
+    font-size: 15px;
     font-weight: bold;
     color: var(--dark-purple);
     font-family: 'Arsenal', sans-serif;
@@ -70,7 +58,7 @@
 
 .closet-card--name{
     font-weight: bold;
-    font-size: 1.25em;
+    font-size: 20px;
 }
 
 .closet-card--edit {
@@ -80,23 +68,24 @@
 }
 
 .closet-card--input {
-    border: 1px solix black;
-    /* width: 60px; */
+    border: 1px solid black;
+    border-radius: 5px;
     width: 100%;
-    max-width: 120px;
     text-align: center;
+    margin: 5px 0px;
 }
 
 .closet-card--options {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 120px;
+    justify-content: center;
+    width: 80%;
 }
 
 .closet-card--accept {
     background-color: lightgreen;
     border: none;
+    border-radius: 5px;
+    margin: 5px;
 }
 
 .closet-card--accept:hover {
@@ -107,6 +96,9 @@
 
 .closet-card--cancel {
     background-color: red;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
     /* color: var(--red); */
 }
 

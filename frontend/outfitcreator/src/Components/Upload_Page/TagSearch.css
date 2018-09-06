@@ -6,11 +6,11 @@
 
 .tagSearch--icon {
     align-items: center;
-    border: 1px solid grey;
-    border-radius: 20px 0 0 20px;
+    border: 1px solid black;
+    border-radius: 5px 0 0 5px;
     border-right: none;
     display: flex;
-    height: 30px;
+    height: 35px;
     justify-content: center;
     padding-left: 10px;
     width: 35px;
@@ -22,14 +22,15 @@
 }
 
 .tagSearch--input {
-    border: 1px solid grey;
-    border-radius: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
     border-left: none;
-    height: 30px;
+    height: 35px;
+    width: 215px;
 }
 
 .tagSearch--input:focus {
-    border: 1px solid grey;
+    border: 1px solid black;
     border-left: none;
     box-shadow:none;
     outline: none;
