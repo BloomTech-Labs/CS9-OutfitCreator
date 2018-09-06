@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { CardDeck, Button, Input } from 'reactstrap';
 import CreateCard from './CreateCard.js';
-import { ROOT_URL } from '../../config';
+import { ROOT_URL } from '../../config.js';
 import axios from 'axios';
+import queryString from 'query-string';
 import './Create.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Icons } from '../Icons';
+import { Icons } from '../Icons/index.js';
 
-class CreateLayers extends Component {
+class CreateOutfit extends Component {
     constructor(props) {
         super(props);
 
@@ -177,6 +178,11 @@ class CreateLayers extends Component {
     }
 
     componentDidMount() {
+        const hash = queryString.parse(this.props.location.hash);
+        if(hash.token) {
+            localStorage.setItem('authToken', `Bearer ${hash.token}`);
+            this.setAuthToken();
+        }
         const user = this.props.getUserID();
 
         if (user) {
@@ -385,4 +391,4 @@ class CreateLayers extends Component {
     }
 };
 
-export default CreateLayers;
+export default CreateOutfit;
