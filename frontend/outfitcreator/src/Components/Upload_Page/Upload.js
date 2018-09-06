@@ -150,7 +150,7 @@ class Upload extends Component {
                         .then(response => {
                             console.log(response);
                             this.setState({ image: '', name: '', tags: [] });
-                            this.saveTest();
+                            // this.saveTest(); // not sure what this is for
                         })
                         .catch(error => {
                             console.log(error);
@@ -162,7 +162,7 @@ class Upload extends Component {
                         .then(response => {
                             console.log(response);
                             this.setState({ image: '', name: '', tags: [] });
-                            this.saveTest();
+                            // this.saveTest(); // not sure what this is for
                         })
                         .catch(error => {
                             console.log(error);

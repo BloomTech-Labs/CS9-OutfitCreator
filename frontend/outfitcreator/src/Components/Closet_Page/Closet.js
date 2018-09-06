@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {ROOT_URL} from '../../config';
+import { ROOT_URL } from '../../config';
 import './closet.css';
 import ClosetCard from './ClosetCard.js';
 import { Icons } from '../Icons';
@@ -93,7 +93,6 @@ class Closet extends React.Component {
 
     componentDidMount() {
         const user = this.props.getUserID();
-
         if (user) {
             axios.all([
                 axios.get(`${ROOT_URL.API}/items/type/${user}/top`),
@@ -108,7 +107,7 @@ class Closet extends React.Component {
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/dress`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/formalShoes`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/casualShoes`),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/shoes`),
+                axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`),
             ])
                 .then(res => {
                     const items = { ...this.state.items };
@@ -125,7 +124,7 @@ class Closet extends React.Component {
                     items.formalShoes.all = res[10].data;
                     items.casualShoes.all = res[11].data;
                     items.shoes.all = res[12].data;
-
+                    console.log(res, items);
                     this.setState({ items });
                 })
                 .catch(err => {
@@ -140,6 +139,7 @@ class Closet extends React.Component {
         const items = this.state.items;
         Object.keys(this.state.items).forEach(item => items[item].show = false);
         this.setState({ items, selectAll: !this.state.selectAll });
+        console.log(items, this.state)
     }
 
     activateCategory = (category) => {
@@ -147,7 +147,7 @@ class Closet extends React.Component {
         const items = this.state.items;
         Object.keys(this.state.items).forEach(item => items[item].show = false);
         items[category].show = !items[category].show;
-        this.setState({items, selectAll: false})
+        this.setState({ items, selectAll: false })
     }
 
     getSelected = () => {
@@ -156,13 +156,13 @@ class Closet extends React.Component {
 
     submit = newInfo => {
         axios.put(`${ROOT_URL.API}/items/${newInfo.id}`, newInfo)
-        .then(response => {
-            console.log(response);
-            this.onSelect(newInfo.type);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+            .then(response => {
+                console.log(response);
+                this.onSelect(newInfo.type);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     render() {
@@ -180,12 +180,14 @@ class Closet extends React.Component {
         return (
             <div className="closet">
                 <div className="closet-menu">
-                <button className={this.state.selectAll ? "closet-button--active" : "closet-button"} onClick={this.toggleAll}>All</button>
+                    <button className={this.state.selectAll ? "closet-button--active" : "closet-button"} onClick={this.toggleAll}>All</button>
                     {typesInCloset.map(type => (
                         <button
                             className={this.state.items[type].show ? "closet-button--active" : "closet-button"}
                             onClick={() => { this.activateCategory(type) }}
-                            key={type} > {this.state.items[type].title} 
+                            key={type}
+                        >
+                            {this.state.items[type].title}
                         </button>
                     ))}
                 </div>
@@ -193,12 +195,12 @@ class Closet extends React.Component {
                     {this.state.selectAll ?
                         subtypesInCloset.map(type => (
                             this.state.items[type].all.map(item => (
-                                <ClosetCard submit={this.submit} item={item} key={item._id}/>
+                                <ClosetCard submit={this.submit} item={item} key={item._id} />
                             ))
-                        )) : 
+                        )) :
                         selected.map(type => (
                             this.state.items[type].all.map(item => (
-                                <ClosetCard submit={this.submit} item={item} key={item._id}/>
+                                <ClosetCard submit={this.submit} item={item} key={item._id} />
                             ))
                         ))
                     }

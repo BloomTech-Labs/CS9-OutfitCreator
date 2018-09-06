@@ -74,6 +74,22 @@ class CreateOutfit extends Component {
                 icon: Icons.top,
                 locked: false,
             },
+            bottom: {
+                title: 'All Bottoms',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.bottom,
+                locked: false,
+            },
+            shoes: {
+                title: 'All Shoes',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.casualShoes,
+                locked: false,
+            },
             shirt: {
                 title: 'Shirt',
                 show: false,
@@ -106,14 +122,6 @@ class CreateOutfit extends Component {
                 icon: Icons.dress,
                 locked: false,
             },
-            bottom: {
-                title: 'All Bottoms',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.bottom,
-                locked: false,
-            },
             pants: {
                 title: 'Pants',
                 show: false,
@@ -144,14 +152,6 @@ class CreateOutfit extends Component {
                 all: [],
                 current: null,
                 icon: Icons.leggings,
-                locked: false,
-            },
-            shoes: {
-                title: 'All Shoes',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.casualShoes,
                 locked: false,
             },
             formalShoes: {
@@ -188,24 +188,27 @@ class CreateOutfit extends Component {
         if (user) {
             axios.all([
                 axios.get(`${ROOT_URL.API}/items/type/${user}/top`),
+                axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`),
+                axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/shirt`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/sweater`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/jacket`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/dress`),
-                axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/pants`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/shorts`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/skirt`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/leggings`),
-                axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/formalShoes`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/casualShoes`),
             ])
                 .then(res => {
                     const items = { ...this.state.items };
+                    console.log(res);
 
                     Object.keys(items).forEach((item, idx) => {
+                        console.log(item, idx);
                         items[item].all = res[idx].data;
+                        console.log(res[idx].data)
                     });
 
                     this.setState({ items });
@@ -354,6 +357,7 @@ class CreateOutfit extends Component {
     render() {
         const typesInCloset = this.getTypesInCloset();
         const selected = this.getSelected();
+        console.log(this.state);
 
         return (
             <div className="createContainer">
