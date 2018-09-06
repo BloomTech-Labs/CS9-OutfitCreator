@@ -28,7 +28,7 @@
     background: white;
     border-radius: 5px;
     box-shadow: 2px 2px 0 0 black;
-    color: black;
+    color: white;
     font-size: 12px;
     margin: 10px 0 30px;
 }
@@ -55,10 +55,15 @@
 }
 
 .container--upload .upload--save, .container--upload .upload--save:hover {
-    padding: 5px 10px;
-    font-size: 1.1em;
-    width: 100px;
+    padding: 2px 25px 3px;
+    font-size: 17px;
+    color: white;
 }
+
+.container--upload .upload--save:hover {
+    color: var(--dark-purple);
+}
+
 .upload--pairWith {
     line-height: 23px;
     text-align: left;
@@ -110,10 +115,10 @@ input[type=checkbox] {
   background: var(--dark-purple);
   border: 2px solid var(--dark-purple);
   border-radius: 5px;
-  padding: 5px 10px;
+  padding: 3px 15px 4px;
   font-weight: bold;
   font-size: 15px;
-  color: var(--pale-purple);
+  color: white;
   font-family: 'Arsenal', cursive;
 }
 
@@ -122,7 +127,7 @@ input[type=checkbox] {
   border: 2px solid var(--dark-purple);
   text-decoration: none;
   border-radius: 5px;
-  padding: 5px 10px;
+  padding: 3px 15px 4px;
   color: var(--dark-purple);
   font-weight: bold;
   font-size: 15px;
