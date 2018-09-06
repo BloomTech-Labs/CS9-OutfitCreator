@@ -4,16 +4,11 @@ import './TagSearch.css';
 import Icon from './tag.png';
 
 class TagSearch extends Component {
-    constructor(props) {
-        super();
-    }
-
     addTag = (e) => {
-        if(e.key === 'Enter' && !this.props.state.tags.includes(this.props.state.search)) {
-            this.props.passState({ 
-                tags: [...this.props.state.tags, this.props.state.search],
-                search: ''
-            });
+        const tag = this.props.state.tag.toLowerCase();
+
+        if(e.key === 'Enter' && !this.props.state.tags.includes(tag)) {
+            this.props.passState({ tags: [...this.props.state.tags, tag], tag: '' });
         }
     }
 
@@ -23,12 +18,8 @@ class TagSearch extends Component {
         });
     }
 
-    getTags = () => {
-      // Axios call?
-    }
-
     handleInputChange = (e) => {
-        this.props.passState({ search: e.target.value });
+        this.props.passState({ tag: e.target.value });
     }
 
     render () {
