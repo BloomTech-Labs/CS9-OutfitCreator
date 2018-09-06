@@ -32,9 +32,10 @@
 .card--images img {
     margin: 5px;
     border-radius: 3px;
+
 }
 
-.card--footer{
+.card--footer {
     display: block;
     align-self: flex-start;
     margin: 5px 0;

@@ -10,6 +10,9 @@ import shorts from './shorts.png';
 import skirt from './skirt.png';
 import sweater from './sweater.png';
 import top from './top.png';
+import locked from './locked.png';
+import unlocked from './unlocked.png';
+import refresh from './refresh-button.png';
 
 export const Icons = {
   bottom,
@@ -24,4 +27,7 @@ export const Icons = {
   skirt,
   sweater,
   top,
+  locked,
+  unlocked,
+  refresh,
 }
