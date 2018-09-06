@@ -50,6 +50,8 @@ class CreateOutfit extends Component {
               shoes: ['casualShoes', 'formalShoes']
             },
         }
+
+        if (localStorage.getItem('authToken')) this.setTypes();
     }
 
     setAuthToken = () => {
