@@ -25,7 +25,7 @@ class Upload extends Component {
         }
 
         props.isUserPaid(paid => {
-            const options = paid ? { 
+            const options = paid ? {
                     top: 'Top',
                     shirt: 'Shirt',
                     sweater: 'Sweater',
@@ -206,7 +206,6 @@ class Upload extends Component {
         return (
             <div className='container--upload'>
                 <div className='upload--columns'>
-                    <div className="column--left">
                         {this.state.image ?
                             <CardImg
                                 className="upload--image"
@@ -239,6 +238,7 @@ class Upload extends Component {
                                 className='upload--select'
                                 type='select'
                                 name='type'
+                                placeholder="Item Type"
                                 onChange={this.handleInputChange}>
                                 {this.state.options ?
                                   Object.keys(this.state.options).map(option => (
@@ -250,7 +250,6 @@ class Upload extends Component {
                             state={this.state}
                             passState={this.passState}
                         />
-                    </div>
                 </div>
                 <Button className="button upload--save" onClick={this.saveItem}>Save</Button>
             </div>
