@@ -24,7 +24,7 @@
     border-radius: 5px;
     padding: 0px 8px;
     margin: 5px;
-    font-size: 1.25em;
+    font-size: 15px;
     font-weight: bold;
     color: var(--pale-purple);
     font-family: 'Arsenal', sans-serif;
@@ -36,7 +36,7 @@
     border-radius: 5px;
     padding: 0px 8px;
     margin: 5px;
-    font-size: 1.25em;
+    font-size: 15px;
     font-weight: bold;
     color: var(--dark-purple);
     font-family: 'Arsenal', sans-serif;

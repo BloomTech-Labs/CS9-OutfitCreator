@@ -217,7 +217,6 @@ class Closet extends React.Component {
 
         return (
             <div className="closet">
-                {/* <div className="closet-title">My Closet</div> */}
                 <div className="closet-menu">
                 <button className={this.state.selectAll ? "closet-button--active" : "closet-button"} onClick={this.toggleAll}>All</button>
                     {typesInCloset.map(type => (
@@ -227,13 +226,8 @@ class Closet extends React.Component {
                             key={type} > {this.state.items[type].title} 
                         </button>
                     ))}
-                    {/* <button className={this.state.selectedType === "all" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("all")}>All</button>
-                    <button className={this.state.selectedType === "top" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("top")}>Tops</button>
-                    <button className={this.state.selectedType === "bottom" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("bottom")}>Bottoms</button>
-                    <button className={this.state.selectedType === "shoes" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("shoes")}>Shoes</button> */}
                 </div>
                 <div className="closet-cards">
-                    {/* {selected.map(item => <ClosetCard item={item} key={item._id}/>)} */}
                     {this.state.selectAll ?
                         subtypesInCloset.map(type => (
                             this.state.items[type].all.map(item => (
