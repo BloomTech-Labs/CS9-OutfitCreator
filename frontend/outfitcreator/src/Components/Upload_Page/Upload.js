@@ -3,7 +3,7 @@ import axios from 'axios';
 import { CloudinaryContext } from 'cloudinary-react';
 import { CardImg, Button, FormGroup, Input } from 'reactstrap';
 import { ROOT_URL } from '../../config';
-import TagSearch from './TagSearch';
+import TagInput from './TagInput';
 import uploadPlacholder from './uploadPlaceholder.png';
 import './Upload.css';
 // import sha1 from 'sha1';
@@ -210,7 +210,7 @@ class Upload extends Component {
                                   )) : null }
                             </Input>
                         </FormGroup>
-                        <TagSearch
+                        <TagInput
                             state={this.state}
                             passState={this.passState}
                         />

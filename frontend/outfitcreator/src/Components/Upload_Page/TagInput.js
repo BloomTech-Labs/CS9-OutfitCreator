@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Input, InputGroup, InputGroupAddon,  } from 'reactstrap';
-import './TagSearch.css';
+import './TagInput.css';
 import Icon from './tag.png';
 
-class TagSearch extends Component {
+class TagInput extends Component {
     addTag = (e) => {
         const tag = this.props.state.tag.toLowerCase();
 
@@ -54,4 +54,4 @@ class TagSearch extends Component {
     }
 }
 
-export default TagSearch;
+export default TagInput;
