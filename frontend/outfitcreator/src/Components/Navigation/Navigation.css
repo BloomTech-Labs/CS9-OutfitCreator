@@ -50,6 +50,7 @@
   margin-top: 5px;
   margin-left: 40px;
   width: 55%;
+  transition: none;
 }
 
 .navigation--user-options {
@@ -126,7 +127,6 @@
   }
 
   .sideNav--expanded {
-    filter: drop-shadow(inset5px 5px 10px black);
     top: 50px;
   }
   

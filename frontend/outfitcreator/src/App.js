@@ -49,7 +49,7 @@ class App extends Component {
   // Return user paid status and execute call back function with value
   // i.e. isUserPaid(paid => console.log(paid)) logs paid status
   isUserPaid = (cb) => {
-    return axios.get(`${ROOT_URL.API}/user/info/${this.getUserID()}`)
+    axios.get(`${ROOT_URL.API}/user/info/${this.getUserID()}`)
       .then(res => {
         cb(res.data.paid);
       })
