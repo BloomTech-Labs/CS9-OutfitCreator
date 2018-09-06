@@ -92,7 +92,6 @@ class Closet extends React.Component {
     }
 
     componentDidMount() {
-        // this.getItems(this.state.selectedType);
         const user = this.props.getUserID();
 
         if (user) {
@@ -138,14 +137,6 @@ class Closet extends React.Component {
     }
 
     toggleAll = () => {
-        // const items = { ...this.state.items };
-
-        // Object.keys(items).forEach(type => {
-        //     items[type].show = !items[type].show;
-        // });
-
-        // this.setState({ items });
-
         const items = this.state.items;
         Object.keys(this.state.items).forEach(item => items[item].show = false);
         this.setState({ items, selectAll: !this.state.selectAll });
@@ -173,35 +164,6 @@ class Closet extends React.Component {
             console.log(err);
         })
     }
-
-    // onSelect(category) {
-    //     this.setState({selectedType: category});
-    //     this.getItems(category);
-    // }
-
-    // getItems(category) {
-    //     const user = this.props.getUserID();
-    //     const authToken = localStorage.getItem('authToken');
-    //     const requestOptions = {headers: { Authorization: authToken }}
-
-    //     if (category === 'all') {
-    //         axios.get(`${ROOT_URL.API}/items/user/${user}`)
-    //             .then(res => {
-    //                 this.setState({
-    //                   items: res.data
-    //                 });
-    //             })
-    //             .catch(err => console.log(err));
-    //     } else {
-    //         axios.get(`${ROOT_URL.API}/items/type/${user}/${category}`, requestOptions)
-    //             .then(res => {
-    //                 this.setState({
-    //                     items: res.data
-    //                 });
-    //             })
-    //             .catch(err => console.log(err.message));
-    //     }
-    // }
 
     render() {
         const typesInCloset = Object.keys(this.state.items).filter(type => {
