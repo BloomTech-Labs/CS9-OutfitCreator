@@ -84,7 +84,8 @@ class Upload extends Component {
                      'instagram',
                      'facebook'
                     ],
-                theme: 'purple'
+                theme: 'minimal',
+                stylesheet: '#cloudinary-overlay { background-color: #9400D3; }',
             },
             (err, result) => {
                 if (result) {
