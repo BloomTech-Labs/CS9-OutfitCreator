@@ -49,7 +49,7 @@ class App extends Component {
   // Return user paid status and execute call back function with value
   // i.e. isUserPaid(paid => console.log(paid)) logs paid status
   isUserPaid = (cb) => {
-    return axios.get(`${ROOT_URL.API}/user/info/${this.getUserID()}`)
+    axios.get(`${ROOT_URL.API}/user/info/${this.getUserID()}`)
       .then(res => {
         cb(res.data.paid);
       })
@@ -87,7 +87,8 @@ class App extends Component {
           <Route exact path='/verify/:key?' render={props =>
             <VerifyEmail {...props} />
           } />
-          {/* <Route path='/Create?' render={props => <Route path='/Create?' render={props =>
+
+          {/* <Route path='/Create' render={props =>
             <div className='App--create'>
               <Create {...props} getUserID={this.getUserID} />
               <Navigation getUserID={this.getUserID} />
