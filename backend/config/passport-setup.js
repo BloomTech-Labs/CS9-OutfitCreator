@@ -7,7 +7,7 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const GitHubStrategy = require("passport-github2").Strategy;
 
-const { ROOT_URL } = require('./keys.js');
+const { ROOT_URL } = require('./root-urls.js');
 
 require("dotenv").config();
 

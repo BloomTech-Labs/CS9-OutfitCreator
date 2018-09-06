@@ -337,8 +337,10 @@ class CreateOutfit extends Component {
         console.log(outfit);
 
         axios.post(`${ROOT_URL.API}/outfits`, outfit)
-            .then(() => {
-                this.props.history.push('/Archive')
+            .then(res => {
+                // this.props.history.push('/Archive')
+                console.log(res);
+                const items = { ...this.state }
             })
             .catch(err => {
                 console.log(err);

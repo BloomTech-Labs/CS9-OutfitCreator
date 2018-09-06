@@ -82,7 +82,6 @@ class App extends Component {
               </div>
             </div>
           } />
-
           <Route exact path='/verify/:key?' render={props =>
             <VerifyEmail {...props} />
           } />
