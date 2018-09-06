@@ -205,6 +205,9 @@ class Closet extends React.Component {
 
     render() {
         const typesInCloset = Object.keys(this.state.items).filter(type => {
+            return (this.state.items[type].all.length > 0);
+        });
+        const subtypesInCloset = Object.keys(this.state.items).filter(type => {
             return ((this.state.items[type].all.length > 0) && (type != "top" && type != "bottom" && type != "shoes"));
         });
 
@@ -232,7 +235,7 @@ class Closet extends React.Component {
                 <div className="closet-cards">
                     {/* {selected.map(item => <ClosetCard item={item} key={item._id}/>)} */}
                     {this.state.selectAll ?
-                        typesInCloset.map(type => (
+                        subtypesInCloset.map(type => (
                             this.state.items[type].all.map(item => (
                                 <ClosetCard submit={this.submit} item={item} key={item._id}/>
                             ))
