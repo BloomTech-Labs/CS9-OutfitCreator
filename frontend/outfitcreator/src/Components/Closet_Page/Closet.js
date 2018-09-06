@@ -92,7 +92,6 @@ class Closet extends React.Component {
     }
 
     componentDidMount() {
-        // this.getItems(this.state.selectedType);
         const user = this.props.getUserID();
 
         if (user) {
@@ -138,14 +137,6 @@ class Closet extends React.Component {
     }
 
     toggleAll = () => {
-        // const items = { ...this.state.items };
-
-        // Object.keys(items).forEach(type => {
-        //     items[type].show = !items[type].show;
-        // });
-
-        // this.setState({ items });
-
         const items = this.state.items;
         Object.keys(this.state.items).forEach(item => items[item].show = false);
         this.setState({ items, selectAll: !this.state.selectAll });
@@ -174,35 +165,6 @@ class Closet extends React.Component {
         })
     }
 
-    // onSelect(category) {
-    //     this.setState({selectedType: category});
-    //     this.getItems(category);
-    // }
-
-    // getItems(category) {
-    //     const user = this.props.getUserID();
-    //     const authToken = localStorage.getItem('authToken');
-    //     const requestOptions = {headers: { Authorization: authToken }}
-
-    //     if (category === 'all') {
-    //         axios.get(`${ROOT_URL.API}/items/user/${user}`)
-    //             .then(res => {
-    //                 this.setState({
-    //                   items: res.data
-    //                 });
-    //             })
-    //             .catch(err => console.log(err));
-    //     } else {
-    //         axios.get(`${ROOT_URL.API}/items/type/${user}/${category}`, requestOptions)
-    //             .then(res => {
-    //                 this.setState({
-    //                     items: res.data
-    //                 });
-    //             })
-    //             .catch(err => console.log(err.message));
-    //     }
-    // }
-
     render() {
         const typesInCloset = Object.keys(this.state.items).filter(type => {
             return (this.state.items[type].all.length > 0);
@@ -217,7 +179,6 @@ class Closet extends React.Component {
 
         return (
             <div className="closet">
-                {/* <div className="closet-title">My Closet</div> */}
                 <div className="closet-menu">
                 <button className={this.state.selectAll ? "closet-button--active" : "closet-button"} onClick={this.toggleAll}>All</button>
                     {typesInCloset.map(type => (
@@ -227,13 +188,8 @@ class Closet extends React.Component {
                             key={type} > {this.state.items[type].title} 
                         </button>
                     ))}
-                    {/* <button className={this.state.selectedType === "all" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("all")}>All</button>
-                    <button className={this.state.selectedType === "top" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("top")}>Tops</button>
-                    <button className={this.state.selectedType === "bottom" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("bottom")}>Bottoms</button>
-                    <button className={this.state.selectedType === "shoes" ? "closet-button--active" : "closet-button"} onClick={() => this.onSelect("shoes")}>Shoes</button> */}
                 </div>
                 <div className="closet-cards">
-                    {/* {selected.map(item => <ClosetCard item={item} key={item._id}/>)} */}
                     {this.state.selectAll ?
                         subtypesInCloset.map(type => (
                             this.state.items[type].all.map(item => (
