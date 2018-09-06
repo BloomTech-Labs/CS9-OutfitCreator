@@ -214,8 +214,9 @@ class OutfitEdit extends React.Component {
                                             </div>
                                         </div>
                                         <div className='edit--buttons'>
-                                            <button className='edit--submit button' onClick={this.submitChanges}>Submit</button>
-                                            <button className='edit--cancel button' onClick={this.redirectArchive}>Cancel</button>
+                                            <button className='edit--submit edit--button button' onClick={this.submitChanges}>Submit</button>
+                                            <button className='edit--delete edit--button button' onClick={this.submitChanges}>delete</button>
+                                            <button className='edit--cancel edit--button button' onClick={this.redirectArchive}>Cancel</button>
                                         </div>
                                     </form>
                                 </div>
