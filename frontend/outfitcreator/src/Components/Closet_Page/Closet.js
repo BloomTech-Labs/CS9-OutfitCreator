@@ -173,6 +173,15 @@ class Closet extends React.Component {
             return ((this.state.items[type].all.length > 0) && (type != "top" && type != "bottom" && type != "shoes"));
         });
 
+        let subtypeItems = [];
+        subtypesInCloset.forEach(subtype => {
+            subtypeItems = subtypeItems.concat(this.state.items[subtype].all);
+        });
+        const typeItems = [].concat(this.state.items.top.all, this.state.items.bottom.all, this.state.items.shoes.all);
+        const noRepeats = typeItems.filter(item => subtypeItems.includes(item));
+        const itemsNoRepeats = subtypeItems.concat(noRepeats);
+        console.log("items: ", typeItems);
+
         const selected = this.getSelected();
         console.log(selected);
         console.log(typesInCloset);
@@ -191,10 +200,8 @@ class Closet extends React.Component {
                 </div>
                 <div className="closet-cards">
                     {this.state.selectAll ?
-                        subtypesInCloset.map(type => (
-                            this.state.items[type].all.map(item => (
-                                <ClosetCard submit={this.submit} item={item} key={item._id}/>
-                            ))
+                        itemsNoRepeats.map(item => (
+                            <ClosetCard submit={this.submit} item={item} key={item._id}/>
                         )) : 
                         selected.map(type => (
                             this.state.items[type].all.map(item => (
