@@ -69,8 +69,8 @@
 
 .closet-card--input {
     border: 1px solid black;
+    border-radius: 5px;
     width: 100%;
-    max-width: 120px;
     text-align: center;
     margin: 5px 0px;
 }
@@ -84,6 +84,7 @@
 .closet-card--accept {
     background-color: lightgreen;
     border: none;
+    border-radius: 5px;
     margin: 5px;
 }
 
@@ -96,6 +97,7 @@
 .closet-card--cancel {
     background-color: red;
     border: none;
+    border-radius: 5px;
     margin: 5px;
     /* color: var(--red); */
 }
