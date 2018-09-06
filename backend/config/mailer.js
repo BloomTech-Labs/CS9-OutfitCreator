@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const mailgunTransport = require('nodemailer-mailgun-transport');
+const nodemailerSendgrid = require('nodemailer-sendgrid');
 
 // Configure transport options -- for production
 // const mailgunOptions = {
@@ -12,16 +13,22 @@ const mailgunTransport = require('nodemailer-mailgun-transport');
 // const transport = mailgunTransport(mailgunOptions);
 // const emailClient = nodemailer.createTransport(transport);
 
-const transport = nodemailer.createTransport({
-    service: 'Mailgun',
-    auth: {
-      user: process.env.MAILGUN_USER,
-      pass: process.env.MAILGUN_PASS
-    },
-    tls: {
-      rejectUnauthorized: false
-    }
-});
+// const transport = nodemailer.createTransport({
+//     service: 'Mailgun',
+//     auth: {
+//       user: process.env.MAILGUN_USER,
+//       pass: process.env.MAILGUN_PASS
+//     },
+//     tls: {
+//       rejectUnauthorized: false
+//     }
+// });
+
+const transport = nodemailer.createTransport(
+  nodemailerSendgrid({
+    apiKey: process.env.SENDGRID_API_KEY
+  })
+)
 
 const generateSignupKey = () => {
     const buf = crypto.randomBytes(24);
@@ -41,6 +48,6 @@ const sendEmail = (to, subject, html) => {
         resolve(info);
       });
     });
-  }
+}
 
 module.exports = { generateSignupKey, sendEmail };
