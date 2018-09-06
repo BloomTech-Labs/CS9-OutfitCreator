@@ -3,6 +3,7 @@ import { CardDeck, Button, Input } from 'reactstrap';
 import CreateCard from './CreateCard.js';
 import { ROOT_URL } from '../../config';
 import axios from 'axios';
+import queryString from 'query-string';
 import './Create.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -177,6 +178,11 @@ class CreateLayers extends Component {
     }
 
     componentDidMount() {
+        const hash = queryString.parse(this.props.location.hash);
+        if(hash.token) {
+            localStorage.setItem('authToken', `Bearer ${hash.token}`);
+            this.setAuthToken();
+        }
         const user = this.props.getUserID();
 
         if (user) {
