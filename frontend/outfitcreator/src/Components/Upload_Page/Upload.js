@@ -256,6 +256,7 @@ class Upload extends Component {
                         <TagSearch
                             state={this.state}
                             passState={this.passState}
+                            className="upload--tags"
                         />
                 </div>
                 <Button className="button upload--save" onClick={this.saveItem}>Save</Button>

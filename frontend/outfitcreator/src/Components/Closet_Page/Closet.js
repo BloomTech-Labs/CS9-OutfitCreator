@@ -108,7 +108,7 @@ class Closet extends React.Component {
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/dress`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/formalShoes`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/casualShoes`),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/shoes`),
+                axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`),
             ])
                 .then(res => {
                     const items = { ...this.state.items };
