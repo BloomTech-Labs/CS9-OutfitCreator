@@ -1,109 +1,104 @@
 .container--editbox {
-    width: 100%;
-    margin-top: 10px;
+	width: 100%;
+	margin-top: 10px;
 }
 
 .card-deck .card {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    max-height: 500px;
-    max-width: 400px;
-    width: 100%;
-    margin: 4px;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	max-height: 500px;
+	max-width: 400px;
+	width: 100%;
+	margin: 4px;
 }
 
-/* .card-img {
-    width: 300px;
-    height: 400px;
-} */
-
 .card-deck .card:hover {
-    border: 1px solid purple;
+	border: 1px solid purple;
 }
 
 .container--archive {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .container--edit {
-    display: flex;
-    flex-direction: column;
-    /* flex-wrap: wrap; */
-    justify-content: space-between;
-    left: 10px;
-    max-width: 70vw;
-    max-height: 90vh;
-    margin-top: 4.5em;
-    width: 95%;
-    min-height: 700px;
-    margin-left: 1em;
-    overflow-x: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	left: 10px;
+	max-width: 70vw;
+	max-height: 90vh;
+	margin-top: 4.5em;
+	width: 95%;
+	min-height: 700px;
+	margin-left: 1em;
+	overflow-x: auto;
 }
 
 .edit--header {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 30px;
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 30px;
 }
 
-.header--edit{
-    border: 0;
-    background: transparent;
+.header--edit {
+	border: 0;
+	background: transparent;
 }
 
 .edit--images {
-    display: flex;
-    justify-content: space-evenly;
+	display: flex;
+	justify-content: space-evenly;
 }
 
 .edit--selections {
-    display: flex;
-    flex-wrap: wrap;
-    max-height: 90vh;
-    max-width: 80vw;
-    overflow-x: auto;
+	display: flex;
+	flex-wrap: wrap;
+	max-height: 90vh;
+	max-width: 80vw;
+	overflow-x: auto;
 }
 
 .edit--input {
-    border-radius: 5px;
+	border-radius: 5px;
 }
 
 .edit--buttons {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
-.edit--submit, .edit--cancel {
-    border-radius: 5px;
-    width: 100px;
-    height: 50px;
+.edit--submit,
+.edit--cancel {
+	border-radius: 5px;
+	width: 100px;
+	height: 50px;
 }
 
-.edit--submit:hover, .edit--cancel:hover {
-    background-color: black;
-    color: white;
-    cursor: pointer;
-    animation-duration: .5s;
+.edit--submit:hover,
+.edit--cancel:hover {
+	background-color: black;
+	color: white;
+	cursor: pointer;
+	animation-duration: .5s;
 }
 
 .outfit--card {
-    border-radius: 5px;
-    max-width: 225px;
-    margin: 10px;
-    padding: 5px;
-    transition: .5s;
-    z-index: 1000;
+	border-radius: 5px;
+	max-width: 225px;
+	margin: 10px;
+	padding: 5px;
+	transition: .5s;
+	z-index: 1000;
 }
 
 .outfit--card:hover {
-    /* border: 1xp solid purple; */
-    background: var(--dark-purple);
-    transform: translateY(-10px);
-    cursor: pointer;
+	background: var(--dark-purple);
+	transform: translateY(-10px);
+	cursor: pointer;
 }
 
-.edit--footer{
-    align-self: flex-start;
+.edit--footer {
+	align-self: flex-start;
 }

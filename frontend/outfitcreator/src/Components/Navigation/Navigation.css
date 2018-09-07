@@ -1,173 +1,176 @@
 .navigation--container {
-  align-items: center;
-  background: var(--dark-purple);
-  display: flex;
-  height: 50px;
-  justify-content: space-between;
-  left: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
+	align-items: center;
+	background: var(--dark-purple);
+	display: flex;
+	height: 50px;
+	justify-content: space-between;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
 }
 
 .navigation--container:after {
-  content: '';
-  box-shadow: 0 0 10px 1px;
-  height: 50px;
-  position: absolute;
-  width: 100%;
-  z-index: -1;
+	content: '';
+	box-shadow: 0 0 10px 1px;
+	height: 50px;
+	position: absolute;
+	width: 100%;
+	z-index: -1;
 }
 
 .navigation--site-title {
-  background: var(--dark-purple);
-  color: var(--dark-purple);
-  font-family: 'Homemade Apple', cursive;
-  font-size: 15px;
-  font-weight: bold;
-  margin-left: 10px;
-  margin-top: 10px;
-  text-shadow:
-    -1px -1px white,
-    1px -1px white,
-    -1px 1px white,
-    1px 1px white;
+	background: var(--dark-purple);
+	color: var(--dark-purple);
+	font-family: 'Homemade Apple', cursive;
+	font-size: 15px;
+	font-weight: bold;
+	margin-left: 10px;
+	margin-top: 10px;
+	text-shadow: -1px -1px white, 1px -1px white, -1px 1px white, 1px 1px white;
 }
 
-.navigation--pages, .navigation--user-options, .nav-link {
-  align-content: center;
-  display: flex;
+.navigation--pages,
+.navigation--user-options,
+.nav-link {
+	align-content: center;
+	display: flex;
 }
 
-.navigation--pages *, .navigation--user-options * {
-  color: white;
+.navigation--pages *,
+.navigation--user-options * {
+	color: white;
 }
 
 .navigation--pages {
-  display: flex;
-  justify-content: space-around;
-  font-size: 14px;
-  margin-top: 5px;
-  margin-left: 40px;
-  width: 55%;
-  transition: none;
+	display: flex;
+	justify-content: space-around;
+	font-size: 14px;
+	margin-top: 5px;
+	margin-left: 40px;
+	width: 55%;
+	transition: none;
 }
 
 .navigation--user-options {
-  font-size: 15px;
-  margin-top: -2px;
-  margin-right: 5px;
+	font-size: 15px;
+	margin-top: -2px;
+	margin-right: 5px;
 }
 
 .navigation--user-options * {
-  padding: 0 10px;
+	padding: 0 10px;
 }
 
-.navigation--user, .navigation--logout {
-  cursor: pointer;
+.navigation--user,
+.navigation--logout {
+	cursor: pointer;
 }
 
 .navigation--user {
-  border-right: 1px solid white;
+	border-right: 1px solid white;
 }
 
-.nav--item, .nav--item:hover  {
-  cursor: pointer;
-  background: var(--dark-purple);
-  border: solid 2px var(--dark-purple);
+.nav--item,
+.nav--item:hover {
+	cursor: pointer;
+	background: var(--dark-purple);
+	border: solid 2px var(--dark-purple);
 }
 
 .nav--active {
-  font-size: 16px;
+	font-size: 16px;
 }
 
 .nav--active:before {
-  content: '';
-  width: 20px;
-  height: 20px;
-  top: 8px;
-  margin-left: -25px;
-  position: absolute;
-  border-bottom: 1px solid white;
+	content: '';
+	width: 20px;
+	height: 20px;
+	top: 8px;
+	margin-left: -25px;
+	position: absolute;
+	border-bottom: 1px solid white;
 }
 
 .nav--active:after {
-  content: '';
-  width: 20px;
-  height: 20px;
-  top: 8px;
-  margin-left: 5px;
-  position: absolute;
-  border-bottom: 1px solid white;
+	content: '';
+	width: 20px;
+	height: 20px;
+	top: 8px;
+	margin-left: 5px;
+	position: absolute;
+	border-bottom: 1px solid white;
 }
 
 @media screen and (max-width: 850px) {
-  .navigation--current-page {
-    color: white;
-    font-size: 20px;
-    margin-left: 90px;
-  }
+	.navigation--current-page {
+		color: white;
+		font-size: 20px;
+		margin-left: 90px;
+	}
 
-  .nav--active:before {
-    border: none;
-  }
-  
-  .nav--active:after {
-    border: none;
-  }
- 
-  .navigation--pages {
-    position: absolute;
-    left: 0;
-    top: -50px;
-    justify-content: center;
-    width: 100%;
-    z-index: -1;
-    margin: 0;
-  }
+	.nav--active:before {
+		border: none;
+	}
 
-  .sideNav--expanded {
-    top: 50px;
-  }
-  
-  .sideNav--expanded * {
-    background: var(--dark-purple);
-    padding: 5px 0;
-    width: 100%;
-  }
+	.nav--active:after {
+		border: none;
+	}
 
-  /* Animation related */
-  .navigation--minimize {
-    cursor: pointer;
-    padding: 9px 20px;
-    width: 50px;
-  }
+	.navigation--pages {
+		position: absolute;
+		left: 0;
+		top: -50px;
+		justify-content: center;
+		width: 100%;
+		z-index: -1;
+		margin: 0;
+	}
 
-  .bar1, .bar2, .bar3 {
-    width: 30px;
-    height: 4px;
-    background-color: white; 
-    margin: 5px 0;
-    transition: 0.4s;
-  }
+	.sideNav--expanded {
+		top: 50px;
+	}
 
-  .change .bar1 { 
-    transform: translate(0, 9px) ;
-  }
+	.sideNav--expanded * {
+		background: var(--dark-purple);
+		padding: 5px 0;
+		width: 100%;
+	}
 
-  .change .bar2 { 
-    opacity: 0;
-  }
+	/* Animation related */
+	.navigation--minimize {
+		cursor: pointer;
+		padding: 9px 20px;
+		width: 50px;
+	}
 
-  .change .bar3 { 
-    transform: translate(0, -9px);
-  }
+	.bar1,
+	.bar2,
+	.bar3 {
+		width: 30px;
+		height: 4px;
+		background-color: white;
+		margin: 5px 0;
+		transition: 0.4s;
+	}
 
-  .cross .bar1 { 
-    transform: rotate(-45deg) translate(-6px, 7px);
-  }
+	.change .bar1 {
+		transform: translate(0, 9px);
+	}
 
-  .cross .bar3 { 
-    transform: rotate(45deg) translate(-5px, -7px);
-  }
+	.change .bar2 {
+		opacity: 0;
+	}
+
+	.change .bar3 {
+		transform: translate(0, -9px);
+	}
+
+	.cross .bar1 {
+		transform: rotate(-45deg) translate(-6px, 7px);
+	}
+
+	.cross .bar3 {
+		transform: rotate(45deg) translate(-5px, -7px);
+	}
 }

@@ -1,61 +1,60 @@
 .container--card {
-    border: 1px solid black;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    max-width: 550px;
-    min-width: 400px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    margin: 15px;
-    padding: 0px 10px;
-    border: 1px solid black;
+	border: 1px solid black;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	max-width: 550px;
+	min-width: 400px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin: 15px;
+	padding: 0px 10px;
+	border: 1px solid black;
 }
 
 .card--header {
-    color: var(--dark-purple);
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 0;
-    margin: 5px 0;
+	color: var(--dark-purple);
+	font-weight: bold;
+	display: flex;
+	justify-content: space-between;
+	padding: 5px 0;
+	margin: 5px 0;
 }
 
 .card--images {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .card--images img {
-    margin: 5px;
-    border-radius: 3px;
-
+	margin: 5px;
+	border-radius: 3px;
 }
 
 .card--footer {
-    display: block;
-    align-self: flex-start;
-    margin: 5px 0;
+	display: block;
+	align-self: flex-start;
+	margin: 5px 0;
 }
 
-.header--edit{
-    border: 0;
-    background: transparent;
+.header--edit {
+	border: 0;
+	background: transparent;
 }
 
 .edit--button {
-    border: none;
-    height: 25px;
-    width: 25px;
-    background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACkSURBVEhL7ZDNCQIxEEbTwipsMV60CgXtRBC3CMVutAr7cO+CvlkzEEIWIZnc8uCRn8P3JeManiO+cDedjDnjx/tG85IBtUBLtljM2q9CXCLjKkLHIqsSlpzkIpdw5qkSMZs4PFWSzVy4usFs/oVXGYvawpMWhQtLvGGVcKVH8/ADrn7biQ71JyYvv+CIYckCzcbyQHltXGLGE+94xb1cNCrj3Bd0W2O4MZVXCgAAAABJRU5ErkJggg==');
+	border: none;
+	height: 25px;
+	width: 25px;
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACkSURBVEhL7ZDNCQIxEEbTwipsMV60CgXtRBC3CMVutAr7cO+CvlkzEEIWIZnc8uCRn8P3JeManiO+cDedjDnjx/tG85IBtUBLtljM2q9CXCLjKkLHIqsSlpzkIpdw5qkSMZs4PFWSzVy4usFs/oVXGYvawpMWhQtLvGGVcKVH8/ADrn7biQ71JyYvv+CIYckCzcbyQHltXGLGE+94xb1cNCrj3Bd0W2O4MZVXCgAAAABJRU5ErkJggg==');
 }
 
 .edit--button:hover {
-    cursor: pointer;
-    border: 1px solid black;
-    border-radius: 5px;
-    box-shadow: 1px 1px;
+	cursor: pointer;
+	border: 1px solid black;
+	border-radius: 5px;
+	box-shadow: 1px 1px;
 }
