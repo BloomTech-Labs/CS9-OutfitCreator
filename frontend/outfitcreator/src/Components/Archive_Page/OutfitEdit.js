@@ -94,7 +94,7 @@ class OutfitEdit extends React.Component {
 
     submitChanges = () => {
         const { user, name, worn, top, topTags, bottom, bottomTags, shoes, shoesTags } = this.state;
-        const outfitId = this.props.location.pathname.split('Edit/')[1];
+        const outfitID = this.props.location.pathname.split('Edit/')[1];
 
         const tags = [...topTags, ...bottomTags, ...shoesTags];
         const newInfo = { name, worn, tags, top, bottom, shoes };
