@@ -10,7 +10,7 @@ router.post("/", (req, res) => {
   const { user, name, tags, worn, top, bottom, shoes } = req.body;
   Outfit.create({ user, name, tags, worn, top, bottom, shoes })
     .then(outfit => {
-      res.sendStatus(201).json(outfit);
+      res.status(201).json(outfit);
     })
     .catch(err => {
       res.status(500).json({ error: err.message });

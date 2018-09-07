@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {ROOT_URL} from '../../config';
+import { ROOT_URL } from '../../config';
 import './closet.css';
 import ClosetCard from './ClosetCard.js';
 import { Icons } from '../Icons';
@@ -9,7 +9,7 @@ class Closet extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectAll: true,
+            selectAll: false,
             items: {
                 top: {
                     title: 'Tops',
@@ -93,7 +93,6 @@ class Closet extends React.Component {
 
     componentDidMount() {
         const user = this.props.getUserID();
-
         if (user) {
             axios.all([
                 axios.get(`${ROOT_URL.API}/items/type/${user}/top`),
@@ -125,7 +124,7 @@ class Closet extends React.Component {
                     items.formalShoes.all = res[10].data;
                     items.casualShoes.all = res[11].data;
                     items.shoes.all = res[12].data;
-
+                    console.log(res, items);
                     this.setState({ items });
                 })
                 .catch(err => {
@@ -134,53 +133,64 @@ class Closet extends React.Component {
         } else {
             this.props.history.push('/');
         }
+        this.toggleAll();
     }
 
     toggleAll = () => {
-        const items = this.state.items;
-        Object.keys(this.state.items).forEach(item => items[item].show = false);
+        const { items } = this.state;
+        Object.keys(items).forEach(item => items[item].show = false);
         this.setState({ items, selectAll: !this.state.selectAll });
     }
 
     activateCategory = (category) => {
-        console.log(category);
         const items = this.state.items;
         Object.keys(this.state.items).forEach(item => items[item].show = false);
         items[category].show = !items[category].show;
-        this.setState({items, selectAll: false})
+        this.setState({ items, selectAll: false })
     }
 
     getSelected = () => {
         return Object.keys(this.state.items).filter(type => this.state.items[type].show === true);
     }
 
+    typesInCloset = () => {
+        return (Object.keys(this.state.items).filter(type => {
+            return (this.state.items[type].all.length > 0);
+        }));
+    }
+
+    subtypesInCloset = () => {
+        return (Object.keys(this.state.items).filter(type => {
+            return ((this.state.items[type].all.length > 0) && (type != "top" && type != "bottom" && type != "shoes"));
+        }));
+    }
+
     submit = newInfo => {
         axios.put(`${ROOT_URL.API}/items/${newInfo.id}`, newInfo)
-        .then(response => {
-            console.log(response);
-            this.onSelect(newInfo.type);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+            .then(() => {
+                this.onSelect(newInfo.type);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     render() {
-        const typesInCloset = Object.keys(this.state.items).filter(type => {
-            return (this.state.items[type].all.length > 0);
-        });
-        const allItems = [].concat(this.state.items.top.all, this.state.items.bottom.all, this.state.items.shoes.all);
+        const typesInCloset = this.typesInCloset();
         const selected = this.getSelected();
+        const allItems = [].concat(this.state.items.top.all, this.state.items.bottom.all, this.state.items.shoes.all);
 
         return (
-            <div className="closet">
+            <div className="closet" >
                 <div className="closet-menu">
-                <button className={this.state.selectAll ? "closet-button--active" : "closet-button"} onClick={this.toggleAll}>All</button>
+                    <button className={this.state.selectAll ? "closet-button--active" : "closet-button"} onClick={this.toggleAll}>All</button>
                     {typesInCloset.map(type => (
                         <button
                             className={this.state.items[type].show ? "closet-button--active" : "closet-button"}
                             onClick={() => { this.activateCategory(type) }}
-                            key={type} > {this.state.items[type].title} 
+                            key={type}
+                        >
+                            {this.state.items[type].title}
                         </button>
                     ))}
                 </div>
@@ -191,7 +201,7 @@ class Closet extends React.Component {
                         )) : 
                         selected.map(type => (
                             this.state.items[type].all.map(item => (
-                                <ClosetCard submit={this.submit} item={item} key={item._id}/>
+                                <ClosetCard submit={this.submit} item={item} key={item._id} />
                             ))
                         ))
                     }
