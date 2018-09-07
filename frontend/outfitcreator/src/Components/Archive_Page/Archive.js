@@ -16,7 +16,7 @@ class Archive extends React.Component {
     }
 
     componentDidMount() {
-        this.getOutfits();
+        setTimeout(this.getOutfits, 50);
     }
 
     getOutfits = () => {
