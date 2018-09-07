@@ -32,13 +32,10 @@ class Login extends React.Component {
         axios.post(`${ROOT_URL.API}/auth/signup`, { username, password, email })
             .then(res => {
                 localStorage.setItem('authToken', `Bearer ${res.data.token}`);
-                // Redirect to create page once logged in
-                // window.location = `${ROOT_URL.WEB}/Create`;
                 this.notifySignUpSuccess();
                 this.setState({ activeTab: '2'})
             })
             .catch(err => {
-                // alert('Failed to sign up. Please try again.');
                 this.notifySignUpFailure();
                 console.log(err.response);
             });
@@ -145,7 +142,7 @@ class Login extends React.Component {
                 <div>
                     <a href={`${ROOT_URL.API}/auth/google`}><GoogleLoginButton/></a>
                     <a href={`${ROOT_URL.API}/auth/facebook`}><FacebookLoginButton/></a>
-                    <GithubLoginButton/>
+                    <a href={`${ROOT_URL.API}/auth/github`}><GithubLoginButton/></a>
                 </div>
               </Col>
             </Row>
@@ -184,7 +181,7 @@ class Login extends React.Component {
                     <a href={`${ROOT_URL.API}/auth/facebook`}><FacebookLoginButton/></a>
                 </div>
                 <div>
-                    <GithubLoginButton/>
+                    <a href={`${ROOT_URL.API}/auth/github`}><GithubLoginButton/></a>
                 </div>
               </Col>
             </Row>
