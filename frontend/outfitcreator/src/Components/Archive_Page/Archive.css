@@ -20,7 +20,6 @@
     height: 30px;
     width: 8px;
     border: 1px solid black;
-    /* filler color to be changed to color pallete when chosen */
     background: rgb(54, 56, 88);
     background: -webkit-linear-gradient(rgb(79, 71, 114), rgb(69, 68, 104));
 }
