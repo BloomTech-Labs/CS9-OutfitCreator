@@ -45,7 +45,6 @@ const UserSchema = new mongoose.Schema({
         },
         username: {
             type: String,
-            unique: true,
             lowercase: true,
         },
         email: {
@@ -54,6 +53,20 @@ const UserSchema = new mongoose.Schema({
         },
         picture: String,
         token: String
+    },
+    github: {
+        id: {
+            type: String
+        },
+        username: {
+            type: String,
+            lowercase: true,
+        },
+        email: {
+            type: String,
+            lowercase: true,
+        },
+        thumbnail: String,
     },
     phone: {
         type: String,
