@@ -1,8 +1,6 @@
 const router = require("express").Router();
-
 const { authenticate, googleAuthenticate, googleRedirectAuthenticate, facebookAuthenticate, facebookRedirectAuthenticate, signToken } = require("../config/passport-setup");
 const users = require("../controllers/users");
-
 
 router.post('/signup', users.signup);
 router.post('/login', authenticate, users.login);

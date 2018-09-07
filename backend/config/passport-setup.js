@@ -5,30 +5,19 @@ const JwtStrategy = require("passport-jwt").Strategy;
 const { ExtractJwt } = require("passport-jwt");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
-const GitHubStrategy = require("passport-github2").Strategy;
+// const GitHubStrategy = require("passport-github2").Strategy;
 
 const { ROOT_URL } = require('./root-urls.js');
 
 require("dotenv").config();
 
-// const Guser = require("../models/gusermodel");
 const User = require("../models/userModel");
 const secret = process.env.SECRET || "SECRET!";
 
-// passport.serializeUser((user, done) => {
-//   done(null, user.id);
-// });
-
-// passport.deserializeUser((id, done) => {
-//   Guser.findById(id).then(user => {
-//     done(null, user);
-//   });
-// });
-
 // Local Strategy
-const localStrategy = new LocalStrategy({usernameField: 'email'}, function(email, password, done) {
+const localStrategy = new LocalStrategy({ usernameField: 'email' }, function (email, password, done) {
   // Use async function for awaiting promise in user.validPassword
-  User.findOne({ 'local.email': email }, async function(err, user) {
+  User.findOne({ 'local.email': email }, async function (err, user) {
     if (err) return done(err);
     if (!user) {
       return done(null, false);
@@ -51,28 +40,28 @@ const jwtOptions = {
 // Passport strategy for securing RESTful endpoints using JWT
 const jwtStrategy = new JwtStrategy(jwtOptions, (payload, done) => {
   User.findById(payload.sub)
-  .select('-password')
-  .then(user => {
-    if(user) {
-      done(null, user);
-    } else {
-      done(null, false);
-    }
-  })
-  .catch(err => {
-    done(err, false);
-  })
+    .select('-password')
+    .then(user => {
+      if (user) {
+        done(null, user);
+      } else {
+        done(null, false);
+      }
+    })
+    .catch(err => {
+      done(err, false);
+    })
 })
 
 // Google OAuth Strategy
 const googleStrategy = new GoogleStrategy({
-    callbackURL: "/auth/google/redirect",
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET
-  }, (accessToken, refreshToken, profile, done) => {
-  User.findOne({ $or: [{ "google.id": profile.id }, { "local.email": profile.emails[0].value }]}).then(existingUser => {
+  callbackURL: "/auth/google/redirect",
+  clientID: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET
+}, (accessToken, refreshToken, profile, done) => {
+  User.findOne({ $or: [{ "google.id": profile.id }, { "local.email": profile.emails[0].value }] }).then(existingUser => {
     if (existingUser) {
-      if(existingUser.google.id == undefined) {
+      if (existingUser.google.id == undefined) {
         existingUser.google.id = profile.id;
         existingUser.google.username = profile.displayName;
         existingUser.google.email = profile.emails[0].value;
@@ -94,9 +83,9 @@ const googleStrategy = new GoogleStrategy({
       newUser.local.username = profile.displayName;
       newUser.verified = true;
       newUser.save()
-      .then(newUser => {
-        done(null, newUser);
-      });
+        .then(newUser => {
+          done(null, newUser);
+        });
     }
   }).catch(err => {
     done(err, false, err.message);
@@ -111,9 +100,9 @@ const facebookStrategy = new FacebookStrategy(
     profileFields: ["id", "displayName", "name", "gender", "photos", "email"]
   },
   (accessToken, refreshToken, profile, done) => {
-    User.findOne({ $or: [{"facebook.id": profile.id }, {"local.email": profile.emails[0].value }]}).then(existingUser => {
+    User.findOne({ $or: [{ "facebook.id": profile.id }, { "local.email": profile.emails[0].value }] }).then(existingUser => {
       if (existingUser) {
-        if(existingUser.facebook.id == undefined) {
+        if (existingUser.facebook.id == undefined) {
           existingUser.facebook.id = profile.id;
           existingUser.facebook.username = profile.displayName;
           existingUser.facebook.email = profile.emails[0].value;
@@ -135,15 +124,16 @@ const facebookStrategy = new FacebookStrategy(
         })
         newUser.local.email = profile.emails[0].value;
         newUser.save()
-        .then(newUser => {
-          done(null, newUser);
-        });
+          .then(newUser => {
+            done(null, newUser);
+          });
       }
     }).catch(err => {
       done(err, false, err.message);
     })
   }
 )
+
 // passport.use(
 //   new GitHubStrategy(
 //     {
@@ -181,8 +171,8 @@ passport.use(facebookStrategy)
 
 // passport local middleware
 const passportOptions = { session: false };
-const googleOptions = { session: false, scope: ["profile", "email"]};
-const facebookOptions = { session: false, scope: ["email"]};
+const googleOptions = { session: false, scope: ["profile", "email"] };
+const facebookOptions = { session: false, scope: ["email"] };
 const facebookRedirectOptions = { session: false, successRedirect: "/profile", failureRedirect: "/login" };
 const authenticate = passport.authenticate('local', passportOptions);
 const restricted = passport.authenticate('jwt', passportOptions);
@@ -208,7 +198,6 @@ function makeToken(user) {
 const signToken = (req, res) => {
   const timestamp = new Date().getTime();
   const payload = {
-    // iss: 'OutfitCreator',
     sub: req.user._id,
     iat: timestamp,
     username: req.user.username
@@ -217,13 +206,21 @@ const signToken = (req, res) => {
     expiresIn: '24h'
   };
   jwt.sign(payload, secret, options, (err, token) => {
-    if(err){
-        res.sendStatus(500);
+    if (err) {
+      res.sendStatus(500);
     } else {
-        res.redirect(`${ROOT_URL.WEB}/create#token=${token}`);
-        // res.status(200).json({token});
+      res.redirect(`${ROOT_URL.WEB}/create#token=${token}`);
     }
   });
 }
 
-module.exports = { authenticate, restricted, googleAuthenticate, googleRedirectAuthenticate, facebookAuthenticate, facebookRedirectAuthenticate, makeToken, signToken }
+module.exports = {
+  authenticate,
+  restricted,
+  googleAuthenticate,
+  googleRedirectAuthenticate,
+  facebookAuthenticate,
+  facebookRedirectAuthenticate,
+  makeToken,
+  signToken,
+}

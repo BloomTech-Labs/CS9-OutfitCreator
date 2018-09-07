@@ -6,48 +6,46 @@ router.use(require("body-parser").text());
 
 // set up cors options
 const corsOptions = {
-    origin: '*'
-  };
+  origin: '*'
+};
 
 router.post("/charge", cors(corsOptions), async (req, res) => {
-    stripe.customers.create({
-        //this will return a new Customer object.
-        //Store customer.id in database with user profile info
-        email: 'test@example.com', //TODO: how to extract this data from the request?
-        source: req.body.token
-    })
+  stripe.customers.create({
+    //this will return a new Customer object.
+    //Store customer.id in database with user profile info
+    email: 'test@example.com',
+    source: req.body.token
+  })
     .then(customer => {
-        stripe.plans.create({
-            product: {
-                name: 'Outfit Creator',
-                type: 'service',
-            },
-            nickname: 'outfit creator',
-            currency: 'usd',
-            interval: 'month',
-            amount: 1000,
-        })
+      stripe.plans.create({
+        product: {
+          name: 'Outfit Creator',
+          type: 'service',
+        },
+        nickname: 'outfit creator',
+        currency: 'usd',
+        interval: 'month',
+        amount: 1000,
+      })
         .then(plan => {
-            stripe.subscriptions.create({
-                customer: customer.id,
-                items: [{plan: plan.id}]
-            })
+          stripe.subscriptions.create({
+            customer: customer.id,
+            items: [{ plan: plan.id }]
+          })
             .then(subscription => {
-                const data = {stripe_cust: customer.id, stripe_sub: subscription.id};
-                console.log(data);
-                res.status(200).json(data)
+              const data = { stripe_cust: customer.id, stripe_sub: subscription.id };
+              res.status(200).json(data)
             })
-            .catch(err => console.log(err));
+            .catch(err => err);
         })
-        .catch(err => console.log(err));
+        .catch(err => err);
     })
-    .catch(err => console.log(err));
+    .catch(err => err);
 })
 
 router.post("/cancel", cors(corsOptions), async (req, res) => {
-    console.log("canceling sub ", req.body.sub);
-    stripe.subscriptions.del(req.body.sub, {at_period_end: true});
-    res.status(200).json("success");
+  stripe.subscriptions.del(req.body.sub, { at_period_end: true });
+  res.status(200).json("success");
 })
 
 module.exports = router;
