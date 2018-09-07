@@ -5,7 +5,7 @@ const saltRounds = 11;
 const UserSchema = new mongoose.Schema({
     method: {
         type: String,
-        enum: ['local', 'google', 'facebook'],
+        enum: ['local', 'google', 'facebook', 'github'],
         required: true
     },
     local: {
