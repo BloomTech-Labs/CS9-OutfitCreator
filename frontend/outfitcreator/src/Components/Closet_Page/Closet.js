@@ -137,14 +137,9 @@ class Closet extends React.Component {
     }
 
     toggleAll = () => {
-        const types = this.typesInCloset() + this.subtypesInCloset();
-        console.log(types);
         const { items } = this.state;
         Object.keys(items).forEach(item => items[item].show = false);
-        Object.keys(items).forEach((item) => {
-            if (types.indexOf(item) > -1) items[item].show = true;
-        })
-        this.setState({ items });
+        this.setState({ items, selectAll: !this.state.selectAll });
     }
 
     activateCategory = (category) => {
@@ -182,20 +177,8 @@ class Closet extends React.Component {
 
     render() {
         const typesInCloset = this.typesInCloset();
-        const subtypesInCloset = this.subtypesInCloset();
-
-        let subtypeItems = [];
-        subtypesInCloset.forEach(subtype => {
-            subtypeItems = subtypeItems.concat(this.state.items[subtype].all);
-        });
-        const typeItems = [].concat(this.state.items.top.all, this.state.items.bottom.all, this.state.items.shoes.all);
-        const noRepeats = typeItems.filter(item => subtypeItems.includes(item));
-        const itemsNoRepeats = subtypeItems.concat(noRepeats);
-        // console.log("items: ", typeItems);
-
         const selected = this.getSelected();
-        // console.log(selected);
-        // console.log(typesInCloset);
+        const allItems = [].concat(this.state.items.top.all, this.state.items.bottom.all, this.state.items.shoes.all);
 
         return (
             <div className="closet" >
@@ -213,9 +196,9 @@ class Closet extends React.Component {
                 </div>
                 <div className="closet-cards">
                     {this.state.selectAll ?
-                        itemsNoRepeats.map(item => (
-                            <ClosetCard submit={this.submit} item={item} key={item._id} />
-                        )) :
+                        allItems.map(item => (
+                            <ClosetCard submit={this.submit} item={item} key={item._id}/>
+                        )) : 
                         selected.map(type => (
                             this.state.items[type].all.map(item => (
                                 <ClosetCard submit={this.submit} item={item} key={item._id} />
