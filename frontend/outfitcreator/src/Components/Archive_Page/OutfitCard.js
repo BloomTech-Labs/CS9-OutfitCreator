@@ -11,12 +11,12 @@ class OutfitCard extends React.Component {
     }
     
     render() {
-        const { key, name, src, lastWorn } = this.props;
+        const { key, name, src } = this.props;
         console.log(this.props.src);
         let worn = 'Never Worn';
         // worn is an array of dates worn, will always try to access latest day (stored at the front) if ever worn
-        if (lastWorn.length > 0) {
-            worn = lastWorn[0].split('T')[0]
+        if (this.props.worn.length > 0) {
+            worn = this.props.worn.pop().slice(0,10);
         }
         return (
             <div className='container--card' key={key}>
@@ -38,7 +38,7 @@ class OutfitCard extends React.Component {
                 <div className='card--footer'>
                     {worn == "Never Worn"
                         ? <div>{worn}</div>
-                        : <div>Worn on: {worn}</div>}
+                        : <div>Last worn: {worn.slice(0,10)}</div>}
                 </div>
             </div>
         )
