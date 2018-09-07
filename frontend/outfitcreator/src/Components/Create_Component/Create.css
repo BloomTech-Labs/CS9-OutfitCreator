@@ -58,9 +58,11 @@
 
 
 .card-deck .card, .card, .create-card, .cardImage, .card-img-overlay {
-    max-height: 200px;
-    min-width: 300px;
-    max-width: 400px;
+    /* max-height: 200px; */
+    /* min-width: 300px; */
+    /* max-width: 400px; */
+    max-width: 300px;
+    max-height: 300px;
     border: none;
     box-shadow: none;
     outline: none;
@@ -123,8 +125,8 @@
 }
 
 .createContainer .cardImage {
-    height: 200px;
-    width: 300px;
+    /* height: 200px; */
+    /* width: 300px; */
     margin: 0;
     box-shadow: none;
 }

@@ -77,7 +77,6 @@ class OutfitEdit extends React.Component {
     }
 
     redirectArchive = () => {
-        console.log('reached')
         this.props.history.push('/Archive');
     }
 

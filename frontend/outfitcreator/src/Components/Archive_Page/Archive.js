@@ -16,6 +16,8 @@ class Archive extends React.Component {
     }
 
     componentDidMount() {
+        //allows for new data to be accessed in case of a redirect from an axios request
+        //ensures the data shown isnt an old one before a request finished processing
         setTimeout(this.getOutfits, 50);
     }
 
@@ -54,6 +56,7 @@ class Archive extends React.Component {
                     ))) {
                     count++;
                 }
+                // if (criteria.includes(searchWords[count])) count++;
                 //this is what makes it return false when something doesnt match
                 //allowing for exact match filtering
                 else break;
@@ -63,6 +66,7 @@ class Archive extends React.Component {
         }
 
         let filteredOutfits;
+        //ternary allows to cut down time on operations by filtering an already filtered array
         searching ? filteredOutfits = myOutfits.filter(myFilter) : filteredOutfits = searchedOutfits.filter(myFilter);
         if (search.length === 0) this.setState({ searching: false, searchedOutfits: filteredOutfits });
         else this.setState({ searching: true, searchedOutfits: filteredOutfits });

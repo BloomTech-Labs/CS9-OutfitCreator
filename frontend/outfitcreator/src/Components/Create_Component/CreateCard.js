@@ -12,7 +12,7 @@ class CreateCard extends React.Component {
                 <Card inverse>
                         <CardImg
                             width="80%"
-                            src={newURL || this.props.item.icon}
+                            src={URL || this.props.item.icon}
                             alt="Card image cap"
                             className="cardImage"
                         />
