@@ -67,8 +67,8 @@ class Upload extends Component {
                      'facebook'
                     ],
                 theme: 'minimal',
-                stylesheet: `#cloudinary-widget {background-color: #363858;}
-                            #cloudinary-widget .drag_area {background-color: #363858;}`,
+                stylesheet: `#cloudinary-widget {background-color: #41446d;}
+                            #cloudinary-widget .drag_area {background-color: #31324f;}`,
             },
             (err, result) => {
                 if (result) {
