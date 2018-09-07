@@ -88,7 +88,7 @@ class Upload extends Component {
 	saveItem = (e) => {
 		e.preventDefault();
 
-		if (this.state.type == 'title') {
+		if (this.state.type === 'title') {
 			alert('Please select an item type');
 			return;
 		}
@@ -135,7 +135,6 @@ class Upload extends Component {
 						})
 						.then((response) => {
 							this.setState({ image: '', name: '', tag: '', tags: [] });
-							this.saveTest();
 						})
 						.catch((error) => error);
 				} else {
@@ -149,7 +148,6 @@ class Upload extends Component {
 						})
 						.then(() => {
 							this.setState({ image: '', name: '', tag: '', tags: [] });
-							this.saveTest();
 						})
 						.catch((error) => error);
 				}
