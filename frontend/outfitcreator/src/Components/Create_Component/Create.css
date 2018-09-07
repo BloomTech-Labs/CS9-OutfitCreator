@@ -146,6 +146,11 @@
     padding: 2px 12px 3px;
 }
 
+.outfitPickerDecision button:hover {
+  margin: 1em;
+  padding: 2px 12px 3px;
+}
+
 .outfitPickerDecision .fa-share-alt {
     margin-left: 0.3em;
 }

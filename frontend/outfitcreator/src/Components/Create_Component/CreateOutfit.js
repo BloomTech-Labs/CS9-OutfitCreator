@@ -51,8 +51,7 @@ class CreateOutfit extends Component {
             },
         }
 
-        this.setTypes();
-        this.setAuthToken();
+        if (localStorage.getItem('authToken')) this.setTypes();
     }
 
     setAuthToken = () => {
@@ -72,6 +71,22 @@ class CreateOutfit extends Component {
                 all: [],
                 current: null,
                 icon: Icons.top,
+                locked: false,
+            },
+            bottom: {
+                title: 'All Bottoms',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.bottom,
+                locked: false,
+            },
+            shoes: {
+                title: 'All Shoes',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.casualShoes,
                 locked: false,
             },
             shirt: {
@@ -171,7 +186,7 @@ class CreateOutfit extends Component {
                 locked: false,
             },
         }
-
+        
         this.props.isUserPaid(paid => {
             if (paid) this.setState({ items: paidItems });
         });
@@ -182,22 +197,23 @@ class CreateOutfit extends Component {
         if(hash.token) {
             localStorage.setItem('authToken', `Bearer ${hash.token}`);
             this.setAuthToken();
+            this.setTypes();
         }
         const user = this.props.getUserID();
 
         if (user) {
             axios.all([
                 axios.get(`${ROOT_URL.API}/items/type/${user}/top`),
+                axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`),
+                axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/shirt`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/sweater`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/jacket`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/dress`),
-                axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/pants`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/shorts`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/skirt`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/leggings`),
-                axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/formalShoes`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/casualShoes`),
             ])
@@ -249,7 +265,6 @@ class CreateOutfit extends Component {
         // Otherwise toggle off main of subtype
         } else {
             Object.entries(subtypeMap).forEach(pair => {
-                console.log(pair, category);
                 if (pair[1].includes(category)) {
                   items[pair[0]].show = false;
                 }
@@ -334,7 +349,6 @@ class CreateOutfit extends Component {
         const { name, worn, tags } = this.state;
         const { top, bottom, shoes } = groups;
         const outfit = { user, name, worn, tags, top, bottom, shoes };
-        console.log(outfit);
 
         axios.post(`${ROOT_URL.API}/outfits`, outfit)
             .then(res => {
@@ -354,6 +368,9 @@ class CreateOutfit extends Component {
     }
 
     render() {
+      console.log('Render');
+      // this.setTypes();
+      // this.setAuthToken();
         const typesInCloset = this.getTypesInCloset();
         const selected = this.getSelected();
 

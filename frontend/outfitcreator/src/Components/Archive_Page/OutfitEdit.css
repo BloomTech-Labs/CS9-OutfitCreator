@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .container--editbox {
     width: 50%;
     margin-top: 15px;
@@ -6,18 +10,22 @@
     align-items: center;
 }
 
-.card-deck .card {
+.edit--card {
     display: flex;
     justify-content: center;
     align-content: center;
-    max-height: 500px;
+    max-height: 600px;
     max-width: 400px;
     width: 100%;
     margin: 4px;
+    transition: 2s;
 }
 
-.card-deck .card:hover {
-    border: 1px solid purple;
+
+.edit--card:hover {
+    cursor: pointer;
+    border: 2px solid purple;
+    transform: translateY(-10px);
 }
 
 .container--archive {
@@ -29,11 +37,35 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    left: 10px;
+    left: 50px;
+    /* max-width: 70vw; */
+    min-width: 75vw;
     max-height: 90vh;
     margin-top: 4.5em;
+    min-height: 700px;
     margin-left: 1em;
-    align-items: center;
+    overflow-x: hidden;
+}
+
+.image--container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 75px;
+    min-width: 75vw;
+}
+
+.edit--card-image {
+    max-width: 25vw;
+    max-height: 40vh;
+    margin: 0 5px;
+    padding: 5px;
+}
+
+.edit--card-image:hover {
+    cursor: pointer;
+    background: var(--dark-purple);
+    /* border: 5px solid var(--dark-purple); */
+    transform: translateY(-10px);
 }
 /* 
 .edit--fields{
@@ -52,17 +84,13 @@
     background: transparent;
 }
 
-.edit--images {
-    display: flex;
-    justify-content: space-evenly;
-}
-
 .edit--selections {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     max-height: 90vh;
     max-width: 80vw;
-    overflow-x: auto;
+    overflow-x: hidden;
 }
 
 .edit--input {
@@ -72,18 +100,18 @@
     padding: 5px;
 }
 
-.edit--buttons {
+.edit--button-group {
     display: flex;
     justify-content: center;
 }
 
-/* .edit--submit, .edit--cancel {
+.edit--button{
     border-radius: 5px;
     width: 100px;
     height: 50px;
 } */
 
-.edit--submit:hover, .edit--cancel:hover {
+.edit--button:hover {
     background-color: black;
     color: white;
     cursor: pointer;

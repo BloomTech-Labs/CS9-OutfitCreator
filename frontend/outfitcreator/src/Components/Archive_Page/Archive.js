@@ -74,7 +74,7 @@ class Archive extends React.Component {
 
     render() {
         return (
-            <div className='container--archive'>
+            <div className='container-archive'>
                 <div className='archive--search'>
                     <input
                         type='search'
