@@ -134,6 +134,8 @@ const facebookStrategy = new FacebookStrategy(
           }
         })
         newUser.local.email = profile.emails[0].value;
+        newUser.local.username = profile.displayName;
+        newUser.verified = true;
         newUser.save()
         .then(newUser => {
           done(null, newUser);
