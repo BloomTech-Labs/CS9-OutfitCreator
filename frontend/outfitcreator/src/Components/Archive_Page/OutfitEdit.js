@@ -165,7 +165,7 @@ class OutfitEdit extends React.Component {
         }
         const items = [top, bottom, shoes];
         return (
-            <div>
+            <div className='container--archive-edit'>
                 {/* ternary to check if modal is toggled or not*/}
                 {/* this will be the darkened background*/}
                 {editItem ?

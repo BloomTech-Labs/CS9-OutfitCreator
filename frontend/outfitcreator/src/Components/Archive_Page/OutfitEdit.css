@@ -78,7 +78,7 @@
 .edit--fields {
     display: flex;
     justify-content: space-between;
-    padding-top: 15px;
+    padding: 15px 0;
 }
 
 .header--edit{
@@ -163,7 +163,7 @@
     position: absolute;
     display: flex;
     flex-wrap: wrap;
-    margin-top: 50px;
+    margin: 50px 0 10px;
     width: 28vw;
     /* left: 100px; */
 }
@@ -180,4 +180,14 @@
     .container--edit {
         max-height: 100%;
     }
+
+    .modal--backdrop {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    /* .container--archive-edit{
+        width: 100vw;
+        height: 100vh;
+    } */
 }

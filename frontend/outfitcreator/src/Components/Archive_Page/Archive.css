@@ -11,9 +11,10 @@
 }
 
 ::-webkit-scrollbar{
-    width: 10px;
+    width: 1.5vw;
     height: 10px;
     padding-top: 40px;
+    z-index: 1000;
 }
 ::-webkit-scrollbar-thumb{
     border-radius:10px;
