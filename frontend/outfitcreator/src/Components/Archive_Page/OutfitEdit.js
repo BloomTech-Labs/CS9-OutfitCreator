@@ -86,21 +86,19 @@ class OutfitEdit extends React.Component {
         const tags = [...topTags, ...bottomTags, ...shoesTags];
         const newInfo = { name, worn, tags, top, bottom, shoes };
         axios.put(`${ROOT_URL.API}/outfits/${user}/${outfitID}`, newInfo)
-            .then()
+            .then(() => this.redirectArchive())
             .catch(err => {
                 console.log(err);
-            });
-        this.redirectArchive();
+            });        
     }
 
     deleteOutfit = () => {
         const { outfitID } = this.state;
         axios.delete(`${ROOT_URL.API}/outfits/${outfitID}`)
-        .then()
+        .then(() => this.redirectArchive())
         .catch(err => {
             console.log(err);
-        })
-        this.redirectArchive();
+        })        
     }
 
     getItems = (type, id) => {
