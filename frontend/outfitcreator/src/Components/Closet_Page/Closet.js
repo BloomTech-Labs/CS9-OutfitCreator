@@ -9,7 +9,7 @@ class Closet extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectAll: true,
+            selectAll: false,
             items: {
                 top: {
                     title: 'Tops',
@@ -133,19 +133,18 @@ class Closet extends React.Component {
         } else {
             this.props.history.push('/');
         }
+        this.toggleAll();
     }
 
     toggleAll = () => {
-        const typesInCloset = this.typesInCloset();
-        console.log(typesInCloset)
+        const types = this.typesInCloset() + this.subtypesInCloset();
+        console.log(types);
         const { items } = this.state;
         Object.keys(items).forEach(item => items[item].show = false);
         Object.keys(items).forEach((item) => {
-            console.log(item);
-            if (typesInCloset.indexOf(items[item]) > -1) items[item].show = true;
-            console.log(typesInCloset.indexOf(items[item].title));
+            if (types.indexOf(item) > -1) items[item].show = true;
         })
-        this.setState({ items, selectAll: !this.state.selectAll });
+        this.setState({ items });
     }
 
     activateCategory = (category) => {
@@ -192,11 +191,11 @@ class Closet extends React.Component {
         const typeItems = [].concat(this.state.items.top.all, this.state.items.bottom.all, this.state.items.shoes.all);
         const noRepeats = typeItems.filter(item => subtypeItems.includes(item));
         const itemsNoRepeats = subtypeItems.concat(noRepeats);
-        console.log("items: ", typeItems);
+        // console.log("items: ", typeItems);
 
         const selected = this.getSelected();
-        console.log(selected);
-        console.log(typesInCloset);
+        // console.log(selected);
+        // console.log(typesInCloset);
 
         return (
             <div className="closet" >

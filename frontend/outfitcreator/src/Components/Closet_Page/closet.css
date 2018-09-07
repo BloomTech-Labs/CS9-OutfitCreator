@@ -30,6 +30,10 @@
     font-family: 'Arsenal', sans-serif;
 }
 
+.closet-button:hover, .closet-button--active:hover {
+    cursor: pointer;
+}
+
 .closet-cards {
     display: flex;
     flex-direction: row;
