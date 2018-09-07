@@ -13,8 +13,8 @@ class OutfitEdit extends React.Component {
             user: '',
             outfit: '',
             name: '',
-            lastWorn: Date,
-            worn: Date,
+            newDate: null,
+            worn: [],
             top: '',
             topTags: [],
             bottom: '',
@@ -76,13 +76,26 @@ class OutfitEdit extends React.Component {
         this.setState({ [event.target.name]: event.target.value });
     }
 
+    handleNewDate = event => {
+        const worn = this.state.worn;
+        worn.push(event.target.value);
+        worn.sort();
+        this.setState({ worn, lastWorn: event.target.value });
+    }
+
+    removeDate = event => {
+        const worn = this.state.worn.filter(date => Date.parse(date) !== Date.parse(event.target.nextElementSibling.innerHTML))
+        this.setState({worn});
+    }
+
     redirectArchive = () => {
         this.props.history.push('/Archive');
     }
 
     submitChanges = () => {
-        const { user, name, worn, lastWorn, top, topTags, bottom, bottomTags, shoes, shoesTags, outfitID } = this.state;
-        if (lastWorn) worn.unshift(lastWorn);
+        const { user, name, worn, top, topTags, bottom, bottomTags, shoes, shoesTags } = this.state;
+        const outfitID = this.props.location.pathname.split('Edit/')[1];
+
         const tags = [...topTags, ...bottomTags, ...shoesTags];
         const newInfo = { name, worn, tags, top, bottom, shoes };
         axios.put(`${ROOT_URL.API}/outfits/${user}/${outfitID}`, newInfo)
@@ -201,7 +214,12 @@ class OutfitEdit extends React.Component {
                                 {/* here are the inputs to change the name and last worn date*/}
                                 <div className='container--editbox'>
                                     <form>
-                                        <div className='edit--header'>
+                                        <div className='edit--button-group '>
+                                            <button className='edit--submit edit--button button' onClick={this.submitChanges}>Submit</button>
+                                            <button className='edit--delete edit--button button' onClick={this.deleteOutfit}>delete</button>
+                                            <button className='edit--cancel edit--button button' onClick={this.redirectArchive}>Cancel</button>
+                                        </div>
+                                        <div className='edit--fields'>
                                             <div className='header--title'>
                                                 Name: <input
                                                     type='text'
@@ -211,20 +229,23 @@ class OutfitEdit extends React.Component {
                                                     className='edit--input'
                                                 />
                                             </div>
-                                            <div className='edit--footer'>
-                                                Worn on: <input
-                                                    type='text'
-                                                    name='lastWorn'
-                                                    value={this.state.lastWorn}
-                                                    onChange={this.handleInput}
-                                                    className='edit--input'
-                                                />
+                                            <div className='edit--date'>
+                                                <div className="date--input">
+                                                    Worn on: <input
+                                                        type='date'
+                                                        name='lastWorn'
+                                                        value={this.state.newDate}
+                                                        onChange={this.handleNewDate}
+                                                        className='edit--input'
+                                                    />
+                                                </div>
+                                                    {this.state.worn.map(date => (
+                                                        <div className="outfit-date" key={this.state.worn.indexOf(date)}>
+                                                            <span className="outfit-date--delete" onClick={this.removeDate}>x</span>
+                                                            <span>{date.slice(0,10)}</span>
+                                                        </div>
+                                                    ))}
                                             </div>
-                                        </div>
-                                        <div className='edit--button-group '>
-                                            <button className='edit--submit edit--button button' onClick={this.submitChanges}>Submit</button>
-                                            <button className='edit--delete edit--button button' onClick={this.deleteOutfit}>delete</button>
-                                            <button className='edit--cancel edit--button button' onClick={this.redirectArchive}>Cancel</button>
                                         </div>
                                     </form>
                                 </div>
