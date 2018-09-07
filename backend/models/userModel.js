@@ -5,7 +5,7 @@ const saltRounds = 11;
 const UserSchema = new mongoose.Schema({
     method: {
         type: String,
-        enum: ['local', 'google', 'facebook'],
+        enum: ['local', 'google', 'facebook', 'github'],
         required: true
     },
     local: {
@@ -45,7 +45,6 @@ const UserSchema = new mongoose.Schema({
         },
         username: {
             type: String,
-            unique: true,
             lowercase: true,
         },
         email: {
@@ -54,6 +53,20 @@ const UserSchema = new mongoose.Schema({
         },
         picture: String,
         token: String
+    },
+    github: {
+        id: {
+            type: String
+        },
+        username: {
+            type: String,
+            lowercase: true,
+        },
+        email: {
+            type: String,
+            lowercase: true,
+        },
+        thumbnail: String,
     },
     phone: {
         type: String,
