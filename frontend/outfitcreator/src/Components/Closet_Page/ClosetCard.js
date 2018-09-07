@@ -64,7 +64,7 @@ class ClosetCard extends React.Component {
                 </div>
             ) : (
                     <div className="closet-card" onClick={this.toggle}>
-                        <div className="closet-card--name">{this.props.item.name}</div>
+                        <div className="closet-card--name">{name}</div>
                         <img className="closet-image"
                             src={`${newURL}`}
                             alt={this.props.item.name} />

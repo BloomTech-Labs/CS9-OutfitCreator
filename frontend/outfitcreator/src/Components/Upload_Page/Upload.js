@@ -66,7 +66,8 @@ class Upload extends Component {
                      'instagram',
                      'facebook'
                     ],
-                theme: 'purple'
+                theme: 'minimal',
+                stylesheet: '#cloudinary-overlay { background-color: #9400D3; }',
             },
             (err, result) => {
                 if (result) {
@@ -136,7 +137,7 @@ class Upload extends Component {
                         .then(response => {
                             console.log(response);
                             this.setState({ image: '', name: '', tags: [] });
-                            this.saveTest();
+                            // this.saveTest(); // not sure what this is for
                         })
                         .catch(error => {
                             console.log(error);
@@ -148,7 +149,7 @@ class Upload extends Component {
                         .then(response => {
                             console.log(response);
                             this.setState({ image: '', name: '', tags: [] });
-                            this.saveTest();
+                            // this.saveTest(); // not sure what this is for
                         })
                         .catch(error => {
                             console.log(error);

@@ -25,6 +25,7 @@ class OutfitEdit extends React.Component {
             tags: [],
             itemSelection: [],
             editItem: false,
+            outfitID: '',
         }
     }
 
@@ -44,15 +45,15 @@ class OutfitEdit extends React.Component {
 
     getOutfit = () => {
         const user = this.props.getUserID();
-        const outfitId = this.props.location.pathname.split('Edit/')[1];
-        axios.get(`${ROOT_URL.API}/outfits/${user}/${outfitId}`)
+        const outfitID = this.props.location.pathname.split('Edit/')[1];
+        axios.get(`${ROOT_URL.API}/outfits/${user}/${outfitID}`)
             .then(response => {
                 const { data } = response;
                 let lastWorn = data.worn[0];
                 if (lastWorn) {
                     lastWorn = lastWorn.split('T')[0];
                 }
-                this.setState({ outfit: data, name: data.name, worn: data.worn, lastWorn, user })
+                this.setState({ outfit: data, name: data.name, worn: data.worn, lastWorn, user, outfitID })
             })
             .catch(err => {
                 console.log(err);
@@ -80,17 +81,24 @@ class OutfitEdit extends React.Component {
     }
 
     submitChanges = () => {
-        const { user, name, worn, lastWorn, top, topTags, bottom, bottomTags, shoes, shoesTags } = this.state;
-        const outfitId = this.props.location.pathname.split('Edit/')[1];
+        const { user, name, worn, lastWorn, top, topTags, bottom, bottomTags, shoes, shoesTags, outfitID } = this.state;
         if (lastWorn) worn.unshift(lastWorn);
         const tags = [...topTags, ...bottomTags, ...shoesTags];
         const newInfo = { name, worn, tags, top, bottom, shoes };
-        axios.put(`${ROOT_URL.API}/outfits/${user}/${outfitId}`, newInfo)
-            .then()
+        axios.put(`${ROOT_URL.API}/outfits/${user}/${outfitID}`, newInfo)
+            .then(() => this.redirectArchive())
             .catch(err => {
                 console.log(err);
-            });
-        this.redirectArchive();
+            });        
+    }
+
+    deleteOutfit = () => {
+        const { outfitID } = this.state;
+        axios.delete(`${ROOT_URL.API}/outfits/${outfitID}`)
+        .then(() => this.redirectArchive())
+        .catch(err => {
+            console.log(err);
+        })        
     }
 
     getItems = (type, id) => {
@@ -157,7 +165,6 @@ class OutfitEdit extends React.Component {
                                     const [partOne, partTwo] = item.image.split('upload/');
                                     const crop = 'upload/w_200,h_250/';
                                     const newUrl = partOne + crop + partTwo;
-                                    console.log(newUrl);
                                     return (<div className='outfit--card' key={index}>
                                         <img
                                             key={item._id}
@@ -176,20 +183,21 @@ class OutfitEdit extends React.Component {
                         {/* another ternary to check if outfit was loaded correctly*/}
                         {outfit ? (
                             <div className="container--edit">
-                                <CardDeck>
+                                <div className='image--container'>
                                     {/*here maps out the items of the current outfit*/}
                                     {items.map((item, index) => {
-                                        return (<Card className='outfit--card' key={index} inverse>
-                                            <CardImg
+                                        return (<div key={index}>
+                                            <img
                                                 key={item._id}
-                                                width="80%"
+                                                // width="80%"
+                                                className='edit--card-image'
                                                 src={item.image}
                                                 onClick={() => this.getItems(item.type, item._id)}
                                                 alt="Card image cap"
                                             />
-                                        </Card>)
+                                        </div>)
                                     })}
-                                </CardDeck>
+                                </div>
                                 {/* here are the inputs to change the name and last worn date*/}
                                 <div className='container--editbox'>
                                     <form>
@@ -213,9 +221,10 @@ class OutfitEdit extends React.Component {
                                                 />
                                             </div>
                                         </div>
-                                        <div className='edit--buttons'>
-                                            <button className='edit--submit button' onClick={this.submitChanges}>Submit</button>
-                                            <button className='edit--cancel button' onClick={this.redirectArchive}>Cancel</button>
+                                        <div className='edit--button-group '>
+                                            <button className='edit--submit edit--button button' onClick={this.submitChanges}>Submit</button>
+                                            <button className='edit--delete edit--button button' onClick={this.deleteOutfit}>delete</button>
+                                            <button className='edit--cancel edit--button button' onClick={this.redirectArchive}>Cancel</button>
                                         </div>
                                     </form>
                                 </div>
