@@ -1,7 +1,11 @@
 .createContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
     background: white;
-    width: 80%;
-    margin: 60px 0;
+    width: 80vw;
+    margin: 60px auto;
     padding: 20px;
 }
 
@@ -65,6 +69,14 @@
     box-shadow: none;
     outline: none;
     margin: 0 8px 15px;
+}
+
+.card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 700px;
+    /* max-width: 700px; */
+    /* margin: 0 auto; */
 }
 
 .createContainer .card.text-white {
