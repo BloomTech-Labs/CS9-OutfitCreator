@@ -67,7 +67,7 @@ class CreateOutfit extends Component {
     setTypes = () => {
         const paidItems = {
             top: {
-                title: 'All Tops',
+                title: 'Tops',
                 show: false,
                 all: [],
                 current: null,
@@ -107,7 +107,7 @@ class CreateOutfit extends Component {
                 locked: false,
             },
             bottom: {
-                title: 'All Bottoms',
+                title: 'Bottoms',
                 show: false,
                 all: [],
                 current: null,
@@ -147,7 +147,7 @@ class CreateOutfit extends Component {
                 locked: false,
             },
             shoes: {
-                title: 'All Shoes',
+                title: 'Shoes',
                 show: false,
                 all: [],
                 current: null,
