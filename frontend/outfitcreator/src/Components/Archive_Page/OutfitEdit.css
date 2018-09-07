@@ -35,16 +35,16 @@
     margin-left: 1em;
     align-items: center;
 }
-
+/* 
 .edit--fields{
     display: flex;
     flex-direction: row;
-}
+} */
 
-.edit--title {
+.edit--fields {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 30px;
+    padding-top: 15px;
 }
 
 .header--edit{
@@ -77,11 +77,11 @@
     justify-content: center;
 }
 
-.edit--submit, .edit--cancel {
+/* .edit--submit, .edit--cancel {
     border-radius: 5px;
     width: 100px;
     height: 50px;
-}
+} */
 
 .edit--submit:hover, .edit--cancel:hover {
     background-color: black;

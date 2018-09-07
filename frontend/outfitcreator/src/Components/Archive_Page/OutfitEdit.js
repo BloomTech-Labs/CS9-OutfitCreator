@@ -204,7 +204,11 @@ class OutfitEdit extends React.Component {
                                 {/* here are the inputs to change the name and last worn date*/}
                                 <div className='container--editbox'>
                                     <form>
-                                        <div className='edit--title'>
+                                        <div className='edit--buttons'>
+                                            <button className='edit--submit button' onClick={this.submitChanges}>Submit</button>
+                                            <button className='edit--cancel button' onClick={this.redirectArchive}>Cancel</button>
+                                        </div>
+                                        <div className='edit--fields'>
                                             <div className='header--title'>
                                                 Name: <input
                                                     type='text'
@@ -231,10 +235,6 @@ class OutfitEdit extends React.Component {
                                                         </div>
                                                     ))}
                                             </div>
-                                        </div>
-                                        <div className='edit--buttons'>
-                                            <button className='edit--submit button' onClick={this.submitChanges}>Submit</button>
-                                            <button className='edit--cancel button' onClick={this.redirectArchive}>Cancel</button>
                                         </div>
                                     </form>
                                 </div>
