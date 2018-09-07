@@ -7,23 +7,11 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const GitHubStrategy = require("passport-github2").Strategy;
 
-const { ROOT_URL } = require('./root-urls.js');
-
 require("dotenv").config();
 
-// const Guser = require("../models/gusermodel");
+const { ROOT_URL } = require('./root-urls.js');
 const User = require("../models/userModel");
 const secret = process.env.SECRET;
-
-// passport.serializeUser((user, done) => {
-//   done(null, user.id);
-// });
-
-// passport.deserializeUser((id, done) => {
-//   Guser.findById(id).then(user => {
-//     done(null, user);
-//   });
-// });
 
 // Local Strategy
 const localStrategy = new LocalStrategy({usernameField: 'email'}, function(email, password, done) {
@@ -241,7 +229,6 @@ const signToken = (req, res) => {
         res.sendStatus(500);
     } else {
         res.redirect(`${ROOT_URL.WEB}/create#token=${token}`);
-        // res.status(200).json({token});
     }
   });
 }
