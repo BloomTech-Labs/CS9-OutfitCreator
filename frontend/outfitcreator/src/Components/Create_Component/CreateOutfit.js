@@ -51,8 +51,7 @@ class CreateOutfit extends Component {
             },
         }
 
-        this.setTypes();
-        this.setAuthToken();
+        if (localStorage.getItem('authToken')) this.setTypes();
     }
 
     setAuthToken = () => {
@@ -171,7 +170,7 @@ class CreateOutfit extends Component {
                 locked: false,
             },
         }
-
+        
         this.props.isUserPaid(paid => {
             if (paid) this.setState({ items: paidItems });
         });
@@ -182,6 +181,7 @@ class CreateOutfit extends Component {
         if(hash.token) {
             localStorage.setItem('authToken', `Bearer ${hash.token}`);
             this.setAuthToken();
+            this.setTypes();
         }
         const user = this.props.getUserID();
 
@@ -354,6 +354,9 @@ class CreateOutfit extends Component {
     }
 
     render() {
+      console.log('Render');
+      // this.setTypes();
+      // this.setAuthToken();
         const typesInCloset = this.getTypesInCloset();
         const selected = this.getSelected();
 
@@ -383,7 +386,6 @@ class CreateOutfit extends Component {
                     <div className="outfitPickerDecision">
                         <Button className="button" onClick={this.handleCreateOutfit}>Save</Button>
                         <Button className="button" onClick={this.randomize}>Randomize</Button>
-                        <FontAwesomeIcon icon="share-alt" size="4x" onClick={this.handleButtonClick} />
                     </div>
                 </div>
             </div>

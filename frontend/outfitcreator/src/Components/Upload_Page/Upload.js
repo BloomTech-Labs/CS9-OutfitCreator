@@ -20,12 +20,13 @@ class Upload extends Component {
             name: '',
             tag: '',
             tags: [],
-            type: 'top',
+            type: 'title',
             options: {},
         }
 
         props.isUserPaid(paid => {
-            const options = paid ? { 
+            const options = paid ? {
+                    title: 'Item Type',
                     top: 'Top',
                     shirt: 'Shirt',
                     sweater: 'Sweater',
@@ -40,6 +41,7 @@ class Upload extends Component {
                     casualShoes: 'Casual Shoes',
                     shoes: 'Shoes',
                 } : { 
+                    title: 'Item Category',
                     top: 'Top',
                     bottom: 'Bottom',
                     shoes: 'Shoes',
@@ -91,6 +93,11 @@ class Upload extends Component {
 
     saveItem = e => {
         e.preventDefault();
+
+        if (this.state.type == 'title'){
+            alert('Please select an item type');
+            return;
+        }
 
         this.props.isUserPaid(paid => {
             this.uploadCount(count => {
@@ -170,7 +177,6 @@ class Upload extends Component {
         return (
             <div className='container--upload'>
                 <div className='upload--columns'>
-                    <div className="column--left">
                         {this.state.image ?
                             <CardImg
                                 className="upload--image"
@@ -203,6 +209,7 @@ class Upload extends Component {
                                 className='upload--select'
                                 type='select'
                                 name='type'
+                                placeholder="Item Type"
                                 onChange={this.handleInputChange}>
                                 {this.state.options ?
                                   Object.keys(this.state.options).map(option => (
@@ -214,7 +221,6 @@ class Upload extends Component {
                             state={this.state}
                             passState={this.passState}
                         />
-                    </div>
                 </div>
                 <Button className="button upload--save" onClick={this.saveItem}>Save</Button>
             </div>

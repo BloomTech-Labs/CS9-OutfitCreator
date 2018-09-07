@@ -1,7 +1,5 @@
 .container--tagSearch {
-    margin-top: 10px;
-    min-width: 300px;
-    width: 300px;
+    width: 250px;
 }
 
 .tagSearch--icon {
@@ -51,8 +49,10 @@
 
 .tagSearch--tag {
     border: 1px solid black;
-    box-shadow: 2px 2px 0 0 black;
+    border-radius: 5px;
+    box-shadow: 1px 1px 0 0 black;
     display: flex;
-    margin: 5px;
+    margin: 5px 5px 5px 0px;
     padding: 3px 10px 3px 5px;
+    font-size: 15px;
 }

@@ -108,7 +108,7 @@ class Closet extends React.Component {
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/dress`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/formalShoes`),
                 axios.get(`${ROOT_URL.API}/items/subtype/${user}/casualShoes`),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/shoes`),
+                axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`),
             ])
                 .then(res => {
                     const items = { ...this.state.items };
@@ -169,13 +169,8 @@ class Closet extends React.Component {
         const typesInCloset = Object.keys(this.state.items).filter(type => {
             return (this.state.items[type].all.length > 0);
         });
-        const subtypesInCloset = Object.keys(this.state.items).filter(type => {
-            return ((this.state.items[type].all.length > 0) && (type != "top" && type != "bottom" && type != "shoes"));
-        });
-
+        const allItems = [].concat(this.state.items.top.all, this.state.items.bottom.all, this.state.items.shoes.all);
         const selected = this.getSelected();
-        console.log(selected);
-        console.log(typesInCloset);
 
         return (
             <div className="closet">
@@ -191,10 +186,8 @@ class Closet extends React.Component {
                 </div>
                 <div className="closet-cards">
                     {this.state.selectAll ?
-                        subtypesInCloset.map(type => (
-                            this.state.items[type].all.map(item => (
-                                <ClosetCard submit={this.submit} item={item} key={item._id}/>
-                            ))
+                        allItems.map(item => (
+                            <ClosetCard submit={this.submit} item={item} key={item._id}/>
                         )) : 
                         selected.map(type => (
                             this.state.items[type].all.map(item => (
