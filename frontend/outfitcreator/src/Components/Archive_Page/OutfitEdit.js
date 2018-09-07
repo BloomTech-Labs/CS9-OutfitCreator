@@ -81,6 +81,11 @@ class OutfitEdit extends React.Component {
         this.setState({ worn, lastWorn: event.target.value });
     }
 
+    removeDate = event => {
+        const worn = this.state.worn.filter(date => date !== event.target.nextElementSibling.innerHTML)
+        this.setState({worn});
+    }
+
     redirectArchive = () => {
         this.props.history.push('/Archive');
     }
@@ -199,7 +204,7 @@ class OutfitEdit extends React.Component {
                                 {/* here are the inputs to change the name and last worn date*/}
                                 <div className='container--editbox'>
                                     <form>
-                                        <div className='edit--header'>
+                                        <div className='edit--title'>
                                             <div className='header--title'>
                                                 Name: <input
                                                     type='text'
@@ -209,15 +214,22 @@ class OutfitEdit extends React.Component {
                                                     className='edit--input'
                                                 />
                                             </div>
-                                            <div className='edit--footer'>
-                                                Worn on: <input
-                                                    type='date'
-                                                    name='lastWorn'
-                                                    value={this.state.newDate}
-                                                    onChange={this.handleNewDate}
-                                                    className='edit--input'
-                                                />
-                                                <button onClick={() => this.handleNewDate} className="button">Add</button>
+                                            <div className='edit--date'>
+                                                <div className="date--input">
+                                                    Worn on: <input
+                                                        type='date'
+                                                        name='lastWorn'
+                                                        value={this.state.newDate}
+                                                        onChange={this.handleNewDate}
+                                                        className='edit--input'
+                                                    />
+                                                </div>
+                                                    {this.state.worn.map(date => (
+                                                        <div className="outfit-date" key={this.state.worn.indexOf(date)}>
+                                                            <span className="outfit-date--delete" onClick={this.removeDate}>x</span>
+                                                            <span>{date.slice(0,10)}</span>
+                                                        </div>
+                                                    ))}
                                             </div>
                                         </div>
                                         <div className='edit--buttons'>

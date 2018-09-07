@@ -1,6 +1,9 @@
 .container--editbox {
-    width: 100%;
-    margin-top: 10px;
+    width: 50%;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .card-deck .card {
@@ -12,11 +15,6 @@
     width: 100%;
     margin: 4px;
 }
-
-/* .card-img {
-    width: 300px;
-    height: 400px;
-} */
 
 .card-deck .card:hover {
     border: 1px solid purple;
@@ -35,9 +33,15 @@
     max-height: 90vh;
     margin-top: 4.5em;
     margin-left: 1em;
+    align-items: center;
 }
 
-.edit--header {
+.edit--fields{
+    display: flex;
+    flex-direction: row;
+}
+
+.edit--title {
     display: flex;
     justify-content: space-between;
     padding-bottom: 30px;
@@ -70,7 +74,7 @@
 
 .edit--buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .edit--submit, .edit--cancel {
@@ -102,6 +106,25 @@
     cursor: pointer;
 }
 
-.edit--footer{
-    align-self: flex-start;
+.edit--date{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0px 10px;
+}
+
+.outfit-date{
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 1px 1px 0 0 black;
+    display: flex;
+    margin: 5px 0px 0px 0px;
+    padding: 5px;
+    font-size: 15px;
+    width: 120px;
+}
+
+.outfit-date--delete{
+    padding: 0 8px;
+    cursor: pointer;
 }
