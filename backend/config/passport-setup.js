@@ -13,7 +13,7 @@ require("dotenv").config();
 
 // const Guser = require("../models/gusermodel");
 const User = require("../models/userModel");
-const secret = process.env.SECRET || "SECRET!";
+const secret = process.env.SECRET;
 
 // passport.serializeUser((user, done) => {
 //   done(null, user.id);
@@ -146,57 +146,75 @@ const facebookStrategy = new FacebookStrategy(
     })
   }
 )
-// passport.use(
-//   new GitHubStrategy(
-//     {
-//       callbackURL: "/auth/github/callback",
-//       clientID: process.env.GH_CLIENT_ID,
-//       clientSecret: process.env.GH_CLIENT_SECRET,
-//       scope: "user"
-//     },
-//     (accessToken, refreshToken, profile, done) => {
-//       Guser.findOne({ "github.githubId": profile.id }).then(currentUser => {
-//         if (currentUser) {
-//           done(null, currentUser);
-//         } else {
-//           new Guser({
-//             "github.githubId": profile.id,
-//             "github.username": profile.username,
-//             "github.thumbnail": profile._json.avatar_url,
-//             "github.email": profile.emails[0].value
-//           })
-//             .save()
-//             .then(newUser => {
-//               done(null, newUser);
-//             });
-//         }
-//       });
-//     }
-//   )
-// );
+const githubStrategy = new GitHubStrategy(
+  {
+    callbackURL: "/auth/github/callback",
+    clientID: process.env.GH_CLIENT_ID,
+    clientSecret: process.env.GH_CLIENT_SECRET,
+    scope: "user"
+  },
+  (accessToken, refreshToken, profile, done) => {
+    User.findOne({ $or: [{ "github.id": profile.id }, {"local.email": profile.emails[0].value }]}).then(existingUser => {
+      if (existingUser) {
+        if(existingUser.github.id === undefined) {
+          existingUser.github.id = profile.id;
+          existingUser.github.username = profile.username;
+          existingUser.github.email = profile.emails[0].value;
+          existingUser.github.thumbnail = profile._json.avatar_url;
+          existingUser.save();
+        }
+        done(null, currentUser);
+      } else {
+        let newUser = new User({
+          method: 'github',
+          github: {
+            id: profile.id,
+            username: profile.username,
+            email: profile.emails[0].value,
+            thumbnail: profile._json.avatar_url
+          }
+        })
+        newUser.local.email = profile.emails[0].value;
+        newUser.local.username = profile.username;
+        newUser.verified = true;
+        newUser.save()
+        .then(newUser => {
+          done(null, newUser);
+        });
+      }
+    }).catch(err => {
+      done(err, false, err.message);
+    });
+  }
+)
+
 
 // passport global middleware
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 passport.use(googleStrategy);
-passport.use(facebookStrategy)
+passport.use(facebookStrategy);
+passport.use(githubStrategy);
 
 // passport local middleware
 const passportOptions = { session: false };
 const googleOptions = { session: false, scope: ["profile", "email"]};
 const facebookOptions = { session: false, scope: ["email"]};
-const facebookRedirectOptions = { session: false, successRedirect: "/profile", failureRedirect: "/login" };
+const githubOptions = { session: false, scope: ["user"]};
+
 const authenticate = passport.authenticate('local', passportOptions);
 const restricted = passport.authenticate('jwt', passportOptions);
 const googleAuthenticate = passport.authenticate('google', googleOptions);
 const facebookAuthenticate = passport.authenticate('facebook', facebookOptions);
+const githubAuthenticate = passport.authenticate('github', githubOptions);
 const googleRedirectAuthenticate = passport.authenticate('google', passportOptions);
-const facebookRedirectAuthenticate = passport.authenticate('google', facebookRedirectOptions);
+const facebookRedirectAuthenticate = passport.authenticate('facebook', passportOptions);
+const githubRedirectAuthenticate = passport.authenticate('github', passportOptions )
 
 function makeToken(user) {
   const timestamp = new Date().getTime();
   const payload = {
-    iss: 'OutfitCreator',
+    iss: 'Closet Roulette',
     sub: user._id,
     iat: timestamp,
   };
@@ -228,4 +246,4 @@ const signToken = (req, res) => {
   });
 }
 
-module.exports = { authenticate, restricted, googleAuthenticate, googleRedirectAuthenticate, facebookAuthenticate, facebookRedirectAuthenticate, makeToken, signToken }
+module.exports = { authenticate, restricted, googleAuthenticate, googleRedirectAuthenticate, facebookAuthenticate, facebookRedirectAuthenticate, githubAuthenticate, githubRedirectAuthenticate, makeToken, signToken }
