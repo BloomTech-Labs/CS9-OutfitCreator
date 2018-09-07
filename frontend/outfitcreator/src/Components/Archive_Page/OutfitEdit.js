@@ -78,11 +78,12 @@ class OutfitEdit extends React.Component {
     handleNewDate = event => {
         const worn = this.state.worn;
         worn.push(event.target.value);
+        worn.sort();
         this.setState({ worn, lastWorn: event.target.value });
     }
 
     removeDate = event => {
-        const worn = this.state.worn.filter(date => date !== event.target.nextElementSibling.innerHTML)
+        const worn = this.state.worn.filter(date => Date.parse(date) !== Date.parse(event.target.nextElementSibling.innerHTML))
         this.setState({worn});
     }
 
@@ -91,9 +92,8 @@ class OutfitEdit extends React.Component {
     }
 
     submitChanges = () => {
-        const { user, name, worn, lastWorn, top, topTags, bottom, bottomTags, shoes, shoesTags } = this.state;
+        const { user, name, worn, top, topTags, bottom, bottomTags, shoes, shoesTags } = this.state;
         const outfitId = this.props.location.pathname.split('Edit/')[1];
-        if (lastWorn) worn.unshift(lastWorn);
         const tags = [...topTags, ...bottomTags, ...shoesTags];
         const newInfo = { name, worn, tags, top, bottom, shoes };
         axios.put(`${ROOT_URL.API}/outfits/${user}/${outfitId}`, newInfo)
