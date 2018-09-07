@@ -185,20 +185,21 @@ class OutfitEdit extends React.Component {
                         {/* another ternary to check if outfit was loaded correctly*/}
                         {outfit ? (
                             <div className="container--edit">
-                                <CardDeck>
+                                <div className='image--container'>
                                     {/*here maps out the items of the current outfit*/}
                                     {items.map((item, index) => {
-                                        return (<Card className='outfit--card' key={index} inverse>
-                                            <CardImg
+                                        return (<div key={index}>
+                                            <img
                                                 key={item._id}
-                                                width="80%"
+                                                // width="80%"
+                                                className='edit--card-image'
                                                 src={item.image}
                                                 onClick={() => this.getItems(item.type, item._id)}
                                                 alt="Card image cap"
                                             />
-                                        </Card>)
+                                        </div>)
                                     })}
-                                </CardDeck>
+                                </div>
                                 {/* here are the inputs to change the name and last worn date*/}
                                 <div className='container--editbox'>
                                     <form>
