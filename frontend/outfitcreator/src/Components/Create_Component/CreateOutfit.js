@@ -386,7 +386,6 @@ class CreateOutfit extends Component {
                     <div className="outfitPickerDecision">
                         <Button className="button" onClick={this.handleCreateOutfit}>Save</Button>
                         <Button className="button" onClick={this.randomize}>Randomize</Button>
-                        <FontAwesomeIcon icon="share-alt" size="4x" onClick={this.handleButtonClick} />
                     </div>
                 </div>
             </div>
