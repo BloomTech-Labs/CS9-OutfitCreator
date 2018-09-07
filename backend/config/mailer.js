@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const mailgunTransport = require('nodemailer-mailgun-transport');
+const nodemailerSendgrid = require('nodemailer-sendgrid');
 
 // Configure transport options -- for production
 // const mailgunOptions = {
@@ -12,16 +13,22 @@ const mailgunTransport = require('nodemailer-mailgun-transport');
 // const transport = mailgunTransport(mailgunOptions);
 // const emailClient = nodemailer.createTransport(transport);
 
-const transport = nodemailer.createTransport({
-    service: 'Mailgun',
-    auth: {
-      user: process.env.MAILGUN_USER,
-      pass: process.env.MAILGUN_PASS
-    },
-    tls: {
-      rejectUnauthorized: false
-    }
-});
+// const transport = nodemailer.createTransport({
+//     service: 'Mailgun',
+//     auth: {
+//       user: process.env.MAILGUN_USER,
+//       pass: process.env.MAILGUN_PASS
+//     },
+//     tls: {
+//       rejectUnauthorized: false
+//     }
+// });
+
+const transport = nodemailer.createTransport(
+  nodemailerSendgrid({
+    apiKey: process.env.SENDGRID_API_KEY
+  })
+)
 
 const generateSignupKey = () => {
     const buf = crypto.randomBytes(24);
@@ -34,13 +41,13 @@ const generateSignupKey = () => {
     }
 }
 
-const sendEmail = (to, subject, html, text) => {
+const sendEmail = (to, subject, html) => {
     return new Promise((resolve, reject) => {
-      transport.sendMail({ from: 'Closet Roulette', to, subject, html, text }, (err, info) => {
+      transport.sendMail({ from: 'Closet Roulette <closetroulette@gmail.com>', to, subject, html }, (err, info) => {
         if (err) reject(err);
         resolve(info);
       });
     });
-  }
+}
 
 module.exports = { generateSignupKey, sendEmail };
