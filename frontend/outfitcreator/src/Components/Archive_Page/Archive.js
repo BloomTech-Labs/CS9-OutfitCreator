@@ -101,7 +101,7 @@ class Archive extends React.Component {
                                     outfitId={outfit._id}
                                     name={outfit.name}
                                     src={[...outfit.top, ...outfit.bottom, outfit.shoes]}
-                                    lastWorn={outfit.worn}
+                                    worn={outfit.worn}
                                 />
                             ))}
                         </div>
@@ -114,7 +114,7 @@ class Archive extends React.Component {
                                             outfitId={outfit._id}
                                             name={outfit.name}
                                             src={[...outfit.top, ...outfit.bottom, outfit.shoes]}
-                                            lastWorn={outfit.worn}
+                                            worn={outfit.worn}
                                         />
                                     </div>
                                 ))}

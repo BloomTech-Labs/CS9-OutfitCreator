@@ -3,8 +3,11 @@
 }
 
 .container--editbox {
-    width: 100%;
-    margin-top: 10px;
+    width: 50%;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .edit--card {
@@ -17,6 +20,7 @@
     margin: 4px;
     transition: 2s;
 }
+
 
 .edit--card:hover {
     cursor: pointer;
@@ -32,7 +36,6 @@
 .container--edit {
     display: flex;
     flex-direction: column;
-    /* flex-wrap: wrap; */
     justify-content: space-between;
     left: 50px;
     /* max-width: 70vw; */
@@ -64,11 +67,16 @@
     /* border: 5px solid var(--dark-purple); */
     transform: translateY(-10px);
 }
+/* 
+.edit--fields{
+    display: flex;
+    flex-direction: row;
+} */
 
-.edit--header {
+.edit--fields {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 30px;
+    padding-top: 15px;
 }
 
 .header--edit{
@@ -86,19 +94,22 @@
 }
 
 .edit--input {
+    border: 1px solid black;
     border-radius: 5px;
+    font-size: 15px;
+    padding: 5px;
 }
 
 .edit--button-group {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .edit--button{
     border-radius: 5px;
     width: 100px;
     height: 50px;
-}
+} */
 
 .edit--button:hover {
     background-color: black;
@@ -123,6 +134,25 @@
     cursor: pointer;
 }
 
-.edit--footer{
-    align-self: flex-start;
+.edit--date{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0px 10px;
+}
+
+.outfit-date{
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 1px 1px 0 0 black;
+    display: flex;
+    margin: 5px 0px 0px 0px;
+    padding: 5px;
+    font-size: 15px;
+    width: 120px;
+}
+
+.outfit-date--delete{
+    padding: 0 8px;
+    cursor: pointer;
 }
