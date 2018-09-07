@@ -84,8 +84,13 @@ class OutfitEdit extends React.Component {
     }
 
     removeDate = event => {
-        const worn = this.state.worn.filter(date => Date.parse(date) !== Date.parse(event.target.nextElementSibling.innerHTML))
-        this.setState({worn});
+        if (event.target.nextElementSibling) {
+            const worn = this.state.worn.filter(date => Date.parse(date) !== Date.parse(event.target.nextElementSibling.innerHTML))
+            this.setState({ worn });
+        } else {
+            const worn = this.state.worn.slice(1);
+            this.setState({ worn });
+        }
     }
 
     redirectArchive = () => {
@@ -241,12 +246,12 @@ class OutfitEdit extends React.Component {
                                                         className='edit--input'
                                                     />
                                                 </div>
-                                                    {this.state.worn.map(date => (
-                                                        <div className="outfit-date" key={this.state.worn.indexOf(date)}>
-                                                            <span className="outfit-date--delete" onClick={this.removeDate}>x</span>
-                                                            <span>{date.slice(0,10)}</span>
-                                                        </div>
-                                                    ))}
+                                                {this.state.worn.map(date => (
+                                                    <div className="outfit-date" key={this.state.worn.indexOf(date)}>
+                                                        <span className="outfit-date--delete" onClick={this.removeDate}>x</span>
+                                                        {date ? <span>{date.slice(0, 10)}</span> : null}
+                                                    </div>
+                                                ))}
                                             </div>
                                         </div>
                                     </form>
