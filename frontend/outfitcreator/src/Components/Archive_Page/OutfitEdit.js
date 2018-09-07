@@ -13,8 +13,8 @@ class OutfitEdit extends React.Component {
             user: '',
             outfit: '',
             name: '',
-            lastWorn: Date,
-            worn: Date,
+            newDate: null,
+            worn: [],
             top: '',
             topTags: [],
             bottom: '',
@@ -73,6 +73,12 @@ class OutfitEdit extends React.Component {
 
     handleInput = event => {
         this.setState({ [event.target.name]: event.target.value });
+    }
+
+    handleNewDate = event => {
+        const worn = this.state.worn;
+        worn.push(event.target.value);
+        this.setState({ worn, lastWorn: event.target.value });
     }
 
     redirectArchive = () => {
@@ -205,12 +211,13 @@ class OutfitEdit extends React.Component {
                                             </div>
                                             <div className='edit--footer'>
                                                 Worn on: <input
-                                                    type='text'
+                                                    type='date'
                                                     name='lastWorn'
-                                                    value={this.state.lastWorn}
-                                                    onChange={this.handleInput}
+                                                    value={this.state.newDate}
+                                                    onChange={this.handleNewDate}
                                                     className='edit--input'
                                                 />
+                                                <button onClick={() => this.handleNewDate} className="button">Add</button>
                                             </div>
                                         </div>
                                         <div className='edit--buttons'>

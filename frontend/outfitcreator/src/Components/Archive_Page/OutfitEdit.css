@@ -30,16 +30,11 @@
 .container--edit {
     display: flex;
     flex-direction: column;
-    /* flex-wrap: wrap; */
     justify-content: space-between;
     left: 10px;
-    max-width: 70vw;
     max-height: 90vh;
     margin-top: 4.5em;
-    width: 95%;
-    min-height: 700px;
     margin-left: 1em;
-    overflow-x: auto;
 }
 
 .edit--header {
@@ -67,7 +62,10 @@
 }
 
 .edit--input {
+    border: 1px solid black;
     border-radius: 5px;
+    font-size: 15px;
+    padding: 5px;
 }
 
 .edit--buttons {
