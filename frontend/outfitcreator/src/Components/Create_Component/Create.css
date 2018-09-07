@@ -1,12 +1,15 @@
 .createContainer {
     background: white;
+    width: 80%;
     margin: 60px 0;
     padding: 20px;
 }
 
 .layerSelect {
-    margin: 0 auto 2em;
-    width: 70%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .create-button {
@@ -53,10 +56,6 @@
     border: none;
 }
 
-.test{
-    border: 0px;
-    box-shadow: none;
-}
 
 .card-deck .card, .card, .create-card, .cardImage, .card-img-overlay {
     max-height: 200px;
@@ -145,6 +144,11 @@
     margin: 1em;
     color: white;
     padding: 2px 12px 3px;
+}
+
+.outfitPickerDecision button:hover {
+  margin: 1em;
+  padding: 2px 12px 3px;
 }
 
 .outfitPickerDecision .fa-share-alt {

@@ -51,8 +51,7 @@ class CreateOutfit extends Component {
             },
         }
 
-        this.setTypes();
-        this.setAuthToken();
+        if (localStorage.getItem('authToken')) this.setTypes();
     }
 
     setAuthToken = () => {
@@ -67,7 +66,7 @@ class CreateOutfit extends Component {
     setTypes = () => {
         const paidItems = {
             top: {
-                title: 'All Tops',
+                title: 'Tops',
                 show: false,
                 all: [],
                 current: null,
@@ -122,6 +121,14 @@ class CreateOutfit extends Component {
                 icon: Icons.dress,
                 locked: false,
             },
+            bottom: {
+                title: 'Bottoms',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.bottom,
+                locked: false,
+            },
             pants: {
                 title: 'Pants',
                 show: false,
@@ -154,6 +161,14 @@ class CreateOutfit extends Component {
                 icon: Icons.leggings,
                 locked: false,
             },
+            shoes: {
+                title: 'Shoes',
+                show: false,
+                all: [],
+                current: null,
+                icon: Icons.casualShoes,
+                locked: false,
+            },
             formalShoes: {
                 title: 'Formal Shoes',
                 show: false,
@@ -171,7 +186,7 @@ class CreateOutfit extends Component {
                 locked: false,
             },
         }
-
+        
         this.props.isUserPaid(paid => {
             if (paid) this.setState({ items: paidItems });
         });
@@ -182,6 +197,7 @@ class CreateOutfit extends Component {
         if(hash.token) {
             localStorage.setItem('authToken', `Bearer ${hash.token}`);
             this.setAuthToken();
+            this.setTypes();
         }
         const user = this.props.getUserID();
 
@@ -352,6 +368,9 @@ class CreateOutfit extends Component {
     }
 
     render() {
+      console.log('Render');
+      // this.setTypes();
+      // this.setAuthToken();
         const typesInCloset = this.getTypesInCloset();
         const selected = this.getSelected();
 
