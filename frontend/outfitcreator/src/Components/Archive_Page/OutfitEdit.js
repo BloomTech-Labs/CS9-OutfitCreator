@@ -56,9 +56,7 @@ class OutfitEdit extends React.Component {
 				}
 				this.setState({ outfit: data, name: data.name, worn: data.worn, lastWorn, user, outfitID });
 			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.catch((err) => err);
 	};
 
 	populate = (id) => {
@@ -72,9 +70,7 @@ class OutfitEdit extends React.Component {
 					[response.data.type + 'Tags']: response.data.tags
 				});
 			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.catch((err) => err);
 	};
 
 	handleInput = (event) => {
@@ -108,16 +104,12 @@ class OutfitEdit extends React.Component {
 		axios
 			.put(`${ROOT_URL.API}/outfits/${user}/${outfitID}`, newInfo)
 			.then(() => this.redirectArchive())
-			.catch((err) => {
-				console.log(err);
-			});
+			.catch((err) => err);
 	};
 
 	deleteOutfit = () => {
 		const { outfitID } = this.state;
-		axios.delete(`${ROOT_URL.API}/outfits/${outfitID}`).then(() => this.redirectArchive()).catch((err) => {
-			console.log(err);
-		});
+		axios.delete(`${ROOT_URL.API}/outfits/${outfitID}`).then(() => this.redirectArchive()).catch((err) => err);
 	};
 
 	getItems = (type, id) => {
@@ -129,9 +121,7 @@ class OutfitEdit extends React.Component {
 			.then((response) => {
 				this.setState({ itemSelection: response.data, editItem: !this.state.editItem, oldID: id });
 			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.catch((err) => err);
 	};
 
 	selectItem = (type, id) => {
@@ -169,10 +159,9 @@ class OutfitEdit extends React.Component {
 				{/* ternary to check if modal is toggled or not*/}
 				{/* this will be the darkened background*/}
 				{editItem ? <div className="modal--backdrop" onClick={this.toggle} /> : null}
-				{/* 
-                    ternary to check if modal is toggled or not
-                    this one will hold the content for screen, either the new options or the current outfit that is being editted
-                */}
+        {/* ternary to check if modal is toggled or not this 
+          one will hold the content for screen, either the new 
+          options or the current outfit that is being editted */}
 				{editItem ? (
 					<div onClick={this.toggle}>
 						{/*this will map out hte possible items to be selected to replace the selected one*/}
@@ -210,7 +199,6 @@ class OutfitEdit extends React.Component {
 											<div key={index}>
 												<img
 													key={item._id}
-													// width="80%"
 													className="edit--card-image"
 													src={item.image}
 													onClick={() => this.getItems(item.type, item._id)}

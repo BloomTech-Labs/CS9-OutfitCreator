@@ -28,14 +28,13 @@ class Billing extends React.Component {
 			axios
 				.get(`${ROOT_URL.API}/user/info/${user}`, requestOptions)
 				.then((res) => {
-					console.log(res.data);
 					this.setState({
 						userID: res.data._id,
 						subscribed: res.data.paid,
 						subscription: res.data.stripe_sub
 					});
 				})
-				.catch((err) => console.log(err.message));
+				.catch((err) => err);
 		}
 		// get user info from server to see if user is subscribed
 		if (window.Stripe) {
@@ -48,7 +47,6 @@ class Billing extends React.Component {
 	}
 
 	render() {
-		console.log(this.state);
 		return (
 			<div className="container--billing">
 				{this.state.subscribed === false || this.state.subscribed === null ? (

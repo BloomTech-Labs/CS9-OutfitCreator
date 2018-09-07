@@ -32,9 +32,7 @@ class Archive extends React.Component {
 			.then((response) => {
 				this.setState({ myOutfits: response.data });
 			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.catch((err) => err);
 	};
 
 	filter = () => {

@@ -3,13 +3,11 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
 const port = process.env.PORT || 5000;
 
 require('dotenv').config();
 
 const passport = require('passport');
-
 const authRoutes = require('./routes/auth-routes');
 const stripeRoutes = require('./routes/stripe-routes');
 const userRoutes = require('./routes/user-routes');
@@ -56,8 +54,7 @@ server.use('/items', itemRoutes);
 server.use('/outfits', outfitRoutes);
 
 // Catch-all error handler
-server.use((err, req, res, next) => {
-	console.log(err);
+server.use((err, req, res) => {
 	res.status(500).send({ err });
 });
 

@@ -131,7 +131,7 @@ UserSchema.methods.validPassword = async function(passwordGuess) {
 	try {
 		return await bcrypt.compare(passwordGuess, this.local.password);
 	} catch (err) {
-		console.log(err);
+		return err;
 	}
 };
 
@@ -139,7 +139,7 @@ UserSchema.methods.newPassword = async function(password) {
 	try {
 		return await bcrypt.hash(password, saltRounds);
 	} catch (err) {
-		console.log(err);
+		return err;
 	}
 };
 

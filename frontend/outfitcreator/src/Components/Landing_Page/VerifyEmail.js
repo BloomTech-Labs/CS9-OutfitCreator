@@ -19,16 +19,13 @@ class VerifyEmail extends Component {
 		const key = this.props.match.params.key;
 		axios
 			.post(`${ROOT_URL.API}/auth/verify`, { key })
-			.then((res) => {
-				console.log(res);
+			.then(() => {
 				this.notifyVerificationSuccess();
 				this.setState({ validated: 'true' });
-				// window.location = `${ROOT_URL.WEB}/login`;
 			})
-			.catch((err) => {
+			.catch(() => {
 				this.notifyVerificationFailure();
 				this.setState({ validated: 'false' });
-				// window.location = `${ROOT_URL.WEB}/`;
 			});
 	}
 	render() {

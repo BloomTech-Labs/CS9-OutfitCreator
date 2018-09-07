@@ -21,14 +21,12 @@ const OutfitSchema = new mongoose.Schema({
 	],
 	top: [
 		{
-			// changing this to an array to account for layers
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Item'
 		}
 	],
 	bottom: [
 		{
-			// changing this to an array to account for layers
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Item'
 		}

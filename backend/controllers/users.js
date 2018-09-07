@@ -31,13 +31,10 @@ exports.signup = (req, res) => {
 								res.status(201).json({ token });
 							})
 							.catch((err) => {
-								console.log(err);
 								return next(err);
 							});
 					})
-					.catch((err) => {
-						console.log(err);
-					});
+					.catch((err) => err);
 			}
 		} else {
 			const key = generateSignupKey();

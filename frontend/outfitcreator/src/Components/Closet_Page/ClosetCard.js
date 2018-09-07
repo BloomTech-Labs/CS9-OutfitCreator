@@ -39,7 +39,6 @@ class ClosetCard extends React.Component {
 		const { item, name, tags } = this.state;
 		const URL = item.image;
 		const newURL = URL.slice(0, 53) + 'h_150/' + URL.slice(53);
-		console.log(newURL);
 		return this.state.edit ? (
 			<div className="closet-card--edit">
 				<div className="closet-card--options">
@@ -60,7 +59,7 @@ class ClosetCard extends React.Component {
 				<div className="closet-card">
 					<img
 						className="closet-image"
-						src={`${newURL}`} //split this and add height parameter
+						src={`${newURL}`}
 						alt={name}
 						onClick={this.toggle}
 					/>

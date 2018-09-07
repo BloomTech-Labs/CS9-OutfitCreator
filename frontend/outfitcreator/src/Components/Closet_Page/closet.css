@@ -104,7 +104,6 @@
 	border: none;
 	border-radius: 5px;
 	margin: 5px;
-	/* color: var(--red); */
 }
 
 .closet-card--cancel:hover {
@@ -115,8 +114,9 @@
 
 .closet-image {
 	border-radius: 3px;
-	overflow: hidden;
-	height: 150px; /*these images are scaled to a height of 150px but might be variable widths*/
+  overflow: hidden;
+  /*these images are scaled to a height of 150px but might be variable widths*/
+	height: 150px;
 }
 
 @media (max-width: 950px) {

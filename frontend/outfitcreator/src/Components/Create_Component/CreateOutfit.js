@@ -227,9 +227,7 @@ class CreateOutfit extends Component {
 
 					this.setState({ items });
 				})
-				.catch((err) => {
-					console.log(err);
-				});
+				.catch((err) => err);
 		} else {
 			this.props.history.push('/');
 		}
@@ -351,14 +349,10 @@ class CreateOutfit extends Component {
 
 		axios
 			.post(`${ROOT_URL.API}/outfits`, outfit)
-			.then((res) => {
-				// this.props.history.push('/Archive')
-				console.log(res);
+			.then(() => {
 				const items = { ...this.state };
 			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.catch((err) => err);
 	};
 
 	getTypesInCloset = () => {
@@ -368,9 +362,6 @@ class CreateOutfit extends Component {
 	};
 
 	render() {
-		console.log('Render');
-		// this.setTypes();
-		// this.setAuthToken();
 		const typesInCloset = this.getTypesInCloset();
 		const selected = this.getSelected();
 

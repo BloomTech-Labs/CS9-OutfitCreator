@@ -1,6 +1,4 @@
 const router = require('express').Router();
-const passport = require('passport');
-
 const { restricted } = require('../config/passport-setup');
 const User = require('../models/userModel');
 
@@ -20,12 +18,10 @@ router.get('/info/:id', restricted, (req, res) => {
 router.put('/info/:id', restricted, async (req, res) => {
 	const id = req.params.id;
 	const settingsInfo = { ...req.body };
-	console.log(settingsInfo);
 
 	await User.findById(id)
 		.then(async (user) => {
 			const match = await user.validPassword(settingsInfo.oldPassword);
-			console.log(match);
 			if (match) {
 				settingsInfo.local.password = await user.newPassword(settingsInfo.newPassword);
 			}
@@ -38,9 +34,7 @@ router.put('/info/:id', restricted, async (req, res) => {
 					res.status(500).json({ error: err.message });
 				});
 		})
-		.catch((err) => {
-			console.log(err);
-		});
+		.catch((err) => err);
 });
 
 // Mark a user as subscribed

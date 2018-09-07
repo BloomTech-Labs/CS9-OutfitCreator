@@ -37,7 +37,6 @@
 	flex-direction: column;
 	justify-content: space-between;
 	left: 50px;
-	/* max-width: 70vw; */
 	min-width: 75vw;
 	max-height: 90vh;
 	margin-top: 4.5em;
@@ -63,14 +62,8 @@
 .edit--card-image:hover {
 	cursor: pointer;
 	background: var(--dark-purple);
-	/* border: 5px solid var(--dark-purple); */
 	transform: translateY(-10px);
 }
-/* 
-.edit--fields{
-    display: flex;
-    flex-direction: row;
-} */
 
 .edit--fields {
 	display: flex;
@@ -126,7 +119,6 @@
 }
 
 .outfit--card:hover {
-	/* border: 1xp solid purple; */
 	background: var(--dark-purple);
 	transform: translateY(-10px);
 	cursor: pointer;

@@ -21,7 +21,7 @@ class Cancel extends React.Component {
 			.post(`${ROOT_URL.API}/pay/cancel`, { sub: this.props.subscription }, requestOptions)
 			.then(this.setState({ canceled: true }))
 			.then(axios.post(`${ROOT_URL.API}/user/unsubscribe/${this.props.userID}`, {}, requestOptions))
-			.catch((err) => console.log(err.message));
+			.catch((err) => err);
 	};
 	render() {
 		if (this.state.canceled) return <h1>Canceled Successfully!</h1>;

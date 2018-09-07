@@ -6,10 +6,8 @@ import { ROOT_URL } from '../../config';
 import TagInput from './TagInput';
 import uploadPlacholder from './uploadPlaceholder.png';
 import './Upload.css';
-// import sha1 from 'sha1';
 
 const CLOUD_API = '465735684648442';
-// const API_SECRET = 'HVxIWBW7bQaBHJygz_qiprAfwok';
 
 class Upload extends Component {
 	constructor(props) {
@@ -68,7 +66,6 @@ class Upload extends Component {
 			},
 			(err, result) => {
 				if (result) {
-					console.log(result);
 					this.setState({ image: result['0'].secure_url, result: result['0'] });
 				}
 			}
@@ -82,9 +79,7 @@ class Upload extends Component {
 			.then((res) => {
 				cb(res.data.length);
 			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.catch((err) => err);
 	};
 
 	fileChanged = (event) => {
@@ -139,14 +134,11 @@ class Upload extends Component {
 							type,
 							subtype
 						})
-						.then((response) => {
-							console.log(response);
+						.then(() => {
 							this.setState({ image: '', name: '', tags: [] });
 							// this.saveTest(); // not sure what this is for
 						})
-						.catch((error) => {
-							console.log(error);
-						});
+						.catch((error) => error);
 				} else {
 					axios
 						.post(`${ROOT_URL.API}/items`, {
@@ -156,14 +148,10 @@ class Upload extends Component {
 							tags,
 							type
 						})
-						.then((response) => {
-							console.log(response);
+						.then(() => {
 							this.setState({ image: '', name: '', tags: [] });
-							// this.saveTest(); // not sure what this is for
 						})
-						.catch((error) => {
-							console.log(error);
-						});
+						.catch((error) => error);
 				}
 			});
 		});

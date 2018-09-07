@@ -1,5 +1,4 @@
 const router = require('express').Router();
-
 const { restricted } = require('../config/passport-setup');
 const Outfit = require('../models/outfitModel');
 

@@ -125,12 +125,9 @@ class Closet extends React.Component {
 					items.formalShoes.all = res[10].data;
 					items.casualShoes.all = res[11].data;
 					items.shoes.all = res[12].data;
-					console.log(res, items);
 					this.setState({ items });
 				})
-				.catch((err) => {
-					console.log(err);
-				});
+				.catch((err) => err);
 		} else {
 			this.props.history.push('/');
 		}
@@ -172,9 +169,7 @@ class Closet extends React.Component {
 			.then(() => {
 				this.onSelect(newInfo.type);
 			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.catch((err) => err);
 	};
 
 	render() {

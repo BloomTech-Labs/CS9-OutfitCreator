@@ -51,9 +51,7 @@ class Settings extends Component {
 						subscription: res.data.stripe_sub
 					});
 				})
-				.catch((err) => {
-					console.log(err);
-				});
+				.catch((err) => err);
 		} else {
 			this.props.history.push('/');
 		}
@@ -71,13 +69,11 @@ class Settings extends Component {
 	updateUserInfo = () => {
 		axios
 			.put(`${ROOT_URL.API}/user/info/${this.state.userID}`, this.state)
-			.then((res) => {
+			.then(() => {
 				alert('Info updated');
-				console.log(res.data);
 			})
-			.catch((err) => {
+			.catch(() => {
 				alert('Failed to updated Information');
-				console.log(err);
 			});
 	};
 

@@ -53,9 +53,7 @@ class App extends Component {
 			.then((res) => {
 				cb(res.data.paid);
 			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.catch((err) => err);
 	};
 
 	signInSuccess = (data) => {
@@ -65,7 +63,6 @@ class App extends Component {
 	toLandingPage = (e) => {
 		e.preventDefault();
 		window.location = `${ROOT_URL.WEB}/`;
-		console.log(e.target);
 	};
 
 	render() {

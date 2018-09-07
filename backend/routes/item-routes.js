@@ -1,36 +1,8 @@
-// const multer = require("multer");
-// const fs = require("fs");
-// const cloudinary = require("cloudinary");
-
 const Item = require('../models/itemModel');
-
 const router = require('express').Router();
 
 require('dotenv').config();
-// cloudinary.config({
-//   cloud_name: "cloudtesting",
-//   api_key: "465735684648442",
-//   api_secret: "HVxIWBW7bQaBHJygz_qiprAfwok"
-// });
-
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     console.log('from storage.destination');
-//     console.log(file);
-//     cb(null, "./uploads/");
-//   },
-//   filename: (req, file, cb) => {
-//     console.log('from storage.filename');
-//     console.log(file);
-//     cb(null, file.originalname);
-//   }
-// });
-
-// const upload = multer({ storage: storage });
-// const upload = multer({ dest: './uploads' });
-// Add a new item to the database
 router.post('/', (req, res) => {
-	// console.log('req.body: ' + req.body);
 	const { user, name, image, type, subtype, tags } = req.body;
 
 	Item.create({ user, name, image, type, subtype, tags })
@@ -40,22 +12,6 @@ router.post('/', (req, res) => {
 		.catch((err) => {
 			res.status(500).json({ error: err.message });
 		});
-	// console.log(req.file.image);
-	// console.log(req.file.originalname);
-	// res.sendStatus(200);
-	// const { originalname } = req.file;
-	// console.log(req.file);
-	// cloudinary.uploader.upload(`./uploads/${originalname}`, result => {
-	//   fs.unlinkSync(`./uploads/${originalname}`);
-	//   const { width, height, url } = result;
-	//   let cropWidth = width, cropHeight = height;
-	//   while (cropWidth >= 300 || cropHeight >= 200) {
-	//     (cropWidth *= 0.9), (cropHeight *= 0.9);
-	//   }
-	//   const crop = `/upload/w_${cropWidth.toFixed(0)},h_${cropHeight.toFixed(0)}/`;
-	//   const [partOne, partTwo] = url.split("/upload/");
-	//   const image = partOne + crop + partTwo;
-	// });
 });
 
 // Get all items for a user
@@ -159,14 +115,10 @@ router.post('/tags/delete/:id/:tag', (req, res) => {
 	const { id, tag } = req.params;
 	Item.findById(id)
 		.then((item) => {
-			console.log(item.tags);
-			console.log(item.tags.indexOf(tag));
 			if (item.tags.indexOf(tag) != -1) {
 				let tags = item.tags.splice(item.tags.indexOf(tag), 1, 'test');
-				console.log(tags);
 				item.tags = tags;
 			}
-			console.log(item);
 			item.save();
 		})
 		.then(res.status(200).json('success!'))

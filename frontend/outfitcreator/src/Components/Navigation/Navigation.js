@@ -39,9 +39,7 @@ class Navigation extends Component {
 				.then((res) => {
 					this.setState({ username: res.data.local.username });
 				})
-				.catch((err) => {
-					console.log(err);
-				});
+				.catch((err) => err);
 		}
 	}
 
