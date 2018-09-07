@@ -220,7 +220,7 @@ class OutfitEdit extends React.Component {
                                 </div>
                                 {/* here are the inputs to change the name and last worn date*/}
                                 <div className='container--editbox'>
-                                    <form>
+                                    <form className='container--editbox'>
                                         <div className='edit--button-group '>
                                             <button className='edit--submit edit--button button' onClick={this.submitChanges}>Submit</button>
                                             <button className='edit--delete edit--button button' onClick={this.deleteOutfit}>delete</button>
@@ -246,12 +246,14 @@ class OutfitEdit extends React.Component {
                                                         className='edit--input'
                                                     />
                                                 </div>
-                                                {this.state.worn.map(date => (
-                                                    <div className="outfit-date" key={this.state.worn.indexOf(date)}>
-                                                        <span className="outfit-date--delete" onClick={this.removeDate}>x</span>
-                                                        {date ? <span>{date.slice(0, 10)}</span> : null}
-                                                    </div>
-                                                ))}
+                                                <div className='outfit-date-block'>
+                                                    {this.state.worn.map(date => (
+                                                        <div className="outfit-date" key={this.state.worn.indexOf(date)}>
+                                                            <span className="outfit-date--delete" onClick={this.removeDate}>x</span>
+                                                            {date ? <span>{date.slice(0, 10)}</span> : null}
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
