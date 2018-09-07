@@ -1,8 +1,13 @@
-const router = require("express").Router();
-
-const { authenticate, googleAuthenticate, googleRedirectAuthenticate, facebookAuthenticate, facebookRedirectAuthenticate, signToken } = require("../config/passport-setup");
-const users = require("../controllers/users");
-
+const router = require('express').Router();
+const {
+	authenticate,
+	googleAuthenticate,
+	googleRedirectAuthenticate,
+	facebookAuthenticate,
+	facebookRedirectAuthenticate,
+	signToken
+} = require('../config/passport-setup');
+const users = require('../controllers/users');
 
 router.post('/signup', users.signup);
 router.post('/login', authenticate, users.login);
@@ -10,7 +15,7 @@ router.get('/google', googleAuthenticate);
 router.get('/google/redirect', googleRedirectAuthenticate, signToken);
 router.get('/facebook', facebookAuthenticate);
 router.get('/facebook/callback', facebookRedirectAuthenticate, signToken);
-router.post('/verify', users.verifyEmail)
+router.post('/verify', users.verifyEmail);
 
 // // auth with github
 // router.get(
