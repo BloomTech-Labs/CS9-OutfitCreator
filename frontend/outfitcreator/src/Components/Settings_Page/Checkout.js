@@ -14,10 +14,10 @@ class Checkout extends React.Component {
     return (
       <div className="Checkout">
         <h2>Subscribe to the Outfit Creator!</h2>
-          <p><b>With the pro version, you get great features like:</b></p>
-          <p>Unlimited item uploads</p>
-          <p>More detailed saved outfit data</p>
-          <p>Plan your outfits ahead and get reminders</p>
+          <div><b>With the pro version, you get great features like:</b></div>
+          <div>Unlimited item uploads</div>
+          <div>Improved category selection</div><br/>
+          <div><b>Enter your payment information below to get started!</b></div>
         <StripeProvider stripe={this.props.stripe}>
           <Elements>
             <PaymentForm userID={this.props.userID}/>
