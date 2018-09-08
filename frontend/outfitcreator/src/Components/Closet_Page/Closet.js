@@ -3,7 +3,6 @@ import axios from 'axios';
 import { ROOT_URL } from '../../config';
 import './closet.css';
 import ClosetCard from './ClosetCard.js';
-import { Icons } from '../Icons';
 
 class Closet extends React.Component {
 	constructor(props) {

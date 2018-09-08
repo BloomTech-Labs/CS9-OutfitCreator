@@ -136,7 +136,6 @@ class Upload extends Component {
 						})
 						.then(() => {
 							this.setState({ image: '', name: '', tags: [] });
-							// this.saveTest(); // not sure what this is for
 						})
 						.catch((error) => error);
 				} else {

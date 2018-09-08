@@ -5,8 +5,6 @@ import { ROOT_URL } from '../../config.js';
 import axios from 'axios';
 import queryString from 'query-string';
 import './Create.css';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Icons } from '../Icons/index.js';
 
 class CreateOutfit extends Component {
@@ -349,9 +347,7 @@ class CreateOutfit extends Component {
 
 		axios
 			.post(`${ROOT_URL.API}/outfits`, outfit)
-			.then(() => {
-				const items = { ...this.state };
-			})
+			.then((res) => res)
 			.catch((err) => err);
 	};
 
