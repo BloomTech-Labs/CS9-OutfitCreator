@@ -12,6 +12,7 @@ router.get('/facebook', facebookAuthenticate);
 router.get('/facebook/callback', facebookRedirectAuthenticate, signToken);
 router.get('/github', githubAuthenticate);
 router.get('/github/callback', githubRedirectAuthenticate, signToken);
-router.post('/verify', users.verifyEmail)
+router.post('/verify', users.verifyEmail);
+router.post('/sendverifyemail', users.sendVerifyEmail);
 
 module.exports = router;
