@@ -17,9 +17,9 @@
 }
 
 .upload--image {
-	min-height: 200px;
+	min-height: 100px;
 	margin-bottom: 10px;
-	width: 400px;
+	max-width: 400px;
 	border-radius: 5px;
 }
 

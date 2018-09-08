@@ -1,7 +1,11 @@
 .createContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
 	background: white;
-	width: 80%;
-	margin: 60px 0;
+	width: 80vw;
+	margin: 60px auto;
 	padding: 20px;
 }
 
@@ -61,13 +65,16 @@
 .create-card,
 .cardImage,
 .card-img-overlay {
-	max-height: 200px;
-	min-width: 300px;
-	max-width: 400px;
 	border: none;
 	box-shadow: none;
 	outline: none;
 	margin: 0 8px 15px;
+}
+
+.card-deck {
+	display: flex;
+	flex-wrap: wrap;
+	min-width: 700px;
 }
 
 .createContainer .card.text-white {
@@ -125,8 +132,6 @@
 }
 
 .createContainer .cardImage {
-	height: 200px;
-	width: 300px;
 	margin: 0;
 	box-shadow: none;
 }
