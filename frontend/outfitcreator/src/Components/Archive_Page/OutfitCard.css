@@ -6,10 +6,6 @@
     justify-content: space-between;
     max-width: 550px;
     min-width: 350px;
-    min-height: 220px;
-    max-height: 220px;
-    overflow-y: auto;
-    overflow-x: hidden;
     margin: 15px;
     padding: 0px 10px;
     border: 1px solid black;
@@ -36,9 +32,8 @@
     margin: 5px;
     display: block;
     align-self: flex-start;
-    margin: 5px 0;
+    margin: 5px;
     border-radius: 3px;
-
 }
 
 .card--footer {
