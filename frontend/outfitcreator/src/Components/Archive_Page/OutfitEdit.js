@@ -94,7 +94,7 @@ class OutfitEdit extends React.Component {
 
     submitChanges = () => {
         const { user, name, worn, top, topTags, bottom, bottomTags, shoes, shoesTags } = this.state;
-        const outfitId = this.props.location.pathname.split('Edit/')[1];
+        const outfitID = this.props.location.pathname.split('Edit/')[1];
 
         const tags = [...topTags, ...bottomTags, ...shoesTags];
         const newInfo = { name, worn, tags, top, bottom, shoes };
@@ -216,7 +216,7 @@ class OutfitEdit extends React.Component {
                                     <form>
                                         <div className='edit--button-group '>
                                             <button className='edit--submit edit--button button' onClick={this.submitChanges}>Submit</button>
-                                            <button className='edit--delete edit--button button' onClick={this.deleteOutfit}>delete</button>
+                                            <button className='edit--delete edit--button button' onClick={this.deleteOutfit}>Delete</button>
                                             <button className='edit--cancel edit--button button' onClick={this.redirectArchive}>Cancel</button>
                                         </div>
                                         <div className='edit--fields'>
