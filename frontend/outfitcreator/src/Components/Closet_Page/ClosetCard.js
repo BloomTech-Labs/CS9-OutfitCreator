@@ -36,7 +36,7 @@ class ClosetCard extends React.Component {
 	};
 
 	render() {
-		const { item, name, tags } = this.state;
+		const { item, name } = this.state;
 		const URL = item.image;
 		const newURL = URL.slice(0, 53) + 'h_150/' + URL.slice(53);
 		return this.state.edit ? (

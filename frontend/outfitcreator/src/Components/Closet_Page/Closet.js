@@ -158,7 +158,7 @@ class Closet extends React.Component {
 
 	subtypesInCloset = () => {
 		return Object.keys(this.state.items).filter((type) => {
-			return this.state.items[type].all.length > 0 && (type != 'top' && type != 'bottom' && type != 'shoes');
+			return this.state.items[type].all.length > 0 && (type !== 'top' && type !== 'bottom' && type !== 'shoes');
 		});
 	};
 

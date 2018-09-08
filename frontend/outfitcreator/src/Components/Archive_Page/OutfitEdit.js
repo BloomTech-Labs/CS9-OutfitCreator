@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import { ROOT_URL } from '../../config';
 import { withRouter } from 'react-router';
-import { Card, CardImg, CardDeck } from 'reactstrap';
 import './OutfitEdit.css';
 import '../Landing_Page/Modal.css';
 
@@ -13,7 +12,7 @@ class OutfitEdit extends React.Component {
 			user: '',
 			outfit: '',
 			name: '',
-			newDate: null,
+			newDate: undefined,
 			worn: [],
 			top: '',
 			topTags: [],
@@ -176,10 +175,9 @@ class OutfitEdit extends React.Component {
 										<div className="outfit--card" key={index}>
 											<img
 												key={item._id}
-												// width="300px"
 												src={newUrl}
 												onClick={() => this.selectItem(item.type, item._id)}
-												alt="Card image cap"
+												alt="Clothing Item"
 											/>
 										</div>
 									);
@@ -202,7 +200,7 @@ class OutfitEdit extends React.Component {
 													className="edit--card-image"
 													src={item.image}
 													onClick={() => this.getItems(item.type, item._id)}
-													alt="Card image cap"
+													alt="Clothing Item"
 												/>
 											</div>
 										);

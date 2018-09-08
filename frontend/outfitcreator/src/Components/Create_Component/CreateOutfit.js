@@ -64,7 +64,7 @@ class CreateOutfit extends Component {
 	setTypes = () => {
 		const paidItems = {
 			top: {
-				title: 'Tops',
+				title: 'All Tops',
 				show: false,
 				all: [],
 				current: null,
@@ -119,14 +119,6 @@ class CreateOutfit extends Component {
 				icon: Icons.dress,
 				locked: false
 			},
-			bottom: {
-				title: 'Bottoms',
-				show: false,
-				all: [],
-				current: null,
-				icon: Icons.bottom,
-				locked: false
-			},
 			pants: {
 				title: 'Pants',
 				show: false,
@@ -157,14 +149,6 @@ class CreateOutfit extends Component {
 				all: [],
 				current: null,
 				icon: Icons.leggings,
-				locked: false
-			},
-			shoes: {
-				title: 'Shoes',
-				show: false,
-				all: [],
-				current: null,
-				icon: Icons.casualShoes,
 				locked: false
 			},
 			formalShoes: {
@@ -247,7 +231,7 @@ class CreateOutfit extends Component {
 		// Allow only one shoe type to be active
 		if (shoeTypes.includes(category)) {
 			shoeTypes.forEach((type) => {
-				if (category != type) {
+				if (category !== type) {
 					if (items[type]) items[type].show = false;
 				}
 			});
