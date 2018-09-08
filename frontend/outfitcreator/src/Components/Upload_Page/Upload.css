@@ -15,9 +15,9 @@
 
 .upload--image {
     min-height: 200px;
-    /* height: 250px; */
+    max-height: 300px;
+    width: auto;
     margin-bottom: 10px;
-    width: 400px;
     border-radius: 5px;
 }
 
