@@ -44,7 +44,9 @@
 
 .archive--collection {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+
     align-content: flex-start;
     flex-wrap: wrap;
     margin: 0 2.5%;
