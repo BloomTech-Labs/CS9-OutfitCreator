@@ -25,7 +25,7 @@ class Cancel extends React.Component {
             .catch(err => console.log(err.message))
     }
     render() {
-        if (this.state.canceled) return (<div className="billing--cancel">Canceled Successfully!</div>)
+        if (this.state.canceled) return (<div className="billing--cancel">Canceled Successfully. <p>We're sorry to see you go!</p></div>)
         return (
             <div className="billing--cancel">
                 If you wish to cancel your subscription, please click below:<br/>

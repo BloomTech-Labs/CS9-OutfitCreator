@@ -33,11 +33,9 @@ class PaymentForm extends Component {
                     stripe_sub: res.data.stripe_sub,
                     stripe_cust: res.data.stripe_cust
                 }, requestOptions)
-                // alert('Payment successful! Welcome to Closet Roulette!');
             })
             .catch(err => { 
                 console.log(err);
-                // alert('Payment could not go through');
             });
         }
     }
