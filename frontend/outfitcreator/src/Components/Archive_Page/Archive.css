@@ -10,21 +10,6 @@
     padding: 30px;
 }
 
-::-webkit-scrollbar{
-    width: 1.5vw;
-    height: 10px;
-    padding-top: 40px;
-    z-index: 1000;
-}
-::-webkit-scrollbar-thumb{
-    border-radius:10px;
-    height: 30px;
-    width: 8px;
-    border: 1px solid black;
-    background: rgb(54, 56, 88);
-    background: -webkit-linear-gradient(rgb(79, 71, 114), rgb(69, 68, 104));
-}
-
 .archive--search {
     margin: 0 auto;
     width: 400px;
