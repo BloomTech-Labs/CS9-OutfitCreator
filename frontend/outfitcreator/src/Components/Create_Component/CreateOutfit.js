@@ -398,8 +398,8 @@ class CreateOutfit extends Component {
                 <div className="outfitPickerContainer">
                     <Input type="text" name="name" placeholder="Outfit Nickname" onChange={this.handleInputChange} value={this.state.name} className="outfitInput" />
                     <div className="outfitPickerDecision">
-                        <Button className="button" onClick={this.handleCreateOutfit}>Save</Button>
                         <Button className="button" onClick={this.randomize}>Randomize</Button>
+                        <Button className="button" onClick={this.handleCreateOutfit}>Save</Button>
                     </div>
                 </div>
             </div>
