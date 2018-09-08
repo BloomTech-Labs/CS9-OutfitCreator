@@ -84,37 +84,37 @@ class App extends Component {
           <Route exact path='/verify/:key?' render={props =>
             <VerifyEmail {...props} />
           } />
-          <Route path='/Create' render={props =>
+          <Route path='/create' render={props =>
             <div className='App--create-layers'>
               <CreateOutfit {...props} getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
               <Navigation getUserID={this.getUserID} />
             </div>
           } />
-          <Route path='/Archive' render={props =>
+          <Route path='/archive' render={props =>
             <div>
               <Archive getUserID={this.getUserID} />
               <Navigation getUserID={this.getUserID} />
             </div>
           } />
-          <Route path='/Settings' render={props =>
+          <Route path='/settings' render={props =>
             <div>
               <Settings {...props} getUserID={this.getUserID} />
               <Navigation getUserID={this.getUserID} />
             </div>
           } />
-          <Route path='/Upload' render={props =>
+          <Route path='/upload' render={props =>
             <div>
               <Upload getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
               <Navigation getUserID={this.getUserID} />
             </div>
           } />
-          <Route path='/Edit' render={props =>
+          <Route path='/edit' render={props =>
             <div>
               <OutfitEdit {...props} getUserID={this.getUserID} />
               <Navigation getUserID={this.getUserID} />
             </div>
           } />
-          <Route path='/Closet' render={props =>
+          <Route path='/closet' render={props =>
             <div className="App">
               <Closet {...props} getUserID={this.getUserID} />
               <Navigation getUserID={this.getUserID} />

@@ -106,7 +106,7 @@ class Navigation extends Component {
     }
 
     navSettings() {
-        window.location = `${ROOT_URL.WEB}/Settings`;
+        window.location = `${ROOT_URL.WEB}/settings`;
     }
 
     signOut() {
@@ -126,10 +126,10 @@ class Navigation extends Component {
                 <div className='navigation--current-page nav--active'>{this.currentPageName()}</div>
                 <Nav className='navigation--pages'>
                     <Collapse isOpen={!this.state.collapsed}>
-                        <NavLink href='/Create'><button className='nav--item Create nav--active'>New Outfit</button></NavLink>
-                        <NavLink href='/Upload'><button className='nav--item Upload'>Add Item</button></NavLink>
-                        <NavLink href='/Closet'><button className='nav--item Closet'>My Closet</button></NavLink>
-                        <NavLink href='/Archive'><button className='nav--item Archive'>Archive</button></NavLink>
+                        <NavLink href='/create'><button className='nav--item Create nav--active'>New Outfit</button></NavLink>
+                        <NavLink href='/upload'><button className='nav--item Upload'>Add Item</button></NavLink>
+                        <NavLink href='/closet'><button className='nav--item Closet'>My Closet</button></NavLink>
+                        <NavLink href='/archive'><button className='nav--item Archive'>Archive</button></NavLink>
                     </Collapse>
                 </Nav>
                 <div className='navigation--user-options'>
@@ -141,10 +141,10 @@ class Navigation extends Component {
             <div className='navigation--container'>
                 <div className='navigation--site-title'>Closet Roulette</div>
                 <Nav className='navigation--pages'>
-                    <NavLink href='/Create'><button className='nav--item Create'>New Outfit</button></NavLink>
-                    <NavLink href='/Upload'><button className='nav--item Upload'>Add Item</button></NavLink>
-                    <NavLink href='/Closet'><button className='nav--item Closet'>My Closet</button></NavLink>
-                    <NavLink href='/Archive'><button className='nav--item Archive'>Outfits</button></NavLink>
+                    <NavLink href='/create'><button className='nav--item Create'>New Outfit</button></NavLink>
+                    <NavLink href='/upload'><button className='nav--item Upload'>Add Item</button></NavLink>
+                    <NavLink href='/closet'><button className='nav--item Closet'>My Closet</button></NavLink>
+                    <NavLink href='/archive'><button className='nav--item Archive'>Outfits</button></NavLink>
                 </Nav>
                 <div className='navigation--user-options'>
                     <div onClick={this.navSettings} className='navigation--user'>{this.state.username}</div>
