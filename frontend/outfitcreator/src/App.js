@@ -83,7 +83,12 @@ class App extends Component {
             </div>
           } />
           <Route exact path='/verify/:key?' render={props =>
-            <VerifyEmail {...props} />
+            <div>
+              <Landing {...props} />
+              <div className='landingPage--faded'>
+                <VerifyEmail {...props} />
+              </div>
+            </div>
           } />
           <Route path='/Create' render={props =>
             <div className='App--create-layers'>
