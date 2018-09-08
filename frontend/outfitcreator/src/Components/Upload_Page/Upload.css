@@ -1,11 +1,8 @@
 .container--upload {
-    background: white;
-    border-radius: 25px;
     display: flex;
     flex-flow: column;
     align-items: center;
-    padding: 20px 40px;
-    margin: 50px 0;
+    margin-top: 90px;
 }
 
 .upload--columns {
