@@ -89,7 +89,7 @@ class Login extends React.Component {
                             onClick={() => { this.toggle('1'); }}
                         >
                             Sign Up
-            </NavLink>
+                        </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink
