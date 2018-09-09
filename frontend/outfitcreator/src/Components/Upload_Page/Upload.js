@@ -89,7 +89,7 @@ class Upload extends Component {
 	saveItem = (e) => {
 		e.preventDefault();
 
-		if (this.state.type == 'title') {
+		if (this.state.type === 'title') {
 			alert('Please select an item type');
 			return;
 		}

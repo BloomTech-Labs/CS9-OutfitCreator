@@ -181,7 +181,7 @@ class OutfitEdit extends React.Component {
 												key={item._id}
 												src={newUrl}
 												onClick={() => this.selectItem(item.type, item._id)}
-												alt="Card image cap"
+												alt="Outfit Card Clothing Item"
 											/>
 										</div>
 									);
@@ -204,7 +204,7 @@ class OutfitEdit extends React.Component {
 													className="edit--card-image"
 													src={item.image}
 													onClick={() => this.getItems(item.type, item._id)}
-													alt="Card image cap"
+													alt="Outfit Card Clothing Item"
 												/>
 											</div>
 										);

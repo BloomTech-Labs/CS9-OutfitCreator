@@ -18,10 +18,10 @@ class CreateCard extends React.Component {
 					/>
 					<CardImgOverlay className={this.props.locked ? 'locked--border' : null}>
 						<div className="create-card--lock" onClick={() => this.props.toggleLocked(this.props.type)}>
-							<img className="lock--icon" src={this.props.locked ? Icons.locked : Icons.unlocked} />
+							<img className="lock--icon" src={this.props.locked ? Icons.locked : Icons.unlocked} alt='Lock Icon' />
 						</div>
 						<div id={this.props.type} className="create-card--refresh" onClick={this.props.randomizeSingle}>
-							<img className="refresh--icon" src={Icons.refresh} />
+							<img className="refresh--icon" src={Icons.refresh} alt='Refresh Icon' />
 						</div>
 					</CardImgOverlay>
 				</Card>

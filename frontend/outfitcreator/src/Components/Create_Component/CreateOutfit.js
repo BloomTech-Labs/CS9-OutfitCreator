@@ -231,7 +231,7 @@ class CreateOutfit extends Component {
 		// Allow only one shoe type to be active
 		if (shoeTypes.includes(category)) {
 			shoeTypes.forEach((type) => {
-				if (category != type) {
+				if (category !== type) {
 					if (items[type]) items[type].show = false;
 				}
 			});
