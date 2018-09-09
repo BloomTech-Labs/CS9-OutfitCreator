@@ -1,7 +1,7 @@
 .container--editbox {
 	align-self: center;
 	min-width: 75vw;
-	margin-top: 15px;
+	margin-top: 1px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -32,16 +32,15 @@
 .container--edit {
 	display: flex;
 	flex-direction: column;
-	left: 50px;
-	margin-top: 90px;
-	margin-left: 1em;
+	margin-top: 50px;
 	overflow-x: hidden;
 }
 
 .image--container {
-	display: flex;
+  display: flex;
+  flex-flow: wrap;
 	justify-content: space-evenly;
-	margin-top: 75px;
+	margin: 50px 15px;
 	width: 80vw;
 }
 

@@ -14,11 +14,11 @@ class OutfitEdit extends React.Component {
 			name: '',
 			newDate: undefined,
 			worn: [],
-			top: '',
+			top: [],
 			topTags: [],
-			bottom: '',
+			bottom: [],
 			bottomTags: [],
-			shoes: '',
+			shoes: [],
 			shoesTags: [],
 			oldID: '',
 			tags: [],
@@ -53,7 +53,22 @@ class OutfitEdit extends React.Component {
 				if (lastWorn) {
 					lastWorn = lastWorn.split('T')[0];
 				}
-				this.setState({ outfit: data, name: data.name, worn: data.worn, lastWorn, user, outfitID });
+
+				this.setState(
+					{
+						outfit: data,
+						name: data.name,
+						worn: data.worn,
+						lastWorn,
+						user,
+						outfitID
+					},
+					() => {
+						const { top, bottom, shoes } = this.state.outfit;
+						const items = [ ...top, ...bottom, shoes ];
+						items.forEach((id) => this.populate(id));
+					}
+				);
 			})
 			.catch((err) => err);
 	};
@@ -64,8 +79,11 @@ class OutfitEdit extends React.Component {
 		axios
 			.get(`${ROOT_URL.API}/items/${user}/${id}`)
 			.then((response) => {
+				const stateData = this.state[response.data.type];
+				stateData.push(response.data);
+
 				this.setState({
-					[response.data.type]: response.data,
+					[response.data.type]: stateData,
 					[response.data.type + 'Tags']: response.data.tags
 				});
 			})
@@ -149,14 +167,8 @@ class OutfitEdit extends React.Component {
 
 	render() {
 		const { outfit, top, bottom, shoes, editItem, itemSelection } = this.state;
-		const sources = [];
-		if (outfit) {
-			sources.push(...outfit.top, ...outfit.bottom, outfit.shoes);
-		}
-		if (!top || !bottom || !shoes) {
-			sources.forEach((id) => this.populate(id));
-		}
-		const items = [ top, bottom, shoes ];
+		const items = [ ...top, ...bottom, ...shoes ];
+
 		return (
 			<div className="container--archive-edit">
 				{/* ternary to check if modal is toggled or not*/}
@@ -197,6 +209,7 @@ class OutfitEdit extends React.Component {
 								<div className="image--container">
 									{/*here maps out the items of the current outfit*/}
 									{items.map((item, index) => {
+										console.log(item);
 										return (
 											<div key={index}>
 												<img
