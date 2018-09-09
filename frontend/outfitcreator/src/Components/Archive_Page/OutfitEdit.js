@@ -209,7 +209,6 @@ class OutfitEdit extends React.Component {
 								<div className="image--container">
 									{/*here maps out the items of the current outfit*/}
 									{items.map((item, index) => {
-										console.log(item);
 										return (
 											<div key={index}>
 												<img
