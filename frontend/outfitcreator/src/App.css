@@ -1,44 +1,46 @@
 .App {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
 }
 
 ul {
-  list-style: none;
+	list-style: none;
 }
 
 .button {
-  background: var(--dark-purple);
-  border: 2px solid var(--dark-purple);
-  border-radius: 5px;
-  padding: 5px 10px;
-  font-size: 15px;
-  font-weight: bold;
-  color: var(--pale-purple);
-  font-family: 'Arsenal', sans-serif;
+	background: var(--dark-purple);
+	border: 2px solid var(--dark-purple);
+	border-radius: 5px;
+	padding: 5px 10px;
+	font-size: 15px;
+	font-weight: bold;
+	color: var(--pale-purple);
+	font-family: 'Arsenal', sans-serif;
 }
 
 .button:hover {
-  background: var(--pale-purple);
-  border: 2px solid var(--dark-purple);
-  border-radius: 5px;
-  padding: 5px 10px;
-  color: var(--dark-purple);
-  font-size: 15px;
-  font-weight: bold;
+	background: var(--pale-purple);
+	border: 2px solid var(--dark-purple);
+	border-radius: 5px;
+	padding: 5px 10px;
+	color: var(--dark-purple);
+	font-size: 15px;
+	font-weight: bold;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
-  background-color: var(--dark-purple);
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+	background-color: var(--dark-purple);
 }
 
-.nav-pills .nav-link.active:hover, .nav-pills .show > .nav-link:hover{
-  color: white;
+.nav-pills .nav-link.active:hover,
+.nav-pills .show > .nav-link:hover {
+	color: white;
 }
 
 a:not([href]):not([tabindex]) {
-  cursor: pointer;
+	cursor: pointer;
 }
