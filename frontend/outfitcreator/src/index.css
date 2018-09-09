@@ -1,27 +1,29 @@
 :root {
-  --tan: rgb(255, 225, 225);
-  --pale-pink: rgb(250,210,210);
-  --pale-purple: rgb(225,225,255);
-  --light-purple: rgb(194,194,235);
-  --med-purple: rgb(141,141,200);
-  --dark-purple: rgb(54, 56, 88);
+	--tan: rgb(255, 225, 225);
+	--pale-pink: rgb(250, 210, 210);
+	--pale-purple: rgb(225, 225, 255);
+	--light-purple: rgb(194, 194, 235);
+	--med-purple: rgb(141, 141, 200);
+	--dark-purple: rgb(54, 56, 88);
 }
 
-html, body, body #root {
-  background: white;
-  background-repeat: no-repeat;
-  background-size: cover;
-  box-sizing: border-box;
-  font-family: sans-serif;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
+html,
+body,
+body #root {
+	background: white;
+	background-repeat: no-repeat;
+	background-size: cover;
+	box-sizing: border-box;
+	font-family: sans-serif;
+	min-height: 100vh;
+	margin: 0;
+	padding: 0;
 }
 
 button {
-  outline: none !important;
+	outline: none !important;
 }
 
 * {
-  transition: 0.3s;
+	transition: 0.3s;
 }

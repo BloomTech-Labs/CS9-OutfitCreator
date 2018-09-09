@@ -20,110 +20,126 @@ import './App.css';
 library.add(faShareAlt);
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+	constructor(props) {
+		super(props);
 
-    this.setAuthToken();
-  }
+		this.setAuthToken();
+	}
 
-  setAuthToken = () => {
-    const token = localStorage.getItem('authToken');
+	setAuthToken = () => {
+		const token = localStorage.getItem('authToken');
 
-    if (token) axios.defaults.headers.common.Authorization = token;
-    else delete axios.defaults.headers.common.Authorization;
-  }
+		if (token) axios.defaults.headers.common.Authorization = token;
+		else delete axios.defaults.headers.common.Authorization;
+	};
 
-  getUserID() {
-    const token = localStorage.getItem('authToken');
+	getUserID() {
+		const token = localStorage.getItem('authToken');
 
-    if (token) {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace('-', '+').replace('_', '/');
+		if (token) {
+			const base64Url = token.split('.')[1];
+			const base64 = base64Url.replace('-', '+').replace('_', '/');
 
-      return JSON.parse(window.atob(base64)).sub;
-    }
-  }
+			return JSON.parse(window.atob(base64)).sub;
+		}
+	}
 
-  // Return user paid status and execute call back function with value
-  // i.e. isUserPaid(paid => console.log(paid)) logs paid status
-  isUserPaid = (cb) => {
-    axios.get(`${ROOT_URL.API}/user/info/${this.getUserID()}`)
-      .then(res => {
-        cb(res.data.paid);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
+	// Return user paid status and execute call back function with value
+	// i.e. isUserPaid(paid => console.log(paid)) logs paid status
+	isUserPaid = (cb) => {
+		axios
+			.get(`${ROOT_URL.API}/user/info/${this.getUserID()}`)
+			.then((res) => {
+				cb(res.data.paid);
+			})
+			.catch((err) => err);
+	};
 
-  signInSuccess = (data) => {
-    localStorage.setItem('authToken', `Bearer ${data.token}`);
-  }
+	signInSuccess = (data) => {
+		localStorage.setItem('authToken', `Bearer ${data.token}`);
+	};
 
-  toLandingPage = (e) => {
-    e.preventDefault();
-    window.location = `${ROOT_URL.WEB}/`;
-    console.log(e.target);
-  }
+	toLandingPage = (e) => {
+		e.preventDefault();
+		window.location = `${ROOT_URL.WEB}/`;
+	};
 
-  render() {
-    return (
-      <div className="App">
-        <Switch>
-          <Route exact path='/' render={props =>
-            <Landing {...props} />
-          } />
-          <Route exact path='/login' render={props =>
-            <div>
-              <Landing {...props} />
-              <div className='landingPage--faded'>
-                <Login {...props} onSignin={this.signInSuccess} />
-              </div>
-            </div>
-          } />
-          <Route exact path='/verify/:key?' render={props =>
-            <VerifyEmail {...props} />
-          } />
-          <Route path='/create' render={props =>
-            <div className='App--create-layers'>
-              <CreateOutfit {...props} getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
-              <Navigation getUserID={this.getUserID} />
-            </div>
-          } />
-          <Route path='/archive' render={props =>
-            <div>
-              <Archive getUserID={this.getUserID} />
-              <Navigation getUserID={this.getUserID} />
-            </div>
-          } />
-          <Route path='/settings' render={props =>
-            <div>
-              <Settings {...props} getUserID={this.getUserID} />
-              <Navigation getUserID={this.getUserID} />
-            </div>
-          } />
-          <Route path='/upload' render={props =>
-            <div>
-              <Upload getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
-              <Navigation getUserID={this.getUserID} />
-            </div>
-          } />
-          <Route path='/edit' render={props =>
-            <div>
-              <OutfitEdit {...props} getUserID={this.getUserID} />
-              <Navigation getUserID={this.getUserID} />
-            </div>
-          } />
-          <Route path='/closet' render={props =>
-            <div className="App">
-              <Closet {...props} getUserID={this.getUserID} />
-              <Navigation getUserID={this.getUserID} />
-            </div>
-          } />
-        </Switch>
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div className="App">
+				<Switch>
+					<Route exact path="/" render={(props) => <Landing {...props} />} />
+					<Route
+						exact
+						path="/login"
+						render={(props) => (
+							<div>
+								<Landing {...props} />
+								<div className="landingPage--faded">
+									<Login {...props} onSignin={this.signInSuccess} />
+								</div>
+							</div>
+						)}
+					/>
+					<Route exact path="/verify/:key?" render={(props) => <VerifyEmail {...props} />} />
+					<Route
+						path="/Create"
+						render={(props) => (
+							<div className="App--create-layers">
+								<CreateOutfit {...props} getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
+								<Navigation getUserID={this.getUserID} />
+							</div>
+						)}
+					/>
+					<Route
+						path="/Archive"
+						render={(props) => (
+							<div>
+								<Archive getUserID={this.getUserID} />
+								<Navigation getUserID={this.getUserID} />
+							</div>
+						)}
+					/>
+					<Route
+						path="/Settings"
+						render={(props) => (
+							<div>
+								<Settings {...props} getUserID={this.getUserID} />
+								<Navigation getUserID={this.getUserID} />
+							</div>
+						)}
+					/>
+					<Route
+						path="/Upload"
+						render={(props) => (
+							<div>
+								<Upload getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
+								<Navigation getUserID={this.getUserID} />
+							</div>
+						)}
+					/>
+					<Route
+						path="/Edit"
+						render={(props) => (
+							<div>
+								<OutfitEdit {...props} getUserID={this.getUserID} />
+								<Navigation getUserID={this.getUserID} />
+							</div>
+						)}
+					/>
+					<Route
+						path="/Closet"
+						render={(props) => (
+							<div className="App">
+								<Closet {...props} getUserID={this.getUserID} />
+								<Navigation getUserID={this.getUserID} />
+							</div>
+						)}
+					/>
+				</Switch>
+			</div>
+		);
+	}
 }
 
 export default App;

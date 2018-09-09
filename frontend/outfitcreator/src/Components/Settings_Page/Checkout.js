@@ -10,17 +10,21 @@ class Checkout extends React.Component {
   }
 
   render() {
-    //TODO: add a user email
     return (
       <div className="Checkout">
         <h2>Subscribe to the Outfit Creator!</h2>
-          <div><b>With the pro version, you get great features like:</b></div>
-          <div>Unlimited item uploads</div>
-          <div>Improved category selection</div><br/>
-          <div><b>Enter your payment information below to get started!</b></div>
+        <div>
+          <b>With the pro version, you get great features like:</b>
+        </div>
+        <div>Unlimited item uploads</div>
+        <div>Improved category selection</div>
+        <br />
+        <div>
+          <b>Enter your payment information below to get started!</b>
+        </div>
         <StripeProvider stripe={this.props.stripe}>
           <Elements>
-            <PaymentForm userID={this.props.userID}/>
+            <PaymentForm userID={this.props.userID} />
           </Elements>
         </StripeProvider>
       </div>

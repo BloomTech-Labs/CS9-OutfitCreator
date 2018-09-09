@@ -6,11 +6,11 @@
 }
 
 .upload--columns {
-    align-items: center;
-    display: flex;
-    flex-flow: column;
-    justify-content: space-around;
-    width: 80%;
+	align-items: center;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	width: 80%;
 }
 
 .upload--image {
@@ -21,56 +21,58 @@
     border-radius: 5px;
 }
 
-.upload--button, .upload--button:focus {
-    background: white;
-    border-radius: 5px;
-    box-shadow: 2px 2px 0 0 black;
-    color: white;
-    font-size: 12px;
-    margin: 10px 0 30px;
+.upload--button,
+.upload--button:focus {
+	background: white;
+	border-radius: 5px;
+	box-shadow: 2px 2px 0 0 black;
+	color: white;
+	font-size: 12px;
+	margin: 10px 0 30px;
 }
 
 .upload--name {
-    border: 1px solid black;
-    font-size: 15px;
-    height: 35px;
-    width: 250px;
-    margin-top: 10px;
+	border: 1px solid black;
+	font-size: 15px;
+	height: 35px;
+	width: 250px;
+	margin-top: 10px;
 }
 
 .upload--name:focus {
-    border: 1px solid black;
-    box-shadow:none;
-    outline: none;
+	border: 1px solid black;
+	box-shadow: none;
+	outline: none;
 }
 
 .upload--select {
-    border: 1px solid black;
-    font-size: 15px;
-    height: 35px;
-    width: 250px;
+	border: 1px solid black;
+	font-size: 15px;
+	height: 35px;
+	width: 250px;
 }
 
-.container--upload .upload--save, .container--upload .upload--save:hover {
-    padding: 2px 25px 3px;
-    font-size: 17px;
-    color: white;
+.container--upload .upload--save,
+.container--upload .upload--save:hover {
+	padding: 2px 25px 3px;
+	font-size: 17px;
+	color: white;
 }
 
 .container--upload .upload--save:hover {
-    color: var(--dark-purple);
+	color: var(--dark-purple);
 }
 
 .upload--pairWith {
-    line-height: 23px;
-    text-align: left;
-    margin: 0 auto;
-    width: 50%;
+	line-height: 23px;
+	text-align: left;
+	margin: 0 auto;
+	width: 50%;
 }
 
 input[type=checkbox] {
-    padding: 10px;
-    transform: scale(1.3);
+	padding: 10px;
+	transform: scale(1.3);
 }
 
 .inputfile {
@@ -83,55 +85,50 @@ input[type=checkbox] {
 }
 
 .inputfile + label {
-    font-size: 1em;
-    width: 5em;
-    height: 2em;
-    padding: 2px;
-    margin-top: 10px;
-    margin-bottom: 50px;
-    display: inline-block;
-    cursor: pointer;
-    border: 1px solid black;
-    border-radius: 5px;
-    box-shadow: 2px 2px;
+	font-size: 1em;
+	width: 5em;
+	height: 2em;
+	padding: 2px;
+	margin-top: 10px;
+	margin-bottom: 50px;
+	display: inline-block;
+	cursor: pointer;
+	border: 1px solid black;
+	border-radius: 5px;
+	box-shadow: 2px 2px;
 }
 
-.inputfile:focus + label, .inputfile + label:hover {
-    transition-duration: .3s;
-    background-color: #6c757d;
-    color: white;
+.inputfile:focus + label,
+.inputfile + label:hover {
+	transition-duration: .3s;
+	background-color: #6c757d;
+	color: white;
 }
-
-/* for touch devices */
-/* .inputfile + label * {
-	pointer-events: none;
-} */
-
 
 .cloudinary-button {
-  background: var(--dark-purple);
-  border: 2px solid var(--dark-purple);
-  border-radius: 5px;
-  padding: 3px 15px 4px;
-  font-weight: bold;
-  font-size: 15px;
-  color: white;
-  font-family: 'Arsenal', cursive;
+	background: var(--dark-purple);
+	border: 2px solid var(--dark-purple);
+	border-radius: 5px;
+	padding: 3px 15px 4px;
+	font-weight: bold;
+	font-size: 15px;
+	color: white;
+	font-family: 'Arsenal', cursive;
 }
 
 .cloudinary-button:hover {
-  background: var(--light-purple);
-  border: 2px solid var(--dark-purple);
-  text-decoration: none;
-  border-radius: 5px;
-  padding: 3px 15px 4px;
-  color: var(--dark-purple);
-  font-weight: bold;
-  font-size: 15px;
+	background: var(--light-purple);
+	border: 2px solid var(--dark-purple);
+	text-decoration: none;
+	border-radius: 5px;
+	padding: 3px 15px 4px;
+	color: var(--dark-purple);
+	font-weight: bold;
+	font-size: 15px;
 }
 
 @media screen and (max-width: 900px) {
-    .upload--columns {
-        width: 50vw;
-    }
+	.upload--columns {
+		width: 50vw;
+	}
 }
