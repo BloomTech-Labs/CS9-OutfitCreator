@@ -350,17 +350,21 @@ class CreateOutfit extends Component {
 		return (
 			<div className="create--container">
 				<div className="create--selection">
-					{typesInCloset.map((type) => (
-						<button
-							className={this.state.items[type].show ? 'create--button-active' : 'create--button'}
-							onClick={() => {
-								this.activateCategory(type);
-							}}
-							key={type}
-						>
-							{this.state.items[type].title}
-						</button>
-					))}
+					{this.state.items ? (
+						typesInCloset.map((type) => (
+							<button
+								className={this.state.items[type].show ? 'create--button-active' : 'create--button'}
+								onClick={() => {
+									this.activateCategory(type);
+								}}
+								key={type}
+							>
+								{this.state.items[type].title}
+							</button>
+						))
+					) : (
+						<div>Loading...</div>
+					)}
 				</div>
 				<CardDeck>
 					{selected.map((type) => {
