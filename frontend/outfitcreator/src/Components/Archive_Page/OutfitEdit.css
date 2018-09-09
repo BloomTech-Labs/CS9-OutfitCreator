@@ -33,16 +33,12 @@
 }
 
 .container--edit {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	left: 50px;
-	min-width: 75vw;
-	max-height: 90vh;
-	margin-top: 4.5em;
-	min-height: 700px;
-	margin-left: 1em;
-	overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    left: 50px;
+    margin-top: 90px;
+    margin-left: 1em;
+    overflow-x: hidden;
 }
 
 .image--container {
