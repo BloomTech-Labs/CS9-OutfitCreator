@@ -81,27 +81,78 @@ exports.login = (req, res) => {
 };
 
 exports.verifyEmail = (req, res) => {
-	const key = req.body.key;
-	const target = {
-		'signupKey.key': key,
-		'signupKey.exp': { $gt: Date.now() }
-	};
-	const updates = {
-		verified: true
-	};
-	const options = { new: true };
+    const key = req.body.key;
+    const target = {
+      'signupKey.key': key,
+      'signupKey.exp': { $gt: Date.now() }
+      };
+    const updates = {
+      verified: true
+    };
+    const options = { new: true };
+  
+    User.findOneAndUpdate(target, updates, options)
+    .exec()
+    .then( user => {
+        if (!user) {
+            return res.status(400).json({ code:'EXPTOKEN', message: 'Sorry, your token has expired, please try again.' });
+        } else {
+            const token = makeToken(user);
+            res.status(201).json({ token });
+        }
+    })
+    .catch( err => {
+        return res.status(400).json({ message: err});
+    });
+}
 
-	User.findOneAndUpdate(target, updates, options)
-		.exec()
-		.then((user) => {
-			if (!user) {
-				return res.status(400).json({ message: 'Sorry, your token has expired, please try again.' });
-			} else {
-				const token = makeToken(user);
-				res.status(201).json({ token });
-			}
-		})
-		.catch((err) => {
-			return res.status(400).json({ message: err });
-		});
-};
+exports.sendVerifyEmail = (req, res, next) => {
+
+    const { email } = req.body;
+    const key = generateSignupKey();
+  
+    const target = { 'local.email': email }
+    const updates = {
+      signupKey: key
+    };
+    const options = { new: true };
+  
+    User.findOneAndUpdate(target, updates, options)
+    .exec()
+    .then( (user) => {
+        if(user.verified) {
+            return res.status(400).json({ message: 'Something went wrong.'})
+        }
+        else if (!user) {
+            return res
+            .status(400)
+            .json({
+                message: 'Something went wrong'
+            });
+            } else {
+                // Send verification email
+                const subject = "Closet Roulette | Email Verification Required";
+                const url = `${ROOT_URL.WEB}/verify/${key.key}`;
+                const html = `Hi ${user.local.username},
+                <br/>
+                Thank you for registering for Closet Roulette!
+                <br/><br/>
+                Please verify your email by clicking this link: <a href="${url}">${url}</a>
+                <br/>
+                Have a pleasant day.`;
+                const text = `Please click here to verify your email: ${url}`;
+                sendEmail(email, subject, html, text)
+                .then(() => {
+                    // Respond with success message if email sent sucessfully
+                    res.status(201).json({ message: `Verification email sent` });
+                })
+                .catch((err) => {
+                    return next(err);
+                });
+                
+            }
+        })
+      .catch( err => {
+        return res.status(400).json({ err });
+      });
+}
