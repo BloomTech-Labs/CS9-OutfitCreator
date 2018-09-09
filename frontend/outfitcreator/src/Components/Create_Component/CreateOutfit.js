@@ -374,7 +374,6 @@ class CreateOutfit extends Component {
 							}}
 							key={type}
 						>
-							{' '}
 							{this.state.items[type].title}
 						</button>
 					))}

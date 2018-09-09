@@ -1,14 +1,6 @@
 .createContainer {
-	width: 100%;
+	width: 80%;
 	margin-top: 90px;
-}
-
-.layerSelect {
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
 }
 
 .create-button {
@@ -59,12 +51,8 @@
 }
 
 .createContainer .card-deck {
-	margin: 0;
+	margin: 20px auto;
 	justify-content: center;
-}
-
-.createContainer .card-deck .card:hover {
-	border: none;
 }
 
 .card-deck .card,
@@ -81,7 +69,6 @@
 .card-deck {
 	display: flex;
 	flex-wrap: wrap;
-	min-width: 700px;
 }
 
 .createContainer .card.text-white {
@@ -140,7 +127,9 @@
 
 .createContainer .cardImage {
 	margin: 0;
-	box-shadow: none;
+  box-shadow: none;
+  height: 200px;
+  width: 300px;
 }
 
 .outfitPickerContainer {

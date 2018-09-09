@@ -96,7 +96,7 @@ class App extends Component {
 					<Route
 						path="/Create"
 						render={(props) => (
-							<div className="App--create-layers">
+							<div className="App">
 								<CreateOutfit {...props} getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
 								<Navigation getUserID={this.getUserID} />
 							</div>
