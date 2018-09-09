@@ -19,7 +19,7 @@ class CreateOutfit extends Component {
 			items: {
 				top: {
 					title: 'Tops',
-					show: false,
+					show: true,
 					all: [],
 					current: null,
 					icon: Icons.top,
@@ -27,7 +27,7 @@ class CreateOutfit extends Component {
 				},
 				bottom: {
 					title: 'Bottoms',
-					show: false,
+					show: true,
 					all: [],
 					current: null,
 					icon: Icons.bottom,
@@ -35,7 +35,7 @@ class CreateOutfit extends Component {
 				},
 				shoes: {
 					title: 'Shoes',
-					show: false,
+					show: true,
 					all: [],
 					current: null,
 					icon: Icons.casualShoes,
@@ -64,8 +64,8 @@ class CreateOutfit extends Component {
 	setTypes = () => {
 		const paidItems = {
 			top: {
-				title: 'Tops',
-				show: false,
+				title: 'All Tops',
+				show: true,
 				all: [],
 				current: null,
 				icon: Icons.top,
@@ -73,7 +73,7 @@ class CreateOutfit extends Component {
 			},
 			bottom: {
 				title: 'All Bottoms',
-				show: false,
+				show: true,
 				all: [],
 				current: null,
 				icon: Icons.bottom,
@@ -81,7 +81,7 @@ class CreateOutfit extends Component {
 			},
 			shoes: {
 				title: 'All Shoes',
-				show: false,
+				show: true,
 				all: [],
 				current: null,
 				icon: Icons.casualShoes,
@@ -119,14 +119,6 @@ class CreateOutfit extends Component {
 				icon: Icons.dress,
 				locked: false
 			},
-			bottom: {
-				title: 'Bottoms',
-				show: false,
-				all: [],
-				current: null,
-				icon: Icons.bottom,
-				locked: false
-			},
 			pants: {
 				title: 'Pants',
 				show: false,
@@ -157,14 +149,6 @@ class CreateOutfit extends Component {
 				all: [],
 				current: null,
 				icon: Icons.leggings,
-				locked: false
-			},
-			shoes: {
-				title: 'Shoes',
-				show: false,
-				all: [],
-				current: null,
-				icon: Icons.casualShoes,
 				locked: false
 			},
 			formalShoes: {

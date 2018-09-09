@@ -52,7 +52,6 @@
 
 .create--container .card-deck {
 	margin: 20px auto;
-	justify-content: center;
 }
 
 .card-deck .card,
@@ -63,12 +62,14 @@
 	border: none;
 	box-shadow: none;
 	outline: none;
-	margin: 0 8px 15px;
+	margin: 10px;
 }
 
 .card-deck {
 	display: flex;
-	flex-wrap: wrap;
+  flex-wrap: wrap;
+  /* margin: 30px auto; */
+	justify-content: center;
 }
 
 .create--container .card.text-white {
