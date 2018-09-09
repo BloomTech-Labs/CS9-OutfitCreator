@@ -6,9 +6,9 @@ import Icon from './tag.png';
 class TagInput extends Component {
 	addTag = (e) => {
 		const tag = this.props.state.tag.toLowerCase();
-
 		if (e.key === 'Enter' && !this.props.state.tags.includes(tag)) {
-			this.props.passState({ tags: [ ...this.props.state.tags, tag ], tag: '' });
+			this.props.passState({ tags: [ ...this.props.state.tags, tag ] });
+			this.props.passState({ tag: '' });
 		}
 	};
 

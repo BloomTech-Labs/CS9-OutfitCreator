@@ -105,7 +105,7 @@ class Navigation extends Component {
 	};
 
 	navSettings() {
-		window.location = `${ROOT_URL.WEB}/Settings`;
+		window.location = `${ROOT_URL.WEB}/settings`;
 	}
 
 	signOut() {
@@ -124,16 +124,16 @@ class Navigation extends Component {
 				<div className="navigation--current-page nav--active">{this.currentPageName()}</div>
 				<Nav className="navigation--pages">
 					<Collapse isOpen={!this.state.collapsed}>
-						<NavLink href="/Create">
+						<NavLink href="/create">
 							<button className="nav--item Create nav--active">New Outfit</button>
 						</NavLink>
-						<NavLink href="/Upload">
+						<NavLink href="/upload">
 							<button className="nav--item Upload">Add Item</button>
 						</NavLink>
-						<NavLink href="/Closet">
+						<NavLink href="/closet">
 							<button className="nav--item Closet">My Closet</button>
 						</NavLink>
-						<NavLink href="/Archive">
+						<NavLink href="/archive">
 							<button className="nav--item Archive">Archive</button>
 						</NavLink>
 					</Collapse>
@@ -151,16 +151,16 @@ class Navigation extends Component {
 			<div className="navigation--container">
 				<div className="navigation--site-title">Closet Roulette</div>
 				<Nav className="navigation--pages">
-					<NavLink href="/Create">
+					<NavLink href="/create">
 						<button className="nav--item Create">New Outfit</button>
 					</NavLink>
-					<NavLink href="/Upload">
+					<NavLink href="/upload">
 						<button className="nav--item Upload">Add Item</button>
 					</NavLink>
-					<NavLink href="/Closet">
+					<NavLink href="/closet">
 						<button className="nav--item Closet">My Closet</button>
 					</NavLink>
-					<NavLink href="/Archive">
+					<NavLink href="/archive">
 						<button className="nav--item Archive">Outfits</button>
 					</NavLink>
 				</Nav>
