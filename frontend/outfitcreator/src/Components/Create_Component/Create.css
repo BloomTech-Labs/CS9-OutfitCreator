@@ -39,17 +39,6 @@
 	font-family: 'Arsenal', sans-serif;
 }
 
-/* .cardText {
-	vertical-align: middle;
-	text-align: center;
-	left: 50%;
-	margin-right: -50%;
-	position: absolute;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	font-size: 2em;
-} */
-
 .create--container .card-deck {
 	margin: 20px auto;
 }
@@ -68,7 +57,6 @@
 .card-deck {
 	display: flex;
   flex-wrap: wrap;
-  /* margin: 30px auto; */
 	justify-content: center;
 }
 
