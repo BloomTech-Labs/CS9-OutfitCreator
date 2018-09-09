@@ -129,15 +129,6 @@ class App extends Component {
 							</div>
 						)}
 					/>
-					{/* <Route
-						path="/Billing"
-						render={(props) => (
-							<div>
-								<Billing {...props} getUserID={this.getUserID} />
-								<Navigation getUserID={this.getUserID} />
-							</div>
-						)}
-					/> */}
 					<Route
 						path="/Edit"
 						render={(props) => (
