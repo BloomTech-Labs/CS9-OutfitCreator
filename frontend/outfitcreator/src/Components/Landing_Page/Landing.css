@@ -91,7 +91,6 @@
 	margin: 10px;
 	background-color: var(--light-purple);
 	color: var(--dark-purple);
-	/* border: 2px outset var(--dark-purple); */
 	border-radius: 5px;
 }
 

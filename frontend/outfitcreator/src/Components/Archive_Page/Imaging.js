@@ -20,9 +20,7 @@ class Imaging extends React.Component {
 			.then((response) => {
 				this.setState({ image: response.data });
 			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.catch((err) => err);
 	};
 
 	render() {

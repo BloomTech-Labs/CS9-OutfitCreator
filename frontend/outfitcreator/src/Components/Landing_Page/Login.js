@@ -38,7 +38,6 @@ class Login extends React.Component {
 			})
 			.catch((err) => {
 				this.notifySignUpFailure();
-				console.log(err.response);
 			});
 	};
 

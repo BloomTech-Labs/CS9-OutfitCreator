@@ -32,24 +32,20 @@ class Archive extends React.Component {
 			.then((response) => {
 				this.setState({ myOutfits: response.data });
 			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.catch((err) => err);
 	};
 
 	filter = () => {
 		const { search, myOutfits, searching, searchedOutfits } = this.state;
-
-		const searchWords = search.trim().toLowerCase().split(' ');
+    const searchWords = search.trim().toLowerCase().split(' ');
+    
 		// Filters from the outfit list based on context in search bar, by name and tag
 		// i.e. if the name of outfit A was used as a tag in outfit B, both will show
-
 		const myFilter = (outfit) => {
 			let count = 0;
 			while (count < searchWords.length) {
 				if (
 					outfit.name.toLowerCase().includes(searchWords[count]) ||
-					// eslint-disable-next-line
 					outfit.tags.some((tag) => tag.toLowerCase().includes(searchWords[count]))
 				) {
 					count++;

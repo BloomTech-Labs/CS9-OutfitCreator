@@ -3,7 +3,6 @@ import axios from 'axios';
 import { ROOT_URL } from '../../config';
 import './closet.css';
 import ClosetCard from './ClosetCard.js';
-import { Icons } from '../Icons';
 
 class Closet extends React.Component {
 	constructor(props) {
@@ -125,12 +124,9 @@ class Closet extends React.Component {
 					items.formalShoes.all = res[10].data;
 					items.casualShoes.all = res[11].data;
 					items.shoes.all = res[12].data;
-					console.log(res, items);
 					this.setState({ items });
 				})
-				.catch((err) => {
-					console.log(err);
-				});
+				.catch((err) => err);
 		} else {
 			this.props.history.push('/');
 		}
@@ -162,7 +158,7 @@ class Closet extends React.Component {
 
 	subtypesInCloset = () => {
 		return Object.keys(this.state.items).filter((type) => {
-			return this.state.items[type].all.length > 0 && (type != 'top' && type != 'bottom' && type != 'shoes');
+			return this.state.items[type].all.length > 0 && (type !== 'top' && type !== 'bottom' && type !== 'shoes');
 		});
 	};
 
@@ -172,9 +168,7 @@ class Closet extends React.Component {
 			.then(() => {
 				this.onSelect(newInfo.type);
 			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.catch((err) => err);
 	};
 
 	render() {

@@ -1,17 +1,3 @@
-/* .container--billing {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 -1px 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  left: 50px;
-  max-width: 70vw;
-  margin: 100px auto;
-  padding: 40px;
-} */
-
 .StripeElement {
 	background-color: white;
 	height: 40px;

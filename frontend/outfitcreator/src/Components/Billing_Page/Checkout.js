@@ -10,7 +10,6 @@ class Checkout extends React.Component {
 	}
 
 	render() {
-		//TODO: add a user email
 		return (
 			<div className="Checkout">
 				<h2>Subscribe to the Outfit Creator!</h2>

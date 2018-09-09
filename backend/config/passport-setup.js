@@ -221,7 +221,6 @@ function makeToken(user) {
 const signToken = (req, res) => {
 	const timestamp = new Date().getTime();
 	const payload = {
-		// iss: 'OutfitCreator',
 		sub: req.user._id,
 		iat: timestamp,
 		username: req.user.username

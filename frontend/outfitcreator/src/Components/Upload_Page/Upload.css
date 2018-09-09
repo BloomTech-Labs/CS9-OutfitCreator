@@ -18,7 +18,6 @@
 
 .upload--image {
 	min-height: 200px;
-	/* height: 250px; */
 	margin-bottom: 10px;
 	width: 400px;
 	border-radius: 5px;
@@ -107,11 +106,6 @@ input[type=checkbox] {
 	background-color: #6c757d;
 	color: white;
 }
-
-/* for touch devices */
-/* .inputfile + label * {
-	pointer-events: none;
-} */
 
 .cloudinary-button {
 	background: var(--dark-purple);

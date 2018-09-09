@@ -39,7 +39,7 @@ class PaymentForm extends Component {
 						requestOptions
 					);
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => err);
 		}
 	}
 
@@ -48,7 +48,6 @@ class PaymentForm extends Component {
 	};
 
 	render() {
-		console.log('props: ', this.props.userID);
 		if (this.state.complete) return <h1>Payment Complete!</h1>;
 		return (
 			<div className="checkout">

@@ -4,7 +4,6 @@ import Imaging from './Imaging';
 import { withRouter } from 'react-router';
 
 // Will display a card with any information relevent to an outfit such as name, image, etc.
-
 class OutfitCard extends React.Component {
 	editRedirect = () => {
 		this.props.history.push(`/Edit/${this.props.outfitId}`);
@@ -12,7 +11,6 @@ class OutfitCard extends React.Component {
 
 	render() {
 		const { key, name, src } = this.props;
-		console.log(this.props.src);
 		let worn = 'Never Worn';
 		// worn is an array of dates worn, will always try to access latest day (stored at the front) if ever worn
 		if (this.props.worn.length > 0) {
@@ -34,7 +32,7 @@ class OutfitCard extends React.Component {
 					})}
 				</div>
 				<div className="card--footer">
-					{worn == 'Never Worn' ? <div>{worn}</div> : <div>Last worn: {worn.slice(0, 10)}</div>}
+					{worn === 'Never Worn' ? <div>{worn}</div> : <div>Last worn: {worn.slice(0, 10)}</div>}
 				</div>
 			</div>
 		);

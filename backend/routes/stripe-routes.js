@@ -37,18 +37,16 @@ router.post('/charge', cors(corsOptions), async (req, res) => {
 						})
 						.then((subscription) => {
 							const data = { stripe_cust: customer.id, stripe_sub: subscription.id };
-							console.log(data);
 							res.status(200).json(data);
 						})
-						.catch((err) => console.log(err));
+						.catch((err) => err);
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => err);
 		})
-		.catch((err) => console.log(err));
+		.catch((err) => err);
 });
 
 router.post('/cancel', cors(corsOptions), async (req, res) => {
-	console.log('canceling sub ', req.body.sub);
 	stripe.subscriptions.del(req.body.sub, { at_period_end: true });
 	res.status(200).json('success');
 });

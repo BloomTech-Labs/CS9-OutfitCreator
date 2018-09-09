@@ -31,13 +31,10 @@ exports.signup = (req, res) => {
 								res.status(201).json({ token });
 							})
 							.catch((err) => {
-								console.log(err);
 								return next(err);
 							});
 					})
-					.catch((err) => {
-						console.log(err);
-					});
+					.catch((err) => err);
 			}
 		} else {
 			const key = generateSignupKey();
@@ -65,13 +62,8 @@ exports.signup = (req, res) => {
                 Have a pleasant day.`;
 					const text = `Please click here to verify your email: ${url}`;
 					sendEmail(email, subject, html, text)
-						.then(() => {
-							console.log('email sent (authentication.js > 124)');
-						})
-						.catch((err) => {
-							console.log(err);
-							return next(err);
-						});
+						.then((res) => next(res))
+						.catch((err) => next(err));
 
 					const token = makeToken(user);
 					res.status(201).json({ token });

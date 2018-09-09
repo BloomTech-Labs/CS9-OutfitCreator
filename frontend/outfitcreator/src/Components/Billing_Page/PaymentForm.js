@@ -38,12 +38,8 @@ class PaymentForm extends Component {
 						},
 						requestOptions
 					);
-					// alert('Payment successful! Welcome to Closet Roulette!');
 				})
-				.catch((err) => {
-					console.log(err);
-					// alert('Payment could not go through');
-				});
+				.catch((err) => err);
 		}
 	}
 
@@ -52,7 +48,6 @@ class PaymentForm extends Component {
 	};
 
 	render() {
-		console.log('props: ', this.props.userID);
 		if (this.state.complete) return <h1>Payment Complete!</h1>;
 		return (
 			<div className="checkout">

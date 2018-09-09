@@ -5,8 +5,6 @@ import { ROOT_URL } from '../../config.js';
 import axios from 'axios';
 import queryString from 'query-string';
 import './Create.css';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Icons } from '../Icons/index.js';
 
 class CreateOutfit extends Component {
@@ -66,7 +64,7 @@ class CreateOutfit extends Component {
 	setTypes = () => {
 		const paidItems = {
 			top: {
-				title: 'Tops',
+				title: 'All Tops',
 				show: false,
 				all: [],
 				current: null,
@@ -121,14 +119,6 @@ class CreateOutfit extends Component {
 				icon: Icons.dress,
 				locked: false
 			},
-			bottom: {
-				title: 'Bottoms',
-				show: false,
-				all: [],
-				current: null,
-				icon: Icons.bottom,
-				locked: false
-			},
 			pants: {
 				title: 'Pants',
 				show: false,
@@ -159,14 +149,6 @@ class CreateOutfit extends Component {
 				all: [],
 				current: null,
 				icon: Icons.leggings,
-				locked: false
-			},
-			shoes: {
-				title: 'Shoes',
-				show: false,
-				all: [],
-				current: null,
-				icon: Icons.casualShoes,
 				locked: false
 			},
 			formalShoes: {
@@ -227,9 +209,7 @@ class CreateOutfit extends Component {
 
 					this.setState({ items });
 				})
-				.catch((err) => {
-					console.log(err);
-				});
+				.catch((err) => err);
 		} else {
 			this.props.history.push('/');
 		}
@@ -251,7 +231,7 @@ class CreateOutfit extends Component {
 		// Allow only one shoe type to be active
 		if (shoeTypes.includes(category)) {
 			shoeTypes.forEach((type) => {
-				if (category != type) {
+				if (category !== type) {
 					if (items[type]) items[type].show = false;
 				}
 			});
@@ -351,14 +331,8 @@ class CreateOutfit extends Component {
 
 		axios
 			.post(`${ROOT_URL.API}/outfits`, outfit)
-			.then((res) => {
-				// this.props.history.push('/Archive')
-				console.log(res);
-				const items = { ...this.state };
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.then((res) => res)
+			.catch((err) => err);
 	};
 
 	getTypesInCloset = () => {
@@ -368,9 +342,6 @@ class CreateOutfit extends Component {
 	};
 
 	render() {
-		console.log('Render');
-		// this.setTypes();
-		// this.setAuthToken();
 		const typesInCloset = this.getTypesInCloset();
 		const selected = this.getSelected();
 

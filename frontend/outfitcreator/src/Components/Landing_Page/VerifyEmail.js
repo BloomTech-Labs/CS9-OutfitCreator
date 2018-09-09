@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { ROOT_URL } from '../../config';
@@ -19,16 +19,13 @@ class VerifyEmail extends Component {
 		const key = this.props.match.params.key;
 		axios
 			.post(`${ROOT_URL.API}/auth/verify`, { key })
-			.then((res) => {
-				console.log(res);
+			.then(() => {
 				this.notifyVerificationSuccess();
 				this.setState({ validated: 'true' });
-				// window.location = `${ROOT_URL.WEB}/login`;
 			})
-			.catch((err) => {
+			.catch(() => {
 				this.notifyVerificationFailure();
 				this.setState({ validated: 'false' });
-				// window.location = `${ROOT_URL.WEB}/`;
 			});
 	}
 	render() {
