@@ -1,58 +1,58 @@
 .container--tagSearch {
-    width: 250px;
+	width: 250px;
 }
 
 .tagSearch--icon {
-    align-items: center;
-    border: 1px solid black;
-    border-radius: 5px 0 0 5px;
-    border-right: none;
-    display: flex;
-    height: 35px;
-    justify-content: center;
-    padding-left: 10px;
-    width: 35px;
+	align-items: center;
+	border: 1px solid black;
+	border-radius: 5px 0 0 5px;
+	border-right: none;
+	display: flex;
+	height: 35px;
+	justify-content: center;
+	padding-left: 10px;
+	width: 35px;
 }
 
 .tagSearch--icon img {
-    height: 18px;
-    width: 18px;
+	height: 18px;
+	width: 18px;
 }
 
 .tagSearch--input {
-    border: 1px solid black;
-    border-radius: 5px;
-    border-left: none;
-    height: 35px;
-    width: 215px;
+	border: 1px solid black;
+	border-radius: 5px;
+	border-left: none;
+	height: 35px;
+	width: 215px;
 }
 
 .tagSearch--input:focus {
-    border: 1px solid black;
-    border-left: none;
-    box-shadow:none;
-    outline: none;
+	border: 1px solid black;
+	border-left: none;
+	box-shadow: none;
+	outline: none;
 }
 
 .tagSearch--view {
-    display: flex;
-    flex-flow: wrap;
-    min-width: 300px;
-    width: 30vw;
-    margin-bottom: 20px;
+	display: flex;
+	flex-flow: wrap;
+	min-width: 300px;
+	width: 30vw;
+	margin-bottom: 20px;
 }
 
 .tagSearch--delete {
-    padding: 0 8px;
-    cursor: pointer;
+	padding: 0 8px;
+	cursor: pointer;
 }
 
 .tagSearch--tag {
-    border: 1px solid black;
-    border-radius: 5px;
-    box-shadow: 1px 1px 0 0 black;
-    display: flex;
-    margin: 5px 5px 5px 0px;
-    padding: 3px 10px 3px 5px;
-    font-size: 15px;
+	border: 1px solid black;
+	border-radius: 5px;
+	box-shadow: 1px 1px 0 0 black;
+	display: flex;
+	margin: 5px 5px 5px 0px;
+	padding: 3px 10px 3px 5px;
+	font-size: 15px;
 }

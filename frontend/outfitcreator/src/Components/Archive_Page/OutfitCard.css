@@ -6,62 +6,55 @@
     justify-content: space-between;
     max-width: 550px;
     min-width: 350px;
-    min-height: 220px;
-    max-height: 220px;
-    overflow-y: auto;
-    overflow-x: hidden;
     margin: 15px;
     padding: 0px 10px;
     border: 1px solid black;
 }
 
 .card--header {
-    color: var(--dark-purple);
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    max-height: 40px;
-    padding: 5px 0;
-    margin: 5px 0;
+	color: var(--dark-purple);
+	font-weight: bold;
+	display: flex;
+	justify-content: space-between;
+	max-height: 40px;
+	padding: 5px 0;
+	margin: 5px 0;
 }
 
 .card--images {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .card--images img {
     margin: 5px;
     display: block;
     align-self: flex-start;
-    margin: 5px 0;
+    margin: 0px 5px 10px 5px;
     border-radius: 3px;
-
 }
 
 .card--footer {
-    display: block;
-    align-self: flex-start;
-    margin: 5px 0;
+	display: block;
+	align-self: flex-start;
+	margin: 5px 0;
 }
 
-.header--edit{
-    border: 0;
-    background: transparent;
+.header--edit {
+	border: 0;
+	background: transparent;
 }
 
 .edit--button-archive {
-    border: none;
-    height: 25px;
-    width: 25px;
-    background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACkSURBVEhL7ZDNCQIxEEbTwipsMV60CgXtRBC3CMVutAr7cO+CvlkzEEIWIZnc8uCRn8P3JeManiO+cDedjDnjx/tG85IBtUBLtljM2q9CXCLjKkLHIqsSlpzkIpdw5qkSMZs4PFWSzVy4usFs/oVXGYvawpMWhQtLvGGVcKVH8/ADrn7biQ71JyYvv+CIYckCzcbyQHltXGLGE+94xb1cNCrj3Bd0W2O4MZVXCgAAAABJRU5ErkJggg==') no-repeat center;
+	border: none;
+	height: 25px;
+	width: 25px;
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACkSURBVEhL7ZDNCQIxEEbTwipsMV60CgXtRBC3CMVutAr7cO+CvlkzEEIWIZnc8uCRn8P3JeManiO+cDedjDnjx/tG85IBtUBLtljM2q9CXCLjKkLHIqsSlpzkIpdw5qkSMZs4PFWSzVy4usFs/oVXGYvawpMWhQtLvGGVcKVH8/ADrn7biQ71JyYvv+CIYckCzcbyQHltXGLGE+94xb1cNCrj3Bd0W2O4MZVXCgAAAABJRU5ErkJggg==')
+		no-repeat center;
 }
 
 .edit--button-archive:hover {
     cursor: pointer;
-    border: 1px solid black;
-    border-radius: 5px;
-    box-shadow: 1px 1px rgb(142, 43, 199);
 }

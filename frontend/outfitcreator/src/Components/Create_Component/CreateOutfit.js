@@ -5,404 +5,397 @@ import { ROOT_URL } from '../../config.js';
 import axios from 'axios';
 import queryString from 'query-string';
 import './Create.css';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Icons } from '../Icons/index.js';
 
 class CreateOutfit extends Component {
-    constructor(props) {
-        super(props);
+	constructor(props) {
+		super(props);
 
-        this.state = {
-            user: '',
-            name: '',
-            worn: [],
-            tags: [],
-            items: {
-                top: {
-                    title: 'Tops',
-                    show: false,
-                    all: [],
-                    current: null,
-                    icon: Icons.top,
-                    locked: false,
-                },
-                bottom: {
-                    title: 'Bottoms',
-                    show: false,
-                    all: [],
-                    current: null,
-                    icon: Icons.bottom,
-                    locked: false,
-                },
-                shoes: {
-                    title: 'Shoes',
-                    show: false,
-                    all: [],
-                    current: null,
-                    icon: Icons.casualShoes,
-                    locked: false,
-                },
-            },
-            subtypeMap: {
-              top: ['sweater', 'shirt', 'jacket', 'dress'],
-              bottom: ['pants', 'shorts', 'leggings', 'skirt'],
-              shoes: ['casualShoes', 'formalShoes']
-            },
-        }
+		this.state = {
+			user: '',
+			name: '',
+			worn: [],
+			tags: [],
+			items: {
+				top: {
+					title: 'Tops',
+					show: false,
+					all: [],
+					current: null,
+					icon: Icons.top,
+					locked: false
+				},
+				bottom: {
+					title: 'Bottoms',
+					show: false,
+					all: [],
+					current: null,
+					icon: Icons.bottom,
+					locked: false
+				},
+				shoes: {
+					title: 'Shoes',
+					show: false,
+					all: [],
+					current: null,
+					icon: Icons.casualShoes,
+					locked: false
+				}
+			},
+			subtypeMap: {
+				top: [ 'sweater', 'shirt', 'jacket', 'dress' ],
+				bottom: [ 'pants', 'shorts', 'leggings', 'skirt' ],
+				shoes: [ 'casualShoes', 'formalShoes' ]
+			}
+		};
 
-        if (localStorage.getItem('authToken')) this.setTypes();
-    }
+		if (localStorage.getItem('authToken')) this.setTypes();
+	}
 
-    setAuthToken = () => {
-        const token = localStorage.getItem('authToken');
-        if (token) {
-            axios.defaults.headers.common.Authorization = token;
-        } else {
-            delete axios.defaults.headers.common.Authorization;
-        }
-    }
+	setAuthToken = () => {
+		const token = localStorage.getItem('authToken');
+		if (token) {
+			axios.defaults.headers.common.Authorization = token;
+		} else {
+			delete axios.defaults.headers.common.Authorization;
+		}
+	};
 
-    setTypes = () => {
-        const paidItems = {
-            top: {
-                title: 'Tops',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.top,
-                locked: false,
-            },
-            bottom: {
-                title: 'All Bottoms',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.bottom,
-                locked: false,
-            },
-            shoes: {
-                title: 'All Shoes',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.casualShoes,
-                locked: false,
-            },
-            shirt: {
-                title: 'Shirt',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.shirt,
-                locked: false,
-            },
-            sweater: {
-                title: 'Sweater',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.sweater,
-                locked: false,
-            },
-            jacket: {
-                title: 'Jacket',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.jacket,
-                locked: false,
-            },
-            dress: {
-                title: 'Dress',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.dress,
-                locked: false,
-            },
-            bottom: {
-                title: 'Bottoms',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.bottom,
-                locked: false,
-            },
-            pants: {
-                title: 'Pants',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.pants,
-                locked: false,
-            },
-            shorts: {
-                title: 'Shorts',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.shorts,
-                locked: false,
-            },
-            skirt: {
-                title: 'Skirt',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.skirt,
-                locked: false,
-            },
-            leggings: {
-                title: 'Leggings',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.leggings,
-                locked: false,
-            },
-            shoes: {
-                title: 'Shoes',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.casualShoes,
-                locked: false,
-            },
-            formalShoes: {
-                title: 'Formal Shoes',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.formalShoes,
-                locked: false,
-            },
-            casualShoes: {
-                title: 'Casual Shoes',
-                show: false,
-                all: [],
-                current: null,
-                icon: Icons.casualShoes,
-                locked: false,
-            },
-        }
-        
-        this.props.isUserPaid(paid => {
-            if (paid) this.setState({ items: paidItems });
-        });
-    }
+	setTypes = () => {
+		const paidItems = {
+			top: {
+				title: 'All Tops',
+				show: false,
+				all: [],
+				current: null,
+				icon: Icons.top,
+				locked: false
+			},
+			bottom: {
+				title: 'All Bottoms',
+				show: false,
+				all: [],
+				current: null,
+				icon: Icons.bottom,
+				locked: false
+			},
+			shoes: {
+				title: 'All Shoes',
+				show: false,
+				all: [],
+				current: null,
+				icon: Icons.casualShoes,
+				locked: false
+			},
+			shirt: {
+				title: 'Shirt',
+				show: false,
+				all: [],
+				current: null,
+				icon: Icons.shirt,
+				locked: false
+			},
+			sweater: {
+				title: 'Sweater',
+				show: false,
+				all: [],
+				current: null,
+				icon: Icons.sweater,
+				locked: false
+			},
+			jacket: {
+				title: 'Jacket',
+				show: false,
+				all: [],
+				current: null,
+				icon: Icons.jacket,
+				locked: false
+			},
+			dress: {
+				title: 'Dress',
+				show: false,
+				all: [],
+				current: null,
+				icon: Icons.dress,
+				locked: false
+			},
+			pants: {
+				title: 'Pants',
+				show: false,
+				all: [],
+				current: null,
+				icon: Icons.pants,
+				locked: false
+			},
+			shorts: {
+				title: 'Shorts',
+				show: false,
+				all: [],
+				current: null,
+				icon: Icons.shorts,
+				locked: false
+			},
+			skirt: {
+				title: 'Skirt',
+				show: false,
+				all: [],
+				current: null,
+				icon: Icons.skirt,
+				locked: false
+			},
+			leggings: {
+				title: 'Leggings',
+				show: false,
+				all: [],
+				current: null,
+				icon: Icons.leggings,
+				locked: false
+			},
+			formalShoes: {
+				title: 'Formal Shoes',
+				show: false,
+				all: [],
+				current: null,
+				icon: Icons.formalShoes,
+				locked: false
+			},
+			casualShoes: {
+				title: 'Casual Shoes',
+				show: false,
+				all: [],
+				current: null,
+				icon: Icons.casualShoes,
+				locked: false
+			}
+		};
 
-    componentDidMount() {
-        const hash = queryString.parse(this.props.location.hash);
-        if(hash.token) {
-            localStorage.setItem('authToken', `Bearer ${hash.token}`);
-            this.setAuthToken();
-            this.setTypes();
-        }
-        const user = this.props.getUserID();
+		this.props.isUserPaid((paid) => {
+			if (paid) this.setState({ items: paidItems });
+		});
+	};
 
-        if (user) {
-            axios.all([
-                axios.get(`${ROOT_URL.API}/items/type/${user}/top`),
-                axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`),
-                axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/shirt`),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/sweater`),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/jacket`),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/dress`),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/pants`),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/shorts`),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/skirt`),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/leggings`),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/formalShoes`),
-                axios.get(`${ROOT_URL.API}/items/subtype/${user}/casualShoes`),
-            ])
-                .then(res => {
-                    const items = { ...this.state.items };
+	componentDidMount() {
+		const hash = queryString.parse(this.props.location.hash);
+		if (hash.token) {
+			localStorage.setItem('authToken', `Bearer ${hash.token}`);
+			this.setAuthToken();
+			this.setTypes();
+		}
+		const user = this.props.getUserID();
 
-                    Object.keys(items).forEach((item, idx) => {
-                        items[item].all = res[idx].data;
-                    });
+		if (user) {
+			axios
+				.all([
+					axios.get(`${ROOT_URL.API}/items/type/${user}/top`),
+					axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`),
+					axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/shirt`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/sweater`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/jacket`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/dress`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/pants`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/shorts`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/skirt`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/leggings`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/formalShoes`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/casualShoes`)
+				])
+				.then((res) => {
+					const items = { ...this.state.items };
 
-                    this.setState({ items });
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-        } else {
-            this.props.history.push('/');
-        }
-    }
+					Object.keys(items).forEach((item, idx) => {
+						items[item].all = res[idx].data;
+					});
 
-    activateCategory = (category) => {
-        const typesInCloset = this.getTypesInCloset();
-        const items = { ...this.state.items };
+					this.setState({ items });
+				})
+				.catch((err) => err);
+		} else {
+			this.props.history.push('/');
+		}
+	}
 
+	activateCategory = (category) => {
+		const typesInCloset = this.getTypesInCloset();
+		const items = { ...this.state.items };
 
-        // Swap show value of clicked element
-        items[category].show = !items[category].show;
+		// Swap show value of clicked element
+		items[category].show = !items[category].show;
 
-        // Special cases after default click?
-        const { subtypeMap } = this.state;
+		// Special cases after default click?
+		const { subtypeMap } = this.state;
 
-        const mainTypes = Object.keys(subtypeMap);
-        const shoeTypes = ['shoes', ...subtypeMap.shoes];
+		const mainTypes = Object.keys(subtypeMap);
+		const shoeTypes = [ 'shoes', ...subtypeMap.shoes ];
 
-        // Allow only one shoe type to be active
-        if (shoeTypes.includes(category)) {
-            shoeTypes.forEach(type => {
-                if (category != type) {
-                    if (items[type]) items[type].show = false;
-                }
-            })
-        } 
-        // If category is of mainType then toggle off all subtypes
-        if (mainTypes.includes(category)) {
-            subtypeMap[category].forEach(subtype => {
-                if(items[subtype] && typesInCloset.includes(subtype)) 
-                    items[subtype].show = items[category].show;
-            });
-        // Otherwise toggle off main of subtype
-        } else {
-            Object.entries(subtypeMap).forEach(pair => {
-                if (pair[1].includes(category)) {
-                  items[pair[0]].show = false;
-                }
-            });
-        }
+		// Allow only one shoe type to be active
+		if (shoeTypes.includes(category)) {
+			shoeTypes.forEach((type) => {
+				if (category !== type) {
+					if (items[type]) items[type].show = false;
+				}
+			});
+		}
+		// If category is of mainType then toggle off all subtypes
+		if (mainTypes.includes(category)) {
+			subtypeMap[category].forEach((subtype) => {
+				if (items[subtype] && typesInCloset.includes(subtype)) items[subtype].show = items[category].show;
+			});
+			// Otherwise toggle off main of subtype
+		} else {
+			Object.entries(subtypeMap).forEach((pair) => {
+				if (pair[1].includes(category)) {
+					items[pair[0]].show = false;
+				}
+			});
+		}
 
-        this.setState({items})
-    }
+		this.setState({ items });
+	};
 
-    getSelected = () => {
-        let selected = Object.keys(this.state.items).filter(type => this.state.items[type].show === true);
-        
-        Object.entries(this.state.subtypeMap).forEach(pair => {
-            const mainType = pair[0];
-            const subTypes = pair[1];
+	getSelected = () => {
+		let selected = Object.keys(this.state.items).filter((type) => this.state.items[type].show === true);
 
-            if (selected.includes(mainType)) {
-                selected = selected.filter(item => !subTypes.includes(item));
-            }
-        });
+		Object.entries(this.state.subtypeMap).forEach((pair) => {
+			const mainType = pair[0];
+			const subTypes = pair[1];
 
-        return selected;
-    }
+			if (selected.includes(mainType)) {
+				selected = selected.filter((item) => !subTypes.includes(item));
+			}
+		});
 
-    toggleLocked = (type) => {
-        const items = { ...this.state.items };
-        items[type].locked = !items[type].locked;
-        this.setState(items); 
-    }
+		return selected;
+	};
 
-    // method to retrieve random items of all types
-    randomize = () => {
-        const items = this.state.items;
-        const selected = this.getSelected();
+	toggleLocked = (type) => {
+		const items = { ...this.state.items };
+		items[type].locked = !items[type].locked;
+		this.setState(items);
+	};
 
-        selected.forEach(type => {
-            if (!items[type].locked)
-              items[type].current = items[type].all[Math.floor(Math.random() * items[type].all.length)];
-        });
+	// method to retrieve random items of all types
+	randomize = () => {
+		const items = this.state.items;
+		const selected = this.getSelected();
 
-        this.setState({ items });
-    }
+		selected.forEach((type) => {
+			if (!items[type].locked)
+				items[type].current = items[type].all[Math.floor(Math.random() * items[type].all.length)];
+		});
 
-    // method to retrieve a single random item
-    randomizeSingle = (e) => {
-        const items = this.state.items;
-        const type = e.target.parentNode.id;
-        
-        if (!items[type].locked)
-          items[type].current = items[type].all[Math.floor(Math.random() * items[type].all.length)];
+		this.setState({ items });
+	};
 
-        this.setState({ items });
-    }
+	// method to retrieve a single random item
+	randomizeSingle = (e) => {
+		const items = this.state.items;
+		const type = e.target.parentNode.id;
 
-    handleInputChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
-    }
+		if (!items[type].locked)
+			items[type].current = items[type].all[Math.floor(Math.random() * items[type].all.length)];
 
-    // method handle creating an outfit
-    handleCreateOutfit = () => {
-        const items = this.state.items;
-        const selected = this.getSelected();
-        const groups = { top: [], bottom: [], shoes: null };
-        const { subtypeMap } = this.state;
+		this.setState({ items });
+	};
 
-        selected.forEach(type => {
-              if (type.toLowerCase().includes('shoe')) {
-                  groups.shoes = items[type].current;
-              } else {
-                  Object.entries(subtypeMap).forEach(pair => {
-                      const mainType = pair[0];
-                      const subTypes = pair[1];
-    
-                      if (mainType === type || subTypes.includes(type)) {
-                          groups[mainType].push(items[type].current);
-                      }
-                  });
-              }
-        });
+	handleInputChange = (e) => {
+		this.setState({ [e.target.name]: e.target.value });
+	};
 
-        const user = this.props.getUserID();
-        const { name, worn, tags } = this.state;
-        const { top, bottom, shoes } = groups;
-        const outfit = { user, name, worn, tags, top, bottom, shoes };
+	// method handle creating an outfit
+	handleCreateOutfit = () => {
+		const items = this.state.items;
+		const selected = this.getSelected();
+		const groups = { top: [], bottom: [], shoes: null };
+		const { subtypeMap } = this.state;
 
-        axios.post(`${ROOT_URL.API}/outfits`, outfit)
-            .then(res => {
-                this.props.history.push(`/Edit/${res.data._id}`)
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    };
+		selected.forEach((type) => {
+			if (type.toLowerCase().includes('shoe')) {
+				groups.shoes = items[type].current;
+			} else {
+				Object.entries(subtypeMap).forEach((pair) => {
+					const mainType = pair[0];
+					const subTypes = pair[1];
 
-    getTypesInCloset = () => { 
-        return Object.keys(this.state.items).filter(type => {
-            return this.state.items[type].all.length > 0;
-        });
-    }
+					if (mainType === type || subTypes.includes(type)) {
+						groups[mainType].push(items[type].current);
+					}
+				});
+			}
+		});
 
-    render() {
-      console.log('Render');
-      // this.setTypes();
-      // this.setAuthToken();
-        const typesInCloset = this.getTypesInCloset();
-        const selected = this.getSelected();
+		const user = this.props.getUserID();
+		const { name, worn, tags } = this.state;
+		const { top, bottom, shoes } = groups;
+		const outfit = { user, name, worn, tags, top, bottom, shoes };
 
-        return (
-            <div className="createContainer">
-                <div className="layerSelect">
-                    {typesInCloset.map(type => (
-                        <button
-                            className={this.state.items[type].show ? "create-button--active" : "create-button"}
-                            onClick={() => { this.activateCategory(type) }}
-                            key={type} > {this.state.items[type].title} 
-                        </button>
-                    ))}
-                </div>
-                <CardDeck>
-                    {selected.map(type => {
-                        return(<CreateCard key={type} 
-                            item={this.state.items[type]} 
-                            randomizeSingle={this.randomizeSingle}
-                            locked={this.state.items[type].locked}
-                            toggleLocked={this.toggleLocked}
-                            type={type} />)
-                    })}
-                </CardDeck>
-                <div className="outfitPickerContainer">
-                    <Input type="text" name="name" placeholder="Outfit Nickname" onChange={this.handleInputChange} value={this.state.name} className="outfitInput" />
-                    <div className="outfitPickerDecision">
-                        <Button className="button" onClick={this.handleCreateOutfit}>Save</Button>
-                        <Button className="button" onClick={this.randomize}>Randomize</Button>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-};
+		axios
+			.post(`${ROOT_URL.API}/outfits`, outfit)
+			.then((res) => {this.props.history.push(`/edit/${res.data._id}`)})
+			.catch((err) => err);
+	};
+
+	getTypesInCloset = () => {
+		return Object.keys(this.state.items).filter((type) => {
+			return this.state.items[type].all.length > 0;
+		});
+	};
+
+	render() {
+		const typesInCloset = this.getTypesInCloset();
+		const selected = this.getSelected();
+
+		return (
+			<div className="createContainer">
+				<div className="layerSelect">
+					{typesInCloset.map((type) => (
+						<button
+							className={this.state.items[type].show ? 'create-button--active' : 'create-button'}
+							onClick={() => {
+								this.activateCategory(type);
+							}}
+							key={type}
+						>
+							{' '}
+							{this.state.items[type].title}
+						</button>
+					))}
+				</div>
+				<CardDeck>
+					{selected.map((type) => {
+						return (
+							<CreateCard
+								key={type}
+								item={this.state.items[type]}
+								randomizeSingle={this.randomizeSingle}
+								locked={this.state.items[type].locked}
+								toggleLocked={this.toggleLocked}
+								type={type}
+							/>
+						);
+					})}
+				</CardDeck>
+				<div className="outfitPickerContainer">
+					<Input
+						type="text"
+						name="name"
+						placeholder="Outfit Nickname"
+						onChange={this.handleInputChange}
+						value={this.state.name}
+						className="outfitInput"
+					/>
+					<div className="outfitPickerDecision">
+						<Button className="button" onClick={this.handleCreateOutfit}>
+							Save
+						</Button>
+						<Button className="button" onClick={this.randomize}>
+							Randomize
+						</Button>
+					</div>
+				</div>
+			</div>
+		);
+	}
+}
 
 export default CreateOutfit;
