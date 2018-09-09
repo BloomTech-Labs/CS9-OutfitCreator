@@ -61,9 +61,7 @@ exports.signup = (req, res) => {
                 <br/>
                 Have a pleasant day.`;
 					const text = `Please click here to verify your email: ${url}`;
-					sendEmail(email, subject, html, text)
-						.then()
-						.catch((err) => next(err));
+					sendEmail(email, subject, html, text).then().catch((err) => next(err));
 
 					const token = makeToken(user);
 					res.status(201).json({ token });

@@ -15,11 +15,11 @@ class Archive extends React.Component {
 		};
 	}
 
-    componentDidMount() {
-        //allows for new data to be accessed in case of a redirect from an axios request
-        //ensures the data shown isnt an old one before a request finished processing
-        setTimeout(this.getOutfits, 50);
-    }
+	componentDidMount() {
+		//allows for new data to be accessed in case of a redirect from an axios request
+		//ensures the data shown isnt an old one before a request finished processing
+		setTimeout(this.getOutfits, 50);
+	}
 
 	getOutfits = () => {
 		const user = this.props.getUserID();
@@ -39,8 +39,8 @@ class Archive extends React.Component {
 
 	filter = () => {
 		const { search, myOutfits, searching, searchedOutfits } = this.state;
-    const searchWords = search.trim().toLowerCase().split(' ');
-    
+		const searchWords = search.trim().toLowerCase().split(' ');
+
 		// Filters from the outfit list based on context in search bar, by name and tag
 		// i.e. if the name of outfit A was used as a tag in outfit B, both will show
 		const myFilter = (outfit) => {
@@ -72,63 +72,60 @@ class Archive extends React.Component {
 		this.setState({ [event.target.name]: event.target.value });
 	};
 
-    handleInputChange = event => {
-        this.setState({ [event.target.name]: event.target.value });
-    }
+	handleInputChange = (event) => {
+		this.setState({ [event.target.name]: event.target.value });
+	};
 
-    render() {
-        return (
-            <div className='container-archive'>
-                <div className='archive--search'>
-                    <input
-                        type='search'
-                        name='search'
-                        placeholder='search'
-                        className='search--input'
-                        value={this.state.search}
-                        onChange={this.handleInputChange}
-                        onKeyUp={this.filter}
-                    />
-                </div>
-                {/* ternary to check if outfits loaded correctly*/}
-                {this.state.myOutfits ?
-                    // ternary to check if filter is being run or not
-                    (this.state.searching ? (
-                        <div className='archive--collection'>
-                            {this.state.searchedOutfits.map((outfit) => (
-                                <OutfitCard
-                                    key={outfit._id}
-                                    outfitId={outfit._id}
-                                    name={outfit.name}
-                                    src={[...outfit.top, ...outfit.bottom, outfit.shoes]}
-                                    worn={outfit.worn}
-                                />
-                            ))}
-                        </div>
-                    ) : (
-                            <div className='archive--collection'>
-                                {this.state.myOutfits.map((outfit) => (
-                                    <div key={outfit._id}>
-                                        <OutfitCard
-                                            key={outfit._id}
-                                            outfitId={outfit._id}
-                                            name={outfit.name}
-                                            src={[...outfit.top, ...outfit.bottom, outfit.shoes]}
-                                            worn={outfit.worn}
-                                        />
-                                    </div>
-                                ))}
-                            </div>
-                        ))
-                    // end of the inner ternary for the filter check
-                    :
-                    <div className='archive--collection'>
-                        Error Loading Collection
-                    </div>
-                } {/* end of the outer ternary to check if outfits loaded correctly */}
-            </div>
-        );
-    }
+	render() {
+		return (
+			<div className="container--archive">
+				<div className="archive--search">
+					<input
+						type="search"
+						name="search"
+						placeholder="search"
+						className="search--input"
+						value={this.state.search}
+						onChange={this.handleInputChange}
+						onKeyUp={this.filter}
+					/>
+				</div>
+				{/* ternary to check if outfits loaded correctly*/}
+				{this.state.myOutfits ? // ternary to check if filter is being run or not
+				this.state.searching ? (
+					<div className="archive--collection">
+						{this.state.searchedOutfits.map((outfit) => (
+							<OutfitCard
+								key={outfit._id}
+								outfitId={outfit._id}
+								name={outfit.name}
+								src={[ ...outfit.top, ...outfit.bottom, outfit.shoes ]}
+								worn={outfit.worn}
+							/>
+						))}
+					</div>
+				) : (
+					<div className="archive--collection">
+						{this.state.myOutfits.map((outfit) => (
+							<div key={outfit._id}>
+								<OutfitCard
+									key={outfit._id}
+									outfitId={outfit._id}
+									name={outfit.name}
+									src={[ ...outfit.top, ...outfit.bottom, outfit.shoes ]}
+									worn={outfit.worn}
+								/>
+							</div>
+						))}
+					</div>
+				) : (
+					// end of the inner ternary for the filter check
+					<div className="archive--collection">Error Loading Collection</div>
+				)}{' '}
+				{/* end of the outer ternary to check if outfits loaded correctly */}
+			</div>
+		);
+	}
 }
 
 export default Archive;

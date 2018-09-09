@@ -178,16 +178,16 @@ class Closet extends React.Component {
 
 		return (
 			<div className="closet">
-				<div className="closet-menu">
+				<div>
 					<button
-						className={this.state.selectAll ? 'closet-button--active' : 'closet-button'}
+						className={this.state.selectAll ? 'closet--button-active' : 'closet--button'}
 						onClick={this.toggleAll}
 					>
 						All
 					</button>
 					{typesInCloset.map((type) => (
 						<button
-							className={this.state.items[type].show ? 'closet-button--active' : 'closet-button'}
+							className={this.state.items[type].show ? 'closet--button-active' : 'closet--button'}
 							onClick={() => {
 								this.activateCategory(type);
 							}}
@@ -197,7 +197,7 @@ class Closet extends React.Component {
 						</button>
 					))}
 				</div>
-				<div className="closet-cards">
+				<div className="closet--cards">
 					{this.state.selectAll ? (
 						allItems.map((item) => <ClosetCard submit={this.submit} item={item} key={item._id} />)
 					) : (

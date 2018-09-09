@@ -364,11 +364,11 @@ class CreateOutfit extends Component {
 		const selected = this.getSelected();
 
 		return (
-			<div className="createContainer">
-				<div className="layerSelect">
+			<div className="create--container">
+				<div className="create--selection">
 					{typesInCloset.map((type) => (
 						<button
-							className={this.state.items[type].show ? 'create-button--active' : 'create-button'}
+							className={this.state.items[type].show ? 'create--button-active' : 'create--button'}
 							onClick={() => {
 								this.activateCategory(type);
 							}}
@@ -392,16 +392,16 @@ class CreateOutfit extends Component {
 						);
 					})}
 				</CardDeck>
-				<div className="outfitPickerContainer">
+				<div className="outfit--container">
 					<Input
 						type="text"
 						name="name"
 						placeholder="Outfit Nickname"
 						onChange={this.handleInputChange}
 						value={this.state.name}
-						className="outfitInput"
+						className="outfit--input"
 					/>
-					<div className="outfitPickerDecision">
+					<div className="outfit--decision">
 						<Button className="button" onClick={this.handleCreateOutfit}>
 							Save
 						</Button>

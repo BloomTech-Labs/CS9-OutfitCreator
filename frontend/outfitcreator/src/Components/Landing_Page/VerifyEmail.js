@@ -23,7 +23,7 @@ class VerifyEmail extends Component {
 	notifyVerificationTokenExpired = () => toast('Token is expired. Please request a new one.');
 
 	componentDidMount() {
-    const key = this.props.match.params.key;
+		const key = this.props.match.params.key;
 		axios
 			.post(`${ROOT_URL.API}/auth/verify`, { key })
 			.then(() => {

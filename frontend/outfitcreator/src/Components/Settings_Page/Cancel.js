@@ -24,12 +24,19 @@ class Cancel extends React.Component {
 			.catch((err) => err);
 	};
 	render() {
-		if (this.state.canceled) return <div className="billing--cancel">Canceled Successfully. <p>We're sorry to see you go!</p></div>;
+		if (this.state.canceled)
+			return (
+				<div className="billing--cancel">
+					Canceled Successfully. <p>We're sorry to see you go!</p>
+				</div>
+			);
 		return (
 			<div className="billing--cancel">
-                If you wish to cancel your subscription, please click below:<br/>
-                <button className="button" onClick={this.cancel}>Cancel My Subscription</button>
-            </div>
+				If you wish to cancel your subscription, please click below:<br />
+				<button className="button" onClick={this.cancel}>
+					Cancel My Subscription
+				</button>
+			</div>
 		);
 	}
 }

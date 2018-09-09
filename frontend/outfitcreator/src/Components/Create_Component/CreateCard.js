@@ -13,15 +13,15 @@ class CreateCard extends React.Component {
 					<CardImg
 						width="80%"
 						src={newURL || this.props.item.icon}
-						alt="Card image cap"
-						className="cardImage"
+						alt="Create Card Clothing Item"
+						className="create-card--image"
 					/>
-					<CardImgOverlay className={this.props.locked ? 'locked-border' : null}>
-						<div className="card-lock" onClick={() => this.props.toggleLocked(this.props.type)}>
-							<img className="lock-icon" src={this.props.locked ? Icons.locked : Icons.unlocked} />
+					<CardImgOverlay className={this.props.locked ? 'locked--border' : null}>
+						<div className="create-card--lock" onClick={() => this.props.toggleLocked(this.props.type)}>
+							<img className="lock--icon" src={this.props.locked ? Icons.locked : Icons.unlocked} />
 						</div>
-						<div id={this.props.type} className="card-refresh" onClick={this.props.randomizeSingle}>
-							<img className="refresh-icon" src={Icons.refresh} />
+						<div id={this.props.type} className="create-card--refresh" onClick={this.props.randomizeSingle}>
+							<img className="refresh--icon" src={Icons.refresh} />
 						</div>
 					</CardImgOverlay>
 				</Card>
