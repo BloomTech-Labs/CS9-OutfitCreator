@@ -1,8 +1,16 @@
-const router = require("express").Router();
+const router = require('express').Router();
 
-const { authenticate, googleAuthenticate, googleRedirectAuthenticate, facebookAuthenticate, facebookRedirectAuthenticate, githubAuthenticate, githubRedirectAuthenticate, signToken } = require("../config/passport-setup");
-const users = require("../controllers/users");
-
+const {
+	authenticate,
+	googleAuthenticate,
+	googleRedirectAuthenticate,
+	facebookAuthenticate,
+	facebookRedirectAuthenticate,
+	githubAuthenticate,
+	githubRedirectAuthenticate,
+	signToken
+} = require('../config/passport-setup');
+const users = require('../controllers/users');
 
 router.post('/signup', users.signup);
 router.post('/login', authenticate, users.login);

@@ -102,6 +102,6 @@ class VerifyEmail extends Component {
             </div>
         )
     }
-} 
+}
 
 export default VerifyEmail;
