@@ -157,11 +157,11 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Authors
 
-* **Devon Bacon**
-* **Ellen Nitchals** 
-* **Julian Alexander Pineyro** 
-* **Justin Mathew** 
-* **Nedu Robert** 
+* **[Devon Bacon](https://github.com/metalogicoder)**
+* **[Ellen Nitchals](https://github.com/enitchals)** 
+* **[Julian Alexander Pineyro](https://github.com/Julian-Alexander)** 
+* **[Justin Mathew](https://github.com/jekm321)** 
+* **[Nedu Robert](https://github.com/Nedu)** 
 
 ## License
 
