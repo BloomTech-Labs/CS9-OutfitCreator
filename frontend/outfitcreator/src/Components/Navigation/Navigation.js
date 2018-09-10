@@ -124,17 +124,17 @@ class Navigation extends Component {
 				<div className="navigation--current-page nav--active">{this.currentPageName()}</div>
 				<Nav className="navigation--pages">
 					<Collapse isOpen={!this.state.collapsed}>
-						<NavLink href="/create">
-							<button id="create" className="nav--item nav--active">New Outfit</button>
-						</NavLink>
 						<NavLink href="/upload">
 							<button id="upload" className="nav--item">Add Item</button>
 						</NavLink>
 						<NavLink href="/closet">
 							<button id="closet" className="nav--item">My Closet</button>
 						</NavLink>
+						<NavLink href="/create">
+							<button id="create" className="nav--item nav--active">New Outfit</button>
+						</NavLink>
 						<NavLink href="/archive">
-							<button id="archive" className="nav--item">Archive</button>
+							<button id="archive" className="nav--item">Outfit Archive</button>
 						</NavLink>
 					</Collapse>
 				</Nav>
@@ -151,17 +151,17 @@ class Navigation extends Component {
 			<div className="navigation--container">
 				<div className="navigation--site-title">Closet Roulette</div>
 				<Nav className="navigation--pages">
-					<NavLink href="/create">
-						<button id="create" className="nav--item">New Outfit</button>
-					</NavLink>
 					<NavLink href="/upload">
 						<button id="upload" className="nav--item">Add Item</button>
 					</NavLink>
 					<NavLink href="/closet">
 						<button id="closet" className="nav--item">My Closet</button>
 					</NavLink>
+					<NavLink href="/create">
+						<button id="create" className="nav--item">New Outfit</button>
+					</NavLink>
 					<NavLink href="/archive">
-						<button id="archive" className="nav--item">Outfits</button>
+						<button id="archive" className="nav--item">Outfit Archive</button>
 					</NavLink>
 				</Nav>
 				<div className="navigation--user-options">
