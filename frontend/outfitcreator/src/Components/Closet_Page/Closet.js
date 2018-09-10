@@ -15,23 +15,28 @@ class Closet extends React.Component {
 					show: false,
 					all: []
 				},
+        bottom: {
+          title: 'Bottoms',
+          show: false,
+          all: []
+        },
+        shoes: {
+          title: 'Shoes',
+          show: false,
+          all: []
+        },
 				shirt: {
 					title: 'Shirts',
 					show: false,
 					all: []
 				},
 				sweater: {
-					title: 'Sweaters',
+          title: 'Sweaters',
 					show: false,
 					all: []
 				},
 				jacket: {
 					title: 'Jackets',
-					show: false,
-					all: []
-				},
-				bottom: {
-					title: 'Bottoms',
 					show: false,
 					all: []
 				},
@@ -70,11 +75,6 @@ class Closet extends React.Component {
 					show: false,
 					all: []
 				},
-				shoes: {
-					title: 'Shoes',
-					show: false,
-					all: []
-				}
 			}
 		};
 
