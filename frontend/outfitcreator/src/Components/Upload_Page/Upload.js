@@ -6,8 +6,6 @@ import { ROOT_URL } from '../../config';
 import TagInput from './TagInput';
 import uploadPlaceholder from './uploadPlaceholder.png';
 import './Upload.css';
-import { REACT_APP_CLOUD_API } from '../../config';
-require('dotenv').config();
 
 class Upload extends Component {
 	constructor(props) {
@@ -57,7 +55,6 @@ class Upload extends Component {
 			{
 				secure: true,
 				cloud_name: 'cloudtesting',
-				api_key: REACT_APP_CLOUD_API,
 				upload_preset: 'default',
 				multiple: false,
 				sources: [ 'local', 'url', 'camera', 'instagram', 'facebook' ],
