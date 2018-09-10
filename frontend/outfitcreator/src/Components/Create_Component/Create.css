@@ -1,15 +1,14 @@
 .createContainer {
-	background: white;
-	width: 80%;
-	margin: 60px 0;
-	padding: 20px;
+    width: 100%;
+    margin-top: 90px;
 }
 
 .layerSelect {
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .create-button {
@@ -23,6 +22,18 @@
 	color: white;
 	font-family: 'Arsenal', sans-serif;
 }
+
+  .create-button:hover {
+    background: var(--dark-purple);
+    border: 2px solid var(--dark-purple);
+    border-radius: 5px;
+    padding: 2px 12px 3px;
+    margin: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    font-family: 'Arsenal', sans-serif;
+  }
 
 .create-button--active {
 	background: var(--pale-purple);

@@ -12,7 +12,6 @@ import CreateOutfit from './Components/Create_Component/CreateOutfit';
 import Upload from './Components/Upload_Page/Upload';
 import Archive from './Components/Archive_Page/Archive';
 import Settings from './Components/Settings_Page/Settings';
-import Billing from './Components/Billing_Page/Billing';
 import OutfitEdit from './Components/Archive_Page/OutfitEdit';
 import Closet from './Components/Closet_Page/Closet.js';
 import VerifyEmail from './Components/Landing_Page/VerifyEmail';
