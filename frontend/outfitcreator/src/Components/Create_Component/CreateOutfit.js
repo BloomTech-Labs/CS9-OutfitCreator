@@ -16,32 +16,7 @@ class CreateOutfit extends Component {
 			name: '',
 			worn: [],
 			tags: [],
-			items: {
-				top: {
-					title: 'Tops',
-					show: true,
-					all: [],
-					current: null,
-					icon: Icons.top,
-					locked: false
-				},
-				bottom: {
-					title: 'Bottoms',
-					show: true,
-					all: [],
-					current: null,
-					icon: Icons.bottom,
-					locked: false
-				},
-				shoes: {
-					title: 'Shoes',
-					show: true,
-					all: [],
-					current: null,
-					icon: Icons.casualShoes,
-					locked: false
-				}
-			},
+			items: {},
 			subtypeMap: {
 				top: [ 'sweater', 'shirt', 'jacket', 'dress' ],
 				bottom: [ 'pants', 'shorts', 'leggings', 'skirt' ],
@@ -53,8 +28,8 @@ class CreateOutfit extends Component {
 		if (hash.token) {
       localStorage.setItem('authToken', `Bearer ${hash.token}`);
       this.setAuthToken();
-      this.setTypes();
     }
+    this.setTypes();
 	}
 
 	setAuthToken = () => {
@@ -67,6 +42,33 @@ class CreateOutfit extends Component {
 	};
 
 	setTypes = () => {
+    const basicItems = {
+      top: {
+        title: 'Tops',
+        show: true,
+        all: [],
+        current: null,
+        icon: Icons.top,
+        locked: false
+      },
+      bottom: {
+        title: 'Bottoms',
+        show: true,
+        all: [],
+        current: null,
+        icon: Icons.bottom,
+        locked: false
+      },
+      shoes: {
+        title: 'Shoes',
+        show: true,
+        all: [],
+        current: null,
+        icon: Icons.casualShoes,
+        locked: false
+      }
+    };
+
 		const paidItems = {
 			top: {
 				title: 'All Tops',
@@ -175,13 +177,14 @@ class CreateOutfit extends Component {
 		};
 
 		this.props.isUserPaid((paid) => {
-			if (paid) this.setState({ items: paidItems });
+      if (paid) this.setState({ items: paidItems });
+      else this.setState({ items: basicItems });
 		});
 	};
 
 	componentDidMount() {
     const user = this.props.getUserID();
-    this.setTypes();
+    
 
 		if (user) {
 			axios
