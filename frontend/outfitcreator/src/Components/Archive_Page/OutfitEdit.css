@@ -1,11 +1,7 @@
-* {
-	box-sizing: border-box;
-}
-
 .container--editbox {
-  align-self: center;
-	width: 50%;
-	margin-top: 15px;
+	align-self: center;
+	min-width: 75vw;
+	margin-top: 1px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -34,24 +30,24 @@
 }
 
 .container--edit {
-    display: flex;
-    flex-direction: column;
-    left: 50px;
-    margin-top: 90px;
-    margin-left: 1em;
-    overflow-x: hidden;
+	display: flex;
+	flex-direction: column;
+	margin-top: 50px;
+	overflow-x: hidden;
 }
 
 .image--container {
-	display: flex;
+  display: flex;
+  flex-flow: wrap;
 	justify-content: space-evenly;
-	margin-top: 75px;
-	min-width: 75vw;
+	margin: 50px 15px;
+	width: 80vw;
 }
 
 .edit--card-image {
 	max-width: 25vw;
 	max-height: 40vh;
+	min-width: 300px;
 	margin: 0 5px;
 	padding: 5px;
 }
@@ -65,7 +61,7 @@
 .edit--fields {
 	display: flex;
 	justify-content: space-between;
-	padding-top: 15px;
+	padding: 15px 0;
 }
 
 .header--edit {
@@ -111,7 +107,7 @@
 	max-width: 225px;
 	margin: 10px;
 	padding: 5px;
-	transition: .5s;
+	transition: .2s;
 	z-index: 1000;
 }
 
@@ -133,7 +129,7 @@
 	border-radius: 5px;
 	box-shadow: 1px 1px 0 0 black;
 	display: flex;
-	margin: 5px 0px 0px 0px;
+	margin: 5px 5px 0px;
 	padding: 5px;
 	font-size: 15px;
 	width: 120px;
@@ -145,34 +141,28 @@
 }
 
 .outfit-date-block {
-    position: absolute;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 50px 0 10px;
-    width: 28vw;
-    /* left: 100px; */
+	position: absolute;
+	display: flex;
+	flex-wrap: wrap;
+	margin: 50px 0 10px;
+	width: 28vw;
 }
 
 .button:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 @media (max-width: 1100px) {
-    .image--container {
-        flex-direction: column;
-    }
+	.image--container {
+		flex-direction: column;
+	}
 
-    .container--edit {
-        max-height: 100%;
-    }
+	.container--edit {
+		max-height: 100%;
+	}
 
-    .modal--backdrop {
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-
-    /* .container--archive-edit{
-        width: 100vw;
-        height: 100vh;
-    } */
+	.modal--backdrop {
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
 }

@@ -14,11 +14,11 @@ class OutfitEdit extends React.Component {
 			name: '',
 			newDate: undefined,
 			worn: [],
-			top: '',
+			top: [],
 			topTags: [],
-			bottom: '',
+			bottom: [],
 			bottomTags: [],
-			shoes: '',
+			shoes: [],
 			shoesTags: [],
 			oldID: '',
 			tags: [],
@@ -53,7 +53,22 @@ class OutfitEdit extends React.Component {
 				if (lastWorn) {
 					lastWorn = lastWorn.split('T')[0];
 				}
-				this.setState({ outfit: data, name: data.name, worn: data.worn, lastWorn, user, outfitID });
+
+				this.setState(
+					{
+						outfit: data,
+						name: data.name,
+						worn: data.worn,
+						lastWorn,
+						user,
+						outfitID
+					},
+					() => {
+						const { top, bottom, shoes } = this.state.outfit;
+						const items = [ ...top, ...bottom, shoes ];
+						items.forEach((id) => this.populate(id));
+					}
+				);
 			})
 			.catch((err) => err);
 	};
@@ -64,8 +79,11 @@ class OutfitEdit extends React.Component {
 		axios
 			.get(`${ROOT_URL.API}/items/${user}/${id}`)
 			.then((response) => {
+				const stateData = this.state[response.data.type];
+				stateData.push(response.data);
+
 				this.setState({
-					[response.data.type]: response.data,
+					[response.data.type]: stateData,
 					[response.data.type + 'Tags']: response.data.tags
 				});
 			})
@@ -102,15 +120,14 @@ class OutfitEdit extends React.Component {
 		const outfitID = this.props.location.pathname.split('Edit/')[1];
 		const tags = [ ...topTags, ...bottomTags, ...shoesTags ];
 		const newInfo = { name, worn, tags, top, bottom, shoes };
-		axios
-			.put(`${ROOT_URL.API}/outfits/${user}/${outfitID}`, newInfo)
-			.then(() => this.redirectArchive())
-			.catch((err) => err);
+		axios.put(`${ROOT_URL.API}/outfits/${user}/${outfitID}`, newInfo).then().catch((err) => err);
+		this.redirectArchive();
 	};
 
 	deleteOutfit = () => {
 		const { outfitID } = this.state;
-		axios.delete(`${ROOT_URL.API}/outfits/${outfitID}`).then(() => this.redirectArchive()).catch((err) => err);
+		axios.delete(`${ROOT_URL.API}/outfits/${outfitID}`).then().catch((err) => err);
+		this.redirectArchive();
 	};
 
 	getItems = (type, id) => {
@@ -147,22 +164,16 @@ class OutfitEdit extends React.Component {
 
 	render() {
 		const { outfit, top, bottom, shoes, editItem, itemSelection } = this.state;
-		const sources = [];
-		if (outfit) {
-			sources.push(...outfit.top, ...outfit.bottom, outfit.shoes);
-		}
-		if (!top || !bottom || !shoes) {
-			sources.forEach((id) => this.populate(id));
-		}
-		const items = [ top, bottom, shoes ];
+		const items = [ ...top, ...bottom, ...shoes ];
+
 		return (
-			<div>
+			<div className="container--archive-edit">
 				{/* ternary to check if modal is toggled or not*/}
 				{/* this will be the darkened background*/}
 				{editItem ? <div className="modal--backdrop" onClick={this.toggle} /> : null}
-        {/* ternary to check if modal is toggled or not this 
-          one will hold the content for screen, either the new 
-          options or the current outfit that is being editted */}
+				{/* ternary to check if modal is toggled or not
+          this one will hold the content for screen, either the 
+          new options or the current outfit that is being editted */}
 				{editItem ? (
 					<div onClick={this.toggle}>
 						{/*this will map out hte possible items to be selected to replace the selected one*/}
@@ -179,7 +190,7 @@ class OutfitEdit extends React.Component {
 												key={item._id}
 												src={newUrl}
 												onClick={() => this.selectItem(item.type, item._id)}
-												alt="Clothing Item"
+												alt="Outfit Card Clothing Item"
 											/>
 										</div>
 									);
@@ -202,7 +213,7 @@ class OutfitEdit extends React.Component {
 													className="edit--card-image"
 													src={item.image}
 													onClick={() => this.getItems(item.type, item._id)}
-													alt="Clothing Item"
+													alt="Outfit Card Clothing Item"
 												/>
 											</div>
 										);
@@ -210,7 +221,7 @@ class OutfitEdit extends React.Component {
 								</div>
 								{/* here are the inputs to change the name and last worn date*/}
 								<div className="container--editbox">
-									<form>
+									<form className="container--editbox">
 										<div className="edit--button-group ">
 											<button
 												className="edit--submit edit--button button"
@@ -253,14 +264,22 @@ class OutfitEdit extends React.Component {
 														className="edit--input"
 													/>
 												</div>
-												{this.state.worn.map((date) => (
-													<div className="outfit-date" key={this.state.worn.indexOf(date)}>
-														<span className="outfit-date--delete" onClick={this.removeDate}>
-															x
-														</span>
-														<span>{date.slice(0, 10)}</span>
-													</div>
-												))}
+												<div className="outfit-date-block">
+													{this.state.worn.map((date) => (
+														<div
+															className="outfit-date"
+															key={this.state.worn.indexOf(date)}
+														>
+															<span
+																className="outfit-date--delete"
+																onClick={this.removeDate}
+															>
+																x
+															</span>
+															{date ? <span>{date.slice(0, 10)}</span> : null}
+														</div>
+													))}
+												</div>
 											</div>
 										</div>
 									</form>

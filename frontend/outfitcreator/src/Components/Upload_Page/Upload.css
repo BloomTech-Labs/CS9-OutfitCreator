@@ -1,8 +1,8 @@
 .container--upload {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    margin-top: 90px;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	margin-top: 90px;
 }
 
 .upload--columns {
@@ -14,11 +14,12 @@
 }
 
 .upload--image {
-    min-height: 200px;
-    max-height: 300px;
-    width: auto;
-    margin-bottom: 10px;
-    border-radius: 5px;
+	min-height: 200px;
+	max-height: 300px;
+  width: auto;
+  max-width: 400px;
+	margin-bottom: 10px;
+	border-radius: 5px;
 }
 
 .upload--button,

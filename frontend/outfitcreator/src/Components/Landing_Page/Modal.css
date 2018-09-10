@@ -90,3 +90,11 @@
         overflow-y: hidden;
     }
 }
+
+@media (max-width: 1100px) {
+	.modal--backdrop {
+		width: 98.5vw;
+		overflow-x: hidden;
+		overflow-y: hidden;
+	}
+}

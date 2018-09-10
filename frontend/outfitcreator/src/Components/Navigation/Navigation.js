@@ -59,7 +59,7 @@ class Navigation extends Component {
 		let name = '';
 
 		pageLinks.forEach((link) => {
-			if (link.classList.contains(activePage)) name = link.innerHTML;
+			if (link.id === activePage) name = link.innerHTML;
 		});
 
 		return name;
@@ -70,7 +70,7 @@ class Navigation extends Component {
 		const pageLinks = document.querySelectorAll('.nav--item');
 
 		pageLinks.forEach((link) => {
-			if (link.classList.contains(activePage)) {
+			if (link.id === activePage) {
 				link.classList.add('nav--active');
 			} else {
 				link.classList.remove('nav--active');
@@ -125,16 +125,16 @@ class Navigation extends Component {
 				<Nav className="navigation--pages">
 					<Collapse isOpen={!this.state.collapsed}>
 						<NavLink href="/create">
-							<button className="nav--item Create nav--active">New Outfit</button>
+							<button id="create" className="nav--item nav--active">New Outfit</button>
 						</NavLink>
 						<NavLink href="/upload">
-							<button className="nav--item Upload">Add Item</button>
+							<button id="upload" className="nav--item">Add Item</button>
 						</NavLink>
 						<NavLink href="/closet">
-							<button className="nav--item Closet">My Closet</button>
+							<button id="closet" className="nav--item">My Closet</button>
 						</NavLink>
 						<NavLink href="/archive">
-							<button className="nav--item Archive">Archive</button>
+							<button id="archive" className="nav--item">Archive</button>
 						</NavLink>
 					</Collapse>
 				</Nav>
@@ -152,16 +152,16 @@ class Navigation extends Component {
 				<div className="navigation--site-title">Closet Roulette</div>
 				<Nav className="navigation--pages">
 					<NavLink href="/create">
-						<button className="nav--item Create">New Outfit</button>
+						<button id="create" className="nav--item">New Outfit</button>
 					</NavLink>
 					<NavLink href="/upload">
-						<button className="nav--item Upload">Add Item</button>
+						<button id="upload" className="nav--item">Add Item</button>
 					</NavLink>
 					<NavLink href="/closet">
-						<button className="nav--item Closet">My Closet</button>
+						<button id="closer" className="nav--item">My Closet</button>
 					</NavLink>
 					<NavLink href="/archive">
-						<button className="nav--item Archive">Outfits</button>
+						<button id="archive" className="nav--item">Outfits</button>
 					</NavLink>
 				</Nav>
 				<div className="navigation--user-options">
