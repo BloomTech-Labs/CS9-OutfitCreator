@@ -226,7 +226,7 @@ const signToken = (req, res) => {
 		username: req.user.username
 	};
 	const options = {
-		expiresIn: '24h'
+		expiresIn: '7d'
 	};
 	jwt.sign(payload, secret, options, (err, token) => {
 		if (err) {
