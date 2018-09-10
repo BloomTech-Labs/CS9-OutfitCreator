@@ -232,7 +232,7 @@ const signToken = (req, res) => {
 		if (err) {
 			res.sendStatus(500);
 		} else {
-			res.redirect(`${ROOT_URL.WEB}/create#token=${token}`);
+			res.redirect(`${ROOT_URL.WEB}/upload#token=${token}`);
 		}
 	});
 };

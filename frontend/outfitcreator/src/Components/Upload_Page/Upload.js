@@ -5,6 +5,7 @@ import { CardImg, Button, FormGroup, Input } from 'reactstrap';
 import { ROOT_URL } from '../../config';
 import TagInput from './TagInput';
 import uploadPlaceholder from './uploadPlaceholder.png';
+import queryString from 'query-string';
 import './Upload.css';
 
 class Upload extends Component {
@@ -18,7 +19,13 @@ class Upload extends Component {
 			tags: [],
 			type: 'title',
 			options: {}
-		};
+    };
+    
+    const hash = queryString.parse(this.props.location.hash);
+		if (hash.token) {
+      localStorage.setItem('authToken', `Bearer ${hash.token}`);
+      this.setAuthToken();
+    }
 
 		props.isUserPaid((paid) => {
 			const options = paid
@@ -45,10 +52,20 @@ class Upload extends Component {
 						shoes: 'Shoes'
 					};
 			this.setState({ options });
-		});
-	}
+    });
+  }
+  
+  setAuthToken = () => {
+		const token = localStorage.getItem('authToken');
+		if (token) {
+			axios.defaults.headers.common.Authorization = token;
+		} else {
+			delete axios.defaults.headers.common.Authorization;
+		}
+	};
 
 	componentDidMount() {
+
 		const user = this.props.getUserID();
 		window.cloudinary.applyUploadWidget(
 			document.getElementById('cloudinary--uploader'),
