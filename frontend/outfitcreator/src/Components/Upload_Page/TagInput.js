@@ -7,7 +7,7 @@ class TagInput extends Component {
 	addTag = (e) => {
 		const tag = this.props.state.tag.toLowerCase();
 		if (e.key === 'Enter' && !this.props.state.tags.includes(tag)) {
-			this.props.passState({ tags: [ ...this.props.state.tags, tag ] });
+			this.props.passState({ tags: [ ...this.props.state.tags, tag ]});
 			this.props.passState({ tag: '' });
 		}
 	};
@@ -34,7 +34,7 @@ class TagInput extends Component {
 						type="text"
 						name="tags"
 						placeholder="Add a Tag..."
-						value={this.props.state.search}
+						value={this.props.state.tag}
 						onChange={this.handleInputChange}
 						onKeyPress={this.addTag}
 					/>
