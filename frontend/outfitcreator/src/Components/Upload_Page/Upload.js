@@ -4,10 +4,10 @@ import { CloudinaryContext } from 'cloudinary-react';
 import { CardImg, Button, FormGroup, Input } from 'reactstrap';
 import { ROOT_URL } from '../../config';
 import TagInput from './TagInput';
-import uploadPlacholder from './uploadPlaceholder.png';
+import uploadPlaceholder from './uploadPlaceholder.png';
 import './Upload.css';
-
-const CLOUD_API = '465735684648442';
+import { CLOUD_API } from '../../config';
+require('dotenv').config();
 
 class Upload extends Component {
 	constructor(props) {
@@ -62,7 +62,10 @@ class Upload extends Component {
 				multiple: false,
 				sources: [ 'local', 'url', 'camera', 'instagram', 'facebook' ],
 				theme: 'minimal',
-				stylesheet: '#cloudinary-overlay { background-color: rgba(0,0,0,0.7);}'
+				stylesheet: '#cloudinary-overlay { background-color: rgba(0,0,0,0.7);}',
+				cropping: 'default',
+				cropping_show_dimensions: true,
+				cropping_show_back_button: true
 			},
 			(err, result) => {
 				if (result) {
@@ -178,7 +181,7 @@ class Upload extends Component {
 					{this.state.image ? (
 						<CardImg className="upload--image" src={this.state.image} alt="Upload Image Thumbnail" />
 					) : (
-						<CardImg className="upload--image" src={uploadPlacholder} alt="Upload Image Thumbnail" />
+						<CardImg className="upload--image" src={uploadPlaceholder} alt="Upload Image Thumbnail" />
 					)}
 					<FormGroup>
 						<CloudinaryContext cloudName="cloudtesting">
