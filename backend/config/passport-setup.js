@@ -212,7 +212,7 @@ function makeToken(user) {
 		iat: timestamp
 	};
 	const options = {
-		expiresIn: '24h'
+		expiresIn: '7d'
 	};
 	return jwt.sign(payload, secret, options);
 }
