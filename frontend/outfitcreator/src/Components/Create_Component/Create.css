@@ -81,6 +81,14 @@
 	margin: 0 8px 15px;
 }
 
+.card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 700px;
+    /* max-width: 700px; */
+    /* margin: 0 auto; */
+}
+
 .createContainer .card.text-white {
 	margin: 0;
 	height: 100%;

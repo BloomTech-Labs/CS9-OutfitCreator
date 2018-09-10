@@ -15,9 +15,11 @@ class Archive extends React.Component {
 		};
 	}
 
-	componentDidMount() {
-		this.getOutfits();
-	}
+    componentDidMount() {
+        //allows for new data to be accessed in case of a redirect from an axios request
+        //ensures the data shown isnt an old one before a request finished processing
+        setTimeout(this.getOutfits, 50);
+    }
 
 	getOutfits = () => {
 		const user = this.props.getUserID();

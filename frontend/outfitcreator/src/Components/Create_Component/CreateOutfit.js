@@ -331,7 +331,7 @@ class CreateOutfit extends Component {
 
 		axios
 			.post(`${ROOT_URL.API}/outfits`, outfit)
-			.then((res) => res)
+			.then((res) => {this.props.history.push(`/edit/${res.data._id}`)})
 			.catch((err) => err);
 	};
 

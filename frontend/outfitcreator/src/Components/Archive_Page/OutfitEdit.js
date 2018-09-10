@@ -83,12 +83,15 @@ class OutfitEdit extends React.Component {
 		this.setState({ worn, lastWorn: event.target.value });
 	};
 
-	removeDate = (event) => {
-		const worn = this.state.worn.filter(
-			(date) => Date.parse(date) !== Date.parse(event.target.nextElementSibling.innerHTML)
-		);
-		this.setState({ worn });
-	};
+    removeDate = event => {
+        if (event.target.nextElementSibling) {
+            const worn = this.state.worn.filter(date => Date.parse(date) !== Date.parse(event.target.nextElementSibling.innerHTML))
+            this.setState({ worn });
+        } else {
+            const worn = this.state.worn.slice(1);
+            this.setState({ worn });
+        }
+    }
 
 	redirectArchive = () => {
 		this.props.history.push('/Archive');
@@ -97,7 +100,6 @@ class OutfitEdit extends React.Component {
 	submitChanges = () => {
 		const { user, name, worn, top, topTags, bottom, bottomTags, shoes, shoesTags } = this.state;
 		const outfitID = this.props.location.pathname.split('Edit/')[1];
-
 		const tags = [ ...topTags, ...bottomTags, ...shoesTags ];
 		const newInfo = { name, worn, tags, top, bottom, shoes };
 		axios

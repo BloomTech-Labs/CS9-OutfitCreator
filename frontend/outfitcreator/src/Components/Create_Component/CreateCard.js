@@ -6,7 +6,7 @@ import './Create.css';
 class CreateCard extends React.Component {
 	render() {
 		const URL = this.props.item.current ? this.props.item.current.image : null;
-		const newURL = URL ? URL.slice(0, 53) + 'h_120/' + URL.slice(53) : null;
+		const newURL = URL ? URL.slice(0, 53) + 'h_300' + URL.slice(53) : null;
 		return (
 			<div className="create-card">
 				<Card inverse>
