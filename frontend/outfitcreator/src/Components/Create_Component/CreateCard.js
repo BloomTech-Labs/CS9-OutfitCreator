@@ -1,9 +1,10 @@
 import React from 'react';
-import { Card, CardImg, CardImgOverlay, Button } from 'reactstrap';
+import { Card, CardImg, CardImgOverlay } from 'reactstrap';
 import { Icons } from '../Icons';
 import './Create.css';
 
 class CreateCard extends React.Component {
+<<<<<<< HEAD
     render() {
         const URL= this.props.item.current ? this.props.item.current.image : null;
         const newURL = URL ? URL.slice(0,53)+"h_300/"+URL.slice(53) : null;
@@ -28,6 +29,32 @@ class CreateCard extends React.Component {
             </div>
         )
     }
+=======
+	render() {
+		const URL = this.props.item.current ? this.props.item.current.image : null;
+		const newURL = URL ? URL.slice(0, 53) + 'h_120/' + URL.slice(53) : null;
+		return (
+			<div className="create-card">
+				<Card inverse>
+					<CardImg
+						width="80%"
+						src={newURL || this.props.item.icon}
+						alt="Card image cap"
+						className="cardImage"
+					/>
+					<CardImgOverlay className={this.props.locked ? 'locked-border' : null}>
+						<div className="card-lock" onClick={() => this.props.toggleLocked(this.props.type)}>
+							<img className="lock-icon" src={this.props.locked ? Icons.locked : Icons.unlocked} alt={'Lock Icon'} />
+						</div>
+						<div id={this.props.type} className="card-refresh" onClick={this.props.randomizeSingle}>
+							<img className="refresh-icon" src={Icons.refresh} alt={'Refresh Icon'} />
+						</div>
+					</CardImgOverlay>
+				</Card>
+			</div>
+		);
+	}
+>>>>>>> 0cd6a908d387bc40967fbba324fbb2eafa766c42
 }
 
 export default CreateCard;
