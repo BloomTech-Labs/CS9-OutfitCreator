@@ -180,7 +180,8 @@ class CreateOutfit extends Component {
 	};
 
 	componentDidMount() {
-		const user = this.props.getUserID();
+    const user = this.props.getUserID();
+    this.setTypes();
 
 		if (user) {
 			axios
