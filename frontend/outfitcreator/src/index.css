@@ -20,10 +20,10 @@ body #root {
 	padding: 0;
 }
 
-button {
-	outline: none !important;
+* {
+  box-sizing: border-box; 
 }
 
-* {
-	transition: 0.3s;
+button {
+	outline: none !important;
 }

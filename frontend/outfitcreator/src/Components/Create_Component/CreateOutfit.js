@@ -19,7 +19,7 @@ class CreateOutfit extends Component {
 			items: {
 				top: {
 					title: 'Tops',
-					show: false,
+					show: true,
 					all: [],
 					current: null,
 					icon: Icons.top,
@@ -27,7 +27,7 @@ class CreateOutfit extends Component {
 				},
 				bottom: {
 					title: 'Bottoms',
-					show: false,
+					show: true,
 					all: [],
 					current: null,
 					icon: Icons.bottom,
@@ -35,7 +35,7 @@ class CreateOutfit extends Component {
 				},
 				shoes: {
 					title: 'Shoes',
-					show: false,
+					show: true,
 					all: [],
 					current: null,
 					icon: Icons.casualShoes,
@@ -48,8 +48,13 @@ class CreateOutfit extends Component {
 				shoes: [ 'casualShoes', 'formalShoes' ]
 			}
 		};
-
-		if (localStorage.getItem('authToken')) this.setTypes();
+    
+    const hash = queryString.parse(this.props.location.hash);
+		if (hash.token) {
+      localStorage.setItem('authToken', `Bearer ${hash.token}`);
+      this.setAuthToken();
+      this.setTypes();
+    }
 	}
 
 	setAuthToken = () => {
@@ -65,7 +70,7 @@ class CreateOutfit extends Component {
 		const paidItems = {
 			top: {
 				title: 'All Tops',
-				show: false,
+				show: true,
 				all: [],
 				current: null,
 				icon: Icons.top,
@@ -73,7 +78,7 @@ class CreateOutfit extends Component {
 			},
 			bottom: {
 				title: 'All Bottoms',
-				show: false,
+				show: true,
 				all: [],
 				current: null,
 				icon: Icons.bottom,
@@ -81,7 +86,7 @@ class CreateOutfit extends Component {
 			},
 			shoes: {
 				title: 'All Shoes',
-				show: false,
+				show: true,
 				all: [],
 				current: null,
 				icon: Icons.casualShoes,
@@ -175,12 +180,6 @@ class CreateOutfit extends Component {
 	};
 
 	componentDidMount() {
-		const hash = queryString.parse(this.props.location.hash);
-		if (hash.token) {
-			localStorage.setItem('authToken', `Bearer ${hash.token}`);
-			this.setAuthToken();
-			this.setTypes();
-		}
 		const user = this.props.getUserID();
 
 		if (user) {
@@ -331,7 +330,7 @@ class CreateOutfit extends Component {
 
 		axios
 			.post(`${ROOT_URL.API}/outfits`, outfit)
-			.then((res) => res)
+			.then((res) => {this.props.history.push(`/edit/${res.data._id}`)})
 			.catch((err) => err);
 	};
 
@@ -346,20 +345,23 @@ class CreateOutfit extends Component {
 		const selected = this.getSelected();
 
 		return (
-			<div className="createContainer">
-				<div className="layerSelect">
-					{typesInCloset.map((type) => (
-						<button
-							className={this.state.items[type].show ? 'create-button--active' : 'create-button'}
-							onClick={() => {
-								this.activateCategory(type);
-							}}
-							key={type}
-						>
-							{' '}
-							{this.state.items[type].title}
-						</button>
-					))}
+			<div className="create--container">
+				<div className="create--selection">
+					{this.state.items ? (
+						typesInCloset.map((type) => (
+							<button
+								className={this.state.items[type].show ? 'create--button-active' : 'create--button'}
+								onClick={() => {
+									this.activateCategory(type);
+								}}
+								key={type}
+							>
+								{this.state.items[type].title}
+							</button>
+						))
+					) : (
+						<div>Loading...</div>
+					)}
 				</div>
 				<CardDeck>
 					{selected.map((type) => {
@@ -375,16 +377,16 @@ class CreateOutfit extends Component {
 						);
 					})}
 				</CardDeck>
-				<div className="outfitPickerContainer">
+				<div className="outfit--container">
 					<Input
 						type="text"
 						name="name"
 						placeholder="Outfit Nickname"
 						onChange={this.handleInputChange}
 						value={this.state.name}
-						className="outfitInput"
+						className="outfit--input"
 					/>
-					<div className="outfitPickerDecision">
+					<div className="outfit--decision">
 						<Button className="button" onClick={this.handleCreateOutfit}>
 							Save
 						</Button>

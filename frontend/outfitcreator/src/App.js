@@ -88,7 +88,7 @@ class App extends Component {
             </div>
           } />
           <Route path='/Create' render={props =>
-            <div className='App--create-layers'>
+            <div className='App'>
               <CreateOutfit {...props} getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
               <Navigation getUserID={this.getUserID} />
             </div>
@@ -108,12 +108,6 @@ class App extends Component {
           <Route path='/Upload' render={props =>
             <div>
               <Upload getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
-              <Navigation getUserID={this.getUserID} />
-            </div>
-          } />
-          <Route path='/Billing' render={props =>
-            <div>
-              <Billing {...props} getUserID={this.getUserID} />
               <Navigation getUserID={this.getUserID} />
             </div>
           } />

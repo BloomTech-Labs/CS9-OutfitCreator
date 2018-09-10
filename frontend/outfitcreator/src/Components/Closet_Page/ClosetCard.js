@@ -57,12 +57,7 @@ class ClosetCard extends React.Component {
 					</button>
 				</div>
 				<div className="closet-card">
-					<img
-						className="closet-image"
-						src={`${newURL}`}
-						alt={name}
-						onClick={this.toggle}
-					/>
+					<img className="closet-image" src={`${newURL}`} alt={name} onClick={this.toggle} />
 				</div>
 			</div>
 		) : (
