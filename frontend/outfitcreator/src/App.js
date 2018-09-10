@@ -94,7 +94,7 @@ class App extends Component {
 						)}
 					/>
 					<Route
-						path="/Create"
+						path="/create"
 						render={(props) => (
 							<div className="App">
 								<CreateOutfit {...props} getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
@@ -103,7 +103,7 @@ class App extends Component {
 						)}
 					/>
 					<Route
-						path="/Archive"
+						path="/archive"
 						render={(props) => (
 							<div>
 								<Archive getUserID={this.getUserID} />
@@ -112,7 +112,7 @@ class App extends Component {
 						)}
 					/>
 					<Route
-						path="/Settings"
+						path="/settings"
 						render={(props) => (
 							<div>
 								<Settings {...props} getUserID={this.getUserID} />
@@ -121,7 +121,7 @@ class App extends Component {
 						)}
 					/>
 					<Route
-						path="/Upload"
+						path="/upload"
 						render={(props) => (
 							<div>
 								<Upload getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
@@ -130,7 +130,7 @@ class App extends Component {
 						)}
 					/>
 					<Route
-						path="/Edit"
+						path="/edit"
 						render={(props) => (
 							<div>
 								<OutfitEdit {...props} getUserID={this.getUserID} />
@@ -139,7 +139,7 @@ class App extends Component {
 						)}
 					/>
 					<Route
-						path="/Closet"
+						path="/closet"
 						render={(props) => (
 							<div className="App">
 								<Closet {...props} getUserID={this.getUserID} />
