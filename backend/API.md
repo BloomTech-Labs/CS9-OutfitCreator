@@ -1,12 +1,3 @@
-# /Auth
-## /Auth/Login
-## /Auth/Logout
-## /Auth/Google
-## /Auth/Google/Redirect
-
-# /Profile
-## /Profile/
-
 # /Pay
 ## /Pay/Charge
 POST - Start a user subscription in Stripe.
@@ -19,9 +10,9 @@ POST - Create a new user account
 This request should have the following format:
 ```
 {
-    "username": "ellen",
+    "username": "user123",
     "password": "password123",
-    "email": "ellen@email.com"
+    "email": "user@email.com"
 }
 ```
 ## /User/Info/:ID

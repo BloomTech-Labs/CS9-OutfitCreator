@@ -1,126 +1,125 @@
+
 .closet {
-  background: white;
-  border-radius: 5px;
-  margin-top: 60px;
-  padding: 30px;
-  width: 80%;
+	margin-top: 90px;
+	width: 80%;
 }
 
-.closet-button {
-    background: var(--dark-purple);
-    border: 2px solid var(--dark-purple);
-    border-radius: 5px;
-    padding: 2px 12px 3px;
-    margin: 5px;
-    font-size: 15px;
-    font-weight: bold;
-    color: white;
-    font-family: 'Arsenal', sans-serif;
-  }
-
-.closet-button--active {
-    background: var(--pale-purple);
-    border: 2px solid var(--dark-purple);
-    border-radius: 5px;
-    padding: 2px 12px 3px;
-    margin: 5px;
-    font-size: 15px;
-    font-weight: bold;
-    color: var(--dark-purple);
-    font-family: 'Arsenal', sans-serif;
+.closet--button {
+	background: var(--dark-purple);
+	border: 2px solid var(--dark-purple);
+	border-radius: 5px;
+	padding: 2px 12px 3px;
+	margin: 5px;
+	font-size: 15px;
+	font-weight: bold;
+	color: white;
+	font-family: 'Arsenal', sans-serif;
 }
 
-.closet-button:hover, .closet-button--active:hover {
-    cursor: pointer;
+.closet--button-active {
+	background: var(--pale-purple);
+	border: 2px solid var(--dark-purple);
+	border-radius: 5px;
+	padding: 2px 12px 3px;
+	margin: 5px;
+	font-size: 15px;
+	font-weight: bold;
+	color: var(--dark-purple);
+	font-family: 'Arsenal', sans-serif;
 }
 
-.closet-cards {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: baseline;
-    margin-top: 20px;
+.closet--button:hover,
+.closet--button-active:hover {
+	cursor: pointer;
+}
+
+.closet--cards {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: baseline;
+	margin-top: 20px;
 }
 
 .closet-card {
-    border-radius: 5px;
-    margin: 10px;
-    padding: 5px;
-    padding-top: 0px;
-    color: var(--dark-purple);
-    font-family: 'Arsenal', sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: top;
+	border-radius: 5px;
+	margin: 10px;
+	padding: 5px;
+	padding-top: 0px;
+	color: var(--dark-purple);
+	font-family: 'Arsenal', sans-serif;
+	display: flex;
+	flex-direction: column;
+	justify-content: top;
 }
 
 .closet-card:hover {
-    cursor: pointer;
-    transform: translateY(-5px);
+	cursor: pointer;
+	transform: translateY(-5px);
 }
 
-.closet-card--name{
-    font-weight: bold;
-    font-size: 20px;
+.closet-card--name {
+	font-weight: bold;
+	font-size: 20px;
 }
 
 .closet-card--edit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .closet-card--input {
-    border: 1px solid black;
-    border-radius: 5px;
-    width: 100%;
-    text-align: center;
-    margin: 5px 0px;
+	border: 1px solid black;
+	border-radius: 5px;
+	width: 100%;
+	text-align: center;
+	margin: 5px 0px;
 }
 
 .closet-card--options {
-    display: flex;
-    justify-content: center;
-    width: 80%;
+	display: flex;
+	justify-content: center;
+	width: 80%;
 }
 
 .closet-card--accept {
-    background-color: lightgreen;
-    border: none;
-    border-radius: 5px;
-    margin: 5px;
+	background-color: lightgreen;
+	border: none;
+	border-radius: 5px;
+	margin: 5px;
 }
 
 .closet-card--accept:hover {
-    cursor: pointer;
-    color: green;
-    background-color: darkgreen;
+	cursor: pointer;
+	color: green;
+	background-color: darkgreen;
 }
 
 .closet-card--cancel {
-    background-color: red;
-    border: none;
-    border-radius: 5px;
-    margin: 5px;
-    /* color: var(--red); */
+	background-color: red;
+	border: none;
+	border-radius: 5px;
+	margin: 5px;
 }
 
 .closet-card--cancel:hover {
-    cursor: pointer;
-    background-color: rgba(94, 26, 26, 0.836);
-    color: rgb(177, 38, 61);
+	cursor: pointer;
+	background-color: rgba(94, 26, 26, 0.836);
+	color: rgb(177, 38, 61);
 }
 
 .closet-image {
-    border-radius: 3px;
-    overflow: hidden;
-    height: 150px; /*these images are scaled to a height of 150px but might be variable widths*/
+	border-radius: 3px;
+	overflow: hidden;
+	/*these images are scaled to a height of 150px but might be variable widths*/
+	height: 150px;
 }
 
 @media (max-width: 950px) {
-    .closet-image {
-        height: 230px;
-        width: 390px;
-    }
+	.closet-image {
+		height: 230px;
+		width: 390px;
+	}
 }

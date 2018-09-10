@@ -12,6 +12,7 @@ Closet Roulette is deployed with [Heroku](https://www.heroku.com/) and developed
 - [React.js](https://reactjs.org/)
 - [Node.js](https://nodejs.org)
 
+
 ![MERN](MERNSTACK.jpg)
 
 ### **Frontend**

@@ -1,179 +1,171 @@
-.createContainer {
-    background: white;
-    width: 80%;
-    margin: 60px 0;
-    padding: 20px;
+.create--container {
+	width: 80%;
+	margin-top: 90px;
 }
 
-.layerSelect {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+.create--button {
+	background: var(--dark-purple);
+	border: 2px solid var(--dark-purple);
+	border-radius: 5px;
+	padding: 2px 12px 3px;
+	margin: 5px;
+	font-size: 15px;
+	font-weight: bold;
+	color: white;
+	font-family: 'Arsenal', sans-serif;
 }
 
-.create-button {
-    background: var(--dark-purple);
-    border: 2px solid var(--dark-purple);
-    border-radius: 5px;
-    padding: 2px 12px 3px;
-    margin: 5px;
-    font-size: 15px;
-    font-weight: bold;
-    color: white;
-    font-family: 'Arsenal', sans-serif;
-  }
-
-.create-button--active {
-    background: var(--pale-purple);
-    border: 2px solid var(--dark-purple);
-    border-radius: 5px;
-    padding: 2px 12px 3px;
-    margin: 5px;
-    font-size: 15px;
-    font-weight: bold;
-    color: var(--dark-purple);
-    font-family: 'Arsenal', sans-serif;
+.create--button:hover {
+	background: var(--dark-purple);
+	border: 2px solid var(--dark-purple);
+	border-radius: 5px;
+	padding: 2px 12px 3px;
+	margin: 5px;
+	font-size: 15px;
+	font-weight: bold;
+	color: white;
+	font-family: 'Arsenal', sans-serif;
 }
 
-.cardText {
-    vertical-align: middle;
-    text-align: center;
-    left: 50%;
-    margin-right: -50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2em;
+.create--button-active {
+	background: var(--pale-purple);
+	border: 2px solid var(--dark-purple);
+	border-radius: 5px;
+	padding: 2px 12px 3px;
+	margin: 5px;
+	font-size: 15px;
+	font-weight: bold;
+	color: var(--dark-purple);
+	font-family: 'Arsenal', sans-serif;
 }
 
-.createContainer .card-deck {
-    margin: 0;
-    justify-content: center;
+.create--container .card-deck {
+	margin: 20px auto;
 }
 
-.createContainer .card-deck .card:hover {
-    border: none;
+.card-deck .card,
+.card,
+.create-card,
+.card--image,
+.card-img-overlay {
+	border: none;
+	box-shadow: none;
+	outline: none;
+	margin: 10px;
 }
 
-
-.card-deck .card, .card, .create-card, .cardImage, .card-img-overlay {
-    max-height: 200px;
-    min-width: 300px;
-    max-width: 400px;
-    border: none;
-    box-shadow: none;
-    outline: none;
-    margin: 0 8px 15px;
+.card-deck {
+	display: flex;
+  flex-wrap: wrap;
+	justify-content: center;
 }
 
-.createContainer .card.text-white {
-    margin: 0;
-    height: 100%;
+.create--container .card.text-white {
+	margin: 0;
+	height: 100%;
 }
 
 .card-img-overlay {
-    width: 100%;
-    border-radius: 5px;
-    margin: 0;
-    
+	width: 100%;
+	border-radius: 5px;
+	margin: 0;
 }
 
-.locked-border {
-    border: 3px solid var(--dark-purple);
+.locked--border {
+	border: 3px solid var(--dark-purple);
 }
 
 .create-card .close {
-    position: absolute;
-    top: 5px;
-    right: 25px;
+	position: absolute;
+	top: 5px;
+	right: 25px;
 }
 
-.card-lock {
-    border-radius: 5px;
-    width: 35px;
-    height: 30px;
-    left: 5px;
-    top: 5px;
-    position: absolute;
-    background: rgba(255, 255, 255, 0.75);
+.create-card--lock {
+	border-radius: 5px;
+	width: 35px;
+	height: 30px;
+	left: 5px;
+	top: 5px;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.75);
 }
 
-.lock-icon {
-    width: 45px;
-    height: 30px;
-    position: relative;
-    left: -5px;
+.lock--icon {
+	width: 45px;
+	height: 30px;
+	position: relative;
+	left: -5px;
 }
 
-.card-refresh {
-    border-radius: 5px;
-    width: 35px;
-    height: 30px;
-    right: 5px;
-    top: 5px;
-    position: absolute;
-    background: rgba(255, 255, 255, 0.75);
+.create-card--refresh {
+	border-radius: 5px;
+	width: 35px;
+	height: 30px;
+	right: 5px;
+	top: 5px;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.75);
 }
 
-.refresh-icon {
-    width: 35px;
-    height: 30px;
-    position: relative;
+.refresh--icon {
+	width: 35px;
+	height: 30px;
+	position: relative;
 }
 
-.createContainer .cardImage {
-    height: 200px;
-    width: 300px;
-    margin: 0;
-    box-shadow: none;
+.create--container .create-card--image {
+	margin: 0;
+	box-shadow: none;
+	height: 200px;
+	width: 300px;
 }
 
-.outfitPickerContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1em;
+.outfit--container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 1em;
 }
 
-.outfitPickerDecision {
-    display: flex;
+.outfit--decision {
+	display: flex;
 }
 
-.outfitPickerDecision button {
-    margin: 1em;
-    color: white;
-    padding: 2px 12px 3px;
+.outfit--decision button {
+	margin: 1em;
+	color: white;
+	padding: 2px 12px 3px;
 }
 
-.outfitPickerDecision button:hover {
-  margin: 1em;
-  padding: 2px 12px 3px;
+.outfit--decision button:hover {
+	margin: 1em;
+	padding: 2px 12px 3px;
 }
 
-.outfitPickerDecision .fa-share-alt {
-    margin-left: 0.3em;
+.outfit--decision .fa-share-alt {
+	margin-left: 0.3em;
 }
 
-.outfitInput {
-    width: 200px;
-    text-align: center;
-    margin-bottom: 1em;
+.outfit--input {
+	width: 200px;
+	text-align: center;
+	margin-bottom: 1em;
 }
 
 @media (min-width: 576px) {
-    .card-deck .card {
-      margin-bottom: 15px;
-    }
+	.card-deck .card {
+		margin-bottom: 15px;
+	}
 }
 
 @media (max-width: 700px) {
-    .card-deck {
-        flex-flow: column;
-        align-items: center;
-    }
+	.card-deck {
+		flex-flow: column;
+		align-items: center;
+	}
 
-    .card {
-        margin: 0 0 15px;
-    }
+	.card {
+		margin: 0 0 15px;
+	}
 }
