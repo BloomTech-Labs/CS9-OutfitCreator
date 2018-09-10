@@ -148,17 +148,22 @@ class OutfitEdit extends React.Component {
 	selectItem = (type, id) => {
 		//top and bottom are arrays so we need type to distinguish how we will change the item
 		//we will use the outfit at the index of hte oldid and replace it with the new id
-		const { outfit, oldID } = this.state;
+    const { outfit, oldID } = this.state;
 		if (type === 'top' || type === 'bottom') {
 			//acessing the outfit of the type either top or bottom
 			//then at the index of the array where the oldid is located at, we replace it with the new id
-			//this way when the outfit's id's are feteched it will get the new id
+      //this way when the outfit's id's are feteched it will get the new id
+      // console.log(outfit[type].indexOf(oldID));
 			outfit[type][outfit[type].indexOf(oldID)] = id;
 		} else {
-			//this would be only shoes at the moment, and shoes isnt an array
-			outfit[type] = id;
-		}
-		this.setState({ outfit, [type]: '' });
+      //this would be only shoes at the moment, and shoes isnt an array
+			outfit[type] = [ id ];
+    }
+    
+		this.setState({ outfit, [type]: [] }, () => {
+      const items = outfit[type];
+      items.forEach((id) => this.populate(id));
+    });
 	};
 
 	toggle = () => {
