@@ -101,17 +101,15 @@ class OutfitEdit extends React.Component {
 		this.setState({ worn, lastWorn: event.target.value });
 	};
 
-	removeDate = (event) => {
-		if (event.target.nextElementSibling) {
-			const worn = this.state.worn.filter(
-				(date) => Date.parse(date) !== Date.parse(event.target.nextElementSibling.innerHTML)
-			);
-			this.setState({ worn });
-		} else {
-			const worn = this.state.worn.slice(1);
-			this.setState({ worn });
-		}
-	};
+    removeDate = event => {
+        if (event.target.nextElementSibling) {
+            const worn = this.state.worn.filter(date => Date.parse(date) !== Date.parse(event.target.nextElementSibling.innerHTML))
+            this.setState({ worn });
+        } else {
+            const worn = this.state.worn.slice(1);
+            this.setState({ worn });
+        }
+    }
 
 	redirectArchive = () => {
 		this.props.history.push('/Archive');
@@ -121,7 +119,6 @@ class OutfitEdit extends React.Component {
     const { user, name, worn, topTags, bottomTags, shoesTags } = this.state;
     const { top, bottom, shoes } = this.state.outfit;
 		const outfitID = this.props.location.pathname.split('Edit/')[1];
-
 		const tags = [ ...topTags, ...bottomTags, ...shoesTags ];
 		const newInfo = { name, worn, tags, top, bottom, shoes };
 		axios.put(`${ROOT_URL.API}/outfits/${user}/${outfitID}`, newInfo).then().catch((err) => err);

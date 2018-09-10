@@ -21,5 +21,9 @@ body #root {
 }
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box; 
+}
+
+button {
+	outline: none !important;
 }

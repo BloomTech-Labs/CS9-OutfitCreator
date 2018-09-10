@@ -157,7 +157,7 @@ const githubStrategy = new GitHubStrategy(
 						existingUser.github.thumbnail = profile._json.avatar_url;
 						existingUser.save();
 					}
-					done(null, currentUser);
+					done(null, existingUser);
 				} else {
 					let newUser = new User({
 						method: 'github',
