@@ -107,7 +107,7 @@ class App extends Component {
           } />
           <Route path='/Upload' render={props =>
             <div>
-              <Upload getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
+              <Upload {...props} getUserID={this.getUserID} isUserPaid={this.isUserPaid} />
               <Navigation getUserID={this.getUserID} />
             </div>
           } />

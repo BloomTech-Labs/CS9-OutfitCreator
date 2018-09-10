@@ -55,7 +55,7 @@ class Login extends React.Component {
 				this.props.onSignin(res.data);
 				localStorage.setItem('authToken', `Bearer ${res.data.token}`);
 				// Redirect to create page once logged in
-				window.location = `${ROOT_URL.WEB}/Create`;
+				window.location = `${ROOT_URL.WEB}/upload`;
 				this.notifySignInSuccess();
 			})
 			.catch((err) => {
