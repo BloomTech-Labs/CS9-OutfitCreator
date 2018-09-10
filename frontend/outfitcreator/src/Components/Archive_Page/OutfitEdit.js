@@ -233,13 +233,13 @@ class OutfitEdit extends React.Component {
 												className="edit--submit edit--button button"
 												onClick={this.submitChanges}
 											>
-												Submit
+												Save
 											</button>
 											<button
 												className="edit--delete edit--button button"
 												onClick={this.deleteOutfit}
 											>
-												delete
+												Delete
 											</button>
 											<button
 												className="edit--cancel edit--button button"
