@@ -118,7 +118,7 @@
 	margin: 0;
 	box-shadow: none;
 	height: 200px;
-	width: 300px;
+	width: auto;
 }
 
 .outfit--container {
