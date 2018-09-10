@@ -7,8 +7,6 @@ import TagInput from './TagInput';
 import uploadPlacholder from './uploadPlaceholder.png';
 import './Upload.css';
 
-const CLOUD_API = '465735684648442';
-
 class Upload extends Component {
 	constructor(props) {
 		super(props);
@@ -57,7 +55,6 @@ class Upload extends Component {
 			{
 				secure: true,
 				cloud_name: 'cloudtesting',
-				api_key: CLOUD_API,
 				upload_preset: 'default',
 				multiple: false,
 				sources: [ 'local', 'url', 'camera', 'instagram', 'facebook' ],
