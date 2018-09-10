@@ -14,17 +14,10 @@
 }
 
 .upload--image {
-<<<<<<< HEAD
-    min-height: 100px;
-    /* height: 250px; */
-    margin-bottom: 10px;
-    max-width: 400px;
-=======
     min-height: 200px;
     max-height: 300px;
     width: auto;
     margin-bottom: 10px;
->>>>>>> 0cd6a908d387bc40967fbba324fbb2eafa766c42
     border-radius: 5px;
 }
 

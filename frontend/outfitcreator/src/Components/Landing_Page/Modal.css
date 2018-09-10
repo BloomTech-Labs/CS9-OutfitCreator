@@ -78,22 +78,7 @@
 }
 
 .trigger--modal {
-<<<<<<< HEAD
-    width: 80px;
-    height: 40px;
-    margin-left: 10px;
-}
-
-@media (max-width: 1100px) {
-    .modal--backdrop {
-        width: 98.5vw;
-        overflow-x: hidden;
-        overflow-y: hidden;
-    }
-}
-=======
 	width: 80px;
 	height: 40px;
 	margin-left: 10px;
 }
->>>>>>> 0cd6a908d387bc40967fbba324fbb2eafa766c42

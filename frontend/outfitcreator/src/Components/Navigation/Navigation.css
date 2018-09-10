@@ -1,16 +1,4 @@
 .navigation--container {
-<<<<<<< HEAD
-  align-items: center;
-  background: var(--dark-purple);
-  display: flex;
-  height: 50px;
-  justify-content: space-between;
-  left: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 10000;
-=======
 	align-items: center;
 	background: var(--dark-purple);
 	display: flex;
@@ -20,7 +8,6 @@
 	position: fixed;
 	top: 0;
 	width: 100%;
->>>>>>> 0cd6a908d387bc40967fbba324fbb2eafa766c42
 }
 
 .navigation--container:after {
