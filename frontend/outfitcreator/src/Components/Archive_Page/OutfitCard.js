@@ -6,7 +6,7 @@ import { withRouter } from 'react-router';
 // Will display a card with any information relevent to an outfit such as name, image, etc.
 class OutfitCard extends React.Component {
 	editRedirect = () => {
-		this.props.history.push(`/Edit/${this.props.outfitId}`);
+		this.props.history.push(`/edit/${this.props.outfitId}`);
 	};
 
 	render() {
