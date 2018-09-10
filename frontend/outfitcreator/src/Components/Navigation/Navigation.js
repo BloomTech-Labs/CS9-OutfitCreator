@@ -54,7 +54,7 @@ class Navigation extends Component {
 	};
 
 	currentPageName = () => {
-		const activePage = this.props.match.path.slice(1);
+    const activePage = this.props.match.path.slice(1).toLowerCase();
 		const pageLinks = document.querySelectorAll('.nav--item');
 		let name = '';
 
@@ -66,7 +66,7 @@ class Navigation extends Component {
 	};
 
 	selectActivePage() {
-		const activePage = this.props.match.path.slice(1);
+		const activePage = this.props.match.path.slice(1).toLowerCase();
 		const pageLinks = document.querySelectorAll('.nav--item');
 
 		pageLinks.forEach((link) => {
