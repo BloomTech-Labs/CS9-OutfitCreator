@@ -44,7 +44,7 @@ class OutfitEdit extends React.Component {
 
 	getOutfit = () => {
 		const user = this.props.getUserID();
-		const outfitID = this.props.location.pathname.split('Edit/')[1];
+    const outfitID = this.props.location.pathname.split('edit/')[1];
 		axios
 			.get(`${ROOT_URL.API}/outfits/${user}/${outfitID}`)
 			.then((response) => {
