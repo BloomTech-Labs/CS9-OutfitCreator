@@ -141,7 +141,6 @@
 }
 
 .outfit-date-block {
-<<<<<<< HEAD
 	position: absolute;
 	display: flex;
 	flex-wrap: wrap;
@@ -167,36 +166,3 @@
 		overflow-y: auto;
 	}
 }
-=======
-    position: absolute;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 50px 0 10px;
-    width: 28vw;
-    /* left: 100px; */
-}
-
-.button:hover {
-    cursor: pointer;
-}
-
-@media (max-width: 1100px) {
-    .image--container {
-        flex-direction: column;
-    }
-
-    .container--edit {
-        max-height: 100%;
-    }
-
-    .modal--backdrop {
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-
-    /* .container--archive-edit{
-        width: 100vw;
-        height: 100vh;
-    } */
-}
->>>>>>> e46d464f7eb5f726391d0a43cfe0b23865cf90a2
