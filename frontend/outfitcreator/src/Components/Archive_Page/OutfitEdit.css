@@ -1,7 +1,6 @@
 .container--editbox {
 	align-self: center;
 	min-width: 75vw;
-	margin-top: 1px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -40,7 +39,7 @@
   display: flex;
   flex-flow: wrap;
 	justify-content: space-evenly;
-	margin: 50px 15px;
+	margin: 50px auto;
 	width: 80vw;
 }
 
@@ -48,7 +47,7 @@
 	max-width: 25vw;
 	max-height: 40vh;
 	min-width: 300px;
-	margin: 0 5px;
+	margin: 5px;
 	padding: 5px;
 }
 
@@ -74,8 +73,10 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	max-height: 90vh;
-	max-width: 80vw;
-	overflow-x: hidden;
+  max-width: 80vw;
+  padding: 50px 0;
+  overflow-x: hidden;
+  justify-content: center;
 }
 
 .edit--input {
@@ -95,6 +96,7 @@
 	width: 100px;
 	height: 50px;
 }
+
 */ .edit--button:hover {
 	background-color: black;
 	color: white;
@@ -104,8 +106,10 @@
 
 .outfit--card {
 	border-radius: 5px;
-	max-width: 225px;
-	margin: 10px;
+  /* max-width: 225px; */
+  width: 310px;
+  height: 210px;
+	margin: 5px;
 	padding: 5px;
 	transition: .2s;
 	z-index: 1000;
@@ -115,6 +119,11 @@
 	background: var(--dark-purple);
 	transform: translateY(-10px);
 	cursor: pointer;
+}
+
+.outfit--card img {
+  width: 300px;
+  height: 200px;
 }
 
 .edit--date {
