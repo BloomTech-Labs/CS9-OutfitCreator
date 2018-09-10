@@ -16,7 +16,8 @@ class Login extends React.Component {
 			activeTab: '2',
 			username: '',
 			password: '',
-			email: ''
+			email: '',
+			agreeToTerms: false
 		};
 	}
 
@@ -29,6 +30,7 @@ class Login extends React.Component {
 	signUp = () => {
 		const { username, password, email } = this.state;
 
+		if (this.state.agreeToTerms){
 		axios
 			.post(`${ROOT_URL.API}/auth/signup`, { username, password, email })
 			.then((res) => {
@@ -39,6 +41,9 @@ class Login extends React.Component {
 			.catch((err) => {
 				this.notifySignUpFailure();
 			});
+		} else {
+			window.alert("Please indicate that you agree to the Terms and Conditions.")
+		}
 	};
 
 	signIn = () => {
@@ -75,6 +80,10 @@ class Login extends React.Component {
 	handleInputChange = (event) => {
 		this.setState({ [event.target.name]: event.target.value });
 	};
+
+	handleCheckbox = () => {
+		this.setState({agreeToTerms: !this.state.agreeToTerms});
+	}
 
 	render() {
 		return (
@@ -141,6 +150,15 @@ class Login extends React.Component {
 										value={this.state.password}
 										onChange={this.handleInputChange}
 									/>
+									<br />
+									<input
+										type="checkbox"
+										className="checkbox"
+										checked={this.state.agreeToTerms}
+										ref="agreeToTerms"
+										onChange={this.handleCheckbox}
+										/>
+										<span className="input--login--terms">I agree that I will only upload images that I own.</span>
 									<br />
 									<Button className="button" onClick={this.signUp}>
 										Sign Up
