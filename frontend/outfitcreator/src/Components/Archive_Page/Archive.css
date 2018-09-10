@@ -33,3 +33,11 @@
     align-content: flex-start;
     margin: 0 2.5%;
 }
+
+.archive--all-outfits {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: flex-start;
+    margin: 0 2.5%;
+}

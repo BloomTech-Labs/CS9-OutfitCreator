@@ -105,7 +105,7 @@ class Archive extends React.Component {
 						))}
 					</div>
 				) : (
-					<div className="archive--collection">
+					<div className="archive--all-outfits">
 						{this.state.myOutfits.map((outfit) => (
 							<div key={outfit._id}>
 								<OutfitCard
