@@ -48,8 +48,13 @@ class CreateOutfit extends Component {
 				shoes: [ 'casualShoes', 'formalShoes' ]
 			}
 		};
-
-		if (localStorage.getItem('authToken')) this.setTypes();
+    
+    const hash = queryString.parse(this.props.location.hash);
+		if (hash.token) {
+      localStorage.setItem('authToken', `Bearer ${hash.token}`);
+      this.setAuthToken();
+      this.setTypes();
+    }
 	}
 
 	setAuthToken = () => {
@@ -175,12 +180,6 @@ class CreateOutfit extends Component {
 	};
 
 	componentDidMount() {
-		const hash = queryString.parse(this.props.location.hash);
-		if (hash.token) {
-			localStorage.setItem('authToken', `Bearer ${hash.token}`);
-			this.setAuthToken();
-			this.setTypes();
-		}
 		const user = this.props.getUserID();
 
 		if (user) {
