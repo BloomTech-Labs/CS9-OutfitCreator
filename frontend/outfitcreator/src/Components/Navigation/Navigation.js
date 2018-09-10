@@ -158,7 +158,7 @@ class Navigation extends Component {
 						<button id="upload" className="nav--item">Add Item</button>
 					</NavLink>
 					<NavLink href="/closet">
-						<button id="closer" className="nav--item">My Closet</button>
+						<button id="closet" className="nav--item">My Closet</button>
 					</NavLink>
 					<NavLink href="/archive">
 						<button id="archive" className="nav--item">Outfits</button>
