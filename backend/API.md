@@ -1,12 +1,6 @@
-# /Pay
-## /Pay/Charge
-POST - Start a user subscription in Stripe.
-## /Pay/Cancel
-POST - End a user subscription in Stripe.
-
-# /User
-## /User/Signup
-POST - Create a new user account
+# /auth
+## /auth/signup
+POST - Register a User
 This request should have the following format:
 ```
 {
@@ -15,6 +9,24 @@ This request should have the following format:
     "email": "user@email.com"
 }
 ```
+## /auth/login 
+POST - Login a User
+This request should have the following format:
+```
+{
+    "username": "user123",
+    "password": "password123",
+    "email": "user@email.com"
+}
+```
+
+# /Pay
+## /Pay/Charge
+POST - Start a user subscription in Stripe.
+## /Pay/Cancel
+POST - End a user subscription in Stripe.
+
+# /User
 ## /User/Info/:ID
 GET - Get user information by ID. Returns the User object.
 ## /User/Subscribe/:ID

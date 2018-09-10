@@ -226,11 +226,11 @@ const signToken = (req, res) => {
 		username: req.user.username
 	};
 	const options = {
-		expiresIn: '24h'
+		expiresIn: '7d'
 	};
 	jwt.sign(payload, secret, options, (err, token) => {
 		if (err) {
-			res.sendStatus(500);
+			res.redirect(`${ROOT_URL.WEB}/login#err=${err}`);
 		} else {
 			res.redirect(`${ROOT_URL.WEB}/create#token=${token}`);
 		}
