@@ -62,7 +62,10 @@ class Upload extends Component {
 				multiple: false,
 				sources: [ 'local', 'url', 'camera', 'instagram', 'facebook' ],
 				theme: 'minimal',
-				stylesheet: '#cloudinary-overlay { background-color: rgba(0,0,0,0.7);}'
+				stylesheet: '#cloudinary-overlay { background-color: rgba(0,0,0,0.7);}',
+				cropping: 'default',
+				cropping_show_dimensions: true,
+				cropping_show_back_button: true
 			},
 			(err, result) => {
 				if (result) {
