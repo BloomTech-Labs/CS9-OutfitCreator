@@ -3,6 +3,7 @@ import axios from 'axios';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col } from 'reactstrap';
 import { FacebookLoginButton, GithubLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
 import classnames from 'classnames';
+import queryString from 'query-string';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -81,6 +82,13 @@ class Login extends React.Component {
 		this.setState({ [event.target.name]: event.target.value });
 	};
 
+	componentDidMount() {
+		const hash = queryString.parse(this.props.location.hash);
+		if (hash.err) {
+			this.notifySignInFailure()
+		}
+	}
+	
 	handleCheckbox = () => {
 		this.setState({agreeToTerms: !this.state.agreeToTerms});
 	}
