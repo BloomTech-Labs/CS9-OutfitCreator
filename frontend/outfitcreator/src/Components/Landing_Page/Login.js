@@ -53,8 +53,7 @@ class Login extends React.Component {
 			.post(`${ROOT_URL.API}/auth/login`, { email, password })
 			.then((res) => {
 				this.props.onSignin(res.data);
-				localStorage.setItem('authToken', `Bearer ${res.data.token}`);
-				// Redirect to create page once logged in
+				// Redirect to upload page once logged in
 				window.location = `${ROOT_URL.WEB}/upload`;
 				this.notifySignInSuccess();
 			})
@@ -66,7 +65,7 @@ class Login extends React.Component {
 				} else {
 					this.notifySignInFailure();
 				}
-				localStorage.removeItem('token');
+				localStorage.removeItem('authToken');
 			});
 	};
 
