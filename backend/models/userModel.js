@@ -12,7 +12,6 @@ const UserSchema = new mongoose.Schema({
 		username: {
 			type: String,
 			lowercase: true,
-			required: true
 		},
 		password: {
 			type: String
@@ -20,7 +19,8 @@ const UserSchema = new mongoose.Schema({
 		email: {
 			type: String,
 			lowercase: true,
-			unique: true
+			unique: true,
+			required: true
 		}
 	},
 	google: {
@@ -102,13 +102,11 @@ const UserSchema = new mongoose.Schema({
 		required: true,
 		default: false
 	}
-});
+}, { timestamps: true });
 
 // Hash passwords before saving to database
 UserSchema.pre('save', function(next) {
-	if (this.method !== 'local') {
-		next();
-	}
+	if (!this.isModified('local.password')) return next();
 	bcrypt.hash(this.local.password, saltRounds, (err, hash) => {
 		if (err) return next(err);
 		this.local.password = hash;
