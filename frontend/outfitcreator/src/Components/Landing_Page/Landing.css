@@ -106,3 +106,13 @@
 .landingPage--login-nav {
 	margin: 10px;
 }
+
+@media (max-width: 450px) {
+	.landingPage--app-title {
+		font-size: 2em;
+	}
+
+	.landingPage--description {
+		font-size: 0.95em;
+	}
+}

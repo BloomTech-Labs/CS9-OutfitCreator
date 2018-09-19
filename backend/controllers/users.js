@@ -75,6 +75,9 @@ exports.signup = (req, res) => {
 
 // Login
 exports.login = (req, res) => {
+	if(!req.user) {
+		return res.status(422);
+	}
 	res.status(200).json({ token: makeToken(req.user), user: req.user });
 };
 

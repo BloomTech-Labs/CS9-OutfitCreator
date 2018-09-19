@@ -3,16 +3,10 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const passport = require('passport');
 const port = process.env.PORT || 5000;
 
 require('dotenv').config();
-
-const passport = require('passport');
-const authRoutes = require('./routes/auth-routes');
-const stripeRoutes = require('./routes/stripe-routes');
-const userRoutes = require('./routes/user-routes');
-const outfitRoutes = require('./routes/outfit-routes');
-const itemRoutes = require('./routes/item-routes');
 
 // set up server
 const server = express();
@@ -32,6 +26,12 @@ server.use(express.urlencoded({ extended: false }));
 server.use(morgan('dev'));
 server.use(passport.initialize());
 server.use(express.json());
+
+const authRoutes = require('./routes/auth-routes');
+const stripeRoutes = require('./routes/stripe-routes');
+const userRoutes = require('./routes/user-routes');
+const outfitRoutes = require('./routes/outfit-routes');
+const itemRoutes = require('./routes/item-routes');
 
 mongoose
 	.connect(process.env.DB_URI, { useNewUrlParser: true })
