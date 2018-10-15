@@ -5,7 +5,7 @@ import { faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { ROOT_URL } from './config';
 import axios from 'axios';
 
-import Landing from './Components/Landing_Page/Landing';
+import Landing from './Components/Landing_Page_v2/Landing';
 import Login from './Components/Landing_Page/Login';
 import Navigation from './Components/Navigation/Navigation';
 import CreateOutfit from './Components/Create_Component/CreateOutfit';
