@@ -42,6 +42,16 @@ class Landing extends Component {
             src={CR_Logo} 
           />
 					<div className="landing-form">
+						{this.state.signin ? (
+							<TextField
+                id="landing-email"
+                label="Email"
+                className="landing-email landing-input"
+                value={this.state.email}
+                onChange={this.handleChange('email')}
+                margin="normal"
+              />
+						) : null}
 					</div>
 				</div>
 				<div className="landing-info" />
