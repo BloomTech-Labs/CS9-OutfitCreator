@@ -78,6 +78,9 @@ class Landing extends Component {
                 margin="normal"
               />
             ) : null}
+            <Button variant="outlined" className="landing-button-main">
+              {this.state.signin ? 'Signup' : 'Login'}
+            </Button>
 					</div>
 				</div>
 				<div className="landing-info" />
