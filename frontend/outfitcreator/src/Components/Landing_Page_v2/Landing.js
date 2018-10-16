@@ -67,6 +67,7 @@ class Landing extends Component {
               label="Password"
               margin="normal"
               onChange={this.handleChange('password')}
+              type="password"
               value={this.state.password}
             />
 						{this.state.signin ? (
@@ -76,6 +77,7 @@ class Landing extends Component {
                 label="Verify Password"
                 margin="normal"
                 onChange={this.handleChange('vpassword')}
+                type="password"
                 value={this.state.vpassword}
               />
             ) : null}
