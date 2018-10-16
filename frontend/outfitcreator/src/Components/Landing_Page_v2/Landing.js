@@ -52,6 +52,14 @@ class Landing extends Component {
                 margin="normal"
               />
 						) : null}
+            <TextField
+              id="landing-username"
+              label="Username"
+              className="landing-username landing-input"
+              value={this.state.username}
+              onChange={this.handleChange('username')}
+              margin="normal"
+            />
 					</div>
 				</div>
 				<div className="landing-info" />
