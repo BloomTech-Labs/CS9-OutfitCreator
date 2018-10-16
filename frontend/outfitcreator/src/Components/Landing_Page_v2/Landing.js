@@ -81,6 +81,9 @@ class Landing extends Component {
             <Button variant="outlined" className="landing-button-main">
               {this.state.signin ? 'Signup' : 'Login'}
             </Button>
+            <Button className="landing-button-sub" onClick={this.toggleSignin}>
+              {this.state.signin ? 'Login' : 'Signup'}
+            </Button>
 					</div>
 				</div>
 				<div className="landing-info" />
