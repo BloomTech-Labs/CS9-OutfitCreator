@@ -1,27 +1,50 @@
 import React, { Component } from 'react';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import './Landing.css';
 
 import CR_Logo from '../../media/images/cr_logo.png';
 
 class Landing extends Component {
-  constructor(props) {
-    super(props);
+	constructor(props) {
+		super(props);
 
-    this.state = { 
-      signin: false
-    }
+		this.state = {
+			signin: true,
+			email: '',
+			username: '',
+			password: '',
+			vpassword: ''
+    };
+	}
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
+  };
+  
+  handleInput = (event) => {
+		this.setState({ [event.target.name]: event.target.value });
+  };
+  
+  toggleSignin = () => {
+    this.setState({ signin: !this.state.signin });
   }
+
 	render() {
 		return (
-			<div className="container-landingPage">
-        <img className="landing-logo" src={CR_Logo} />
-        { this.state.signin ? 
-          <div className="sign-in">
-
-          </div> : null }
-				<div className="landing-login">
-          
+			<div className="landing-container">
+				<div className="landing-main">
+          <img 
+            alt="closet roulette logo"
+            className="landing-logo" 
+            src={CR_Logo} 
+          />
+					<div className="landing-form">
+					</div>
 				</div>
+				<div className="landing-info" />
 			</div>
 		);
 	}
