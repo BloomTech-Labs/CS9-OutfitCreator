@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import './Landing.css';
 
 import CR_Logo from '../../media/images/cr_logo.png';
+import { Icons } from '../../media/icons';
 
 class Landing extends Component {
 	constructor(props) {
@@ -81,8 +82,8 @@ class Landing extends Component {
             <Button variant="outlined" className="landing-button-main">
               {this.state.signin ? 'Signup' : 'Login'}
             </Button>
-            <Button className="landing-button-sub" onClick={this.toggleSignin}>
-              {this.state.signin ? 'Login' : 'Signup'}
+            <Button  className="landing-button-sub" onClick={this.toggleSignin}>
+              {this.state.signin ? 'Login' : 'Signup'}?
             </Button>
 					</div>
 				</div>
