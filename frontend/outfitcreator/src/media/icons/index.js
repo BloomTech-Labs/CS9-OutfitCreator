@@ -13,6 +13,9 @@ import top from './top.png';
 import locked from './locked.png';
 import unlocked from './unlocked.png';
 import refresh from './refresh-button.png';
+import google from './google.png';
+import facebook from './facebook.png';
+import github from './github.png';
 
 export const Icons = {
   bottom,
@@ -30,4 +33,7 @@ export const Icons = {
   locked,
   unlocked,
   refresh,
+  google,
+  facebook,
+  github,
 }
