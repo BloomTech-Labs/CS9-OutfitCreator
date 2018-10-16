@@ -26,6 +26,7 @@
 }
 
 .landing-form .landing-button-main {
+  border: 1px solid var(--dark-purple);
   border-radius: 50px;
   height: 30px;
   line-height: 10px;
@@ -34,9 +35,14 @@
   width: 100px;
 }
 
+.landing-form .landing-button-main:hover {
+  border: 1px solid var(--bright-purple);
+  color: var(--bright-purple);
+}
+
 .landing-form .landing-button-sub {
-  border-bottom-right-radius: 50px;
-  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 30px;
   font-size: 12px;
   height: 20px;
   margin: 0 auto;
@@ -44,6 +50,10 @@
   padding: 1px 0 0;
   text-decoration: underline;
   width: 30px;
+}
+
+.landing-form .landing-button-sub:hover {
+  color: var(--bright-purple);
 }
 
 .landing-oauth {
@@ -54,6 +64,6 @@
 
 .landing-oauth-icon {
   cursor: pointer;
-  height: 35px;
-  width: 35px;
+  height: 40px;
+  width: 40px;
 }
