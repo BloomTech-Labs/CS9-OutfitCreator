@@ -85,6 +85,11 @@ class Landing extends Component {
             <Button  className="landing-button-sub" onClick={this.toggleSignin}>
               {this.state.signin ? 'Login' : 'Signup'}?
             </Button>
+            <div className="landing-oauth">
+              <img className="landing-oauth-icon" src={Icons.google} />
+              <img className="landing-oauth-icon" src={Icons.facebook} />
+              <img className="landing-oauth-icon" src={Icons.github} />
+            </div>
 					</div>
 				</div>
 				<div className="landing-info" />
