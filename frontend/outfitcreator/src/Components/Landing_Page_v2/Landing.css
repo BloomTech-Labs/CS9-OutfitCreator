@@ -1,0 +1,59 @@
+.landing-container {
+  margin: 0;
+  padding: 0;
+}
+
+.landing-main {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  padding-right: 10vw;
+  width: 100vw;
+}
+
+.landing-logo {
+  transform: scale(0.75);
+}
+
+.landing-form {
+  display: flex;
+  flex-flow: column;
+}
+
+.landing-form .landing-input {
+  margin: 5px 0;
+}
+
+.landing-form .landing-button-main {
+  border-radius: 50px;
+  height: 30px;
+  line-height: 10px;
+  margin: 20px auto 0;
+  min-height: 30px;
+  width: 100px;
+}
+
+.landing-form .landing-button-sub {
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  font-size: 12px;
+  height: 20px;
+  margin: 0 auto;
+  min-height: 20px;
+  padding: 1px 0 0;
+  text-decoration: underline;
+  width: 30px;
+}
+
+.landing-oauth {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.landing-oauth-icon {
+  cursor: pointer;
+  height: 35px;
+  width: 35px;
+}
