@@ -60,6 +60,14 @@ class Landing extends Component {
               onChange={this.handleChange('username')}
               margin="normal"
             />
+             <TextField
+              id="landing-password"
+              label="Password"
+              className="landing-password landing-input"
+              value={this.state.password}
+              onChange={this.handleChange('password')}
+              margin="normal"
+            />
 					</div>
 				</div>
 				<div className="landing-info" />
