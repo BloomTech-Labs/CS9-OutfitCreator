@@ -98,22 +98,24 @@ class Landing extends Component {
 					<div className="landing-form">
 						{this.state.signin ? null : (
 							<TextField
-								className="landing-email landing-input"
+								className="landing-input"
 								label="Email"
 								margin="normal"
 								onChange={this.handleChange('email')}
+								type="text"
 								value={this.state.email}
 							/>
 						)}
 						<TextField
-							className="landing-username landing-input"
+							className="landing-input"
 							label="Username"
 							margin="normal"
 							onChange={this.handleChange('username')}
+							type="text"
 							value={this.state.username}
 						/>
 						<TextField
-							className="landing-password landing-input"
+							className="landing-input"
 							label="Password"
 							margin="normal"
 							onChange={this.handleChange('password')}
@@ -124,7 +126,7 @@ class Landing extends Component {
 							<React.Fragment>
 								<TextField
 									error={!this.state.match}
-									className="landing-vpassword landing-input"
+									className="landing-input"
 									label="Verify Password"
 									margin="normal"
 									onChange={this.handleChange('vpassword')}
