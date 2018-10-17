@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
+import axios from 'axios';
+import { ROOT_URL } from '../../config';
 import './Landing.css';
 
 import CR_Logo from '../../media/images/cr_logo.png';
@@ -103,21 +105,27 @@ class Landing extends Component {
               {this.state.signin ? 'Login' : 'Signup'}?
             </Button>
             <div className="landing-oauth">
-              <img 
-                alt="google icon"
-                className="landing-oauth-icon" 
-                src={Icons.google} 
-              />
-              <img 
-                alt="facebook icon"
-                className="landing-oauth-icon" 
-                src={Icons.facebook} 
-              />
-              <img 
-                alt="github icon"
-                className="landing-oauth-icon" 
-                src={Icons.github} 
-              />
+              <a href={`${ROOT_URL.API}/auth/google`}>
+                <img 
+                  alt="google icon"
+                  className="landing-oauth-icon" 
+                  src={Icons.google} 
+                />
+							</a>
+              <a href={`${ROOT_URL.API}/auth/facebook`}>
+                <img 
+                  alt="facebook icon"
+                  className="landing-oauth-icon" 
+                  src={Icons.facebook} 
+                />
+              </a>
+              <a href={`${ROOT_URL.API}/auth/github`}>
+                <img 
+                  alt="github icon"
+                  className="landing-oauth-icon" 
+                  src={Icons.github} 
+                />
+							</a>
             </div>
 					</div>
 				</div>
