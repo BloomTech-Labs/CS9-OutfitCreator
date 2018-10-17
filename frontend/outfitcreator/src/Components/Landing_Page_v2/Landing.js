@@ -19,7 +19,9 @@ class Landing extends Component {
 			password: '',
 			vpassword: '',
 			agree: false,
-			signin: true
+      signin: true,
+      notify: false,
+      message: 'No message present...',
 		};
 	}
 
@@ -36,25 +38,39 @@ class Landing extends Component {
 
 	toggleSignin = () => {
 		this.setState({ signin: !this.state.signin });
-	};
+  };
+  
+  notify = (message) => {
+    const state = { ...this.state }
+
+    if (!message) {
+      state.notify = false;
+      state.message = '';
+    } else {
+      state.notify = true;
+      state.message = message;
+    }
+
+    this.setState(state);
+  }
 
 	signIn = () => {
-		const { email, password } = this.state;
+    const { email, password } = this.state;
+
 		axios
 			.post(`${ROOT_URL.API}/auth/login`, { email, password })
 			.then((res) => {
 				this.props.onSignin(res.data);
-				// Redirect to upload page once logged in
 				window.location = `${ROOT_URL.WEB}/upload`;
-				this.notifySignInSuccess();
+				this.notify('Successfully signed in.');
 			})
 			.catch((err) => {
 				if (err.response.data.err) {
 					if (err.response.data.err.message === 'Sorry, you must validate email first') {
-						this.notifySignInValidationFailure();
+						this.notify('You must validate your account. Please check your email.');
 					}
 				} else {
-					this.notifySignInFailure();
+					this.notify('Failed to sign in. Please try again!');
 				}
 				localStorage.removeItem('authToken');
 			});
@@ -76,14 +92,13 @@ class Landing extends Component {
 				.post(`${ROOT_URL.API}/auth/signup`, { username, password, email })
 				.then((res) => {
 					localStorage.setItem('authToken', `Bearer ${res.data.token}`);
-					this.notifySignUpSuccess();
-					this.setState({ activeTab: '2' });
+					this.notify('Successfully signed up. Please check your email to validate your account');
 				})
 				.catch((err) => {
-					this.notifySignUpFailure();
+					this.notify('Failed to sign up. Please try again!');
 				});
 		} else {
-			window.alert('Please indicate that you agree to the Terms and Conditions.');
+			this.notify('Please indicate that you agree to the Terms and Conditions.');
 		}
 	};
 
@@ -96,7 +111,6 @@ class Landing extends Component {
 						{this.state.signin ? (
 							<TextField
 								className="landing-email landing-input"
-								id="landing-email"
 								label="Email"
 								margin="normal"
 								onChange={this.handleChange('email')}
@@ -105,7 +119,6 @@ class Landing extends Component {
 						) : null}
 						<TextField
 							className="landing-username landing-input"
-							id="landing-username"
 							label="Username"
 							margin="normal"
 							onChange={this.handleChange('username')}
@@ -113,7 +126,6 @@ class Landing extends Component {
 						/>
 						<TextField
 							className="landing-password landing-input"
-							id="landing-password"
 							label="Password"
 							margin="normal"
 							onChange={this.handleChange('password')}
@@ -124,7 +136,6 @@ class Landing extends Component {
 							<React.Fragment>
 								<TextField
 									className="landing-vpassword landing-input"
-									id="landing-vpassword"
 									label="Verify Password"
 									margin="normal"
 									onChange={this.handleChange('vpassword')}
@@ -169,6 +180,14 @@ class Landing extends Component {
 					</div>
 				</div>
 				<div className="landing-info" />
+        {this.state.notify ?
+          <div className="landing-background_tinted">
+            <div className="landing-modal">
+              <p>{this.state.message}</p>
+              <Button className="landing-button-main" variant="outlined" onClick={() => this.notify()}>Got it!</Button>
+            </div>
+          </div>
+        : null}
 			</div>
 		);
 	}
