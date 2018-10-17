@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
 import './Landing.css';
 
 import CR_Logo from '../../media/images/cr_logo.png';
@@ -15,13 +16,15 @@ class Landing extends Component {
 			email: '',
 			username: '',
 			password: '',
-			vpassword: ''
+      vpassword: '',
+      agree: false,
     };
 	}
 
   handleChange = name => event => {
+    const prop = name === "agree" ? "checked" : "value";
     this.setState({
-      [name]: event.target.value,
+      [name]: event.target[prop],
     });
   };
   
@@ -71,15 +74,27 @@ class Landing extends Component {
               value={this.state.password}
             />
 						{this.state.signin ? (
-							<TextField
-                className="landing-vpassword landing-input"
-                id="landing-vpassword"
-                label="Verify Password"
-                margin="normal"
-                onChange={this.handleChange('vpassword')}
-                type="password"
-                value={this.state.vpassword}
-              />
+              <React.Fragment>
+                <TextField
+                  className="landing-vpassword landing-input"
+                  id="landing-vpassword"
+                  label="Verify Password"
+                  margin="normal"
+                  onChange={this.handleChange('vpassword')}
+                  type="password"
+                  value={this.state.vpassword}
+                />
+                <div className="landing-agree">
+                  <Checkbox
+                    checked={this.state.agree}
+                    className="landing-agree-check"
+                    color="default"
+                    onChange={this.handleChange('agree')}
+                    value="agree"
+                  />
+                  <span className="landing-agree-text">I agree that I will only upload images that I own.</span>
+                </div>
+              </React.Fragment>
             ) : null}
             <Button className="landing-button-main" variant="outlined">
               {this.state.signin ? 'Signup' : 'Login'}
