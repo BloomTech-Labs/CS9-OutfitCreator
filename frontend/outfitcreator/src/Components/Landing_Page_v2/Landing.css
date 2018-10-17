@@ -19,10 +19,25 @@
 .landing-form {
   display: flex;
   flex-flow: column;
+  padding-bottom: 10px;
+  width: 200px;
 }
 
 .landing-form .landing-input {
   margin: 5px 0;
+}
+
+.landing-agree {
+  margin: 10px 0;
+}
+
+.landing-form .landing-agree-check {
+  color: var(--dark-purple);
+  padding: 5px;
+}
+
+.landing-agree-text {
+  font-size: 14px;
 }
 
 .landing-form .landing-button-main {
@@ -30,11 +45,10 @@
   border-radius: 50px;
   height: 30px;
   line-height: 10px;
-  margin: 20px auto 0;
+  margin: 10px auto 0;
   min-height: 30px;
   width: 100px;
 }
-
 .landing-form .landing-button-main:hover {
   border: 1px solid var(--bright-purple);
   color: var(--bright-purple);
