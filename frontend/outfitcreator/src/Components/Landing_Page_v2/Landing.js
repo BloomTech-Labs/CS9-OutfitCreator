@@ -67,23 +67,18 @@ class Landing extends Component {
 	};
 
 	signUp = () => {
-    const { username, password, email } = this.state;
-    
 		if (this.state.password.length === 0) {
 			this.notify('You must input a valid password.');
 			return;
-		}
-
-		if (!this.state.match) {
+		} else if (!this.state.match) {
 			this.notify('Passwords do not match. Please try again.');
 			return;
-		}
-
-		if (!this.state.agree) {
+		} else if (!this.state.agree) {
 			this.notify('Please indicate that you agree to the Terms and Conditions.');
 			return;
 		}
 
+		const { username, password, email } = this.state;
 		axios
 			.post(`${ROOT_URL.API}/auth/signup`, { username, password, email })
 			.then((res) => {
