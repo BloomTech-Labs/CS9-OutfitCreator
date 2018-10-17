@@ -38,6 +38,28 @@ class Landing extends Component {
 		this.setState({ signin: !this.state.signin });
 	};
 
+	signIn = () => {
+		const { email, password } = this.state;
+		axios
+			.post(`${ROOT_URL.API}/auth/login`, { email, password })
+			.then((res) => {
+				this.props.onSignin(res.data);
+				// Redirect to upload page once logged in
+				window.location = `${ROOT_URL.WEB}/upload`;
+				this.notifySignInSuccess();
+			})
+			.catch((err) => {
+				if (err.response.data.err) {
+					if (err.response.data.err.message === 'Sorry, you must validate email first') {
+						this.notifySignInValidationFailure();
+					}
+				} else {
+					this.notifySignInFailure();
+				}
+				localStorage.removeItem('authToken');
+			});
+	};
+
 	signUp = () => {
 		const { username, password, email } = this.state;
 
