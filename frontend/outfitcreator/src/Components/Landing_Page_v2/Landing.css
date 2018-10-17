@@ -21,7 +21,6 @@
   display: flex;
   flex-flow: column;
   justify-content: center;
-  min-height: 500px;
   padding-bottom: 10px;
   width: 200px;
 }
@@ -53,7 +52,7 @@
   width: 100px;
 }
 
-.landing-form .landing-button-main:hover {
+.landing-container .landing-button-main:hover {
   border: 1px solid var(--bright-purple);
   color: var(--bright-purple);
 }
@@ -141,6 +140,6 @@
   }
 
   .landing-form {
-    margin: -130px auto;
+    margin: -110px auto;
   }
 }
