@@ -4,10 +4,9 @@ import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
 import { ROOT_URL } from '../../config';
-import './Landing.css';
-
 import CR_Logo from '../../media/images/cr_logo.png';
 import { Icons } from '../../media/icons';
+import './Landing.css';
 
 class Landing extends Component {
 	constructor(props) {
@@ -18,45 +17,36 @@ class Landing extends Component {
 			username: '',
 			password: '',
 			vpassword: '',
+			match: true,
 			agree: false,
-      signin: true,
-      notify: false,
-      message: 'No message present...',
+			signin: true,
+			notify: false,
+			message: ''
 		};
 	}
 
 	handleChange = (name) => (event) => {
 		const prop = name === 'agree' ? 'checked' : 'value';
-		this.setState({
-			[name]: event.target[prop]
+		this.setState({ [name]: event.target[prop] }, () => {
+			this.setState({
+				match: this.state.password === this.state.vpassword
+			});
 		});
-	};
-
-	handleInput = (event) => {
-		this.setState({ [event.target.name]: event.target.value });
 	};
 
 	toggleSignin = () => {
 		this.setState({ signin: !this.state.signin });
-  };
-  
-  notify = (message) => {
-    const state = { ...this.state }
+	};
 
-    if (!message) {
-      state.notify = false;
-      state.message = '';
-    } else {
-      state.notify = true;
-      state.message = message;
-    }
-
-    this.setState(state);
-  }
+	notify = (message) => {
+		const state = { ...this.state };
+		state.notify = !state.notify;
+		state.message = message ? message : '';
+		this.setState(state);
+	};
 
 	signIn = () => {
-    const { email, password } = this.state;
-
+		const { email, password } = this.state;
 		axios
 			.post(`${ROOT_URL.API}/auth/login`, { email, password })
 			.then((res) => {
@@ -77,29 +67,32 @@ class Landing extends Component {
 	};
 
 	signUp = () => {
-		const { username, password, email } = this.state;
-
-		if (this.state.password === this.state.vpassword) {
+    const { username, password, email } = this.state;
+    
+		if (this.state.password.length === 0) {
+			this.notify('You must input a valid password.');
 			return;
 		}
 
-		if (this.state.agree) {
+		if (!this.state.match) {
+			this.notify('Passwords do not match. Please try again.');
 			return;
 		}
 
-		if (this.state.agree && this.state.password === this.state.vpassword) {
-			axios
-				.post(`${ROOT_URL.API}/auth/signup`, { username, password, email })
-				.then((res) => {
-					localStorage.setItem('authToken', `Bearer ${res.data.token}`);
-					this.notify('Successfully signed up. Please check your email to validate your account');
-				})
-				.catch((err) => {
-					this.notify('Failed to sign up. Please try again!');
-				});
-		} else {
+		if (!this.state.agree) {
 			this.notify('Please indicate that you agree to the Terms and Conditions.');
+			return;
 		}
+
+		axios
+			.post(`${ROOT_URL.API}/auth/signup`, { username, password, email })
+			.then((res) => {
+				localStorage.setItem('authToken', `Bearer ${res.data.token}`);
+				this.notify('Successfully signed up. Please check your email to validate your account');
+			})
+			.catch((err) => {
+				this.notify('Failed to sign up. Please try again!');
+			});
 	};
 
 	render() {
@@ -108,7 +101,7 @@ class Landing extends Component {
 				<div className="landing-main">
 					<img alt="closet roulette logo" className="landing-logo" src={CR_Logo} />
 					<div className="landing-form">
-						{this.state.signin ? (
+						{this.state.signin ? null : (
 							<TextField
 								className="landing-email landing-input"
 								label="Email"
@@ -116,7 +109,7 @@ class Landing extends Component {
 								onChange={this.handleChange('email')}
 								value={this.state.email}
 							/>
-						) : null}
+						)}
 						<TextField
 							className="landing-username landing-input"
 							label="Username"
@@ -132,9 +125,10 @@ class Landing extends Component {
 							type="password"
 							value={this.state.password}
 						/>
-						{this.state.signin ? (
+						{this.state.signin ? null : (
 							<React.Fragment>
 								<TextField
+									error={!this.state.match}
 									className="landing-vpassword landing-input"
 									label="Verify Password"
 									margin="normal"
@@ -155,11 +149,11 @@ class Landing extends Component {
 									</span>
 								</div>
 							</React.Fragment>
-						) : null}
+						)}
 						<Button
 							className="landing-button-main"
 							variant="outlined"
-							onClick={this.signin ? this.signIn : this.signUp}
+							onClick={this.state.signin ? this.signIn : this.signUp}
 						>
 							{this.state.signin ? 'Signup' : 'Login'}
 						</Button>
@@ -180,14 +174,16 @@ class Landing extends Component {
 					</div>
 				</div>
 				<div className="landing-info" />
-        {this.state.notify ?
-          <div className="landing-background_tinted">
-            <div className="landing-modal">
-              <p>{this.state.message}</p>
-              <Button className="landing-button-main" variant="outlined" onClick={() => this.notify()}>Got it!</Button>
-            </div>
-          </div>
-        : null}
+				{this.state.notify ? (
+					<div className="landing-background_tinted">
+						<div className="landing-modal">
+							<p>{this.state.message}</p>
+							<Button className="landing-button-main" variant="outlined" onClick={() => this.notify()}>
+								OK
+							</Button>
+						</div>
+					</div>
+				) : null}
 			</div>
 		);
 	}
