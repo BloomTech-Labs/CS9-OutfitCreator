@@ -24,7 +24,7 @@ class Landing extends Component {
 			notify: false,
 			message: ''
 		};
-	}
+  }
 
 	handleChange = (name) => (event) => {
     // Calibrate for input field and check box variation
@@ -54,9 +54,8 @@ class Landing extends Component {
 		axios
 			.post(`${ROOT_URL.API}/auth/login`, { email, password })
 			.then((res) => {
-				this.props.onSignin(res.data);
+				this.signInSuccess(res.data);
 				window.location = `${ROOT_URL.WEB}/upload`;
-				this.notify('Successfully signed in.');
 			})
 			.catch((err) => {
 				if (err.response.data.err) {
@@ -93,6 +92,10 @@ class Landing extends Component {
 			.catch((err) => {
 				this.notify('Failed to sign up. Please try again!');
 			});
+  };
+  
+  signInSuccess = (data) => {
+		localStorage.setItem('authToken', `Bearer ${data.token}`);
 	};
 
 	render() {
@@ -105,20 +108,20 @@ class Landing extends Component {
 						{this.state.signin ? null : (
 							<TextField
 								className="landing-input"
-								label="Email"
+								label="Username"
 								margin="normal"
-								onChange={this.handleChange('email')}
+								onChange={this.handleChange('username')}
 								type="text"
-								value={this.state.email}
+								value={this.state.username}
 							/>
 						)}
 						<TextField
 							className="landing-input"
-							label="Username"
+							label="Email"
 							margin="normal"
-							onChange={this.handleChange('username')}
+							onChange={this.handleChange('email')}
 							type="text"
-							value={this.state.username}
+							value={this.state.email}
 						/>
 						<TextField
 							className="landing-input"
