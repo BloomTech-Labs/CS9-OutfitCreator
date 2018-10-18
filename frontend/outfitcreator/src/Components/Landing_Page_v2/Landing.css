@@ -43,8 +43,6 @@
 }
 
 .landing-container .landing-button-main {
-  border: 1px solid var(--dark-purple);
-  border-radius: 50px;
   height: 30px;
   line-height: 10px;
   margin: 20px auto 0;
@@ -58,6 +56,8 @@
 }
 
 .landing-form .landing-button-sub {
+  border: none;
+  border-radius: 0;
   border-bottom-right-radius: 30px;
   border-bottom-left-radius: 30px;
   font-size: 12px;
@@ -70,6 +70,7 @@
 }
 
 .landing-form .landing-button-sub:hover {
+  border: none;
   color: var(--bright-purple);
 }
 
