@@ -10,6 +10,16 @@ ul {
 	list-style: none;
 }
 
+.App .mui-button {
+  border: 1px solid var(--dark-purple);
+  border-radius: 50px;
+}
+
+.App .mui-button:hover {
+  border: 1px solid var(--bright-purple);
+  color: var(--bright-purple);
+}
+
 button {
   outline: none !important;
 }
