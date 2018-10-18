@@ -57,10 +57,13 @@ class App extends Component {
 			.catch((err) => err);
 	};
 
-	// Used to activate modal when needed
-	// Pass down through props then place `this.modal = props.modal.bind(this);`
-	// inside constructor of component in which you wish to use a modal.
-	// To remove the modal component simply call the method with no content or action.
+	// Used to activate Modal component
+  // Pass this method down through props into the component that you 
+  // would like to use the Modal component inside of. Then place the 
+  // following line of code in the components constructor: 
+  // `this.modal = props.modal.bind(this);`
+
+  // See comments in Modal.js for component use instructions
 	modal(content, action = () => this.modal()) {
 		const state = { ...this.state };
 
