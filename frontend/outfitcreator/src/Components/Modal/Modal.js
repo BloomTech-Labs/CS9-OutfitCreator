@@ -16,10 +16,6 @@ import './Modal.css';
 // See comments in App.js for modal method use instructions
 
 class Modal extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		return (
 			<div className="modal-background_tinted">
