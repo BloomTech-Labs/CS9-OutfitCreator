@@ -5,16 +5,14 @@
 
 .landing-main {
 	align-items: center;
-	display: flex;
-	height: 100vh;
-	justify-content: center;
-	padding-right: 10vw;
-	width: 100vw;
+  display: flex;
+  height: 100vh;
 }
 
-.landing-logo {
-	transform: scale(1);
-	margin-right: 50px;
+.landing-title {
+	transform: scale(.8);
+  margin-right: 20px;
+  margin-left: -10vw;
 }
 
 .landing-form {
@@ -77,7 +75,7 @@
 .landing-oauth {
 	display: flex;
 	justify-content: space-between;
-	margin-top: 25px; /* Res */
+	margin-top: 25px;
 }
 
 .landing-oauth-icon {
@@ -110,10 +108,14 @@
 }
 
 @media (max-width: 1000px) {
-	.landing-logo {
-		transform: scale(.8);
-		margin-right: 20px;
-	}
+	.landing-title {
+    transform: scale(.6);
+    margin-right: 0;
+  }
+  
+  .landing-form {
+    padding: 0;
+  }
 
 	.landing-form .landing-input {
 		margin: 5px 0;
@@ -128,16 +130,18 @@
 	}
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
 	.landing-main {
 		display: block;
 		padding: 0;
 	}
 
-	.landing-logo {
-		transform: scale(.5);
-		margin-top: -50px;
-		margin-right: -10px;
+	.landing-title {
+    transform: scale(.5);
+    margin: -100px auto 0;
+    /* margin-top: -50px;
+    margin-left: 0;
+		margin-right: -20px; */
 	}
 
 	.landing-form {
