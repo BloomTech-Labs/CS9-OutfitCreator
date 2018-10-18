@@ -26,6 +26,43 @@ class Landing extends Component {
 		};
 	}
 
+	componentDidMount() {
+		if (this.props.location.pathname.includes('verify')) {
+			const key = this.props.match.params.key;
+			axios
+				.post(`${ROOT_URL.API}/auth/verify`, { key })
+				.then(() => {
+					this.modal(<p>Successfully validated email. You can now login</p>);
+					this.setState({ validated: true });
+				})
+				.catch((err) => {
+					if (err.response) {
+						if (err.response.data.code === 'EXPTOKEN') {
+							this.modal(<p>Token is expired. Please request a new one.</p>);
+						}
+					} else {
+						this.modal(<p>Failed to validate email. Please try again!</p>, () => {
+							this.modal(
+                // Create a small input form to grab email from user
+								<React.Fragment>
+									<p>Please input your email address to resend the verification email.</p>
+									<TextField
+										className="landing-input"
+										label="Email"
+										margin="normal"
+										onChange={this.handleChange('email')}
+										type="text"
+									/>
+								</React.Fragment>,
+								this.resendEmail
+							);
+						});
+					}
+					this.setState({ validated: false });
+				});
+		}
+	}
+
 	resendEmail = () => {
 		const { email } = this.state;
 		axios
