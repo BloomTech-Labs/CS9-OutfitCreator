@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import Modal from '../Modal/Modal';
 import { ROOT_URL } from '../../config';
-import CR_Logo from '../../media/images/cr_logo.png';
+import CR_Title from '../../media/images/cr_title.png';
 import { Icons } from '../../media/icons';
 
 class Landing extends Component {
@@ -145,7 +145,7 @@ class Landing extends Component {
 		return (
 			<div className="landing-container">
 				<div className="landing-main">
-					<img alt="closet roulette logo" className="landing-logo" src={CR_Logo} />
+					<img alt="closet roulette title" className="landing-title" src={CR_Title} />
 					<div className="landing-form">
 						{/* Only show email when not signing in */}
 						{this.state.signin ? null : (
