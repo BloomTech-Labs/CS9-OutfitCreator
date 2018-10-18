@@ -4,14 +4,16 @@ import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
 
+import Modal from '../Modal/Modal';
 import { ROOT_URL } from '../../config';
 import CR_Logo from '../../media/images/cr_logo.png';
 import { Icons } from '../../media/icons';
-import './Landing.css';
 
 class Landing extends Component {
 	constructor(props) {
 		super(props);
+
+		this.modal = props.modal.bind(this);
 
 		this.state = {
 			email: '',
@@ -20,17 +22,15 @@ class Landing extends Component {
 			vpassword: '',
 			match: true,
 			agree: false,
-			signin: true,
-			notify: false,
-			message: ''
+			signin: true
 		};
-  }
+	}
 
 	handleChange = (name) => (event) => {
-    // Calibrate for input field and check box variation
-    const prop = name === 'agree' ? 'checked' : 'value';
+		// Calibrate for input field and check box variation
+		const prop = name === 'agree' ? 'checked' : 'value';
 		this.setState({ [name]: event.target[prop] }, () => {
-      // Wait until first state is resolved to ensure accurate match represantation
+			// Wait until first state is resolved to ensure accurate match represantation
 			this.setState({
 				match: this.state.password === this.state.vpassword
 			});
@@ -39,14 +39,6 @@ class Landing extends Component {
 
 	toggleSignin = () => {
 		this.setState({ signin: !this.state.signin });
-  };
-  
-  // Used to activate modal when notifiaction is needed
-	notify = (message) => {
-		const state = { ...this.state };
-		state.notify = !state.notify;
-		state.message = message ? message : '';
-		this.setState(state);
 	};
 
 	signIn = () => {
@@ -60,25 +52,25 @@ class Landing extends Component {
 			.catch((err) => {
 				if (err.response.data.err) {
 					if (err.response.data.err.message === 'Sorry, you must validate email first') {
-						this.notify('You must validate your account. Please check your email.');
+						this.modal(<p>You must validate your account. Please check your email.</p>);
 					}
 				} else {
-					this.notify('Failed to sign in. Please try again!');
+					this.modal(<p>Failed to sign in. Please try again!</p>);
 				}
 				localStorage.removeItem('authToken');
 			});
 	};
 
 	signUp = () => {
-    // Checks for errors from top to bottom
+		// Checks for errors from top to bottom
 		if (this.state.password.length === 0) {
-			this.notify('You must input a valid password.');
+			this.modal(<p>You must input a valid password.</p>);
 			return;
 		} else if (!this.state.match) {
-			this.notify('Passwords do not match. Please try again.');
+			this.modal(<p>Passwords do not match. Please try again.</p>);
 			return;
 		} else if (!this.state.agree) {
-			this.notify('Please indicate that you agree to the Terms and Conditions.');
+			this.modal(<p>Please indicate that you agree to the Terms and Conditions.</p>);
 			return;
 		}
 
@@ -87,14 +79,16 @@ class Landing extends Component {
 			.post(`${ROOT_URL.API}/auth/signup`, { username, password, email })
 			.then((res) => {
 				localStorage.setItem('authToken', `Bearer ${res.data.token}`);
-				this.notify('Successfully signed up. Please check your email to validate your account');
+				this.modal(<p>Successfully signed up. Please check your email to validate your account</p>);
 			})
 			.catch((err) => {
-				this.notify('Failed to sign up. Please try again!');
+				this.modal(<p>Failed to sign up. Please try again!</p>);
 			});
-  };
-  
-  signInSuccess = (data) => {
+
+		this.setState({ username: '', email: '', password: '', vpassword: '', agree: false });
+	};
+
+	signInSuccess = (data) => {
 		localStorage.setItem('authToken', `Bearer ${data.token}`);
 	};
 
@@ -104,7 +98,7 @@ class Landing extends Component {
 				<div className="landing-main">
 					<img alt="closet roulette logo" className="landing-logo" src={CR_Logo} />
 					<div className="landing-form">
-            {/* Only show email when not signing in */}
+						{/* Only show email when not signing in */}
 						{this.state.signin ? null : (
 							<TextField
 								className="landing-input"
@@ -131,7 +125,7 @@ class Landing extends Component {
 							type="password"
 							value={this.state.password}
 						/>
-            {/* Only show verify password field and checkbox when not signing in */}
+						{/* Only show verify password field and checkbox when not signing in */}
 						{this.state.signin ? null : (
 							<React.Fragment>
 								<TextField
@@ -156,16 +150,16 @@ class Landing extends Component {
 									</span>
 								</div>
 							</React.Fragment>
-            )}
-            {/* Modify button content and action based on sign in status */}
+						)}
+						{/* Modify button content and action based on sign in status */}
 						<Button
-							className="landing-button-main"
+							className="mui-button landing-button-main"
 							variant="outlined"
 							onClick={this.state.signin ? this.signIn : this.signUp}
 						>
 							{this.state.signin ? 'Login' : 'Signup'}
 						</Button>
-						<Button className="landing-button-sub" onClick={this.toggleSignin}>
+						<Button className="mui-button landing-button-sub" onClick={this.toggleSignin}>
 							{this.state.signin ? 'Signup' : 'Login'}
 						</Button>
 						<div className="landing-oauth">
@@ -182,17 +176,7 @@ class Landing extends Component {
 					</div>
 				</div>
 				<div className="landing-info" />
-        {/* Only show modal when notification is activated */}
-				{this.state.notify ? (
-					<div className="landing-background_tinted">
-						<div className="landing-modal">
-							<p>{this.state.message}</p>
-							<Button className="landing-button-main" variant="outlined" onClick={() => this.notify()}>
-								OK
-							</Button>
-						</div>
-					</div>
-				) : null}
+				{this.state.modal ? <Modal content={this.state.content} action={this.state.action} /> : null}
 			</div>
 		);
 	}
