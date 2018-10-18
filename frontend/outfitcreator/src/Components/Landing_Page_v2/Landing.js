@@ -26,6 +26,18 @@ class Landing extends Component {
 		};
 	}
 
+	resendEmail = () => {
+		const { email } = this.state;
+		axios
+			.post(`${ROOT_URL.API}/auth/sendverifyemail`, { email })
+			.then(() => {
+				this.modal(<p>Successfully resent verification. Please check your email</p>);
+			})
+			.catch((err) => {
+				this.modal(<p>Failure resending verification. Please try again.</p>);
+			});
+	};
+
 	handleChange = (name) => (event) => {
 		// Calibrate for input field and check box variation
 		const prop = name === 'agree' ? 'checked' : 'value';
