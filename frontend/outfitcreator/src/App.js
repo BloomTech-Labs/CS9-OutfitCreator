@@ -17,6 +17,7 @@ import Closet from './Components/Closet_Page/Closet.js';
 import VerifyEmail from './Components/Landing_Page/VerifyEmail';
 
 import './App.css';
+import './Components/Landing_Page_v2/Landing.css';
 
 library.add(faShareAlt);
 
@@ -54,6 +55,28 @@ class App extends Component {
 				cb(res.data.paid);
 			})
 			.catch((err) => err);
+	};
+
+  // Used to activate modal when needed
+  // Pass down through props then place `this.modal = props.modal.bind(this);`
+  // inside constructor of component in which you wish to use a modal.
+  // To remove the modal component simply call the method with no content or action.
+	modal(content, action = () => this.modal()) {
+    const state = { ...this.state };
+
+    if (content) {
+      state.content = content;
+      state.action = () => {
+        this.modal();
+        action();
+      };
+      state.modal = true;
+    } else {
+      state.content = '';
+      state.modal = false;
+    }
+
+		this.setState(state);
 	};
 
 	// signInSuccess = (data) => {
