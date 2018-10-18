@@ -14,7 +14,7 @@ import Archive from './Components/Archive_Page/Archive';
 import Settings from './Components/Settings_Page/Settings';
 import OutfitEdit from './Components/Archive_Page/OutfitEdit';
 import Closet from './Components/Closet_Page/Closet.js';
-import VerifyEmail from './Components/Landing_Page/VerifyEmail';
+// import VerifyEmail from './Components/Landing_Page/VerifyEmail';
 
 import './App.css';
 import './Components/Landing_Page_v2/Landing.css';
