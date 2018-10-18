@@ -43,7 +43,7 @@ class Landing extends Component {
 					} else {
 						this.modal(<p>Failed to validate email. Please try again!</p>, () => {
 							this.modal(
-                // Create a small input form to grab email from user
+								// Create a small input form to grab email from user
 								<React.Fragment>
 									<p>Please input your email address to resend the verification email.</p>
 									<TextField
