@@ -57,27 +57,27 @@ class App extends Component {
 			.catch((err) => err);
 	};
 
-  // Used to activate modal when needed
-  // Pass down through props then place `this.modal = props.modal.bind(this);`
-  // inside constructor of component in which you wish to use a modal.
-  // To remove the modal component simply call the method with no content or action.
+	// Used to activate modal when needed
+	// Pass down through props then place `this.modal = props.modal.bind(this);`
+	// inside constructor of component in which you wish to use a modal.
+	// To remove the modal component simply call the method with no content or action.
 	modal(content, action = () => this.modal()) {
-    const state = { ...this.state };
+		const state = { ...this.state };
 
-    if (content) {
-      state.content = content;
-      state.action = () => {
-        this.modal();
-        action();
-      };
-      state.modal = true;
-    } else {
-      state.content = '';
-      state.modal = false;
-    }
+		if (content) {
+			state.content = content;
+			state.action = () => {
+				this.modal();
+				action();
+			};
+			state.modal = true;
+		} else {
+			state.content = '';
+			state.modal = false;
+		}
 
 		this.setState(state);
-	};
+	}
 
 	// signInSuccess = (data) => {
 	// 	localStorage.setItem('authToken', `Bearer ${data.token}`);
