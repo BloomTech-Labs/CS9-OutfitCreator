@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { ROOT_URL } from '../../config.js';
 import CR_Logo from '../../media/images/cr_logo.png';
-import { Icons } from '../Icons/index.js';
+import { Icons } from '../../media/icons/index.js';
 import './Navigation.css';
 
 class Navigation extends Component {
@@ -55,15 +55,15 @@ class Navigation extends Component {
 	render() {
 		return (
       <div className="navigation-container">
-        <img className="navigation-logo" src={CR_Logo}></img>
+        <img alt="closet roulette logo" className="navigation-logo" src={CR_Logo}></img>
         <div className="navigation-pages">
           {Object.keys(this.allPages).map(page => (
-            <div className={`navigation-page page-${page}`}>
-              
+            <div className={`navigation-page page-${page}`} key={page}>
+              <h2><a href={`${ROOT_URL.WEB}/${page}`}>{this.allPages[page]}</a></h2>
             </div>
           ))}
         </div>
-        <img className="navigation-user" src={Icons.userCircle}></img>
+        <img alt="user options icon" className="navigation-user" src={Icons.userCircle}></img>
       </div>
     )
   }
