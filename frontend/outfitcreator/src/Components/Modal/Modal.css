@@ -1,0 +1,24 @@
+.modal-background_tinted {
+	align-items: center;
+	background: rgba(0, 0, 0, 0.25);
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100vw;
+}
+
+.modal-body {
+	align-items: center;
+	background: white;
+	justify-content: space-around;
+	padding: 30px 20px;
+	max-width: 50vw;
+}
+
+.modal-content {
+	border: none;
+	padding-bottom: 20px;
+}
