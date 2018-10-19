@@ -7,7 +7,7 @@ import axios from 'axios';
 
 import Landing from './Components/Landing_Page_v2/Landing';
 // import Login from './Components/Landing_Page/Login';
-import Navigation from './Components/Navigation/Navigation';
+import Navigation from './Components/Navigation_v2/Navigation';
 import CreateOutfit from './Components/Create_Component/CreateOutfit';
 import Upload from './Components/Upload_Page/Upload';
 import Archive from './Components/Archive_Page/Archive';
