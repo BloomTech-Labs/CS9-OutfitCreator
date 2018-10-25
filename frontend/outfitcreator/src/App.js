@@ -18,6 +18,7 @@ import Closet from './Components/Closet_Page/Closet.js';
 
 import './App.css';
 import './Components/Landing_Page_v2/Landing.css';
+import './Components/Navigation_v2/Navigation.css';
 
 library.add(faShareAlt);
 
