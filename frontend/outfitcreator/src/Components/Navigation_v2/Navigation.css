@@ -1,0 +1,61 @@
+.navigation-container {
+  display: flex;
+  justify-content: space-between;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.navigation-logo {
+  height: 100px;
+  margin: 20px;
+  width: 100px;
+}
+
+.navigation-page-indicator {
+  background: var(--dark-purple);
+  border-radius: 50%;
+  display: inline-block;
+  height: 10px;
+  margin: 0 8px 2px 0;
+  width: 10px;
+}
+
+.navigation-pages {
+  border-bottom: 1px solid var(--dark-purple);
+  cursor: pointer;
+  display: flex;
+  font-size: 20px;
+  flex-grow: 1;
+  height: 45px;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+.navigation-pages:after {
+  background: white;
+  content: '';
+  height: 60px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: -10;
+}
+
+.navigation-pages a {
+  color: var(--matt-black);
+}
+
+.navigation-pages a:hover {
+  color: var(--bright-purple);
+  text-decoration: none;
+}
+
+.navigation-user {
+  height: 55px;
+  margin: 30px;
+  margin-left: 40px;
+  width: 55px;
+}
