@@ -5,7 +5,8 @@
 	--light-purple: rgb(194, 194, 235);
   --med-purple: rgb(141, 141, 200);
   --bright-purple: rgb(49,66,157);
-	--dark-purple: rgb(54, 56, 88);
+  --dark-purple: rgb(54, 56, 88);
+  --matt-black: rgb(56,56,56);
 }
 
 html,
