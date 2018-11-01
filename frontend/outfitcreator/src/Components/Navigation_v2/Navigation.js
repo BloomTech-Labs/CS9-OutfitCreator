@@ -47,6 +47,10 @@ class Navigation extends Component {
 			this.setState({ fullSideNav: false });
 		}
 	};
+  
+  toggleDrawer = () => {
+    this.setState({ sideNavOpen: !this.state.sideNavOpen });
+  };
 
 	signOut() {
 		localStorage.removeItem('authToken');
