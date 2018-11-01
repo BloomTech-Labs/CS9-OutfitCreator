@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
 import axios from 'axios';
 
 import { ROOT_URL } from '../../config.js';
@@ -12,9 +17,6 @@ class Navigation extends Component {
 
 		this.state = {
 			currentPage: props.location.pathname.slice(1),
-			navCollapseActive: false,
-			navCollapsed: true,
-			settingsCollapsed: true
 		};
 
 		this.allPages = {
@@ -22,7 +24,7 @@ class Navigation extends Component {
 			closet: 'My Closet',
 			create: 'New Outfit',
 			archive: 'Outfit Archive'
-		};
+    };
 
 		this.setAuthToken();
 	}
@@ -39,22 +41,12 @@ class Navigation extends Component {
 	}
 
 	updateDimensions = () => {
-		if (window.innerWidth < 800) {
-			this.setState({ collapseActive: true });
-		} else if (this.state.collapseActive) {
-			this.setState({ collapsed: true, collapseActive: false });
+		if (window.innerWidth < 700) {
+			this.setState({ fullSideNav: true });
+		} else if (this.state.navCollapseActive) {
+			this.setState({ fullSideNav: false });
 		}
 	};
-
-	// selectActivePage() {
-	//   const current = document.querySelector(`.page-${this.state.currentPage}`);
-	// }
-
-	toggleNav = () => {};
-
-	toggleSettings = () => {};
-
-	navSettings() {}
 
 	signOut() {
 		localStorage.removeItem('authToken');
@@ -66,10 +58,10 @@ class Navigation extends Component {
 			<div className="navigation-container">
 				<img alt="closet roulette logo" className="navigation-logo" src={CR_Logo} />
 				<div className={`navigation-pages`}>
-					{this.state.collapseActive ? (
-						<div className={`navigation-page page-${this.state.currentPage}`}>
-							{this.allPages[this.state.currentPage]}
-						</div>
+					{this.state.navCollapseActive ? (
+            <div className={`navigation-page page-${this.state.currentPage}`} onClick={this.toggleDrawer}>
+              {this.allPages[this.state.currentPage]}
+            </div>
 					) : (
 						Object.keys(this.allPages).map((page) => (
 							<div className={`navigation-page page-${page}`} key={page}>
@@ -83,7 +75,7 @@ class Navigation extends Component {
 						))
 					)}
 				</div>
-				<img alt="user options icon" className="navigation-user" src={Icons.userCircle} />
+				<img alt="user options icon" className="navigation-user" onClick={this.toggleDrawer} src={Icons.userCircle} />
 			</div>
 		);
 	}
