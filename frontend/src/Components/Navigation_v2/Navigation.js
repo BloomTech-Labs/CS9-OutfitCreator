@@ -32,7 +32,7 @@ class Navigation extends Component {
 		this.userOptions = {
 			settings: 'Settings',
 			billing: 'Billing',
-			signout: 'Signout'
+			signout: 'Sign Out'
 		};
 
 		this.mainPagesList = Object.keys(this.mainPages).map((page) => (
@@ -48,11 +48,22 @@ class Navigation extends Component {
 
 		this.userOptionsList = Object.keys(this.userOptions).map((option) => (
 			<React.Fragment key={option}>
-				<a href={`${ROOT_URL.WEB}/${option}`}>
-					<ListItem className="navigation-divide" button key={this.userOptions[option]}>
+				{option === 'signout' ? (
+					<ListItem
+						className="navigation-divide"
+						button
+						key={this.userOptions[option]}
+						onClick={this.signOut}
+					>
 						<ListItemText primary={this.userOptions[option]} />
 					</ListItem>
-				</a>
+				) : (
+					<a href={`${ROOT_URL.WEB}/${option}`}>
+						<ListItem className="navigation-divide" button key={this.userOptions[option]}>
+							<ListItemText primary={this.userOptions[option]} />
+						</ListItem>
+					</a>
+				)}
 				<Divider />
 			</React.Fragment>
 		));
@@ -101,26 +112,24 @@ class Navigation extends Component {
 		return (
 			<div className="navigation-container">
 				<img alt="closet roulette logo" className="navigation-logo" src={CR_Logo} />
-					{this.state.navCollapseActive ? (
-            <div className="navigation-pages clickable" onClick={this.toggleDrawer}>
-              <div className={`navigation-page page-${this.state.currentPage}`}>
-                {this.mainPages[this.state.currentPage]}
-              </div>
-            </div>
-					) : (
-            <div className="navigation-pages">
-              {Object.keys(this.mainPages).map((page) => (
-                <div className={`navigation-page page-${page} clickable`} key={page}>
-                  {this.state.currentPage === page ? (
-                    <span className="navigation-page-indicator" />
-                  ) : null}
-                  <span>
-                    <a href={`${ROOT_URL.WEB}/${page}`}>{this.mainPages[page]}</a>
-                  </span>
-                </div>
-              ))}
-            </div>
-					)}
+				{this.state.navCollapseActive ? (
+					<div className="navigation-pages clickable" onClick={this.toggleDrawer}>
+						<div className={`navigation-page page-${this.state.currentPage}`}>
+							{this.mainPages[this.state.currentPage]}
+						</div>
+					</div>
+				) : (
+					<div className="navigation-pages">
+						{Object.keys(this.mainPages).map((page) => (
+							<div className={`navigation-page page-${page} clickable`} key={page}>
+								{this.state.currentPage === page ? (
+									<span className="navigation-page-indicator" />
+								) : null}
+								<a href={`${ROOT_URL.WEB}/${page}`}>{this.mainPages[page]}</a>
+							</div>
+						))}
+					</div>
+				)}
 				<img
 					alt="user options icon"
 					className="navigation-user clickable"
