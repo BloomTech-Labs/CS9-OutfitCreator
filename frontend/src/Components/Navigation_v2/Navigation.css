@@ -30,9 +30,10 @@
   font-size: 18px;
   height: 35px;
   justify-content: space-around;
-  margin-right: -43px;
+  margin-left: auto;
+  margin-right: -3px;
   margin-top: 25px;
-  width: 80%;
+  width: 50%;
 }
 
 .navigation-pages:after {
@@ -59,7 +60,7 @@
   cursor: pointer;
   height: 50px;
   margin: 25px;
-  margin-left: 40px;
+  margin-left: 0;
   width: 50px;
 }
 
@@ -75,15 +76,8 @@
   border-bottom: 1px solid black;
 }
 
-@media (max-width: 600px) {
+@media (min-width: 600px) {
   .navigation-pages {
-    flex-grow: 0;
-    margin-left: auto;
-    margin-right: -3px;
-    width: 50%;
-  }
-
-  .navigation-user {
-    margin-left: 0;
+    width: 80%;
   }
 }
