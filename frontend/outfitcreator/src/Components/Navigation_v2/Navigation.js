@@ -76,6 +76,16 @@ class Navigation extends Component {
 					)}
 				</div>
 				<img alt="user options icon" className="navigation-user" onClick={this.toggleDrawer} src={Icons.userCircle} />
+        <Drawer anchor="right" open={this.state.sideNavOpen} onClose={this.toggleDrawer}>
+          <div
+            tabIndex={0}
+            role="button"
+            onClick={this.toggleDrawer}
+            onKeyDown={this.toggleDrawer}
+          >
+            {sideList}
+          </div>
+        </Drawer>
 			</div>
 		);
 	}
