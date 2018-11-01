@@ -1,13 +1,20 @@
+/* Base CSS is built with mobile first technique
+All base styles are for small devices below 600px */
+
+/* CSS variables for easy media query adjustments */
 :root {
-  --nav-spacing-top: 10px;
-  --nav-spacing-logo-top: 5px;
+  --nav-logo-size: 60px;  /* 75 */
+  --nav-pages-width: 50%;
   --nav-spacing-logo-left: 10px;
+  --nav-spacing-logo-top: 5px;
+  --nav-spacing-user-top: 5px;
+  --nav-spacing-user-right: 8px;
+  --nav-user-size: 45px; /* 50 */
 }
 
 .navigation-container {
   display: flex;
   height: 60px;
-  justify-content: space-between;
   left: 0;
   position: fixed;
   top: 0;
@@ -15,20 +22,12 @@
 }
 
 .navigation-logo {
-  height: 75px;
+  height: var(--nav-logo-size);
   margin: var(--nav-spacing-logo-top) var(--nav-spacing-logo-left) -10px;
-  width: 75px;
+  width: var(--nav-logo-size);
 }
 
-.navigation-page-indicator {
-  background: var(--dark-purple);
-  border-radius: 50%;
-  display: inline-block;
-  height: 10px;
-  margin: 0 8px 2px 0;
-  width: 10px;
-}
-
+/* Evenly spaces page names when top nav bar is present */
 .navigation-pages {
   border-bottom: 1px solid var(--dark-purple);
   display: flex;
@@ -37,10 +36,11 @@
   justify-content: space-around;
   margin-left: auto;
   margin-right: -3px;
-  margin-top: var(--nav-spacing-top);
-  width: 50%;
+  margin-top: var(--nav-spacing-user-top);
+  width: var(--nav-pages-width);
 }
 
+/* Ensures that main page does not appear behind navigation */
 .navigation-pages:after {
   background: white;
   content: '';
@@ -61,11 +61,21 @@
   text-decoration: none;
 }
 
+/* Dot placed beside current page name */
+.navigation-page-indicator {
+  background: var(--dark-purple);
+  border-radius: 50%;
+  display: inline-block;
+  height: 10px;
+  margin: 0 8px 2px 0;
+  width: 10px;
+}
+
 .navigation-user {
-  height: 50px;
-  margin: var(--nav-spacing-top);
-  margin-left: 0;
-  width: 50px;
+  height: var(--nav-user-size);
+  margin-top: var(--nav-spacing-user-top);
+  margin-right: var(--nav-spacing-user-right);
+  width: var(--nav-user-size);
 }
 
 .navigation-side-nav {
@@ -82,38 +92,38 @@
 
 /* Maintain mobile first approach */
 
+/* For medium devices */
 @media (min-width: 600px) {
   :root {
-    --nav-spacing-top: 15px;
-    --nav-spacing-logo-top: 10px;
+    --nav-logo-size: 60px;  /* 75 */
+    --nav-pages-width: 60%;
     --nav-spacing-logo-left: 10px;
-  }
-
-  .navigation-pages {
-    width: 65%;
-  }
-}
-
-@media (min-width: 800px) {
-  :root {
-    --nav-spacing-top: 25px;
-    --nav-spacing-logo-top: 20px;
-    --nav-spacing-logo-left: 20px;
-  }
-
-  .navigation-pages {
-    width: 80%;
+    --nav-spacing-logo-top: 10px;
+    --nav-spacing-user-top: 15px;
+    --nav-user-size: 45px; /* 50 */
   }
 }
 
-@media (min-width: 1000px) {
+/* For large devices */
+@media (min-width: 900px) {
   :root {
-    --nav-spacing-top: 25px;
-    --nav-spacing-logo-top: 20px;
-    --nav-spacing-logo-left: 20px;
+    --nav-logo-size: 60px;  /* 75 */
+    --nav-pages-width: 70%;
+    --nav-spacing-logo-left: 15px;
+    --nav-spacing-logo-top: 15px;
+    --nav-spacing-user-top: 20px;
+    --nav-user-size: 45px; /* 50 */
   }
+}
 
-  .navigation-pages {
-    width: 80%;
+/* For extra large devices */
+@media (min-width: 1200px) {
+  :root {
+    --nav-logo-size: 60px;  /* 75 */
+    --nav-pages-width: 80%;
+    --nav-spacing-logo-left: 20px;
+    --nav-spacing-logo-top: 20px;
+    --nav-spacing-user-top: 25px;
+    --nav-user-size: 45px; /* 50 */
   }
 }
