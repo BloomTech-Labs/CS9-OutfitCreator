@@ -74,6 +74,14 @@ class Navigation extends Component {
                 <Divider />
               </React.Fragment>
             )) : null}
+            {['Setting', 'Billing', 'Sign Out'].map((text) => (
+              <React.Fragment>
+                <ListItem button key={text}>
+                  <ListItemText primary={text} />
+                </ListItem>
+                {text !== 'Sign Out' ? <Divider /> : null }
+              </React.Fragment>
+            ))}
         </List>
       </div>
     );
