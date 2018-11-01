@@ -17,8 +17,9 @@ class Navigation extends Component {
 
 		this.state = {
 			currentPage: props.location.pathname.slice(1),
-      sideNavOpen: false,
       fullSideNav: false,
+      navCollapsed: true,
+      sideNavOpen: false,
 		};
 
 		this.allPages = {
@@ -44,9 +45,9 @@ class Navigation extends Component {
 
 	updateDimensions = () => {
 		if (window.innerWidth < 700) {
-			this.setState({ fullSideNav: true });
+			this.setState({ navCollapseActive: true, fullSideNav: true });
 		} else if (this.state.navCollapseActive) {
-			this.setState({ fullSideNav: false });
+			this.setState({ nnavCollapseActive: false, fullSideNav: false });
 		}
 	};
   
