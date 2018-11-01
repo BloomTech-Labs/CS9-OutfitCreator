@@ -1,3 +1,9 @@
+:root {
+  --nav-spacing-top: 10px;
+  --nav-spacing-logo-top: 5px;
+  --nav-spacing-logo-left: 10px;
+}
+
 .navigation-container {
   display: flex;
   height: 60px;
@@ -10,7 +16,7 @@
 
 .navigation-logo {
   height: 75px;
-  margin: 20px 20px -10px;
+  margin: var(--nav-spacing-logo-top) var(--nav-spacing-logo-left) -10px;
   width: 75px;
 }
 
@@ -25,14 +31,13 @@
 
 .navigation-pages {
   border-bottom: 1px solid var(--dark-purple);
-  cursor: pointer;
   display: flex;
   font-size: 18px;
   height: 35px;
   justify-content: space-around;
   margin-left: auto;
   margin-right: -3px;
-  margin-top: 25px;
+  margin-top: var(--nav-spacing-top);
   width: 50%;
 }
 
@@ -57,9 +62,8 @@
 }
 
 .navigation-user {
-  cursor: pointer;
   height: 50px;
-  margin: 25px;
+  margin: var(--nav-spacing-top);
   margin-left: 0;
   width: 50px;
 }
@@ -76,7 +80,39 @@
   border-bottom: 1px solid black;
 }
 
+/* Maintain mobile first approach */
+
 @media (min-width: 600px) {
+  :root {
+    --nav-spacing-top: 15px;
+    --nav-spacing-logo-top: 10px;
+    --nav-spacing-logo-left: 10px;
+  }
+
+  .navigation-pages {
+    width: 65%;
+  }
+}
+
+@media (min-width: 800px) {
+  :root {
+    --nav-spacing-top: 25px;
+    --nav-spacing-logo-top: 20px;
+    --nav-spacing-logo-left: 20px;
+  }
+
+  .navigation-pages {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1000px) {
+  :root {
+    --nav-spacing-top: 25px;
+    --nav-spacing-logo-top: 20px;
+    --nav-spacing-logo-left: 20px;
+  }
+
   .navigation-pages {
     width: 80%;
   }
