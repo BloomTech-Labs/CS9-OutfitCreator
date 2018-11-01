@@ -17,6 +17,8 @@ class Navigation extends Component {
 
 		this.state = {
 			currentPage: props.location.pathname.slice(1),
+      sideNavOpen: false,
+      fullSideNav: false,
 		};
 
 		this.allPages = {
