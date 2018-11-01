@@ -11,10 +11,15 @@ import { ROOT_URL } from '../../config.js';
 import CR_Logo from '../../media/images/cr_logo.png';
 import { Icons } from '../../media/icons/index.js';
 
+// Top fixed navigation component is used to navigate Closet Roulette
+// User should have access to this component across entire application
+// Composed of top nav bar and drawer nav for user options
+// Condensed into full drawer nav for smaller screen sizes
 class Navigation extends Component {
 	constructor(props) {
 		super(props);
 
+    // State controls how the component is displayed
 		this.state = {
 			currentPage: props.location.pathname.slice(1),
 			fullSideNav: false,
@@ -22,18 +27,22 @@ class Navigation extends Component {
 			sideNavOpen: false
 		};
 
+    // Page and Option references for iteration
+
 		this.mainPages = {
 			upload: 'Add Item',
 			closet: 'My Closet',
 			create: 'New Outfit',
 			archive: 'Outfit Archive'
-		};
-
+    };
+    
 		this.userOptions = {
 			settings: 'Settings',
 			billing: 'Billing',
 			signout: 'Sign Out'
 		};
+
+    // Precompose lists to avoid reiterating over references
 
 		this.mainPagesList = Object.keys(this.mainPages).map((page) => (
 			<React.Fragment key={page}>
@@ -49,14 +58,16 @@ class Navigation extends Component {
 		this.userOptionsList = Object.keys(this.userOptions).map((option) => (
 			<React.Fragment key={option}>
 				{option === 'signout' ? (
-					<ListItem
-						className="navigation-divide"
-						button
-						key={this.userOptions[option]}
-						onClick={this.signOut}
-					>
-						<ListItemText primary={this.userOptions[option]} />
-					</ListItem>
+          <a href={`${ROOT_URL.WEB}/`}>
+            <ListItem
+              className="navigation-divide"
+              button
+              key={this.userOptions[option]}
+              onClick={this.signOut}
+            >
+              <ListItemText primary={this.userOptions[option]} />
+            </ListItem>
+          </a>
 				) : (
 					<a href={`${ROOT_URL.WEB}/${option}`}>
 						<ListItem className="navigation-divide" button key={this.userOptions[option]}>
@@ -71,17 +82,20 @@ class Navigation extends Component {
 		this.setAuthToken();
 	}
 
+  // Verify user and set header for axios server requests
 	setAuthToken = () => {
 		const token = localStorage.getItem('authToken');
 		if (token) axios.defaults.headers.common.Authorization = token;
 		else delete axios.defaults.headers.common.Authorization;
 	};
 
+  // Initialize component structure and listen for resize event
 	componentDidMount() {
 		this.updateDimensions();
 		window.addEventListener('resize', this.updateDimensions);
 	}
 
+  // Set state to influence component style
 	updateDimensions = () => {
 		if (window.innerWidth < 600) {
 			this.setState({ navCollapseActive: true, fullSideNav: true });
@@ -95,11 +109,11 @@ class Navigation extends Component {
 	};
 
 	signOut() {
-		localStorage.removeItem('authToken');
-		window.location = `${ROOT_URL.WEB}/`;
+    localStorage.removeItem('authToken');
 	}
 
 	render() {
+    // Compose list for drawer nav based on state
 		const sideList = (
 			<div className="navigation-side-nav">
 				<List>
@@ -146,4 +160,5 @@ class Navigation extends Component {
 	}
 }
 
+// Export with router so that we can use pathname in the constructor
 export default withRouter(Navigation);
