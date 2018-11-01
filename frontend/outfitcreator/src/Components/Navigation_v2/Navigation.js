@@ -63,6 +63,17 @@ class Navigation extends Component {
     const sideList = (
       <div className="navigation-side-nav">
         <List>
+          {this.state.fullSideNav ?
+            Object.keys(this.allPages).map((page) => (
+              <React.Fragment>
+                <a href={`${ROOT_URL.WEB}/${page}`}>
+                  <ListItem className="navigation-divide" button key={this.allPages[page]}>
+                    <ListItemText primary={this.allPages[page]} />
+                  </ListItem>
+                </a>
+                <Divider />
+              </React.Fragment>
+            )) : null}
         </List>
       </div>
     );
