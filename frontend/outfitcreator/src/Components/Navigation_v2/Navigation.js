@@ -60,6 +60,13 @@ class Navigation extends Component {
 	}
 
 	render() {
+    const sideList = (
+      <div className="navigation-side-nav">
+        <List>
+        </List>
+      </div>
+    );
+
 		return (
 			<div className="navigation-container">
 				<img alt="closet roulette logo" className="navigation-logo" src={CR_Logo} />
