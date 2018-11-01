@@ -22,12 +22,40 @@ class Navigation extends Component {
       sideNavOpen: false,
 		};
 
-		this.allPages = {
+		this.mainPages = {
 			upload: 'Add Item',
 			closet: 'My Closet',
 			create: 'New Outfit',
-			archive: 'Outfit Archive'
+			archive: 'Outfit Archive',
     };
+
+    this.userOptions = {
+      settings: 'Settings',
+      billing: 'Billing',
+      signout: 'Signout',
+    }
+
+    this.mainPagesList = Object.keys(this.mainPages).map((page) => (
+      <React.Fragment>
+        <a href={`${ROOT_URL.WEB}/${page}`}>
+          <ListItem className="navigation-divide" button key={this.mainPages[page]}>
+            <ListItemText primary={this.mainPages[page]} />
+          </ListItem>
+        </a>
+        <Divider />
+      </React.Fragment>
+    ));
+
+    this.userOptionsList = Object.keys(this.userOptions).map((option) => (
+      <React.Fragment>
+        <a href={`${ROOT_URL.WEB}/${option}`}>
+          <ListItem className="navigation-divide" button key={this.userOptions[option]}>
+            <ListItemText primary={this.userOptions[option]} />
+          </ListItem>
+        </a>
+        <Divider />
+      </React.Fragment>
+    ));
 
 		this.setAuthToken();
 	}
@@ -44,10 +72,10 @@ class Navigation extends Component {
 	}
 
 	updateDimensions = () => {
-		if (window.innerWidth < 700) {
+		if (window.innerWidth < 600) {
 			this.setState({ navCollapseActive: true, fullSideNav: true });
 		} else if (this.state.navCollapseActive) {
-			this.setState({ nnavCollapseActive: false, fullSideNav: false });
+			this.setState({ navCollapseActive: false, fullSideNav: false });
 		}
 	};
   
@@ -64,25 +92,8 @@ class Navigation extends Component {
     const sideList = (
       <div className="navigation-side-nav">
         <List>
-          {this.state.fullSideNav ?
-            Object.keys(this.allPages).map((page) => (
-              <React.Fragment>
-                <a href={`${ROOT_URL.WEB}/${page}`}>
-                  <ListItem className="navigation-divide" button key={this.allPages[page]}>
-                    <ListItemText primary={this.allPages[page]} />
-                  </ListItem>
-                </a>
-                <Divider />
-              </React.Fragment>
-            )) : null}
-            {['Setting', 'Billing', 'Sign Out'].map((text) => (
-              <React.Fragment>
-                <ListItem button key={text}>
-                  <ListItemText primary={text} />
-                </ListItem>
-                {text !== 'Sign Out' ? <Divider /> : null }
-              </React.Fragment>
-            ))}
+          {this.state.fullSideNav ? this.mainPagesList : null}
+          {this.userOptionsList}
         </List>
       </div>
     );
@@ -93,16 +104,16 @@ class Navigation extends Component {
 				<div className={`navigation-pages`}>
 					{this.state.navCollapseActive ? (
             <div className={`navigation-page page-${this.state.currentPage}`} onClick={this.toggleDrawer}>
-              {this.allPages[this.state.currentPage]}
+              {this.mainPages[this.state.currentPage]}
             </div>
 					) : (
-						Object.keys(this.allPages).map((page) => (
+						Object.keys(this.mainPages).map((page) => (
 							<div className={`navigation-page page-${page}`} key={page}>
 								{this.state.currentPage === page ? (
 									<span className="navigation-page-indicator" />
 								) : null}
 								<span>
-									<a href={`${ROOT_URL.WEB}/${page}`}>{this.allPages[page]}</a>
+									<a href={`${ROOT_URL.WEB}/${page}`}>{this.mainPages[page]}</a>
 								</span>
 							</div>
 						))
