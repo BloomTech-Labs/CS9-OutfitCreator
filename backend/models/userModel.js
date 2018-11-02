@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const { makeToken } = require('../config/passport-setup');
-
 const saltRounds = 11;
 
 const UserSchema = new mongoose.Schema({
@@ -158,8 +156,8 @@ UserSchema.methods.newPassword = async function(password) {
 UserSchema.methods.linkAccounts = async function (userModel={}, userInfo={}) {
   try {
     const { username, password, email } = userInfo;
-    const newPassword = await this.newPassword(password)
-    const target = { 'local.email': email }
+    const newPassword = await this.newPassword(password);
+    const target = { 'local.email': email };
     const update = {
       local: { email, username, password: newPassword }
     };
