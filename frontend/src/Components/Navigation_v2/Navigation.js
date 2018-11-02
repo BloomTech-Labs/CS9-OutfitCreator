@@ -17,7 +17,7 @@ import { Icons } from '../../media/icons/index.js';
 // Condensed into full drawer nav for smaller screen sizes
 class Navigation extends Component {
 	constructor(props) {
-		super(props);
+    super(props);
 
     // State controls how the component is displayed
 		this.state = {
@@ -97,7 +97,7 @@ class Navigation extends Component {
 
   // Set state to influence component style
 	updateDimensions = () => {
-		if (window.innerWidth < 600) {
+		if (window.innerWidth < 700) {
 			this.setState({ navCollapseActive: true, fullSideNav: true });
 		} else if (this.state.navCollapseActive) {
 			this.setState({ navCollapseActive: false, fullSideNav: false });
@@ -128,14 +128,12 @@ class Navigation extends Component {
 				<img alt="closet roulette logo" className="navigation-logo" src={CR_Logo} />
 				{this.state.navCollapseActive ? (
 					<div className="navigation-pages clickable" onClick={this.toggleDrawer}>
-						<div className={`navigation-page page-${this.state.currentPage}`}>
-							{this.mainPages[this.state.currentPage]}
-						</div>
+						{this.mainPages[this.state.currentPage]}
 					</div>
 				) : (
 					<div className="navigation-pages">
 						{Object.keys(this.mainPages).map((page) => (
-							<div className={`navigation-page page-${page} clickable`} key={page}>
+							<div className="clickable" key={page}>
 								{this.state.currentPage === page ? (
 									<span className="navigation-page-indicator" />
 								) : null}
