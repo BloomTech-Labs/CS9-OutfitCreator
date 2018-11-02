@@ -9,6 +9,10 @@
   --matt-black: rgb(56,56,56);
 }
 
+* {
+  box-sizing: border-box; 
+}
+
 html,
 body,
 body #root {
@@ -21,6 +25,6 @@ body #root {
 	padding: 0;
 }
 
-* {
-  box-sizing: border-box; 
+::-webkit-scrollbar { 
+  display: none; 
 }
