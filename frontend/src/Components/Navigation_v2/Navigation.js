@@ -17,9 +17,9 @@ import { Icons } from '../../media/icons/index.js';
 // Condensed into full drawer nav for smaller screen sizes
 class Navigation extends Component {
 	constructor(props) {
-    super(props);
+		super(props);
 
-    // State controls how the component is displayed
+		// State controls how the component is displayed
 		this.state = {
 			currentPage: props.location.pathname.slice(1),
 			fullSideNav: false,
@@ -27,27 +27,27 @@ class Navigation extends Component {
 			sideNavOpen: false
 		};
 
-    // Page and Option references for iteration
+		// Page and Option references for iteration
 
 		this.mainPages = {
 			upload: 'Add Item',
 			closet: 'My Closet',
 			create: 'New Outfit',
 			archive: 'Outfit Archive'
-    };
-    
+		};
+
 		this.userOptions = {
 			settings: 'Settings',
 			billing: 'Billing',
 			signout: 'Sign Out'
 		};
 
-    // Precompose lists to avoid reiterating over references
+		// Precompose lists to avoid reiterating over references
 
 		this.mainPagesList = Object.keys(this.mainPages).map((page) => (
 			<React.Fragment key={page}>
 				<a href={`${ROOT_URL.WEB}/${page}`}>
-					<ListItem className="navigation-divide" button key={this.mainPages[page]}>
+					<ListItem button key={this.mainPages[page]}>
 						<ListItemText primary={this.mainPages[page]} />
 					</ListItem>
 				</a>
@@ -58,44 +58,39 @@ class Navigation extends Component {
 		this.userOptionsList = Object.keys(this.userOptions).map((option) => (
 			<React.Fragment key={option}>
 				{option === 'signout' ? (
-          <a href={`${ROOT_URL.WEB}/`}>
-            <ListItem
-              className="navigation-divide"
-              button
-              key={this.userOptions[option]}
-              onClick={this.signOut}
-            >
-              <ListItemText primary={this.userOptions[option]} />
-            </ListItem>
-          </a>
-				) : (
-					<a href={`${ROOT_URL.WEB}/${option}`}>
-						<ListItem className="navigation-divide" button key={this.userOptions[option]}>
+					<a href={`${ROOT_URL.WEB}/`}>
+						<ListItem button key={this.userOptions[option]} onClick={this.signOut}>
 							<ListItemText primary={this.userOptions[option]} />
 						</ListItem>
 					</a>
+				) : (
+					<a href={`${ROOT_URL.WEB}/${option}`}>
+						<ListItem button key={this.userOptions[option]}>
+							<ListItemText primary={this.userOptions[option]} />
+						</ListItem>
+						<Divider />
+					</a>
 				)}
-				<Divider />
 			</React.Fragment>
 		));
 
 		this.setAuthToken();
 	}
 
-  // Verify user and set header for axios server requests
+	// Verify user and set header for axios server requests
 	setAuthToken = () => {
 		const token = localStorage.getItem('authToken');
 		if (token) axios.defaults.headers.common.Authorization = token;
 		else delete axios.defaults.headers.common.Authorization;
 	};
 
-  // Initialize component structure and listen for resize event
+	// Initialize component structure and listen for resize event
 	componentDidMount() {
 		this.updateDimensions();
 		window.addEventListener('resize', this.updateDimensions);
 	}
 
-  // Set state to influence component style
+	// Set state to influence component style
 	updateDimensions = () => {
 		if (window.innerWidth < 700) {
 			this.setState({ navCollapseActive: true, fullSideNav: true });
@@ -109,18 +104,16 @@ class Navigation extends Component {
 	};
 
 	signOut() {
-    localStorage.removeItem('authToken');
+		localStorage.removeItem('authToken');
 	}
 
 	render() {
-    // Compose list for drawer nav based on state
+		// Compose list for drawer nav based on state
 		const sideList = (
-			<div className="navigation-side-nav">
-				<List>
-					{this.state.fullSideNav ? this.mainPagesList : null}
-					{this.userOptionsList}
-				</List>
-			</div>
+			<List className="navigation-drawer-list">
+				{this.state.fullSideNav ? this.mainPagesList : null}
+				{this.userOptionsList}
+			</List>
 		);
 
 		return (
@@ -128,7 +121,9 @@ class Navigation extends Component {
 				<img alt="closet roulette logo" className="navigation-logo" src={CR_Logo} />
 				{this.state.navCollapseActive ? (
 					<div className="navigation-pages clickable" onClick={this.toggleDrawer}>
-						{this.mainPages[this.state.currentPage]}
+						<p className="navigation-current-page">
+							{this.mainPages[this.state.currentPage] || this.userOptions[this.state.currentPage]}
+						</p>
 					</div>
 				) : (
 					<div className="navigation-pages">
