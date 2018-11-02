@@ -33,13 +33,13 @@ class Navigation extends Component {
 			upload: 'Add Item',
 			closet: 'My Closet',
 			create: 'New Outfit',
-			archive: 'Outfit Archive'
+			archive: 'Outfit Archive',
 		};
 
 		this.userOptions = {
 			settings: 'Settings',
-			billing: 'Billing',
-			signout: 'Sign Out'
+			// billing: 'Billing',
+			signout: 'Sign Out',
 		};
 
 		// Precompose lists to avoid reiterating over references
