@@ -24,7 +24,10 @@ library.add(faShareAlt);
 
 class App extends Component {
 	constructor(props) {
-		super(props);
+    super(props);
+    
+     // Set window variable to prep for Material UI version update
+     window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
 		this.setAuthToken();
 	}
