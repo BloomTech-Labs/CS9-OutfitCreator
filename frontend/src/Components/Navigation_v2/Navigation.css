@@ -9,14 +9,14 @@ All base styles are for small devices below 400px */
 	--nav-pages-line-height: 25px;
 	--nav-pages-font-size: 18px;
 	--nav-pages-margin-right: -4px;
-	--nav-pages-width: 45%;
 	--nav-spacing-logo-left: 8px;
-	--nav-spacing-logo-top: 5px;
+	--nav-spacing-logo-top: 8px;
 	--nav-spacing-user-top: 8px;
 	--nav-spacing-user-right: 8px;
 	--nav-user-size: 40px;
 }
 
+/* Fix nav to page so that user can navigate with ease */
 .navigation-container {
 	display: flex;
 	height: 60px;
@@ -26,16 +26,18 @@ All base styles are for small devices below 400px */
 	width: 100%;
 }
 
+/* Keep logo in view to promote brand */
 .navigation-logo {
 	height: var(--nav-logo-size);
-	margin: var(--nav-spacing-logo-top) var(--nav-spacing-logo-left) -10px;
+	margin: var(--nav-spacing-logo-top) 0 -10px var(--nav-spacing-logo-left);
 	width: var(--nav-logo-size);
 }
 
 /* Evenly spaces page names when top nav bar is present */
 .navigation-pages {
 	border-bottom: 1px solid var(--dark-purple);
-	display: flex;
+  display: flex;
+  flex-grow: 1;
 	font-size: var(--nav-pages-font-size);
 	height: var(--nav-pages-height);
 	justify-content: space-around;
@@ -43,7 +45,6 @@ All base styles are for small devices below 400px */
 	margin-left: auto;
 	margin-right: var(--nav-pages-margin-right);
 	margin-top: var(--nav-spacing-user-top);
-	width: var(--nav-pages-width);
 }
 
 /* Ensures that main page does not appear behind navigation */
@@ -67,7 +68,10 @@ All base styles are for small devices below 400px */
 	text-decoration: none;
 }
 
-/* Dot placed beside current page name */
+.navigation-current-page {
+  transform: translate(-25%);
+}
+
 .navigation-page-indicator {
 	background: var(--dark-purple);
 	border-radius: 50%;
@@ -86,16 +90,12 @@ All base styles are for small devices below 400px */
 	width: var(--nav-user-size);
 }
 
-.navigation-side-nav {
-	width: 200px;
+.navigation-drawer-list {
+  width: 200px;
 }
 
-.navigation-side-nav a:hover {
+.navigation-drawer-list a:hover {
 	text-decoration: none;
-}
-
-.navigation-divide {
-	border-bottom: 1px solid black;
 }
 
 /* Maintain mobile first approach */
@@ -108,7 +108,6 @@ All base styles are for small devices below 400px */
 		--nav-pages-height: 35px;
 		--nav-pages-background-height: 45px;
 		--nav-pages-font-size: 20px;
-		--nav-pages-width: 50%;
 		--nav-spacing-logo-left: 15px;
 		--nav-spacing-logo-top: 10px;
 		--nav-spacing-user-top: 10px;
@@ -132,46 +131,19 @@ All base styles are for small devices below 400px */
 	}
 }
 
-/* Extra rule for special cases */
-@media (min-width: 700px) {
-	:root {
-		--nav-pages-font-size: 18px;
-		--nav-pages-width: 65%;
-	}
-}
-
 /* For large devices */
 @media (min-width: 900px) {
 	:root {
-		--nav-logo-size: 75px;
+		--nav-logo-size: 85px;
 		--nav-pages-line-height: 40px;
 		--nav-pages-height: 45px;
 		--nav-pages-background-height: 65px;
-		--nav-pages-font-size: 24px;
+		--nav-pages-font-size: 22px;
 		--nav-pages-margin-right: -8px;
-		--nav-pages-width: 75%;
-		--nav-spacing-logo-left: 25px;
+		--nav-spacing-logo-left: 30px;
 		--nav-spacing-logo-top: 20px;
 		--nav-spacing-user-top: 20px;
-		--nav-spacing-user-right: 25px;
+		--nav-spacing-user-right: 20px;
 		--nav-user-size: 60px;
-	}
-}
-
-/* For extra large devices */
-@media (min-width: 1200px) {
-	:root {
-		--nav-logo-size: 100px;
-		--nav-pages-line-height: 50px;
-		--nav-pages-height: 55px;
-		--nav-pages-background-height: 85px;
-		--nav-pages-font-size: 26px;
-		--nav-pages-margin-right: -8px;
-		--nav-pages-width: 80%;
-		--nav-spacing-logo-left: 35px;
-		--nav-spacing-logo-top: 30px;
-		--nav-spacing-user-top: 30px;
-		--nav-spacing-user-right: 35px;
-		--nav-user-size: 80px;
-	}
+  }
 }
