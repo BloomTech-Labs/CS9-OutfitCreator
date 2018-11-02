@@ -1,15 +1,20 @@
 /* Base CSS is built with mobile first technique
-All base styles are for small devices below 600px */
+All base styles are for small devices below 400px */
 
 /* CSS variables for easy media query adjustments */
 :root {
-  --nav-logo-size: 60px;  /* 75 */
-  --nav-pages-width: 50%;
-  --nav-spacing-logo-left: 10px;
+  --nav-logo-size: 55px;
+  --nav-pages-line-height: 25px;
+  --nav-pages-height: 30px;
+  --nav-pages-background-height: 38px;
+  --nav-pages-font-size: 18px;
+  --nav-pages-margin-right: -4px;
+  --nav-pages-width: 45%;
+  --nav-spacing-logo-left: 8px;
   --nav-spacing-logo-top: 5px;
-  --nav-spacing-user-top: 5px;
+  --nav-spacing-user-top: 8px;
   --nav-spacing-user-right: 8px;
-  --nav-user-size: 45px; /* 50 */
+  --nav-user-size: 40px;
 }
 
 .navigation-container {
@@ -31,11 +36,12 @@ All base styles are for small devices below 600px */
 .navigation-pages {
   border-bottom: 1px solid var(--dark-purple);
   display: flex;
-  font-size: 18px;
-  height: 35px;
+  font-size: var(--nav-pages-font-size);
+  height: var(--nav-pages-height);
   justify-content: space-around;
+  line-height: var(--nav-pages-line-height);
   margin-left: auto;
-  margin-right: -3px;
+  margin-right: var(--nav-pages-margin-right);
   margin-top: var(--nav-spacing-user-top);
   width: var(--nav-pages-width);
 }
@@ -44,7 +50,7 @@ All base styles are for small devices below 600px */
 .navigation-pages:after {
   background: white;
   content: '';
-  height: 60px;
+  height: var(--nav-pages-background-height);
   left: 0;
   position: absolute;
   top: 0;
@@ -72,6 +78,8 @@ All base styles are for small devices below 600px */
 }
 
 .navigation-user {
+  background: white;
+  border-radius: 50%;
   height: var(--nav-user-size);
   margin-top: var(--nav-spacing-user-top);
   margin-right: var(--nav-spacing-user-right);
@@ -92,38 +100,78 @@ All base styles are for small devices below 600px */
 
 /* Maintain mobile first approach */
 
+/* For small to medium */
+@media (min-width: 400px) {
+  :root {
+    --nav-logo-size: 65px;
+    --nav-pages-line-height: 30px;
+    --nav-pages-height: 35px;
+    --nav-pages-background-height: 45px;
+    --nav-pages-font-size: 20px;
+    --nav-pages-width: 50%;
+    --nav-spacing-logo-left: 15px;
+    --nav-spacing-logo-top: 10px;
+    --nav-spacing-user-top: 10px;
+    --nav-spacing-user-right: 10px;
+    --nav-user-size: 50px;
+  }
+}
+
 /* For medium devices */
 @media (min-width: 600px) {
   :root {
-    --nav-logo-size: 60px;  /* 75 */
-    --nav-pages-width: 60%;
-    --nav-spacing-logo-left: 10px;
-    --nav-spacing-logo-top: 10px;
+    --nav-logo-size: 70px;
+    --nav-pages-line-height: 35px;
+    --nav-pages-height: 40px;
+    --nav-pages-background-height: 55px;
+    --nav-pages-font-size: 18px;
+    --nav-spacing-logo-left: 20px;
+    --nav-spacing-logo-top: 15px;
     --nav-spacing-user-top: 15px;
-    --nav-user-size: 45px; /* 50 */
+    --nav-spacing-user-right: 15px;
+    --nav-user-size: 55px;
+  }
+}
+
+/* Extra rule for special cases */
+@media (min-width: 700px) {
+  :root {
+    --nav-pages-width: 65%;
   }
 }
 
 /* For large devices */
 @media (min-width: 900px) {
   :root {
-    --nav-logo-size: 60px;  /* 75 */
-    --nav-pages-width: 70%;
-    --nav-spacing-logo-left: 15px;
-    --nav-spacing-logo-top: 15px;
+    --nav-logo-size: 75px;
+    --nav-pages-line-height: 40px;
+    --nav-pages-height: 45px;
+    --nav-pages-background-height: 65px;
+    --nav-pages-font-size: 24px;
+    --nav-pages-margin-right: -8px;
+    --nav-pages-width: 75%;
+    --nav-spacing-logo-left: 25px;
+    --nav-spacing-logo-top: 20px;
     --nav-spacing-user-top: 20px;
-    --nav-user-size: 45px; /* 50 */
+    --nav-spacing-user-right: 25px;
+    --nav-user-size: 60px;
   }
 }
 
 /* For extra large devices */
 @media (min-width: 1200px) {
   :root {
-    --nav-logo-size: 60px;  /* 75 */
+    --nav-logo-size: 100px;
+    --nav-pages-line-height: 50px;
+    --nav-pages-height: 55px;
+    --nav-pages-background-height: 85px;
+    --nav-pages-font-size: 26px;
+    --nav-pages-margin-right: -8px;
     --nav-pages-width: 80%;
-    --nav-spacing-logo-left: 20px;
-    --nav-spacing-logo-top: 20px;
-    --nav-spacing-user-top: 25px;
-    --nav-user-size: 45px; /* 50 */
+    --nav-spacing-logo-left: 35px;
+    --nav-spacing-logo-top: 30px;
+    --nav-spacing-user-top: 30px;
+    --nav-spacing-user-right: 35px;
+    --nav-user-size: 80px;
   }
 }
