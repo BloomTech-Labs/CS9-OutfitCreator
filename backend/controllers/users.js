@@ -6,7 +6,7 @@ const { ROOT_URL } = require('../config/root-urls');
 // Register a new user
 exports.signup = (req, res) => {
   const { username, password, email } = req.body;
-  const newUserInfo = { username, password, email }
+  const newUserInfo = { username, password, email };
 
 	User.findOne({ 'local.email': email }).then((existingUser) => {
 		// If user with that email exists
