@@ -124,7 +124,6 @@ All base styles are for small devices below 400px */
     --nav-pages-line-height: 35px;
     --nav-pages-height: 40px;
     --nav-pages-background-height: 55px;
-    --nav-pages-font-size: 18px;
     --nav-spacing-logo-left: 20px;
     --nav-spacing-logo-top: 15px;
     --nav-spacing-user-top: 15px;
@@ -136,6 +135,7 @@ All base styles are for small devices below 400px */
 /* Extra rule for special cases */
 @media (min-width: 700px) {
   :root {
+    --nav-pages-font-size: 18px;
     --nav-pages-width: 65%;
   }
 }
