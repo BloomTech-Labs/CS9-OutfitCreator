@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+
+const { makeToken } = require('../config/passport-setup');
+
 const saltRounds = 11;
 
 const UserSchema = new mongoose.Schema({
@@ -140,5 +143,33 @@ UserSchema.methods.newPassword = async function(password) {
 		return err;
 	}
 };
+
+/**
+ * @summary Users that have previously signed up with an OAuth strategy that
+ *          are now attempting to sign up with the signup form will on the
+ *          landing page will now have their existing OAuth account linked up
+ *          with this new 'local'
+ * 
+ * @param   {User} userModel
+ * @param   {Object} userInfo
+ * 
+ * @return  {Object}
+ */
+UserSchema.methods.linkAccounts = async function (userModel={}, userInfo={}) {
+  try {
+    const { username, password, email } = userInfo;
+    const newPassword = await this.newPassword(password)
+    const target = { 'local.email': email }
+    const update = {
+      local: { email, username, password: newPassword }
+    };
+    const options = { new: true, runValidators: true };
+    const updatedUser = await userModel.findOneAndUpdate(target, update, options);
+
+    return updatedUser
+  } catch(err) {
+    return err;
+  }
+}
 
 module.exports = mongoose.model('User', UserSchema);

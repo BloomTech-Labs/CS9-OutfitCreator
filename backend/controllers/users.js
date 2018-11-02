@@ -5,7 +5,8 @@ const { ROOT_URL } = require('../config/root-urls');
 
 // Register a new user
 exports.signup = (req, res) => {
-	const { username, password, email } = req.body;
+  const { username, password, email } = req.body;
+  const newUserInfo = { username, password, email }
 
 	User.findOne({ 'local.email': email }).then((existingUser) => {
 		// If user with that email exists
@@ -14,27 +15,18 @@ exports.signup = (req, res) => {
 			if (existingUser.local.password) {
 				return res.status(409).json({ message: 'problem signing up' });
 			} else {
-				// else user signed up using social auth, link accounts
-				existingUser
-					.newPassword(password)
-					.then((newPassword) => {
-						const target = { 'local.email': email };
-						const update = {
-							local: { email, username, password: newPassword }
-						};
-						const options = { new: true, runValidators: true };
-						// Update user and generate JWT. User is already verified by social-auth
-						User.findOneAndUpdate(target, update, options)
-							.exec()
-							.then((user) => {
-								const token = makeToken(user);
-								res.status(201).json({ token });
-							})
-							.catch((err) => {
-								return next(err);
-							});
-					})
-					.catch((err) => err);
+        try {
+          /**
+           * if user had previously signed up with an OAuth strategy this
+           * condition will now link the two in the database
+           */
+          const updatedUser = existingUser.linkAccounts(User, newUserInfo);
+          const token = makeToken(updatedUser);
+          res.status(201).json({ token });
+        } catch(err) {
+          // pass 'err' to 'next()' if anything goes wrong updating the user
+          next(err);
+        }
 			}
 		} else {
 			const key = generateSignupKey();
