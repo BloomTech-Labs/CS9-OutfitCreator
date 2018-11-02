@@ -15,7 +15,6 @@ body #root {
 	background: white;
 	background-repeat: no-repeat;
 	background-size: cover;
-	box-sizing: border-box;
 	font-family: serif, sans-serif, 'Roboto';
 	min-height: 100vh;
 	margin: 0;
@@ -25,7 +24,3 @@ body #root {
 * {
   box-sizing: border-box; 
 }
-/* 
-button {
-	outline: none !important;
-} */
