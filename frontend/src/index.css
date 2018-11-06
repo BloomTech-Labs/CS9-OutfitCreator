@@ -5,7 +5,12 @@
 	--light-purple: rgb(194, 194, 235);
   --med-purple: rgb(141, 141, 200);
   --bright-purple: rgb(49,66,157);
-	--dark-purple: rgb(54, 56, 88);
+  --dark-purple: rgb(54, 56, 88);
+  --matt-black: rgb(56,56,56);
+}
+
+* {
+  box-sizing: border-box; 
 }
 
 html,
@@ -14,17 +19,12 @@ body #root {
 	background: white;
 	background-repeat: no-repeat;
 	background-size: cover;
-	box-sizing: border-box;
-	font-family: 'Roboto', sans-serif;
+	font-family: serif, sans-serif, 'Roboto';
 	min-height: 100vh;
 	margin: 0;
 	padding: 0;
 }
 
-* {
-  box-sizing: border-box; 
-}
-
-button {
-	outline: none !important;
+::-webkit-scrollbar { 
+  display: none; 
 }

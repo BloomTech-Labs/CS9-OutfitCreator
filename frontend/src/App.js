@@ -7,7 +7,7 @@ import axios from 'axios';
 
 import Landing from './Components/Landing_Page_v2/Landing';
 // import Login from './Components/Landing_Page/Login';
-import Navigation from './Components/Navigation/Navigation';
+import Navigation from './Components/Navigation_v2/Navigation';
 import CreateOutfit from './Components/Create_Component/CreateOutfit';
 import Upload from './Components/Upload_Page/Upload';
 import Archive from './Components/Archive_Page/Archive';
@@ -18,12 +18,16 @@ import Closet from './Components/Closet_Page/Closet.js';
 
 import './App.css';
 import './Components/Landing_Page_v2/Landing.css';
+import './Components/Navigation_v2/Navigation.css';
 
 library.add(faShareAlt);
 
 class App extends Component {
 	constructor(props) {
-		super(props);
+    super(props);
+    
+     // Set window variable to prep for Material UI version update
+     window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
 		this.setAuthToken();
 	}

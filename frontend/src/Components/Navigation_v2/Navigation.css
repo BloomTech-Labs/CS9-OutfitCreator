@@ -1,0 +1,149 @@
+/* Base CSS is built with mobile first technique
+All base styles are for small devices below 400px */
+
+/* CSS variables for easy media query adjustments */
+:root {
+	--nav-logo-size: 55px;
+	--nav-pages-background-height: 38px;
+	--nav-pages-height: 30px;
+	--nav-pages-line-height: 25px;
+	--nav-pages-font-size: 18px;
+	--nav-pages-margin-right: -4px;
+	--nav-spacing-logo-left: 8px;
+	--nav-spacing-logo-top: 8px;
+	--nav-spacing-user-top: 8px;
+	--nav-spacing-user-right: 8px;
+	--nav-user-size: 40px;
+}
+
+/* Fix nav to page so that user can navigate with ease */
+.navigation-container {
+	display: flex;
+	height: 60px;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+/* Keep logo in view to promote brand */
+.navigation-logo {
+	height: var(--nav-logo-size);
+	margin: var(--nav-spacing-logo-top) 0 -10px var(--nav-spacing-logo-left);
+	width: var(--nav-logo-size);
+}
+
+/* Evenly spaces page names when top nav bar is present */
+.navigation-pages {
+	border-bottom: 1px solid var(--dark-purple);
+  display: flex;
+  flex-grow: 1;
+	font-size: var(--nav-pages-font-size);
+	height: var(--nav-pages-height);
+	justify-content: space-around;
+	line-height: var(--nav-pages-line-height);
+	margin-left: auto;
+	margin-right: var(--nav-pages-margin-right);
+	margin-top: var(--nav-spacing-user-top);
+}
+
+/* Ensures that main page does not appear behind navigation */
+.navigation-pages:after {
+	background: white;
+	content: '';
+	height: var(--nav-pages-background-height);
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100vw;
+	z-index: -10;
+}
+
+.navigation-pages a {
+	color: var(--matt-black);
+}
+
+.navigation-pages a:hover {
+	color: var(--bright-purple);
+	text-decoration: none;
+}
+
+.navigation-current-page {
+  transform: translate(-25%);
+}
+
+.navigation-page-indicator {
+	background: var(--dark-purple);
+	border-radius: 50%;
+	display: inline-block;
+	height: 10px;
+	margin: 0 8px 2px 0;
+	width: 10px;
+}
+
+.navigation-user {
+	background: white;
+	border-radius: 50%;
+	height: var(--nav-user-size);
+	margin-top: var(--nav-spacing-user-top);
+	margin-right: var(--nav-spacing-user-right);
+	width: var(--nav-user-size);
+}
+
+.navigation-drawer-list {
+  width: 200px;
+}
+
+.navigation-drawer-list a:hover {
+	text-decoration: none;
+}
+
+/* Maintain mobile first approach */
+
+/* For small to medium */
+@media (min-width: 400px) {
+	:root {
+		--nav-logo-size: 65px;
+		--nav-pages-line-height: 30px;
+		--nav-pages-height: 35px;
+		--nav-pages-background-height: 45px;
+		--nav-pages-font-size: 20px;
+		--nav-spacing-logo-left: 15px;
+		--nav-spacing-logo-top: 10px;
+		--nav-spacing-user-top: 10px;
+		--nav-spacing-user-right: 10px;
+		--nav-user-size: 50px;
+	}
+}
+
+/* For medium devices */
+@media (min-width: 600px) {
+	:root {
+		--nav-logo-size: 70px;
+		--nav-pages-line-height: 35px;
+		--nav-pages-height: 40px;
+		--nav-pages-background-height: 55px;
+		--nav-spacing-logo-left: 20px;
+		--nav-spacing-logo-top: 15px;
+		--nav-spacing-user-top: 15px;
+		--nav-spacing-user-right: 15px;
+		--nav-user-size: 55px;
+	}
+}
+
+/* For large devices */
+@media (min-width: 900px) {
+	:root {
+		--nav-logo-size: 85px;
+		--nav-pages-line-height: 40px;
+		--nav-pages-height: 45px;
+		--nav-pages-background-height: 65px;
+		--nav-pages-font-size: 22px;
+		--nav-pages-margin-right: -8px;
+		--nav-spacing-logo-left: 30px;
+		--nav-spacing-logo-top: 20px;
+		--nav-spacing-user-top: 20px;
+		--nav-spacing-user-right: 20px;
+		--nav-user-size: 60px;
+  }
+}

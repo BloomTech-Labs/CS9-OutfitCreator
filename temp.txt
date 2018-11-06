@@ -1,0 +1,50 @@
+The following are my main focal points when working on the rework. Please let me know if there are any guidelines that can use improvement, need to be removed completely, or that can be added.
+
+1. Stick to consistent guidelines listed below:
+	• Keep functional components such as buttons, input fields, and display components similar(i.e. all input fields with underline style, all buttons have a 1px rounded border, display components have a thin border and associated name inline with top border).
+  • Use Materials UI for this. It focuses on mobile design, has amazing polished built-in animations and has uniform styles.
+  • Keep color use consistant (i.e. using dark purple for border, bright purple for hover, and thicker border for an actively toggled button).
+  • Create a cutsom component for our item cards.
+  • Make component/image size for item cards a specific dimension(i.e. adhering to a set px height and width) within portrait ratio. I recommend the portrait ratio because most articles of clothing being displayed in these components will be longer than they are wide. The reason behind having a fixed height and width is for uniformity. With dynamically changing card sizes many variable are brought into play that can cause bugs for display discrepancies. This being said I know that the ratio of photos being uploaded may vary.
+    I propose two possible solutions the varying image upload size:
+      Main Idea - Use cropping boundry constraints. Result of crop will be saved for use in item card thumbnail. Save original copy for ability to alter in the future.
+      • Force strict ratio. Only allow user constrol of axes. This takes away more control from the user but slightly increases ease of use.
+      • Give user control of boundries and axes while giving a ratio guideline. You can maintain ratio within the app by filling leftover gaps with a color or pattern (these fillers can even prvide more customization options for the user). 
+      Options that may collide:
+
+2. Use Materials UI components whenever possible to make a more seamless transition from web to mobile and improve consistancy. 
+Components used so far:
+	• <Button> for most clickable buttons excluding nav links
+  • <InputField> for all input to benefit from polished animations
+  • <Checkbox> to match with input fields
+  • <Drawer> & <List> for side nav (currently being decided)
+
+3. Things to be decided or to look out for in current build as of 10/28/2018
+  • CSS currently not taking a mobile first approach in regards to media querys.
+  • << I really like the style of our new nav header for it's unique and sleek characteristics but there are possible UI issues. The nav header is current `position: fixed` with the user icon and closet reoulette logo extedning below the center portion. This causes possibly unwanted element overlap. My first though for a solution is to restrict each main page's width to the width of our nav header's center portion.
+  • Logo component overlap with nav header component. Possible solution to shrink logo or constrict page widths
+  • I'm thinking that we may want to make our category selection element a resuable component with injected logic since we used it a few times with different functionality throughout our app. We may also need to use the same element in the future for a different purpose so hopefully this will save some time in the long run. That category element being the element just below our top nav header on closet and create pages.
+  • I left off on experimenting with whether or not a collapsable drawrer nav would be appropriate for our mobile/small screen size version. This could also double as an added feature for our desktop version.
+  • 
+
+4. TO DO's ordered by possible priority:
+  • Complete UX/UI base rework so that we can start adding new features on top of a refined foundation
+  • Finish implementation of all features referenced in our demo video. These should be completed asap so that our video refers to active features rather than ones in development.
+    These include: weather extension, recommendation based on weather, and social media sharing
+  • Integrate type checking via Typescript and/or React Proptypes
+  • Test the app using Enzyme and/or Jest. Unit based testing should be prioritized.
+  • Ask for the help of fellow Lambda students or use third party API to gather use data and performance metrics. Everywhere I look this type of data is extremely vaulable to future growth of the product. The ability to be able to develope code that complies within these types of systems are also a huge plus moving forward in our careers.
+  • Create recommendation algorithms to work along side basic randomization. Use weather, created outfits, clothing items and tags used in created outfits. Make sure to include user option to reset or backup/restore algorithm data in case the algorithm takes a turn for the worse or the user changes style preference.
+  • Utilize image processing API to gather extra insight from pictures used. This can be bolster our recommendation algorithms and previously mentioned data intake/machine learning models.
+
+5. Language guidelines:
+  During the past few months I have tried to learn as much as I could about what makes an app, and comparitively a start up, successful long term. One very common indicator is the establishment of guidlines, both with style and language used to describe the product. Effort to strengthen these developmental aspects contribute greatly not only to a consistant product but a consistant work flow. This increase in productivity is gained by reducing the time and effort it takes to have meaningful communication. This method also reduces confusion around idea during translation within the teams and in cross team communication.
+  Terms:
+    • Closet Roulette: Entirety of application from front to back.
+    • User Experience(UX): User mindset during app use
+    • User Interface(UI): User facing appcomponents and systems
+    • <Component_Name> Page Component: refers to the code for a specific page component
+    • <Component_Name> Page Render: refers to the visual representation of a specific page component
+
+Extra Notes:
+  • Creating regular update stream via social media to broadcasy development stage and thought process. I think that this will not only be agreat way to represent our work but to gather outsider perspective for new features and bug fixes..
