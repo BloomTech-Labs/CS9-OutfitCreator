@@ -123,6 +123,10 @@ class CategorySelector extends Component {
 		items[category].show = !items[category].show;
 		this.setState({ items, selectAll: false });
 	};
+
+	getSelected = () => {
+		return Object.keys(this.state.items).filter((type) => this.state.items[type].show === true);
+  };
   
 	render() {
 		return (
