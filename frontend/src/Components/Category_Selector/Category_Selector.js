@@ -78,7 +78,18 @@ class CategorySelector extends Component {
 				},
 			}
 		};
+
+		this.setAuthToken();
   }
+  
+  setAuthToken = () => {
+		const token = localStorage.getItem('authToken');
+		if (token) {
+			axios.defaults.headers.common.Authorization = token;
+		} else {
+			delete axios.defaults.headers.common.Authorization;
+		}
+	};
 
 	componentDidMount() {
 
