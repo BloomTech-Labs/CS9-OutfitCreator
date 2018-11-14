@@ -92,7 +92,46 @@ class CategorySelector extends Component {
 	};
 
 	componentDidMount() {
-
+		const user = this.props.getUserID();
+		if (user) {
+			axios
+				.all([
+					axios.get(`${ROOT_URL.API}/items/type/${user}/top`),
+					axios.get(`${ROOT_URL.API}/items/type/${user}/bottom`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/shirt`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/sweater`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/jacket`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/pants`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/shorts`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/skirt`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/leggings`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/dress`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/formalShoes`),
+					axios.get(`${ROOT_URL.API}/items/subtype/${user}/casualShoes`),
+					axios.get(`${ROOT_URL.API}/items/type/${user}/shoes`)
+				])
+				.then((res) => {
+					const items = { ...this.state.items };
+					items.top.all = res[0].data;
+					items.bottom.all = res[1].data;
+					items.shirt.all = res[2].data;
+					items.sweater.all = res[3].data;
+					items.jacket.all = res[4].data;
+					items.pants.all = res[5].data;
+					items.shorts.all = res[6].data;
+					items.skirt.all = res[7].data;
+					items.leggings.all = res[8].data;
+					items.dress.all = res[9].data;
+					items.formalShoes.all = res[10].data;
+					items.casualShoes.all = res[11].data;
+					items.shoes.all = res[12].data;
+					this.setState({ items });
+				})
+				.catch((err) => err);
+		} else {
+			this.props.history.push('/');
+		}
+		this.toggleAll();
 	}
 
 
