@@ -115,9 +115,15 @@ class CategorySelector extends Component {
 			this.props.history.push('/');
 		}
 		this.toggleAll();
-	}
-
-
+  }
+  
+  activateCategory = (category) => {
+		const items = this.state.items;
+		Object.keys(this.state.items).forEach((item) => (items[item].show = false));
+		items[category].show = !items[category].show;
+		this.setState({ items, selectAll: false });
+	};
+  
 	render() {
 		return (
 			<div className="category-container">
